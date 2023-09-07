@@ -1,6 +1,6 @@
 ---
-name: Feature request
-about: 새로운 기능 구현을 위한 작업 이슈입니다.
+name: feature request
+about: 새로운 기능 구현을 위한 이슈 템플릿입니다.
 title: "[Page] 작업내용"
 labels: "\U0001F4BB Feature"
 assignees: ''
