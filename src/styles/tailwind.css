@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.modal {
+  border-color: #D7D7D7;
+  border-width: 0.5px;
+  box-shadow: 2px 4px 6px #EAEAEA;
+}
