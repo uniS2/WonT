@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   Route,
 } from 'react-router-dom';
-import Home from './pages/Home';
+import RootLayout from './components/RootLayout';
 // vercel 배포시 createHashRouter 사용
 
 // 경로 예시
