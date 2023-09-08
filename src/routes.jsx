@@ -4,18 +4,18 @@ import {
   createBrowserRouter,
   Route,
 } from 'react-router-dom';
-import RootLayout from './components/RootLayout';
 // vercel 배포시 createHashRouter 사용
 
 // 경로 예시
+const RootLayout = lazy(() => import('./components/RootLayout'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<MainPage />} />
       <Route path="landing" element={<LandingPage />} />
+      <Route index element={<MainPage />} />
     </Route>
   )
 );
