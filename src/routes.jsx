@@ -10,12 +10,14 @@ import {
 const RootLayout = lazy(() => import('./components/RootLayout'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
+const TripLocalPage = lazy(() => import('./pages/TripLocalPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="landing" element={<LandingPage />} />
       <Route index element={<MainPage />} />
+      <Route path="triplocal" element={<TripLocalPage />} />
     </Route>
   )
 );
