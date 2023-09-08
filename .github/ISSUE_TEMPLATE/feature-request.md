@@ -2,7 +2,7 @@
 name: feature request
 about: 새로운 기능 구현을 위한 이슈 템플릿입니다.
 title: "[Page] 작업내용"
-labels: "\U0001F4BB Feature"
+labels: "\U0001F4D1 Docs, \U0001F4BB Feature, ⚙ Setting"
 assignees: ''
 
 ---
