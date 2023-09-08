@@ -10,7 +10,10 @@ import {
 const RootLayout = lazy(() => import('./components/RootLayout'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
+// routes.jsx 예시
+const TripLocalPage = lazy(() => import('./pages/TripLocalPage'));
 
+<Route path="triplocal" element={<TripLocalPage />} />;
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
