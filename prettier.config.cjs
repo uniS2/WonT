@@ -4,14 +4,14 @@ module.exports = {
   ],
   // 화살표 함수 식 매개변수 () 생략 여부 (ex: (a) => a)
   arrowParens: 'always',
-  // 닫는 괄호(>) 위치 설정
   // ex: <div
   //       id="unique-id"
   //       class="contaienr"
   //     >
   htmlWhitespaceSensitivity: 'css',
-  bracketSameLine: false,
   // 객체 표기 괄호 사이 공백 추가 여부 (ex: { foo: bar })
+  bracketSameLine: false,
+  // 닫는 괄호(>) 위치 설정
   bracketSpacing: true,
   // 행폭 설정 (줄 길이가 설정 값보다 길어지면 자동 개행)
   printWidth: 80,
