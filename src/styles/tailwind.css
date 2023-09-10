@@ -3,7 +3,16 @@
 @import 'tailwindcss/utilities';
 
 .modal {
-  border-color: #D7D7D7;
+  border-color: #d7d7d7;
   border-width: 0.5px;
-  box-shadow: 2px 4px 6px #EAEAEA;
+  box-shadow: 2px 4px 6px #eaeaea;
+}
+
+@layer base {
+  html {
+    font-family:
+      SUIT Variable,
+      system-ui,
+      sans-serif;
+  }
 }
