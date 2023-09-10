@@ -4,8 +4,8 @@ export default function TripPlaneIcon() {
   return (
     <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
       <svg
-        width="19"
-        height="19"
+        width="18"
+        height="18"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -4,6 +4,7 @@ import TripPlan from '@/components/tripeditpage/TripPlan';
 import Map from './../components/Map';
 import AddPlan from '@/components/tripeditpage/AddPlan';
 import ButtonMedium from '@/components/tripeditpage/ButtonMedium';
+import { Link } from 'react-router-dom';
 
 export default function TripEditPage() {
   return (
@@ -14,9 +15,13 @@ export default function TripEditPage() {
       <div className="mx-auto mt-[10px] max-w-[1280px]">
         <Map width="1280px" height="500px" />
         <AddPlan view={true} text="장소" />
-        <ButtonMedium fill={false} text="일정 추가" />
+        <Link to="/tripplacepage">
+          <ButtonMedium fill={false} text="일정 추가" />
+        </Link>
         <AddPlan view={false} text="숙소" />
-        <ButtonMedium fill={false} text="숙소 추가" />
+        <Link to="/triphotelpage">
+          <ButtonMedium fill={false} text="숙소 추가" />
+        </Link>
         <div className="my-10">
           <ButtonMedium fill={true} text="저장" />
         </div>
