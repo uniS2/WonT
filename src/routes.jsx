@@ -11,6 +11,9 @@ const RootLayout = lazy(() => import('./components/RootLayout'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const TripEditPage = lazy(() => import('./pages/TripEditPage'));
+const MyPage = lazy(() => import('./pages/MyPage/MyPage'));
+const MySchedule = lazy(() => import('./pages/MyPage/MySchedule'));
+const BookmarkPage = lazy(() => import('./pages/MyPage/BookmarkPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +21,9 @@ const router = createBrowserRouter(
       <Route path="landing" element={<LandingPage />} />
       <Route index element={<MainPage />} />
       <Route path="tripeditpage" element={<TripEditPage />} />
+      <Route path="mypage" element={<MyPage />} />
+      <Route path="myschedule" element={<MySchedule />} />
+      <Route path="bookmarkpage" element={<BookmarkPage />} />
     </Route>
   )
 );
