@@ -24,8 +24,11 @@ export default {
         'gray-2': '#B2B2B2',
         background: '#FAFAFA',
         'gray-3': '#D7D7D7',
+        'custom-color': 'rgba(79,212,230,0.5)',
       },
-      backgroundImage: {},
+      backgroundImage: (theme) => ({
+        LandingPage: "url('./src/assets/LandingPage-background.svg')",
+      }),
     },
   },
   plugins: [],

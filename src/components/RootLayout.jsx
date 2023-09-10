@@ -5,11 +5,11 @@ import Footer from './Footer';
 export default function RootLayout() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

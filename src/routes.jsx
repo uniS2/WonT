@@ -4,6 +4,8 @@ import {
   createBrowserRouter,
   Route,
 } from 'react-router-dom';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
 // vercel 배포시 createHashRouter 사용
 
 // 경로 예시
@@ -18,6 +20,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="landing" element={<LandingPage />} />
+      <Route path="SignIn" element={<SignInPage />} />
+      <Route path="SignUp" element={<SignUpPage />} />
       <Route index element={<MainPage />} />
     </Route>
   )
