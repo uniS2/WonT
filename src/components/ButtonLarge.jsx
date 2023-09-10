@@ -4,7 +4,7 @@
 
 export default function ButtonLarge({
   color = 'bg-primary',
-  height = '3.875rem',
+  height = 'h-[3.875rem]',
   textColor = 'text-white',
   children,
   ...restProps
@@ -12,7 +12,7 @@ export default function ButtonLarge({
   return (
     <button
       type="button"
-      className={`h-[${height}] w-80 rounded-md ${color} text-base font-bold ${textColor}`}
+      className={`mx-5 ${height} w-80 rounded-md ${color} text-base font-bold ${textColor}`}
       {...restProps}
     >
       {children}
