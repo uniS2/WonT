@@ -1,4 +1,4 @@
-export default function ArrowBack({
+export default function BackIcon({
   width = '0.9375rem',
   height = '0.625rem',
   color = '#0D0D0D',
