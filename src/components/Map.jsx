@@ -21,5 +21,7 @@ export default function Map({
     const map = new kakao.maps.Map(container, options);
   }, []);
 
-  return <div id="map" className={`w-[${width}] h-[${height}]`}></div>;
+  // return <div id="map" className="h-[500px] w-[1280px]"></div>;
+
+  return <div id="map" className={`${height} ${width}`}></div>;
 }

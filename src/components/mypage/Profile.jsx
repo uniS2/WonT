@@ -44,21 +44,23 @@ export default function Profile() {
           </clipPath>
         </defs>
       </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="12"
-        viewBox="0 0 13 12"
-        fill="none"
-        className="absolute right-0 top-0 box-content justify-center rounded-full border-[0.0938rem] border-contentsSecondary bg-white p-[0.0625rem]"
-      >
-        <path
-          d="M8.5 6L4.5 10H2.5V8L6.5 4L7.9345 2.5655L7.935 2.565C8.1325 2.3675 8.2315 2.2685 8.3455 2.2315C8.44592 2.19887 8.55408 2.19887 8.6545 2.2315C8.7685 2.2685 8.867 2.3675 9.0645 2.5645L9.9345 3.4345C10.1325 3.6325 10.2315 3.7315 10.2685 3.8455C10.3011 3.94592 10.3011 4.05408 10.2685 4.1545C10.2315 4.2685 10.1325 4.3675 9.9345 4.5655L8.5 6.0005L6.5 4.0005"
-          stroke="#5A80A9"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <button type="button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 13 12"
+          fill="none"
+          className="absolute right-0 top-0 box-content justify-center rounded-full border-[0.0938rem] border-contentsSecondary bg-white p-[0.0625rem]"
+        >
+          <path
+            d="M8.5 6L4.5 10H2.5V8L6.5 4L7.9345 2.5655L7.935 2.565C8.1325 2.3675 8.2315 2.2685 8.3455 2.2315C8.44592 2.19887 8.55408 2.19887 8.6545 2.2315C8.7685 2.2685 8.867 2.3675 9.0645 2.5645L9.9345 3.4345C10.1325 3.6325 10.2315 3.7315 10.2685 3.8455C10.3011 3.94592 10.3011 4.05408 10.2685 4.1545C10.2315 4.2685 10.1325 4.3675 9.9345 4.5655L8.5 6.0005L6.5 4.0005"
+            stroke="#5A80A9"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </div>
   );
 }

@@ -8,12 +8,12 @@ import { Link } from 'react-router-dom';
 
 export default function TripEditPage() {
   return (
-    <div className="mx-auto min-w-[22.5rem] bg-background">
+    <div className="mx-auto  min-w-[22.5rem] bg-background ">
       <h1 className="sr-only">TripEditPage</h1>
       <Header />
       <TripPlan />
-      <div className="mx-auto mt-[10px] max-w-[1280px]">
-        <Map width="1280px" height="500px" />
+      <div className="mx-auto mt-[10px] max-w-[1280px] ">
+        <Map width={'w-[80rem]'} height={'h-[31.25rem]'} />
         <AddPlan view={true} text="장소" />
         <Link to="/tripplacepage">
           <ButtonMedium fill={false} text="일정 추가" />
@@ -22,7 +22,7 @@ export default function TripEditPage() {
         <Link to="/triphotelpage">
           <ButtonMedium fill={false} text="숙소 추가" />
         </Link>
-        <div className="my-10">
+        <div className="py-10">
           <ButtonMedium fill={true} text="저장" />
         </div>
       </div>
