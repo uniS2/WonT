@@ -1,8 +1,8 @@
 import Logo from '@/components/Logo';
-import BackButton from '@/components/SignIn/BackButton';
+import BackButton from '@/components/Sign/BackButton';
 
-import SignPart from '@/components/SignPart';
-import SignInButton from '@/components/SignInButton';
+import SignPart from '@/components/Sign/SignPart';
+import SignInButton from '@/components/Sign/SignInButton';
 import { Link } from 'react-router-dom';
 
 // 회원가입 페이지
@@ -22,11 +22,11 @@ function SignUpPage() {
           <p>
             <span className="text-2xl font-bold">이메일로 가입하기</span>
           </p>
-          <SignPart infomation="이메일 주소" placeholder="이메일 주소 입력" />
-          <SignPart infomation="핸드폰 번호" placeholder="핸드폰 번호 입력" />
-          <SignPart infomation="인증번호 확인" placeholder="인증번호 확인" />
-          <SignPart infomation="비밀번호" placeholder="비밀번호 입력" />
-          <SignPart infomation="비밀번호 확인" placeholder="비밀번호 확인" />
+          <SignPart information="이메일 주소" placeholder="이메일 주소 입력" />
+          <SignPart information="핸드폰 번호" placeholder="핸드폰 번호 입력" />
+          <SignPart information="인증번호 확인" placeholder="인증번호 확인" />
+          <SignPart information="비밀번호" placeholder="비밀번호 입력" />
+          <SignPart information="비밀번호 확인" placeholder="비밀번호 확인" />
           <SignInButton text="회원가입" />
         </div>
       </div>

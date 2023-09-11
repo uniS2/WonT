@@ -3,8 +3,8 @@ import Footer from '@/components/Footer';
 import LandingPagePartBottom from '@/components/Landing/LandingPagePartBottom';
 import LandingPagePartMiddle from '@/components/Landing/LandingPagePartMiddle.jsx';
 import LandingPagePartTop from '@/components/Landing/LandingPagePartTop';
-import SignInButton from '@/components/SignInButton';
-import SignUpButton from '@/components/SignUpButton';
+import SignInButton from '@/components/Sign/SignInButton';
+import SignUpButton from '@/components/Sign/SignUpButton';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -41,7 +41,7 @@ function LandingPage() {
             >
               <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
                 <Link to="/SignInPage">
-                  <SignInButton />
+                  <SignInButton text="로그인" />
                 </Link>
                 <Link to="/SignUpPage">
                   <SignUpButton />

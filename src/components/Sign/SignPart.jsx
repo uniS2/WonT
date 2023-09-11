@@ -1,8 +1,8 @@
-function SignPart({ infomation = '', placeholder = '' }) {
+function SignPart({ information = '', placeholder = '' }) {
   return (
     <div className="pl-[0.625rem]">
       <div className="">
-        <p>{infomation}</p>
+        <p>{information}</p>
       </div>
 
       <form action="">
