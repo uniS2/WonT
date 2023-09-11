@@ -29,6 +29,9 @@ export default {
       backgroundImage: (theme) => ({
         LandingPage: "url('./src/assets/LandingPage-background.svg')",
       }),
+      testImage: (theme) => ({
+        TestPage: "url('./src/assets/LandingPage-test.svg')",
+      }),
     },
   },
   plugins: [],

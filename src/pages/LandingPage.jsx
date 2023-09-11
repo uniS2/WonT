@@ -1,80 +1,72 @@
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
-import LandingPagePartBottom from '@/components/Landing/LandingPagePartBottom';
-import LandingPagePartMiddle from '@/components/Landing/LandingPagePartMiddle.jsx';
-import LandingPagePartTop from '@/components/Landing/LandingPagePartTop';
+import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
+import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo.jsx';
+import LandingPagePartOne from '@/components/Landing/LandingPagePartOne';
 import SignInButton from '@/components/Sign/SignInButton';
 import SignUpButton from '@/components/Sign/SignUpButton';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 
-// 렌딩 페이지
+// 렌딩
+
+// framer-motion 함수
 function LandingPage() {
+  const MotionDiv = ({ children, delay }) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 2 }}
+        transition={{ duration: 1, delay }}
+      >
+        {children}
+      </motion.div>
+    );
+  };
+
   return (
     <div className="mx-auto flex min-h-[50rem] max-w-[80rem] flex-col items-center">
       <h1 className="sr-only">LandingPage</h1>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 2 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="w-full"
-      >
+      <MotionDiv delay={0.8}>
         <div className="w-full bg-LandingPage bg-center bg-no-repeat">
-          <div className=" flex flex-col items-center pt-[10.625rem]">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 2 }}
-              transition={{ duration: 1, delay: 1.5 }}
-            >
+          <div className="flex flex-col items-center pt-[10.625rem]">
+            <MotionDiv delay={1.5}>
               <Logo
                 width={'11.375rem'}
                 height={'4.1688rem'}
                 colors={['#fff', '#fff']}
               />
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 2 }}
-              transition={{ duration: 1, delay: 5 }}
-            >
+            <MotionDiv delay={6}>
               <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
                 <Link to="/SignInPage">
                   <SignInButton text="로그인" />
                 </Link>
                 <Link to="/SignUpPage">
-                  <SignUpButton />
+                  <SignUpButton text="회원가입" />
                 </Link>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
-      </motion.div>
+      </MotionDiv>
 
       <div className="flex h-screen flex-col gap-5 px-5 pt-[3.125rem]">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 2 }}
-          transition={{ duration: 1, delay: 2 }}
-        >
-          <LandingPagePartTop />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 2 }}
-          transition={{ duration: 1, delay: 3 }}
-        >
-          <LandingPagePartMiddle />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 2 }}
-          transition={{ duration: 1, delay: 4 }}
-        >
-          <LandingPagePartBottom />
-        </motion.div>
+        <MotionDiv delay={2}>
+          <LandingPagePartOne />
+        </MotionDiv>
+        <MotionDiv delay={3}>
+          <LandingPagePartTwo />
+        </MotionDiv>
+        <MotionDiv delay={4}>
+          <LandingPagePartThree />
+        </MotionDiv>
+        <MotionDiv delay={5}>
+          <LandingPagePartFour />
+        </MotionDiv>
         <Footer />
       </div>
     </div>
