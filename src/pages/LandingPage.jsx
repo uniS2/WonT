@@ -3,8 +3,8 @@ import Footer from '@/components/Footer';
 import LandingPagePartBottom from '@/components/Landing/LandingPagePartBottom';
 import LandingPagePartMiddle from '@/components/Landing/LandingPagePartMiddle.jsx';
 import LandingPagePartTop from '@/components/Landing/LandingPagePartTop';
-import SignInButton from '@/components/Landing/SignInButton';
-import SignUpButton from '@/components/Landing/SignUpButton';
+import SignInButton from '@/components/SignInButton';
+import SignUpButton from '@/components/SignUpButton';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
