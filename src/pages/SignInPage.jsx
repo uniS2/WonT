@@ -23,7 +23,7 @@ function SignInPage() {
           </p>
           <SignPart infomation="이메일 주소" placeholder="이메일 주소 입력" />
           <SignPart infomation="비밀번호" placeholder="비밀번호 입력" />
-          <SignInButton />
+          <SignInButton text="로그인" />
         </div>
       </div>
     </div>
