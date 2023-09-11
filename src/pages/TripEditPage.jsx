@@ -15,11 +15,11 @@ export default function TripEditPage() {
       <div className="mx-auto mt-[10px] max-w-[1280px] ">
         <Map width={'w-[80rem]'} height={'h-[31.25rem]'} />
         <AddPlan view={true} text="장소" />
-        <Link to="/tripplacepage">
+        <Link to="/tripplace">
           <ButtonMedium fill={false} text="일정 추가" />
         </Link>
         <AddPlan view={false} text="숙소" />
-        <Link to="/triphotelpage">
+        <Link to="/triphotel">
           <ButtonMedium fill={false} text="숙소 추가" />
         </Link>
         <div className="py-10">
