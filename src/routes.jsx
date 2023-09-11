@@ -4,8 +4,6 @@ import {
   createBrowserRouter,
   Route,
 } from 'react-router-dom';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
 // vercel 배포시 createHashRouter 사용
 
 // 경로 예시
@@ -17,15 +15,16 @@ const TripEditPage = lazy(() => import('./pages/TripEditPage'));
 const MyPage = lazy(() => import('./pages/MyPage/MyPage'));
 const MySchedule = lazy(() => import('./pages/MyPage/MySchedule'));
 const BookmarkPage = lazy(() => import('./pages/MyPage/BookmarkPage'));
+const SignInPage = lazy(() => import('./pages/SignInPage'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 
-<Route path="triplocal" element={<TripLocalPage />} />;
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="landing" element={<LandingPage />} />
-      <Route path="SignIn" element={<SignInPage />} />
-      <Route path="SignUp" element={<SignUpPage />} />
-      <Route index element={<MainPage />} />
+      <Route index element={<LandingPage />} />
+      <Route path="signin" element={<SignInPage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="main" element={<MainPage />} />
       <Route path="triplocal" element={<TripLocalPage />} />
       <Route path="tripeditpage" element={<TripEditPage />} />
       <Route path="mypage" element={<MyPage />} />

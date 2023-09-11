@@ -3,6 +3,7 @@ function SignInPage() {
   return (
     <>
       <h1 className="sr-only">SignInPage</h1>
+      <div>text</div>
     </>
   );
 }

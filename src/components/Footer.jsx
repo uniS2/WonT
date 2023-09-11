@@ -3,7 +3,7 @@ import Sns from './Landing/Sns';
 
 export default function Footer({ color }) {
   return (
-    <footer className="flex w-[22.rem] flex-col items-center gap-3 bg-gray-100/50">
+    <footer className="flex w-full flex-col items-center gap-3 bg-gray-100/50">
       <Logo
         colors={['#5A80A9', '#5A80A9']}
         width={'2.75rem'}

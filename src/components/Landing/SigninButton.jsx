@@ -1,6 +1,6 @@
 import React from 'react';
 
-function LoginButton() {
+function SignInButton() {
   return (
     <div>
       <button
@@ -13,4 +13,4 @@ function LoginButton() {
   );
 }
 
-export default LoginButton;
+export default SignInButton;
