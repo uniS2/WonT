@@ -1,13 +1,13 @@
 import Logo from '@/components/Logo';
-import Footer from '@/components/Footer';
-import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
-import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo.jsx';
-import LandingPagePartOne from '@/components/Landing/LandingPagePartOne';
 import SignInButton from '@/components/Sign/SignInButton';
 import SignUpButton from '@/components/Sign/SignUpButton';
+import LandingPagePartOne from '@/components/Landing/LandingPagePartOne';
+import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo.jsx';
+import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
+import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
+import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 
 // 렌딩
 
@@ -27,6 +27,7 @@ function LandingPage() {
 
   return (
     <div className="mx-auto flex min-h-[50rem] max-w-[80rem] flex-col items-center">
+      {/* // 반응형 할땐 안건드려되고 . */}
       <h1 className="sr-only">LandingPage</h1>
 
       <MotionDiv delay={0.8}>
