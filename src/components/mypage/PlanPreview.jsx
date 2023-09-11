@@ -1,7 +1,16 @@
 import useTravelsList from '@/hooks/useTravlesList';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function PlanPreview() {
   const { data } = useTravelsList();
+  const [trip, setTrip] = useState();
+
+  useEffect(() => {
+    if (data) {
+      // setTrip(data.items.filter((item) => item));
+    }
+  });
   return (
     <div className="mx-auto px-4">
       <div className="relative mx-auto flex justify-center rounded-xl  bg-gradient-to-t from-slate-800/60 via-slate-200/20 ">

@@ -1,9 +1,9 @@
 // 여행 일정 편집 페이지
 import Header from '@/components/Header/Header';
-import TripPlan from '@/components/tripeditpage/TripPlan';
+import TripPlan from '@/components/TripEdit/TripPlan';
 import Map from './../components/Map';
-import AddPlan from '@/components/tripeditpage/AddPlan';
-import ButtonMedium from '@/components/tripeditpage/ButtonMedium';
+import AddPlan from '@/components/TripEdit/AddPlan';
+import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import { Link } from 'react-router-dom';
 
 export default function TripEditPage() {

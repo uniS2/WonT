@@ -1,4 +1,4 @@
-import TripPlaneIcon from '@/components/tripeditpage/TripPlaneIcon';
+import TripPlaneIcon from '@/components/TripEdit/TripPlaneIcon';
 
 export default function AddPlan({ view, text }) {
   return (

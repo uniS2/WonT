@@ -1,7 +1,7 @@
-import MyPageHeader from '@/components/mypage/MyPageHeader';
-import MyPageTab from '@/components/mypage/MyPageTab';
-import PlanPreview from '@/components/mypage/PlanPreview';
-import Profile from '@/components/mypage/Profile';
+import MyPageHeader from '@/components/MyPage/MyPageHeader';
+import MyPageTab from '@/components/MyPage/MyPageTab';
+import PlanPreview from '@/components/MyPage/PlanPreview';
+import Profile from '@/components/MyPage/Profile';
 
 export default function MySchedule() {
   return (

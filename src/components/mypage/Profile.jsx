@@ -10,7 +10,7 @@ export default function Profile() {
         viewBox="0 0 69 68"
         fill="none"
       >
-        <g clip-path="url(#clip0_214_5141)">
+        <g clipPath="url(#clip0_214_5141)">
           <circle
             cx="34.5"
             cy="34"
@@ -27,8 +27,8 @@ export default function Profile() {
             strokeWidth="2"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M7.6167 54.8187C13.4889 47.3793 23.339 42.5 34.4996 42.5C45.6603 42.5 55.5104 47.3793 61.3826 54.8187C60.9619 55.3611 60.5252 55.8904 60.0732 56.4059C54.6529 49.2869 45.3198 44.5 34.4996 44.5C23.6795 44.5 14.3464 49.2869 8.92611 56.4059C8.47406 55.8904 8.03735 55.3611 7.6167 54.8187Z"
             fill="#5A80A9"
           />
