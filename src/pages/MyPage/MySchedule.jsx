@@ -5,8 +5,8 @@ import Profile from '@/components/mypage/Profile';
 
 export default function MySchedule() {
   return (
-    <div className="bg-background">
-      <div className="mx-auto flex min-h-[50rem] max-w-[80rem] flex-col items-center bg-background">
+    <div className="mx-auto min-w-[360px] max-w-[1280px] bg-background">
+      <div className="mx-auto flex max-w-[80rem] flex-col items-center bg-background">
         <h1 className="sr-only">MySchedule</h1>
         <MyPageHeader />
         <div className="flex flex-col items-center pb-11 pt-7">
