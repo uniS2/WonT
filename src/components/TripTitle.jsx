@@ -1,4 +1,4 @@
-export default function TripSelectTitle({
+export default function TripTitle({
   question = '여행을 떠나시나요?',
   guide = '선택하세요.',
 }) {
