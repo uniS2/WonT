@@ -2,11 +2,13 @@ import MyPageHeader from '@/components/MyPage/MyPageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
+import { getPocketHostImageURL } from '@/utils';
+import useScheduleList from '@/hooks/useScheduleList';
 
 export default function MySchedule() {
   return (
-    <div className="mx-auto min-w-[360px] max-w-[1280px] bg-background">
-      <div className="mx-auto flex max-w-[80rem] flex-col items-center bg-background">
+    <div className="mx-auto  min-w-[22.5rem]">
+      <div className="flex flex-col items-center bg-background pb-14">
         <h1 className="sr-only">MySchedule</h1>
         <MyPageHeader />
         <div className="flex flex-col items-center pb-11 pt-7">
@@ -18,8 +20,10 @@ export default function MySchedule() {
             멋쟁이 사자 10조
           </span>
         </div>
-        <MyPageTab />
-        <PlanPreview />
+        <div className="mx-auto">
+          <MyPageTab />
+          <PlanPreview />
+        </div>
       </div>
     </div>
   );

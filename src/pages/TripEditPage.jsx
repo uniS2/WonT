@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function TripEditPage() {
   return (
-    <div className="mx-auto  min-w-[22.5rem] bg-background ">
+    <div className="mx-auto  min-w-[22.5rem] bg-background pb-14">
       <h1 className="sr-only">TripEditPage</h1>
       <Header />
       <TripPlan />

@@ -1,34 +1,37 @@
-import useTravelsList from '@/hooks/useTravlesList';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import useScheduleList from '@/hooks/useScheduleList';
+import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 
 export default function PlanPreview() {
-  const { data } = useTravelsList();
-  const [trip, setTrip] = useState();
+  const { data } = useScheduleList();
+  // const image = getPocketHostImageURL();
+  // console.log(data.items);
+  // console.log(data.items[0].place[0]);
 
-  useEffect(() => {
-    if (data) {
-      // setTrip(data.items.filter((item) => item));
-    }
-  });
   return (
-    <div className="mx-auto px-4">
-      <div className="relative mx-auto flex justify-center rounded-xl  bg-gradient-to-t from-slate-800/60 via-slate-200/20 ">
-        <img
-          src="/src/assets/delete/miram-oh-sNxmBz_aJ_k-unsplash.jpg"
-          alt=""
-          className="h-[360px] min-h-[320px]  w-[1240px] min-w-[320px] justify-center rounded-xl object-cover mix-blend-multiply"
-        />
-        <div className="absolute bottom-2 left-3 flex flex-col ">
-          <span className="text-xl font-semibold text-white">제주도 여행</span>
-          <span className="text-sm font-light text-background">
-            2023.10.01 - 2023.10.10
+    <div className="mx-auto flex flex-col gap-4 px-6">
+      {data?.items.map((item) => (
+        <div
+          key={item.id}
+          className="relative mx-auto flex justify-center rounded-xl  bg-gradient-to-t from-slate-800/60 via-slate-200/20 "
+        >
+          <img
+            src={getPocketHostImageURL(item, 'image')}
+            alt=""
+            className="h-[360px] min-h-[320px]  w-[1240px] min-w-[320px] justify-center rounded-xl object-cover mix-blend-multiply"
+          />
+          <div className="absolute bottom-2 left-3 flex flex-col ">
+            <span className="text-xl font-semibold text-white">
+              {item.title}
+            </span>
+            <span className="text-sm font-light text-background">
+              {`${item.start_date} - ${item.end_date}`}
+            </span>
+          </div>
+          <span className="absolute bottom-5 right-3 text-xl text-white">
+            D-20
           </span>
         </div>
-        <span className="absolute bottom-5 right-3 text-xl text-white">
-          D-20
-        </span>
-      </div>
+      ))}
     </div>
   );
 }
