@@ -29,6 +29,17 @@ export default {
       backgroundImage: (theme) => ({
         LandingPage: "url('./src/assets/LandingPage-background.svg')",
       }),
+      carouselImage: (theme) => ({
+        LandingCarouselOne: "url('./src/assets/LandingPage-carousel-one.svg')",
+        LandingCarouselTwo: "url('./src/assets/LandingPage-carousel-two.svg')",
+        LandingCarouselThree:
+          "url('./src/assets/LandingPage-carousel-three.svg')",
+        LandingCarouselFour:
+          "url('./src/assets/LandingPage-carousel-four.svg')",
+        LandingCarouselFive:
+          "url('./src/assets/LandingPage-carousel-five.svg')",
+        LandingCarouselSix: "url('./src/assets/LandingPage-carousel-six.svg')",
+      }),
     },
   },
   plugins: [],
