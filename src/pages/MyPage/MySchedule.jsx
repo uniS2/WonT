@@ -6,6 +6,8 @@ import { getPocketHostImageURL } from '@/utils';
 import useScheduleList from '@/hooks/useScheduleList';
 
 export default function MySchedule() {
+  const { data } = useScheduleList();
+  console.log(data);
   return (
     <div className="mx-auto  min-w-[22.5rem]">
       <div className="flex flex-col items-center bg-background pb-14">
@@ -20,10 +22,12 @@ export default function MySchedule() {
             멋쟁이 사자 10조
           </span>
         </div>
-        <div className="mx-auto">
-          <MyPageTab />
-          <PlanPreview />
-        </div>
+        {data.items.map((item) => (
+          <div className="mx-auto">
+            <MyPageTab />
+            <PlanPreview />
+          </div>
+        ))}
       </div>
     </div>
   );

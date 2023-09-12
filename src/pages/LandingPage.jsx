@@ -8,7 +8,7 @@ import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Carousel } from 'react-responsive-carousel';
+// import { Carousel } from 'react-responsive-carousel';
 
 // 렌딩
 
