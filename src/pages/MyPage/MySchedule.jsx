@@ -5,7 +5,7 @@ import Profile from '@/components/MyPage/Profile';
 
 export default function MySchedule() {
   return (
-    <div className="mx-auto  min-w-[22.5rem]">
+    <div className="container  mx-auto min-w-[22.5rem]">
       <div className="flex flex-col items-center bg-background pb-14">
         <h1 className="sr-only">MySchedule</h1>
         <MyPageHeader />

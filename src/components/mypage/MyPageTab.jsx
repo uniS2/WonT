@@ -6,8 +6,8 @@ export default function MyPageTab() {
     return (
       <div className="w-full">
         <div className="mb-3 flex justify-around">
-          <a href="">나의 일정</a>
-          <a href="">북마크</a>
+          <a href="/myschedule">나의 일정</a>
+          <a href="/bookmark">북마크</a>
         </div>
         <div className="relative w-full max-w-7xl border-b-[1px] border-contentsPrimary">
           <div className="h-1 w-[50%] bg-point"></div>

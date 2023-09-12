@@ -15,7 +15,7 @@ export default function PlanPreview() {
 
   if (data) {
     return (
-      <div className="mx-auto px-4">
+      <div className="mx-auto flex flex-col gap-4 px-4">
         {data?.items.map((item) => (
           <div
             key={item.id}
@@ -26,7 +26,7 @@ export default function PlanPreview() {
               alt=""
               className="h-[360px] min-h-[320px]  w-[1240px] min-w-[320px] justify-center rounded-xl object-cover mix-blend-multiply"
             />
-            <div className="absolute bottom-2 left-3 flex flex-col ">
+            <div className="absolute bottom-4 left-3 flex flex-col ">
               <span className="text-xl font-semibold text-white">
                 {item.title}
               </span>
@@ -36,7 +36,7 @@ export default function PlanPreview() {
                   .substr(0, 10)}`}
               </span>
             </div>
-            <span className="absolute bottom-5 right-3 text-xl text-white">
+            <span className="absolute bottom-6 right-3 text-xl font-bold text-white">
               D-20
             </span>
           </div>
