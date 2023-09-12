@@ -7,7 +7,7 @@ import SignPart from '@/components/Sign/SignPart';
 // 로그인 페이지
 function SignInPage() {
   return (
-    <div className="mx-auto flex min-h-[50rem] max-w-[80rem] flex-col items-center px-5">
+    <div className="container mx-auto flex flex-col items-center px-5">
       <h1 className="sr-only">SignInPage</h1>
       <div className="h-[8.125rem] w-[20rem] pt-[2.125rem]">
         <Link to="/">
