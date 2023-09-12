@@ -8,6 +8,7 @@ import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Carousel } from 'react-responsive-carousel';
 
 // 렌딩
 
@@ -43,10 +44,10 @@ function LandingPage() {
 
             <MotionDiv delay={6}>
               <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
-                <Link to="/SignInPage">
+                <Link to="/signin">
                   <SignInButton text="로그인" />
                 </Link>
-                <Link to="/SignUpPage">
+                <Link to="/signup">
                   <SignUpButton text="회원가입" />
                 </Link>
               </div>
