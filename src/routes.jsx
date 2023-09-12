@@ -28,10 +28,10 @@ const router = createBrowserRouter(
       <Route path="main" element={<MainPage />} />
       <Route path="triplocal" element={<TripLocalPage />} />
       <Route path="tripcalendar" element={<TripCalendarPage />}></Route>
-      <Route path="tripeditpage" element={<TripEditPage />} />
+      <Route path="tripedit" element={<TripEditPage />} />
       <Route path="mypage" element={<MyPage />} />
       <Route path="myschedule" element={<MySchedule />} />
-      <Route path="bookmarkpage" element={<BookmarkPage />} />
+      <Route path="bookmark" element={<BookmarkPage />} />
     </Route>
   )
 );
