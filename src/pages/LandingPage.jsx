@@ -8,7 +8,6 @@ import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Carousel } from 'react-responsive-carousel';
 
 // 렌딩
 
@@ -27,12 +26,12 @@ function LandingPage() {
   };
 
   return (
-    <div className="mx-auto flex min-h-[50rem] max-w-[80rem] flex-col items-center">
+    <div className="container mx-auto flex min-h-[50rem] flex-col">
       {/* // 반응형 할땐 안건드려되고 . */}
       <h1 className="sr-only">LandingPage</h1>
 
       <MotionDiv delay={0.8}>
-        <div className="w-full bg-LandingPage bg-center bg-no-repeat">
+        <div className="bg-LandingCarouselThree lg:w-[80rem] bg-cover bg-center bg-no-repeat">
           <div className="flex flex-col items-center pt-[10.625rem]">
             <MotionDiv delay={1.5}>
               <Logo
@@ -42,7 +41,7 @@ function LandingPage() {
               />
             </MotionDiv>
 
-            <MotionDiv delay={6}>
+            <MotionDiv delay={3.5}>
               <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
                 <Link to="/signin">
                   <SignInButton text="로그인" />
@@ -56,20 +55,26 @@ function LandingPage() {
         </div>
       </MotionDiv>
 
-      <div className="flex h-screen flex-col gap-5 px-5 pt-[3.125rem]">
-        <MotionDiv delay={2}>
-          <LandingPagePartOne />
-        </MotionDiv>
-        <MotionDiv delay={3}>
-          <LandingPagePartTwo />
-        </MotionDiv>
-        <MotionDiv delay={4}>
-          <LandingPagePartThree />
-        </MotionDiv>
-        <MotionDiv delay={5}>
-          <LandingPagePartFour />
-        </MotionDiv>
-        <Footer />
+      <div className="flex flex-col gap-5 px-5 pt-[3.125rem]">
+        <div className="lg:flex lg:gap-5">
+          <MotionDiv delay={2.5}>
+            <LandingPagePartOne />
+          </MotionDiv>
+          <MotionDiv delay={2.5}>
+            <LandingPagePartTwo />
+          </MotionDiv>
+        </div>
+        <div className="lg:flex lg:gap-5">
+          <MotionDiv delay={2.5}>
+            <LandingPagePartThree />
+          </MotionDiv>
+          <MotionDiv delay={2.5}>
+            <LandingPagePartFour />
+          </MotionDiv>
+        </div>
+        <div className="lg:w-[80rem]">
+          <Footer />
+        </div>
       </div>
     </div>
   );
