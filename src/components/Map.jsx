@@ -1,6 +1,5 @@
+import { useEffect, useState } from 'react';
 import debounce from '@/utils/debounce';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 // DOM 내에서 'map' 아이디 찾지 못하는 문제 해결하기
 
