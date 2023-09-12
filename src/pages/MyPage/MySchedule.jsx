@@ -14,12 +14,12 @@ export default function MySchedule() {
             마이 페이지
           </span>
           <Profile />
-          <span className="mt-[0.625rem] text-[18px] text-contentsSecondary">
+          <span className="text-[1.125rem] text-contentsSecondary">
             멋쟁이 사자 10조
           </span>
         </div>
         <div className="mx-auto">
-          <MyPageTab />
+          <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
           <PlanPreview />
         </div>
       </div>

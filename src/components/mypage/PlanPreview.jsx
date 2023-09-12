@@ -1,5 +1,6 @@
 import useScheduleList from '@/hooks/useScheduleList';
 import { getPocketHostImageURL } from '@/utils';
+import { getDDay } from '@/utils/getDDay';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -19,12 +20,12 @@ export default function PlanPreview() {
         {data?.items.map((item) => (
           <div
             key={item.id}
-            className="relative mx-auto flex justify-center rounded-xl  bg-gradient-to-t from-slate-800/60 via-slate-200/20 "
+            className="relative mx-auto flex cursor-pointer justify-center  rounded-xl bg-gradient-to-t from-slate-800/60 via-slate-200/20"
           >
             <img
-              src={getPocketHostImageURL(item, 'place').split(',').shift()}
+              src={getPocketHostImageURL(item, 'place').split(',')[0]}
               alt=""
-              className="h-[360px] min-h-[320px]  w-[1240px] min-w-[320px] justify-center rounded-xl object-cover mix-blend-multiply"
+              className="h-[360px] min-h-[360px]  w-[1256px] min-w-[360px]  rounded-xl object-cover mix-blend-multiply"
             />
             <div className="absolute bottom-4 left-3 flex flex-col ">
               <span className="text-xl font-semibold text-white">
@@ -37,7 +38,7 @@ export default function PlanPreview() {
               </span>
             </div>
             <span className="absolute bottom-6 right-3 text-xl font-bold text-white">
-              D-20
+              {getDDay(item.start_date)}
             </span>
           </div>
         ))}
