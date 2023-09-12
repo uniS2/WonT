@@ -2,14 +2,14 @@ export default function MyPageTab() {
   return (
     <div className="w-full">
       <div className="mb-3 flex justify-around">
-        <a href="">나의 일정</a>
-        <a href="">북마크</a>
+        <a href="/mypage">나의 일정</a>
+        <a href="/bookmark">북마크</a>
       </div>
       <div className="relative w-full max-w-7xl border-b-[1px] border-contentsPrimary">
         <div className="h-1 w-[50%] bg-point"></div>
       </div>
-      <div className="flex items-center gap-[10px]">
-        <span className="mb-6 ml-7 mt-8 font-medium text-contentsPrimary">
+      <div className="mx-8 mb-3 mt-6 flex items-center justify-start gap-[10px]">
+        <span className=" flex font-medium text-contentsPrimary">
           나의 일정
         </span>
 
