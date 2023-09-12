@@ -1,11 +1,11 @@
 import useScheduleList from '@/hooks/useScheduleList';
+import { getPocketHostImageURL } from '@/utils';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
 export default function PlanPreview() {
   const { data } = useScheduleList();
   const [trip, setTrip] = useState();
-  // console.log(data.items[0].start_date);
 
   useEffect(() => {
     if (data) {
@@ -14,9 +14,6 @@ export default function PlanPreview() {
   }, []);
 
   if (data) {
-    let startDate = data.items.map((item) => item.start_date);
-    console.log(startDate);
-
     return (
       <div className="mx-auto px-4">
         {data?.items.map((item) => (
@@ -25,7 +22,7 @@ export default function PlanPreview() {
             className="relative mx-auto flex justify-center rounded-xl  bg-gradient-to-t from-slate-800/60 via-slate-200/20 "
           >
             <img
-              src="/src/assets/delete/miram-oh-sNxmBz_aJ_k-unsplash.jpg"
+              src={getPocketHostImageURL(item, 'place').split(',').shift()}
               alt=""
               className="h-[360px] min-h-[320px]  w-[1240px] min-w-[320px] justify-center rounded-xl object-cover mix-blend-multiply"
             />
