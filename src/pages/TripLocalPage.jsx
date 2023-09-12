@@ -42,7 +42,7 @@ export default function TripLocalPage() {
 
   return (
     <section className="mx-auto flex min-h-[50rem] flex-col items-center bg-background pb-[2.3125rem]">
-      <TripHeader />
+      <TripHeader isBack={false} />
       <h1 className="sr-only">여행 지역 선택 페이지</h1>
       <TripTitle
         question={'어디로 떠나시나요?'}

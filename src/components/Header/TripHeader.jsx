@@ -2,8 +2,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import BackIcon from '@/components/Header/BackIcon';
 import UserIcon from '@/components/Header/UserIcon';
+import CloseIcon from '@/components/CloseIcon';
 
-export default function TripHeader({ isLogo = true, isUserIcon = true }) {
+export default function TripHeader({
+  isBack = true,
+  isLogo = true,
+  isUserIcon = true,
+}) {
   // 뒤로 가기 버튼
   const navigate = useNavigate();
   const handleBackButton = () => {
@@ -14,13 +19,19 @@ export default function TripHeader({ isLogo = true, isUserIcon = true }) {
     <nav className="w-full bg-white">
       <ul className="mx-auto flex max-w-7xl justify-between px-6 py-[1.0625rem]">
         <li>
-          <button
-            type="button"
-            aria-label="뒤로가기"
-            onClick={handleBackButton}
-          >
-            <BackIcon width={'1rem'} height={'1rem'} color="#4EC3F9" />
-          </button>
+          {isBack ? (
+            <button
+              type="button"
+              aria-label="뒤로가기"
+              onClick={handleBackButton}
+            >
+              <BackIcon width={'1rem'} height={'1rem'} color={'#4EC3F9'} />
+            </button>
+          ) : (
+            <Link to="/main">
+              <CloseIcon size={'1.25rem'} color={'#4EC3F9'} />
+            </Link>
+          )}
         </li>
         {isLogo && (
           <li className="ml-[0.4375rem]">
