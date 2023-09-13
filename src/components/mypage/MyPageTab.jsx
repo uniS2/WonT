@@ -1,9 +1,10 @@
+import useRecommendsList from '@/hooks/useRecommendsList';
 import useScheduleList from '@/hooks/useScheduleList';
-import useTravelsList from '@/hooks/useTravlesList';
 import { Link } from 'react-router-dom';
 
 export default function MyPageTab({ position, tab, menu }) {
-  const { data } = tab === 'myschedule' ? useScheduleList() : useTravelsList();
+  const { data } =
+    tab === 'myschedule' ? useScheduleList() : useRecommendsList();
   if (data) {
     return (
       <div className=" mx-auto min-w-[360px] ">
