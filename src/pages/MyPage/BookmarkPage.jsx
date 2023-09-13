@@ -2,7 +2,6 @@ import MyPageHeader from '@/components/MyPage/MyPageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import BookmarkList from '@/components/MyPage/BookmarkList';
 import Profile from '@/components/MyPage/Profile';
-import PlanPreview from '@/components/MyPage/PlanPreview';
 
 export default function BookmarkPage() {
   return (
@@ -21,7 +20,6 @@ export default function BookmarkPage() {
         </div>
         <div className="mx-auto">
           <MyPageTab position="right" tab="bookmark" menu="북마크" />
-          {/* <PlanPreview /> */}
           <BookmarkList />
         </div>
       </div>

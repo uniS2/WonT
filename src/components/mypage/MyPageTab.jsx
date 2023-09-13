@@ -6,7 +6,7 @@ export default function MyPageTab({ position, tab, menu }) {
   const { data } = tab === 'myschedule' ? useScheduleList() : useTravelsList();
   if (data) {
     return (
-      <div className=" 2xl:max-w-[1280px] mx-auto min-w-[360px] ">
+      <div className=" mx-auto min-w-[360px] ">
         <div className="mb-3 flex justify-around">
           <Link to="/myschedule">
             <button type="button">나의 일정</button>

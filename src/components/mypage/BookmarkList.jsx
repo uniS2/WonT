@@ -7,9 +7,9 @@ export default function BookmarkList() {
   console.log(data);
   if (data) {
     return (
-      <div className="md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mx-auto grid  gap-4 ">
+      <ul className="md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mx-auto grid  gap-4 ">
         {data?.items.map((item) => (
-          <div key={item.id} className="relative  min-w-[360px]">
+          <li key={item.id} className="relative  min-w-[360px]">
             <div className="absolute right-4 top-4 ">
               <BookMark />
             </div>
@@ -17,12 +17,12 @@ export default function BookmarkList() {
               <img
                 src={getPocketHostImageURL(item).split(',')[0]}
                 alt=""
-                className="aspect-square max-h-[420px] min-h-[380px]  rounded-lg border-[1px] border-gray-2 object-cover"
+                className="md:h-[380px] lg:h-[420px] sm:h-[360px] xl:h-[400px] box-content aspect-square  rounded-lg border-[1px] border-gray-2 object-cover"
               />
             </a>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     );
   }
 }

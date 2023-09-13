@@ -16,7 +16,7 @@ export default function PlanPreview() {
 
   if (data) {
     return (
-      <div className="mx-auto flex flex-col gap-4 px-4">
+      <div className="sm:w-[361px] md:w-[768px] lg:w-[858px] xl:w-[1236px] mx-auto flex flex-col gap-4">
         {data?.items.map((item) => (
           <div
             key={item.id}
@@ -24,8 +24,8 @@ export default function PlanPreview() {
           >
             <img
               src={getPocketHostImageURL(item, 'place').split(',')[0]}
-              alt=""
-              className="h-[360px] min-h-[360px]  w-[1256px] min-w-[360px]  rounded-xl object-cover mix-blend-multiply"
+              alt={`${item.title} 이미지`}
+              className="h-[360px] min-h-[360px]  w-[1236px] min-w-[360px]  rounded-xl object-cover mix-blend-multiply"
             />
             <div className="absolute bottom-4 left-3 flex flex-col ">
               <span className="text-xl font-semibold text-white">

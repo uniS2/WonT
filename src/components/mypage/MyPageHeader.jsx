@@ -11,8 +11,13 @@ export default function MyPageHeader() {
           <Logo width={74} height={28} />
         </Link>
         <div className="flex flex-row items-center gap-6">
-          <BookMark />
-          <Logout />
+          <Link to="/bookmark">
+            <BookMark />
+          </Link>
+
+          <Link to="/">
+            <Logout />
+          </Link>
         </div>
       </div>
     </div>
