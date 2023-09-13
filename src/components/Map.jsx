@@ -9,6 +9,7 @@ export default function Map({
   latitude = 33,
   longtitude = 126,
   level = 3,
+  restProps,
 }) {
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longtitude)
@@ -41,5 +42,5 @@ export default function Map({
     }
   }, [center, level]);
 
-  return <div id="map" className={`${height} ${width}`}></div>;
+  return <div id="map" className={`${height} ${width} ${restProps}`}></div>;
 }
