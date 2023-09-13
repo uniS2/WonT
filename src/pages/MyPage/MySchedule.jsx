@@ -20,7 +20,9 @@ export default function MySchedule() {
         </div>
         <div className="mx-auto">
           <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
-          <PlanPreview />
+          <div className="px-4">
+            <PlanPreview />
+          </div>
         </div>
       </div>
     </div>
