@@ -2,12 +2,10 @@ import MyPageHeader from '@/components/MyPage/MyPageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
-import { getPocketHostImageURL } from '@/utils';
-import useScheduleList from '@/hooks/useScheduleList';
 
 export default function MySchedule() {
   return (
-    <div className="mx-auto  min-w-[22.5rem]">
+    <div className="container  mx-auto min-w-[22.5rem]">
       <div className="flex flex-col items-center bg-background pb-14">
         <h1 className="sr-only">MySchedule</h1>
         <MyPageHeader />
@@ -16,13 +14,15 @@ export default function MySchedule() {
             마이 페이지
           </span>
           <Profile />
-          <span className="mt-[0.625rem] text-[18px] text-contentsSecondary">
+          <span className="text-[1.125rem] text-contentsSecondary">
             멋쟁이 사자 10조
           </span>
         </div>
         <div className="mx-auto">
-          <MyPageTab />
-          <PlanPreview />
+          <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
+          <div className="px-4">
+            <PlanPreview />
+          </div>
         </div>
       </div>
     </div>
