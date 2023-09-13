@@ -9,8 +9,8 @@ const CarouselDiv = ({ images, children }) => {
       showStatus={false}
       showThumbs={false}
       autoPlay={true}
-      interval={900}
-      infiniteLoop={false}
+      interval={2000}
+      infiniteLoop={true}
     >
       {images.map((image, index) => (
         <div key={index}>
@@ -23,3 +23,5 @@ const CarouselDiv = ({ images, children }) => {
 };
 
 export default CarouselDiv;
+
+// 개별적으로 돌려보기
