@@ -1,25 +1,30 @@
-export default function TripPlan() {
+import { Link } from 'react-router-dom';
+import { useLocalStore } from '@/store/localStore';
+import TripPlanEditButton from '@/components/TripPlanEditButton';
+
+export default function TripPlan({ background = 'bg-secondary/50' }) {
+  const selectName = useLocalStore((set) => set.selectName);
   return (
-    <div className=" bg-secondary/50 px-6 py-[1.125rem]">
-      <div className="mx-auto flex max-w-[1280px] justify-between gap-[0.125rem]">
-        <span className="text-base text-contentsPrimary">제주도</span>
-        <button
-          type="button"
-          className=" text-xs text-gray-1 underline underline-offset-2"
-        >
-          편집
-        </button>
+    <div className={`${background} px-6 py-[1.125rem]`}>
+      <div className="mx-auto flex justify-between gap-[0.125rem]">
+        <dl>
+          <dt className="sr-only">장소</dt>
+          <dd className="text-base text-contentsPrimary">{selectName}</dd>
+        </dl>
+        <Link to="/triplocal">
+          <TripPlanEditButton />
+        </Link>
       </div>
-      <div className="mx-auto flex max-w-[1280px] justify-between">
-        <span className="text-base font-light text-contentsSecondary">
-          2023.10.10 - 2023.10.20
-        </span>
-        <button
-          type="button"
-          className=" text-xs text-gray-1 underline underline-offset-2"
-        >
-          편집
-        </button>
+      <div className="mx-auto flex justify-between">
+        <dl>
+          <dt className="sr-only">여행 기간</dt>
+          <dd className="text-base font-light text-contentsSecondary">
+            2023.10.10 - 2023.10.20
+          </dd>
+        </dl>
+        <Link to="/tripcalendar">
+          <TripPlanEditButton />
+        </Link>
       </div>
     </div>
   );
