@@ -9,6 +9,8 @@ export const useToggleTripMenuStore = create(
     // state: 여행 숙소선택 페이지
     displayHotelTripPlan: true,
     displayHotelList: true,
+    // state: 나의 일정상세 페이지
+    displayTotalschedule: true,
     // action: 여행 장소선택 페이지
     togglePlaceTripPlan: () =>
       set(
@@ -43,4 +45,12 @@ export const useToggleTripMenuStore = create(
         false,
         'hotelList/toggler'
       ),
+    toggleTotalschedule: () =>
+      set(
+        (state) => ({
+          displayTotalschedule: !state.displayTotalschedule,
+        }),
+        false,
+        'totalSchedule/toggler'
+      )
   })));
