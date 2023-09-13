@@ -36,7 +36,7 @@ function LandingPage() {
     <div className="container mx-auto flex min-h-[50rem] flex-col">
       <h1 className="sr-only">LandingPage</h1>
       {/* <CarouselDiv images={images}> */}
-      <div className="bg-LandingCarouselThree lg:w-[80rem] bg-cover bg-center bg-no-repeat">
+      <div className="bg-LandingCarouselThree bg-cover bg-center bg-no-repeat lg:w-[80rem]">
         <div className="flex flex-col items-center pt-[10.625rem]">
           <MotionDiv delay={1.5}>
             <div>
