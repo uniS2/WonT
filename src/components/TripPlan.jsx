@@ -7,15 +7,21 @@ export default function TripPlan({ background = 'bg-secondary/50' }) {
   return (
     <div className={`${background} px-6 py-[1.125rem]`}>
       <div className="mx-auto flex justify-between gap-[0.125rem]">
-        <span className="text-base text-contentsPrimary">{selectName}</span>
+        <dl>
+          <dt className="sr-only">장소</dt>
+          <dd className="text-base text-contentsPrimary">{selectName}</dd>
+        </dl>
         <Link to="/triplocal">
           <TripPlanEditButton />
         </Link>
       </div>
       <div className="mx-auto flex justify-between">
-        <span className="text-base font-light text-contentsSecondary">
-          2023.10.10 - 2023.10.20
-        </span>
+        <dl>
+          <dt className="sr-only">여행 기간</dt>
+          <dd className="text-base font-light text-contentsSecondary">
+            2023.10.10 - 2023.10.20
+          </dd>
+        </dl>
         <Link to="/tripcalendar">
           <TripPlanEditButton />
         </Link>
