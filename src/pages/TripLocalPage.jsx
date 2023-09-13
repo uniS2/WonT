@@ -3,7 +3,6 @@ import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import LocalItem from '@/components/TripLocal/LocalItem';
 import TripTitle from '@/components/TripTitle';
-import Spinner from '@/components/Spinner/Spinner';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 import { useQuery } from '@tanstack/react-query';
 import { useLocalStore } from '@/store/localStore';
@@ -15,17 +14,12 @@ async function fetchLocals() {
 
 export default function TripLocalPage() {
   // Tanstack Query
-  const { data, isLoading, error } = useQuery(['locals'], fetchLocals, {
+  const { data, error } = useQuery(['locals'], fetchLocals, {
     retry: 2,
   });
 
-  const { selectName, selectIndex } = useLocalStore();
+  const selectIndex = useLocalStore((state) => state.selectIndex);
   const isSelect = selectIndex !== null;
-
-  // 로딩 중인 경우 화면
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   // 오류가 발생한 경우 화면
   if (error) {
@@ -46,7 +40,7 @@ export default function TripLocalPage() {
         guide={'여행할 지역을 선택하세요.'}
       />
       <ul className="mb-9 flex w-full flex-col gap-[0.625rem]">
-        {data?.items?.map((item, index) => (
+        {data?.items?.map((item) => (
           <LocalItem
             key={item.id}
             image={getPocketHostImageURL(item)}
