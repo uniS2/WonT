@@ -4,7 +4,7 @@ import Gallery from '@/assets/LandingPage-gallery.svg';
 function LandingPagePartFour() {
   return (
     <div>
-      <div className="flex h-[6.25rem] w-[20rem] justify-around bg-gray-100/30">
+      <div className="lg:w-[38.75rem] flex justify-around bg-gray-100/30">
         <img src={Gallery} alt="plane" />
 
         <div className="relative flex flex-col justify-center py-[1.6875rem]  pl-[1.723125rem] font-semibold text-contentsPrimary">
