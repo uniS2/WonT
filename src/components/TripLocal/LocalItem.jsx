@@ -5,8 +5,8 @@ import { useLocalStore } from '@/store/localStore';
 // import { useState } from 'react';
 
 export default function LocalItem({ image, name = '지역명', index }) {
-  const { selected, setSelectIndex } = useLocalStore();
-  const isSelect = selected === index;
+  const { selectIndex, setSelectIndex, setSelectName } = useLocalStore();
+  const isSelect = selectIndex === index;
 
   return (
     <li className="flex items-center justify-between bg-white px-5 py-[0.9375rem]">
@@ -17,6 +17,7 @@ export default function LocalItem({ image, name = '지역명', index }) {
       <ButtonSmall
         onClick={() => {
           setSelectIndex(index);
+          setSelectName(name);
         }}
         color={isSelect ? 'bg-point' : 'bg-primary'}
       >

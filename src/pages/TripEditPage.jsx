@@ -1,6 +1,6 @@
 // 여행 일정 편집 페이지
 import Header from '@/components/Header/Header';
-import TripPlan from '@/components/TripEdit/TripPlan';
+import TripPlan from '@/components/TripPlan';
 import Map from './../components/Map';
 import AddPlan from '@/components/TripEdit/AddPlan';
 import ButtonMedium from '@/components/TripEdit/ButtonMedium';

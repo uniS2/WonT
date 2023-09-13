@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import debounce from '@/utils/debounce';
 
-// DOM 내에서 'map' 아이디 찾지 못하는 문제 해결하기
-
 const { kakao } = window;
 
 export default function Map({
-  width = '31.25rem',
-  height = '25rem',
+  width = 'w-[31.25rem]',
+  height = 'h-[25rem]',
   latitude = 33,
   longtitude = 126,
   level = 3,
+  restProps,
 }) {
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longtitude)
@@ -43,7 +42,5 @@ export default function Map({
     }
   }, [center, level]);
 
-  // return <div id="map" className="h-[500px] w-[1280px]"></div>;
-
-  return <div id="map" className={`${height} ${width}`}></div>;
+  return <div id="map" className={`${height} ${width} ${restProps}`}></div>;
 }

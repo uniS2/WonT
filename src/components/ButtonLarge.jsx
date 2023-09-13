@@ -7,12 +7,14 @@ export default function ButtonLarge({
   height = 'h-[3.875rem]',
   textColor = 'text-white',
   children,
+  onClick,
   ...restProps
 }) {
   return (
     <button
       type="button"
       className={`mx-5 ${height} w-80 rounded-md ${color} text-base font-bold ${textColor}`}
+      onClick={onClick}
       {...restProps}
     >
       {children}
