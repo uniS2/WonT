@@ -8,7 +8,7 @@ import {
 // vercel 배포시 createHashRouter 사용
 
 // 경로 예시
-const RootLayout = lazy(() => import('./components/RootLayout'));
+const RootLayout = lazy(() => import('./pages/RootLayout'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage'));
