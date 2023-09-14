@@ -20,7 +20,7 @@ export default function PlanPreview() {
         {data?.items.map((item) => (
           <div
             key={item.id}
-            className="relative mx-auto flex cursor-pointer justify-center  rounded-xl bg-gradient-to-t from-slate-800/60 via-slate-200/20"
+            className="relative mx-auto flex cursor-pointer justify-center  rounded-xl bg-[hsl(0,0%,80%,0.2)] bg-gradient-to-t from-slate-800/60  via-slate-200/20 bg-fixed opacity-80 transition duration-300 ease-in-out hover:opacity-100"
           >
             <img
               src={
@@ -29,7 +29,7 @@ export default function PlanPreview() {
                   : '/src/assets/common-trip-default.jpg'
               }
               alt={`${item.title} 이미지`}
-              className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply"
+              className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply "
             />
 
             <div className="absolute bottom-4 left-3 flex flex-col ">
