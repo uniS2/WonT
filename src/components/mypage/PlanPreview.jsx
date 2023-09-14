@@ -29,7 +29,7 @@ export default function PlanPreview() {
                   : '/src/assets/common-trip-default.jpg'
               }
               alt={`${item.title} 이미지`}
-              className="h-[360px] min-h-[360px]  w-[1236px] min-w-[360px]  rounded-xl object-cover mix-blend-multiply"
+              className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply"
             />
 
             <div className="absolute bottom-4 left-3 flex flex-col ">

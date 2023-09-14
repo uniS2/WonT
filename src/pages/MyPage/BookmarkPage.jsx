@@ -20,7 +20,7 @@ export default function BookmarkPage() {
         </div>
         <div className="mx-auto">
           <MyPageTab position="right" tab="bookmark" menu="북마크" />
-          <div className="px-4">
+          <div className="md:px-4 sm:px-0">
             <BookmarkList />
           </div>
         </div>

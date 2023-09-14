@@ -5,7 +5,7 @@ import Logout from './Logout';
 
 export default function MyPageHeader() {
   return (
-    <div className="w-full bg-white">
+    <div className=" w-full bg-white">
       <div className="mx-auto flex max-w-7xl justify-between px-[1.0625rem] py-[1.125rem]">
         {/* <Link to="/mainpage"> */}
         <Logo width={74} height={28} />
