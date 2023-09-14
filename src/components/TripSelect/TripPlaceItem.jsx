@@ -1,6 +1,6 @@
 import TripPlaceImage from '@/components/TripSelect/TripPlaceImage';
 import TripPlaceInfo from '@/components/TripSelect/TripPlaceInfo';
-import AddButton from './AddButton';
+import AddButton from '@/components/TripSelect/AddButton';
 
 export default function TripPlaceItem() {
   return (

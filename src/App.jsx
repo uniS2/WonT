@@ -1,9 +1,10 @@
 import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import router from './routes';
-import Spinner from './components/Spinner/Spinner';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+import router from '@/routes';
+import Spinner from '@/components/Spinner/Spinner';
 
 // 쿼리 클라이언트 객체 생성
 const queryClient = new QueryClient({

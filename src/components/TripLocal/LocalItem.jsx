@@ -1,8 +1,8 @@
+import { useLocalStore } from '@/store/localStore';
+
 import ButtonSmall from '@/components/TripLocal/ButtonSmall';
 import LocalImage from '@/components/TripLocal/LocalImage';
 import LocalName from '@/components/TripLocal/LocalName';
-import { useLocalStore } from '@/store/localStore';
-// import { useState } from 'react';
 
 export default function LocalItem({ image, name = '지역명', index }) {
   const { selectIndex, setSelectIndex, setSelectName } = useLocalStore();

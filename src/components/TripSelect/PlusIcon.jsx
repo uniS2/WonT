@@ -1,6 +1,6 @@
 export default function PlusIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <svg width="0.875rem" height="0.875rem" viewBox="0 0 14 14" fill="none">
       <rect
         x="6.29419"
         y="0.538574"

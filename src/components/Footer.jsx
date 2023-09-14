@@ -1,5 +1,5 @@
-import Logo from './Logo';
-import Sns from './Landing/Sns';
+import Logo from '@/components/Logo';
+import Sns from '@/components/Landing/Sns';
 
 export default function Footer({ color }) {
   return (
