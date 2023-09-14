@@ -4,20 +4,20 @@ import useRecommendsList from '@/hooks/useRecommendsList';
 import { useRef } from 'react';
 
 export default function BookmarkList() {
-  const bookmarkListRef = useRef([]);
+  const bookmarkList = useRef([]);
   const { data } = useRecommendsList();
 
   const handleBookmark = (id) => {
-    const isBookmark = bookmarkListRef.current.includes(id);
+    const isBookmark = bookmarkList.current.includes(id);
 
     if (isBookmark) {
-      bookmarkListRef.current = bookmarkListRef.current.filter(
+      bookmarkList.current = bookmarkList.current.filter(
         (itemId) => itemId !== id
       );
-      console.log(bookmarkListRef);
+      console.log(bookmarkList);
     } else {
-      bookmarkListRef.current = [...bookmarkListRef.current, id];
-      console.log(bookmarkListRef);
+      bookmarkList.current = [...bookmarkList.current, id];
+      console.log(bookmarkList);
     }
   };
 
@@ -29,11 +29,7 @@ export default function BookmarkList() {
             className="absolute right-4 top-4 cursor-pointer"
             onClick={() => handleBookmark(item.id)}
           >
-            {item.filter(bookmarkListRef) ? (
-              <BookMark color="#C9ECFF" />
-            ) : (
-              <BookMark color="none" />
-            )}
+            <BookMark color="#C9ECFF" />
           </div>
           <img
             src={getPocketHostImageURL(item).split(',')[0]}
