@@ -1,25 +1,34 @@
-import { useNavigate } from 'react-router-dom';
-import TripHeader from '@/components/Header/TripHeader';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import CalendarIcon from '@/assets/common-calendar.svg';
-import TotalScheduleTopic from '@/components/MyScheduleDetail/TotalScheduleTopic';
-import DefaultImage from '@/components/DefaultImage';
-import CloseIcon from '@/components/CloseIcon';
+
+import TripHeader from '@/components/Header/TripHeader';
 import Modal from '@/components/Modal';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
 import Map from '@/components/Map';
 import ButtonLarge from '@/components/ButtonLarge';
-import { Link } from 'react-router-dom';
+import DeleteButton from '@/components/DeleteButton';
+import TotalScheduleSummary from '@/components/MyScheduleDetail/TotalScheduleSummary';
+import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
+import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
 
 export default function MyScheduleDetailPage() {
+  // 경로 지정
   const navigate = useNavigate();
 
+  // Store: 전체일정, 모달, 날짜별 일정
   const {
     displayTotalschedule,
     displayDeleteModal,
+    displayDaySchedule,
     toggleTotalschedule,
     toggleDeleteModal,
+    toggleDaySchedule,
   } = useToggleTripMenuStore();
+
+  // hover 시 버튼 색 지정
+  const [backgroundColor, setBackgroundColor] = useState('bg-transparent');
+  const [textColor, setTextColor] = useState('text-contentsSecondary');
 
   // 모달창 '예' 클릭시
   const handleYes = () => {
@@ -27,8 +36,19 @@ export default function MyScheduleDetailPage() {
     navigate('/myschedule');
   };
 
+  // 편집버튼 'hover'시
+  const handleMouseOver = () => {
+    setBackgroundColor('bg-point');
+    setTextColor('text-white');
+  };
+
+  const handleMouseOut = () => {
+    setBackgroundColor('bg-transparent');
+    setTextColor('text-contentsSecondary');
+  };
+
   return (
-    <section className="container mx-auto flex min-h-[50rem] max-w-7xl flex-col gap-[1.875rem] bg-background">
+    <section className="container relative mx-auto flex min-h-screen max-w-7xl flex-col gap-[1.875rem] bg-background">
       <h1 className="sr-only">나의 일정 상세 페이지</h1>
       <TripHeader
         isUserIcon={false}
@@ -44,81 +64,56 @@ export default function MyScheduleDetailPage() {
         <section className="flex flex-col gap-[1.875rem]">
           <h2 className="sr-only">전체 일정 한눈에 보기</h2>
           <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white">
-            <img
-              src="#"
-              alt="지역명"
-              className="h-full w-[43.75%] bg-background"
-            />
-            <div className="absolute right-0 top-0 flex h-full w-[56.23%] flex-col justify-center gap-3 pl-[1.25rem]">
-              <span className="font-semibold text-contentsPrimary">
-                제주도 여행
-              </span>
-              <div className="flex flex-col md:flex-row md:items-center">
-                <div className="flex items-center">
-                  <img src={CalendarIcon} />
-                  <span className="text-sm text-contentsPrimary">여행기간</span>
-                </div>
-                <span className="pl-1 text-xs font-light text-contentsSecondary">
-                  2023.10.01 ~ 2023.10.10
-                </span>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={toggleDeleteModal}
-              className="absolute right-0 top-0 mr-[0.625rem] mt-[0.625rem]"
-            >
-              <CloseIcon size={'1rem'} color="#828282" />
-            </button>
+            <TotalScheduleSummary />
+            <DeleteButton onClick={toggleDeleteModal} />
           </div>
-          {/* 모달창 */}
           {displayDeleteModal && (
             <Modal handleYes={handleYes} handleNo={toggleDeleteModal}>
               정말 삭제하시겠습니까?
             </Modal>
           )}
-          <div className="modal relative mx-[1.25rem] flex min-h-[20.4375rem] flex-col justify-center gap-[1.25rem] overflow-hidden rounded-md bg-white pl-[1.25rem] pr-[0.625rem]">
-            <dl>
-              <dt className="sr-only">장소</dt>
-              <dd className="text-sm font-bold text-contentsPrimary">
-                제주도 여행
-              </dd>
-              <dt className="sr-only">여행기간</dt>
-              <dd className="text-xs font-medium text-contentsSecondary">
-                2023.10.01 ~ 2023.10.10
-              </dd>
-            </dl>
-            <div className="flex flex-col gap-[0.625rem]">
-              <TotalScheduleTopic>선택한 장소</TotalScheduleTopic>
-              <div className="object-fit flex h-[3.75rem] w-[3.75rem] items-center justify-center overflow-hidden rounded-md bg-[#EFF2F6]">
-                <DefaultImage />
-              </div>
-            </div>
-            <div className="flex flex-col gap-[0.625rem]">
-              <TotalScheduleTopic>설정한 숙소</TotalScheduleTopic>
-              <div className="flex w-fit flex-col items-center gap-[0.3125rem]">
-                <div className="w-fit rounded-full bg-point px-4 py-[0.375rem] text-xs font-medium text-background">
-                  Day
-                  <span className="px-1">1</span>
-                </div>
-                <div className="object-fit flex h-[3.75rem] w-[3.75rem] items-center justify-center overflow-hidden rounded-md bg-[#EFF2F6]">
-                  <DefaultImage />
-                </div>
-              </div>
-            </div>
-          </div>
+          <TotalScheduleView />
         </section>
       )}
       <hr className="aria-hidden mx-5" />
-      <Map height="h-[300px]" width="w-full" />
-      <section>
+      <Map
+        width="w-[85%]"
+        height="h-[18rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]"
+        restProps={'mx-auto modal'}
+      />
+      <section className="mb-28">
         <h2 className="sr-only">날짜별 일정 보기</h2>
-        <ToggleTotalSchedule>Day 1</ToggleTotalSchedule>
+        <ToggleTotalSchedule
+          state={displayDaySchedule}
+          action={toggleDaySchedule}
+        >
+          Day 1
+        </ToggleTotalSchedule>
+        {displayDaySchedule && (
+          <>
+            <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+              <DayScheduleItem />
+              <DayScheduleItem />
+              <DayScheduleItem />
+            </ul>
+            <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+              <DayScheduleItem
+                placeName="숙소명"
+                placeType="숙소 분류"
+                backgroundColor="bg-point"
+                textColor="text-point"
+              />
+            </ul>
+          </>
+        )}
       </section>
       <Link to="/tripedit">
         <ButtonLarge
-          textColor="text-contentsSecondary border border-contentsSecondary"
-          color="bg-transparent"
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
+          textColor={textColor}
+          color={backgroundColor}
+          restProps="border border-contentsSecondary absolute left-1/2 -translate-x-[11.25rem] bottom-10"
         >
           일정편집
         </ButtonLarge>

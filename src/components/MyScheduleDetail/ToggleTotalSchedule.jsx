@@ -3,7 +3,7 @@ import ToggleUpIcon from '@/components/ToggleUpIcon';
 
 export default function ToggleTotalSchedule({ children, state, action }) {
   return (
-    <div className="mx-[1.25rem] flex items-center gap-[0.3125rem] pt-[1.25rem]">
+    <div className="mx-5 flex items-center gap-[0.3125rem] pt-2">
       <dl>
         <dt className="sr-only">상세 보기</dt>
         <dd className="text-sm font-semibold text-contentsPrimary">
@@ -13,13 +13,9 @@ export default function ToggleTotalSchedule({ children, state, action }) {
       <button
         type="button"
         onClick={action}
-        aria-label={{ state } ? '나의 일정 접기' : '나의 일정 보기'}
+        aria-label={state ? '나의 일정 접기' : '나의 일정 보기'}
       >
-        {{ state } ? (
-          <ToggleUpIcon size="1rem" />
-        ) : (
-          <ToggleDownIcon size="1rem" />
-        )}
+        {state ? <ToggleUpIcon size="1rem" /> : <ToggleDownIcon size="1rem" />}
       </button>
     </div>
   );

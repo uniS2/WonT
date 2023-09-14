@@ -13,6 +13,7 @@ export const useToggleTripMenuStore = create(
     // 나의 일정상세 페이지
     displayTotalschedule: true,
     displayDeleteModal: false,
+    displayDaySchedule: true,
 
     // action
     // 여행 장소선택 페이지
@@ -65,5 +66,13 @@ export const useToggleTripMenuStore = create(
         }),
         false,
         'deleteModal/toggler'
-      )
+      ),
+    toggleDaySchedule: () =>
+      set(
+        (state) => ({
+          displayDaySchedule: !state.displayDaySchedule
+        }),
+        false,
+        'daySchedule/toggler'
+      ),
   })));
