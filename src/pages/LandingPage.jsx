@@ -35,32 +35,32 @@ function LandingPage() {
   return (
     <div className="container mx-auto flex min-h-[50rem] flex-col">
       <h1 className="sr-only">LandingPage</h1>
-      {/* <CarouselDiv images={images}> */}
-      <div className="bg-LandingCarouselThree bg-cover bg-center bg-no-repeat lg:w-[80rem]">
-        <div className="flex flex-col items-center pt-[10.625rem]">
-          <MotionDiv delay={1.5}>
-            <div>
-              <Logo
-                width={'11.375rem'}
-                height={'4.1688rem'}
-                colors={['#fff', '#fff']}
-              />
-            </div>
-          </MotionDiv>
-          
-          <MotionDiv delay={3.5}>
-            <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
-              <Link to="/signin">
-                <SignInButton text="로그인" />
-              </Link>
-              <Link to="/signup">
-                <SignUpButton text="회원가입" />
-              </Link>
-            </div>
-          </MotionDiv>
+      <CarouselDiv images={images}>
+        <div className="bg-LandingCarouselThree bg-cover bg-center bg-no-repeat lg:w-[80rem]">
+          <div className="flex flex-col items-center pt-[10.625rem]">
+            <MotionDiv delay={1.5}>
+              <div>
+                <Logo
+                  width={'11.375rem'}
+                  height={'4.1688rem'}
+                  colors={['#fff', '#fff']}
+                />
+              </div>
+            </MotionDiv>
+
+            <MotionDiv delay={3.5}>
+              <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
+                <Link to="/signin">
+                  <SignInButton text="로그인" />
+                </Link>
+                <Link to="/signup">
+                  <SignUpButton text="회원가입" />
+                </Link>
+              </div>
+            </MotionDiv>
+          </div>
         </div>
-      </div>
-      {/* </CarouselDiv> */}
+      </CarouselDiv>
 
       <div className="flex flex-col gap-5 px-5 pt-[3.125rem]">
         <div className="lg:flex lg:gap-5">
