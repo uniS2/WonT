@@ -10,7 +10,6 @@ import PlanDate from '@/components/TripEdit/PlanDate';
 
 export default function TripEditPage() {
   const [toggleSchedule, setToggleSchedule] = useState(false);
-
   const handleToggle = () => {
     setToggleSchedule(!toggleSchedule);
   };
@@ -22,7 +21,7 @@ export default function TripEditPage() {
       <TripPlan />
       <div className={`mx-auto mt-[10px] max-w-[1280px]  `}>
         <Map width={'w-[80rem]'} height={'h-[31.25rem]'} />
-        <PlanDate toggleButton={handleToggle} />
+        <PlanDate toggleButton={handleToggle} toggleSchedule={toggleSchedule} />
         <div className={`${toggleSchedule ? 'hidden' : ''}`}>
           <AddPlan text="장소" />
           <Link to="/tripplace">
@@ -33,7 +32,7 @@ export default function TripEditPage() {
             <ButtonMedium fill={false} text="숙소 추가" />
           </Link>
         </div>
-        <div className="py-10">
+        <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
           <ButtonMedium fill={true} text="저장" />
         </div>
       </div>
