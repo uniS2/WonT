@@ -1,6 +1,6 @@
 export default function HambugerIcon({
-  width = 24,
-  heigth = 24,
+  width = '1.5rem',
+  heigth = '1.5rem',
   color = 'black',
 }) {
   return (

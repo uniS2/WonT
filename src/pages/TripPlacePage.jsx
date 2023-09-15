@@ -1,8 +1,9 @@
+import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+
 import TripHeader from '@/components/Header/TripHeader';
 import Map from '@/components/Map';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/addPlaceItem';
 

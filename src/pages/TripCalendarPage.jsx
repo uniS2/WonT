@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useLocalStore } from '@/store/localStore';
-import { createRecord, getLocalName } from '@/utils/index.js';
 
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
+import { createRecord, getLocalName } from '@/utils/index.js';
+
 
 async function createMyScheduleTitle(title) {
   createRecord('mySchedule', {

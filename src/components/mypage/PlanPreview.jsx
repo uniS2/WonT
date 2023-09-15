@@ -16,21 +16,25 @@ export default function PlanPreview() {
 
   if (data) {
     return (
-      <div className="lg:w-[768px] xl:w-[1236px] mx-auto flex flex-col gap-4">
+      <div className="mx-auto flex flex-col gap-4 lg:w-[768px] xl:w-[1236px]">
         {data?.items.map((item) => (
           <div
             key={item.id}
-            className="relative mx-auto flex cursor-pointer justify-center  rounded-xl bg-gradient-to-t from-slate-800/60 via-slate-200/20"
+            className="relative mx-auto flex cursor-pointer justify-center  rounded-xl bg-[hsl(0,0%,90%,0.6)] 
+            bg-fixed opacity-80  transition 
+            duration-300 ease-in-out hover:opacity-100 hover:contrast-125"
           >
-            <img
-              src={
-                item.place[0]
-                  ? getPocketHostImageURL(item, 'place').split(',')[0]
-                  : '/src/assets/common-trip-default.jpg'
-              }
-              alt={`${item.title} 이미지`}
-              className="h-[360px] min-h-[360px]  w-[1236px] min-w-[360px]  rounded-xl object-cover mix-blend-multiply"
-            />
+            <div className="rounded-xl bg-gradient-to-t from-slate-800/40 via-white/10">
+              <img
+                src={
+                  item.place[0]
+                    ? getPocketHostImageURL(item, 'place').split(',')[0]
+                    : '/src/assets/common-trip-default.jpg'
+                }
+                alt={`${item.title} 이미지`}
+                className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply "
+              />
+            </div>
 
             <div className="absolute bottom-4 left-3 flex flex-col ">
               <span className="text-xl font-semibold text-white">
