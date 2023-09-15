@@ -4,21 +4,23 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const CarouselDiv = ({ images, children }) => {
   return (
-    <Carousel
-      showArrows={true}
-      showStatus={false}
-      showThumbs={false}
-      autoPlay={true}
-      interval={2000}
-      infiniteLoop={true}
-    >
-      {images.map((image, index) => (
-        <div key={index}>
-          <img src={image} alt={`Image ${index}`} />
-          {children}
-        </div>
-      ))}
-    </Carousel>
+    <div className="relative">
+      {children}
+      <Carousel
+        showArrows={true}
+        showStatus={false}
+        showThumbs={false}
+        autoPlay={true}
+        interval={1000}
+        infiniteLoop={true}
+      >
+        {images.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt={`Image ${index}`} />
+          </div>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 
