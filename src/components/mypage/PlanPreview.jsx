@@ -16,7 +16,7 @@ export default function PlanPreview() {
 
   if (data) {
     return (
-      <div className="lg:w-[768px] xl:w-[1236px] mx-auto flex flex-col gap-4">
+      <div className="mx-auto flex flex-col gap-4 lg:w-[768px] xl:w-[1236px]">
         {data?.items.map((item) => (
           <div
             key={item.id}
@@ -24,7 +24,7 @@ export default function PlanPreview() {
             bg-fixed opacity-80  transition 
             duration-300 ease-in-out hover:opacity-100 hover:contrast-125"
           >
-            <div className="rounded-xl bg-gradient-to-t from-slate-800/30 via-white/10">
+            <div className="rounded-xl bg-gradient-to-t from-slate-800/40 via-white/10">
               <img
                 src={
                   item.place[0]
