@@ -15,6 +15,7 @@ import Test2 from '@/assets/LandingPage-carousel-two.svg';
 import Test3 from '@/assets/LandingPage-carousel-three.svg';
 import Test4 from '@/assets/LandingPage-carousel-four.svg';
 import Test5 from '@/assets/LandingPage-carousel-five.svg';
+import Test6 from '@/assets/LandingPage-carousel-six.svg';
 
 // framer-motion 함수
 function LandingPage() {
@@ -30,11 +31,13 @@ function LandingPage() {
     );
   };
 
-  const images = [Test1, Test2, Test3, Test4, Test5];
+  const images = [Test1, Test2, Test3, Test4, Test5, Test6];
 
   return (
     <div className="container mx-auto flex min-h-[50rem] flex-col">
       <h1 className="sr-only">LandingPage</h1>
+      
+      
       <CarouselDiv images={images}>
         <div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center pt-[10.625rem]">
           <MotionDiv delay={0.4}>
@@ -58,6 +61,7 @@ function LandingPage() {
           </MotionDiv>
         </div>
       </CarouselDiv>
+      
 
       <div className="flex flex-col gap-5 px-5 pt-[3.125rem]">
         <div className="lg:flex lg:gap-5">
