@@ -7,7 +7,7 @@ export default function MyPageTab({ position, tab, menu }) {
     tab === 'myschedule' ? useScheduleList() : useRecommendsList();
   if (data) {
     return (
-      <div className=" mx-auto min-w-[360px] ">
+      <div className=" mx-auto min-w-[22.5rem]">
         <div className="mb-3 flex justify-around">
           <Link to="/myschedule">
             <button type="button">나의 일정</button>
@@ -17,7 +17,7 @@ export default function MyPageTab({ position, tab, menu }) {
           </Link>
         </div>
         <div
-          className={`relative flex w-full max-w-7xl border-b-[1px] border-contentsPrimary ${
+          className={`relative flex w-full max-w-7xl border-b-[0.0625rem] border-contentsPrimary ${
             position === 'left' ? 'justify-start' : 'justify-end'
           } `}
         >

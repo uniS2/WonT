@@ -7,6 +7,7 @@ import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
 import { createRecord, getLocalName } from '@/utils/index.js';
 
+
 async function createMyScheduleTitle(title) {
   createRecord('mySchedule', {
     title: getLocalName(title),
@@ -17,7 +18,7 @@ export default function TripCalendarPage() {
   const { selectName } = useLocalStore();
 
   return (
-    <section className="mx-auto flex min-h-[50rem] min-w-[22.5rem] flex-col items-center bg-background pb-[2.3125rem]">
+    <section className="mx-auto flex min-h-[50rem] min-w-[22.5rem] flex-col items-center pb-[2.3125rem]">
       <TripHeader isBack={false} isLogo={false} />
       <h1 className="sr-only">여행 날짜 선택 페이지</h1>
       <TripTitle

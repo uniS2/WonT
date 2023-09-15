@@ -1,8 +1,6 @@
-import React from 'react';
-
 export default function Logout() {
   return (
-    <a href="">
+    <a href="/signin">
       <svg
         width="24"
         height="24"

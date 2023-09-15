@@ -5,7 +5,7 @@ import Logo from '@/components/Logo';
 export default function Header() {
   return (
     <div className="flex justify-center px-[1.0625rem] py-[1.125rem]">
-      <Link to="/">
+      <Link to="/main">
         <Logo width={74} height={28} />
       </Link>
     </div>

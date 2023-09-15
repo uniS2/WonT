@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Profile() {
   return (
     <div className="relative mx-auto box-content inline-block">
