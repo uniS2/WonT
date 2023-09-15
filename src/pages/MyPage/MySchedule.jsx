@@ -1,4 +1,4 @@
-import MyPageHeader from '@/components/MyPage/MyPageHeader';
+import MyPageHeader from '@/components/PageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
@@ -8,7 +8,7 @@ export default function MySchedule() {
     <div className="container  mx-auto min-w-[22.5rem]">
       <div className="flex flex-col items-center bg-background pb-14">
         <h1 className="sr-only">MySchedule</h1>
-        <MyPageHeader />
+        <MyPageHeader page="mypage" />
         <div className="flex flex-col items-center pb-11 pt-7">
           <span className="mb-[1.375rem] text-[1.5rem] font-extrabold leading-normal text-contentsPrimary">
             마이 페이지
