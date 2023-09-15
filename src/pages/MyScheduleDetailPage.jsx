@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
@@ -11,6 +10,7 @@ import DeleteButton from '@/components/DeleteButton';
 import TotalScheduleSummary from '@/components/MyScheduleDetail/TotalScheduleSummary';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
+import { useButtonStore } from '@/store/buttonStore';
 
 export default function MyScheduleDetailPage() {
   // 경로 지정
@@ -26,25 +26,14 @@ export default function MyScheduleDetailPage() {
     toggleDaySchedule,
   } = useToggleTripMenuStore();
 
-  // hover 시 버튼 색 지정
-  const [backgroundColor, setBackgroundColor] = useState('bg-transparent');
-  const [textColor, setTextColor] = useState('text-contentsSecondary');
+  // 편집버튼 'hover'시
+  const { editBackgroundColor, editTextColor, editMouseOver, editMouseOut } =
+    useButtonStore();
 
   // 모달창 '예' 클릭시
   const handleYes = () => {
     // toggleDeleteModal;
     navigate('/myschedule');
-  };
-
-  // 편집버튼 'hover'시
-  const handleMouseOver = () => {
-    setBackgroundColor('bg-point');
-    setTextColor('text-white');
-  };
-
-  const handleMouseOut = () => {
-    setBackgroundColor('bg-transparent');
-    setTextColor('text-contentsSecondary');
   };
 
   return (
@@ -109,10 +98,10 @@ export default function MyScheduleDetailPage() {
       </section>
       <Link to="/tripedit">
         <ButtonLarge
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-          textColor={textColor}
-          color={backgroundColor}
+          onMouseOver={editMouseOver}
+          onMouseOut={editMouseOut}
+          textColor={editTextColor}
+          color={editBackgroundColor}
           restProps="border border-contentsSecondary absolute left-1/2 -translate-x-[11.25rem] bottom-10"
         >
           일정편집
