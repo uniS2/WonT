@@ -6,7 +6,8 @@ import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo.jsx';
 import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
 import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 import Footer from '@/components/Footer';
-import { Link } from 'react-router-dom';
+import { Link } from 'r
+eact-router-dom';
 import { motion } from 'framer-motion';
 import CarouselDiv from '@/components/Landing/CarouselDiv';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -89,5 +90,3 @@ function LandingPage() {
 }
 
 export default LandingPage;
-
-// 앱솔로 박아버리기 띄어놓기
