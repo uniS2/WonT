@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+
 import Logo from '@/components/Logo';
 import BackIcon from '@/components/Header/BackIcon';
 import UserIcon from '@/components/Header/UserIcon';
@@ -8,6 +9,7 @@ export default function TripHeader({
   isBack = true,
   isLogo = true,
   isUserIcon = true,
+  restProps,
 }) {
   // 뒤로 가기 버튼
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ export default function TripHeader({
 
   return (
     <nav className="w-full bg-white">
-      <ul className="mx-auto flex max-w-7xl justify-between px-6 py-[1.0625rem]">
+      <ul className="mx-auto flex justify-between px-6 py-[1.0625rem]">
         <li>
           {isBack ? (
             <button
@@ -34,7 +36,7 @@ export default function TripHeader({
           )}
         </li>
         {isLogo && (
-          <li className="ml-[0.4375rem]">
+          <li className={`ml-[0.4375rem] ${restProps}`}>
             <Link to="/main">
               <Logo width={'3.75rem'} height={'1.375rem'} />
             </Link>

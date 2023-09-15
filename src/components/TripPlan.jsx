@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLocalStore } from '@/store/localStore';
+
 import TripPlanEditButton from '@/components/TripPlanEditButton';
 
 export default function TripPlan({ background = 'bg-secondary/50' }) {

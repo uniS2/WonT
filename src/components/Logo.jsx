@@ -1,6 +1,6 @@
 export default function Logo({
-  width = 136,
-  height = 50,
+  width = '8.5rem',
+  height = '3.125rem',
   colors = ['#4EC3F9', '#50D4E5'],
   id,
   ...restProps
