@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import '@/styles/calendar.css';
+import { getTripDate } from '@/utils';
 
 export default function TripCalendar() {
   const [date, setDate] = useState(new Date());
@@ -23,14 +24,10 @@ export default function TripCalendar() {
       {date.length > 0 ? (
         <p className="text-center">
           <span className="font-bold">
-            Start<span className="aria-hidden font-bold">:</span>
+            여행기간<span className="aria-hidden font-bold">: </span>
           </span>
-          {date[0].getMonth()}
-          &nbsp;|&nbsp;
-          <span className="font-bold">
-            End<span className="aria-hidden font-bold">:</span>
-          </span>
-          {date[1].toDateString()}
+          {getTripDate(date[0])}
+          {getTripDate(date[1])}
         </p>
       ) : (
         <p className="text-center">
