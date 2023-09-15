@@ -22,7 +22,7 @@ export default {
         'custom-color': 'rgba(79,212,230,0.5)',
       },
       backgroundImage: (theme) => ({
-        LandingPage: "url('./src/assets/LandingPage-background.svg')",
+        
         LandingCarouselOne: "url('./src/assets/LandingPage-carousel-one.svg')",
         LandingCarouselTwo: "url('./src/assets/LandingPage-carousel-two.svg')",
         LandingCarouselThree:
