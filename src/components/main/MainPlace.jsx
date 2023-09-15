@@ -28,12 +28,12 @@ function MainPlace(item) {
 
   return (
     <div className="flex flex-col items-center">
-      <ul className="grid grid-cols-2 gap-5">
+      <ul className="grid grid-cols-2 gap-5 px-[1.688rem] md:grid md:grid-cols-4 md:gap-5 lg:grid lg:grid-cols-8 lg:gap-5 ">
         {data?.map((item) => (
           <Link to={`/recommends/:${item.id}`}>
             <li
               key={item.id}
-              className="relative mb-[1.625rem] flex h-[9.25rem] w-[9.25rem] overflow-hidden rounded-md hover:scale-125"
+              className="relative mb-[1.625rem] flex h-[9.25rem] w-[9.25rem] overflow-hidden rounded-md hover:scale-125 "
             >
               <img src={getPocketHostImageURL(item).split(',')[0]} alt="" />
 
@@ -48,7 +48,7 @@ function MainPlace(item) {
           </Link>
         ))}
       </ul>
-      <MainMoreButton />
+      {/* <MainMoreButton /> */}
     </div>
   );
 }
