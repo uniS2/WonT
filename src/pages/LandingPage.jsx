@@ -35,10 +35,9 @@ function LandingPage() {
   return (
     <div className="container mx-auto flex min-h-[50rem] flex-col">
       <h1 className="sr-only">LandingPage</h1>
-      {/* <CarouselDiv images={images}> */}
-      <div className="bg-LandingCarouselThree bg-cover bg-center bg-no-repeat lg:w-[80rem]">
-        <div className="flex flex-col items-center pt-[10.625rem]">
-          <MotionDiv delay={1.5}>
+      <CarouselDiv images={images}>
+        <div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center pt-[10.625rem]">
+          <MotionDiv delay={0.4}>
             <div>
               <Logo
                 width={'11.375rem'}
@@ -47,8 +46,7 @@ function LandingPage() {
               />
             </div>
           </MotionDiv>
-          
-          <MotionDiv delay={3.5}>
+          <MotionDiv delay={0.8}>
             <div className="flex flex-col gap-[0.9375rem] px-5 pb-[2.625rem] pt-[4.143125rem]">
               <Link to="/signin">
                 <SignInButton text="로그인" />
@@ -59,8 +57,7 @@ function LandingPage() {
             </div>
           </MotionDiv>
         </div>
-      </div>
-      {/* </CarouselDiv> */}
+      </CarouselDiv>
 
       <div className="flex flex-col gap-5 px-5 pt-[3.125rem]">
         <div className="lg:flex lg:gap-5">
