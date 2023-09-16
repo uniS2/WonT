@@ -25,14 +25,14 @@ function MainTravels({ item, title = '', text = '' }) {
 
   return (
     <div className=" flex flex-col items-center">
-      <ul className="grid grid-cols-1 gap-5 px-[1.688rem] pb-[1.25rem] pt-[0.625rem] md:grid md:grid-cols-2 md:gap-5">
+      <ul className="grid grid-cols-1 gap-5 px-[1.688rem] pb-[1.25rem] pt-[0.625rem] md:grid md:grid-cols-2 md:gap-10">
         {data?.map((item) => (
           <li
             key={item.id}
             className="overflow-hidden rounded-md hover:scale-125"
           >
             <img src={getPocketHostImageURL(item).split(',')[0]} alt="" />
-            <div className="pb-[1.25rem] pl-[1.688rem] pt-[0.625rem]">
+            <div className="pb-[1.25rem] pt-[0.625rem]">
               <p className="text-base font-semibold">{item.title}</p>
               <p className="text-sm font-light text-gray-500">{item.text}</p>
             </div>
