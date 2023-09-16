@@ -33,7 +33,7 @@ function MainPlace(item) {
           <Link to={`/recommends/:${item.id}`}>
             <li
               key={item.id}
-              className="relative mb-[1.625rem] flex h-[9.25rem] w-[9.25rem] overflow-hidden rounded-md hover:scale-125 "
+              className="relative mb-[1.625rem] flex h-[9.25rem] w-[9.25rem] transform overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg "
             >
               <img src={getPocketHostImageURL(item).split(',')[0]} alt="" />
 
