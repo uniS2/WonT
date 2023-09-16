@@ -7,11 +7,10 @@ import { getPocketHostImageURL } from '@/utils';
 // 상세페이지
 function DetailPage() {
   const { data } = useRecommendsList();
-  console.log(data);
+  // console.log(data);
   const detailPlace = data?.items?.find(
     (item) => item.id === '7uz2rhrq49q7f99'
   );
-  console.log(detailPlace.image);
   if (data) {
     return (
       <div className="container  mx-auto min-w-[22.5rem] bg-background pb-10">
@@ -32,7 +31,9 @@ function DetailPage() {
             <h2 className=" text-2xl font-bold text-contentsPrimary">
               {detailPlace.place}
             </h2>
-            <BookMark />
+            <button type="button">
+              <BookMark />
+            </button>
           </div>
           <p className="mb-3 text-[0.875rem] font-light text-gray-1">
             {detailPlace.address}

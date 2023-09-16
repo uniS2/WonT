@@ -1,12 +1,18 @@
-import useRecommendsList from '@/hooks/useRecommendsList';
-
 export default function DetailInfo({ detailPlace }) {
+  const filterDetailPlace = Object.fromEntries(
+    Object.entries(detailPlace).map(([key, value]) => [
+      key,
+      value ? value : '-',
+    ])
+  );
+
   return (
     <>
       <dl className="mx-auto grid max-w-[1236px] grid-cols-3 gap-3 px-4">
         <span className="col-span-3 text-xl font-medium text-contentsPrimary">
           이용안내
         </span>
+        <hr className="col-span-3" />
         <dt className="col-span-2 flex items-center gap-2 self-center">
           <img
             src="/src/assets/detail-info.svg"
@@ -15,9 +21,11 @@ export default function DetailInfo({ detailPlace }) {
           />
           <span className="leading-normal text-gray-1">문의 및 안내</span>
         </dt>
+
         <dd className="leading-normal text-contentsPrimary">
-          {detailPlace.info}
+          {filterDetailPlace.info}
         </dd>
+        <hr className="col-span-3" />
         <dt className="col-span-2 flex items-center gap-2 ">
           <img
             src="/src/assets/detail-calendar.svg"
@@ -27,8 +35,9 @@ export default function DetailInfo({ detailPlace }) {
           <span className="leading-normal text-gray-1">쉬는날</span>
         </dt>
         <dd className="leading-normal text-contentsPrimary">
-          {detailPlace.rest}
+          {filterDetailPlace.rest}
         </dd>
+        <hr className="col-span-3" />
         <dt className="col-span-2 flex items-center gap-2 ">
           <img
             src="/src/assets/detail-ticket.svg"
@@ -38,8 +47,9 @@ export default function DetailInfo({ detailPlace }) {
           <span className="leading-normal text-gray-1">체험 안내</span>
         </dt>
         <dd className="leading-normal text-contentsPrimary">
-          {detailPlace.active}
+          {filterDetailPlace.active}
         </dd>
+        <hr className="col-span-3" />
         <dt className="col-span-2 flex items-center gap-2 ">
           <img
             src="/src/assets/detail-clock.svg"
@@ -49,8 +59,9 @@ export default function DetailInfo({ detailPlace }) {
           <span className="leading-normal text-gray-1">이용시간</span>
         </dt>
         <dd className="leading-normal text-contentsPrimary">
-          {detailPlace.time}
+          {filterDetailPlace.time}
         </dd>
+        <hr className="col-span-3" />
         <dt className="col-span-2 flex items-center gap-2 ">
           <img
             src="/src/assets/detail-homepage.svg"
@@ -60,8 +71,9 @@ export default function DetailInfo({ detailPlace }) {
           <span className="leading-normal text-gray-1">홈페이지</span>
         </dt>
         <dd className="leading-normal text-contentsPrimary">
-          <a href={detailPlace.url}>{detailPlace.url}</a>
+          <a href={filterDetailPlace.url}>{filterDetailPlace.url}</a>
         </dd>
+        <hr className="col-span-3" />
       </dl>
     </>
   );
