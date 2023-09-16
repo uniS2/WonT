@@ -3,6 +3,19 @@ import BookMark from '../BookMark';
 import useRecommendsList from '@/hooks/useRecommendsList';
 import { useRef } from 'react';
 
+const getRecommends = async (userId) => {
+  return await pocketbase.collection('recommends').getFullList({
+    filter: `(userEmail?~'${userId}')`,
+    fields: 'collectionId,id,image',
+  });
+};
+
+const removeRecommend = async ({ recommendId, userId }) => {
+  return await pocketbase.collection('recommends').update(recommendId, {
+    'userEmail-': userId,
+  });
+};
+
 export default function BookmarkList() {
   const bookmarkList = useRef([]);
   const { data } = useRecommendsList();
