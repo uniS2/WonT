@@ -16,8 +16,7 @@ function MainTravels({ item, title = '', text = '' }) {
 
   useEffect(() => {
     async function fetchUsers() {
-      const usersList = await pocketbase.collection('travels').getFullList({});
-      console.log(usersList);
+      const usersList = await pocketbase.collection('travels').getFullList();
       setData(usersList);
     }
 
