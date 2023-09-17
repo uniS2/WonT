@@ -23,7 +23,6 @@ function TravelsPage() {
   const user = userData?.items?.find(
     (item) => item.id === detailTravels.userEmail
   );
-
   if ((detailTravels, user)) {
     return (
       <div className="container  mx-auto min-w-[22.5rem] bg-background pb-10">
@@ -52,11 +51,16 @@ function TravelsPage() {
                     </p>
                   </div>
                 </div>
-                <img
-                  src="/src/assets/common-trip-default.jpg"
-                  alt="이미지"
-                  className="h-[25rem] min-h-[22.5rem]  w-[77.25rem] min-w-[20rem]  rounded-xl object-cover "
-                />
+                {detailTravels.image.map((image) => (
+                  <img
+                    src={`${getPocketHostImageURL(detailTravels, '').replace(
+                      'undefined',
+                      ''
+                    )}/${image}`}
+                    alt="이미지"
+                    className="my-1 h-[25rem]  min-h-[22.5rem] w-[77.25rem]  min-w-[20rem] rounded-xl object-cover"
+                  />
+                ))}
                 <p className="my-5 leading-normal text-contentsPrimary">
                   {detailTravels.text}
                 </p>
@@ -66,10 +70,10 @@ function TravelsPage() {
               <h2 className="sr-only">날짜별 일정 보기</h2>
               <div className="my-8 flex w-[90%] max-w-7xl border-b-[0.0625rem] border-gray-3"></div>
               <Map
-                width="min-w-[90%] sm:w-[600px] md:w-[728px] lg:w-[960px] "
+                width="min-w-[90%] sm:w-[600px] md:w-[728px] lg:w-[960px] xl:w-[1236px] "
                 height="lg:h-[500px] min-h-[352px]"
               />
-              <div className="w-[90%]">
+              <div className="w-full">
                 <ToggleTotalSchedule
                   state={displayDaySchedule}
                   action={toggleDaySchedule}
