@@ -18,14 +18,11 @@ function TravelsPage() {
   const { data: userData } = useQuery(['users'], getUser);
 
   const detailTravels = travelsData?.items?.find(
-    (item) => item.id === 'arxn02u20813j44'
+    (item) => item.id === '48trysq0ovuau3b'
   );
-  console.log(detailTravels);
   const user = userData?.items?.find(
     (item) => item.id === detailTravels.userEmail
   );
-
-  console.log(user.profile);
 
   if ((detailTravels, user)) {
     return (

@@ -7,7 +7,6 @@ import { getPocketHostImageURL } from '@/utils';
 // 상세페이지
 function DetailPage() {
   const { data } = useRecommendsList();
-  // console.log(data);
   const detailPlace = data?.items?.find(
     (item) => item.id === '1htie0bs2d2cf0h'
   );
@@ -32,7 +31,10 @@ function DetailPage() {
             <h2 className=" text-2xl font-bold text-contentsPrimary">
               {detailPlace.place}
             </h2>
-            <button type="button">
+            <button
+              type="button"
+              onClick={() => handleBookmark(detailPlace.id)}
+            >
               <BookMark />
             </button>
           </div>
