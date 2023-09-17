@@ -23,6 +23,7 @@ const MySchedule = lazy(() => import('./pages/MyPage/MySchedule'));
 const BookmarkPage = lazy(() => import('./pages/MyPage/BookmarkPage'));
 const MyScheduleDetailPage = lazy(() => import('./pages/MyScheduleDetailPage'));
 const DetailPage = lazy(() => import('./pages/DetailPage'));
+const TravelsPage = lazy(() => import('./pages/TravelsPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
       <Route path="bookmark" element={<BookmarkPage />} />
       <Route path="myschedule/detail" element={<MyScheduleDetailPage />} />
       <Route path="detail" element={<DetailPage />} />
+      <Route path="travels" element={<TravelsPage />} />
     </Route>
   )
 );

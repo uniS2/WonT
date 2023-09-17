@@ -9,18 +9,19 @@ function DetailPage() {
   const { data } = useRecommendsList();
   // console.log(data);
   const detailPlace = data?.items?.find(
-    (item) => item.id === '7uz2rhrq49q7f99'
+    (item) => item.id === '1htie0bs2d2cf0h'
   );
+
   if (data) {
     return (
       <div className="container  mx-auto min-w-[22.5rem] bg-background pb-10">
-        <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 ">
           <h1 className="sr-only">DetailPage</h1>
           <MyPageHeader page="detail" />
           <img
             src={getPocketHostImageURL(detailPlace, 'image')}
             alt={`${detailPlace.place} 이미지`}
-            className="h-[22.5rem] min-h-[22.5rem]  w-[77.25rem] min-w-[20rem]  rounded-xl object-cover "
+            className="mx-3 h-[22.5rem]  min-h-[22.5rem] w-[77.25rem]  min-w-[20rem] rounded-xl object-cover "
           />
         </div>
         <div className="mx-auto  my-5 max-w-[1236px] px-4">
