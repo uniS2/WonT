@@ -5,6 +5,7 @@ function SignPart({
   information = '',
   placeholder = '',
   type = 'text',
+  label,
   ...restProps
 }) {
   const id = useId();
@@ -16,17 +17,15 @@ function SignPart({
       </div>
 
       {/* 여기부터 props 손보기 */}
-      <form action="">
-        <label htmlFor={id}>
-          <input
-            className="w-[320px] border-b-2 border-b-secondary py-3 placeholder-secondary"
-            id={id}
-            type={type}
-            placeholder={placeholder}
-            {...restProps}
-          />
-        </label>
-      </form>
+      <label htmlFor={id} label={label}>
+        <input
+          className="w-[320px] border-b-2 border-b-secondary py-3 placeholder-secondary"
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          {...restProps}
+        />
+      </label>
     </div>
   );
 }
