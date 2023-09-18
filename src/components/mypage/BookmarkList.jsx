@@ -1,7 +1,11 @@
 import pocketbase from '@/api/pocketbase';
 import { getPocketHostImageURL } from '@/utils';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import BookMark from '../BookMark';
+import { useRef } from 'react';
+import useRecommendsList from '@/hooks/useRecommendsList';
+import useMemosStore from '@/store/memoStore';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {
@@ -27,80 +31,42 @@ const dummyLoginUserInfo = {
 };
 
 export default function BookmarkList() {
-  // 로그인 사용자 정보
-  const user = pocketbase.authStore.model ?? dummyLoginUserInfo;
-
-  // 쿼리 클라이언트 인스턴스 가져오기
-  const queryClient = useQueryClient();
-
-  // 쿼리 키
-  const queryKey = ['recommends', user.id];
-
-  // React Query를 사용한 데이터 쿼리(query) 요청
-  const { isFetching, isLoading, error, data } = useQuery({
-    queryKey: queryKey,
-    queryFn: () => getRecommends(user.id),
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
-  });
-
-  // React Query를 사용한 데이터 수정(mutation) 요청
-  const mutation = useMutation({
-    mutationFn: removeRecommend,
-    onMutate: async ({ recommendId }) => {
-      await queryClient.cancelQueries({ queryKey: queryKey });
-
-      const previousList = queryClient.getQueryData(queryKey);
-
-      queryClient.setQueryData(queryKey, (list) => {
-        return list.filter((item) => item.id !== recommendId);
-      });
-
-      return { previousList };
-    },
-    onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: queryKey });
-    },
-    onError: (error, removedBookmark, context) => {
-      queryClient.setQueryData(queryKey, context.previousList);
-    },
-  });
-
-  const handleRemoveBookmark = (recommendId, userId) => async () => {
-    mutation.mutate({
-      recommendId,
-      userId,
-    });
-  };
+  const { data, isLoading, error } = useRecommendsList();
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <div className=" flex justify-center ">로딩 중...</div>;
   }
 
   if (error) {
     return <div role="alert">{error.toString()}</div>;
   }
 
-  if (data.length === 0) {
+  if (data?.length === 0) {
     return <div className=" flex justify-center ">북마크가 비어있습니다.</div>;
   }
 
   return (
     <ul className="mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-      {data?.map?.((item) => (
-        <li key={item.id} className="relative min-w-[360px]">
+      {data?.items?.map?.((item) => (
+        <li
+          key={item.id}
+          className="relative flex min-w-[360px] justify-center "
+        >
           <button
             type="button"
-            className="absolute right-4 top-4 cursor-pointer"
-            onClick={handleRemoveBookmark(item.id, user.id)}
+            className="absolute right-4 top-4 cursor-pointer sm:right-4 sm:top-4 md:right-4 md:top-4 lg:right-12 lg:top-4 xl:right-4 xl:top-4"
           >
             <BookMark color="#C9ECFF" />
           </button>
-          <img
-            src={getPocketHostImageURL(item).split(',')[0]}
-            alt=""
-            className="box-content aspect-square  rounded-lg border-[1px] border-gray-2 object-cover md:h-[380px] lg:h-[420px] xl:h-[400px]"
-          />
+          <Link to={`/bookmark/${item.id}`}>
+            <img
+              src={getPocketHostImageURL(item).split(',')[0]}
+              alt=""
+              className="box-content aspect-square  rounded-lg border-[1px] border-gray-2 object-cover md:h-[380px] lg:h-[420px] xl:h-[400px]"
+              // onClick={(e) => handleMoveDetail(e, item.id)}
+              // id={memo}
+            />
+          </Link>
         </li>
       ))}
     </ul>

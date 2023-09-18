@@ -18,6 +18,7 @@ function TravelsPage() {
   const { displayDaySchedule, toggleDaySchedule } = useToggleTripMenuStore();
   const { data: travelsData } = useQuery(['travels'], getTravels);
   const { data: userData } = useQuery(['users'], getUser);
+  // console.log(userData);
 
   const detailTravels = travelsData?.items?.find(
     (item) => item.id === '48trysq0ovuau3b'
@@ -58,7 +59,7 @@ function TravelsPage() {
                 showThumbs={false}
                 interval={1000}
                 infiniteLoop={true}
-                className="    min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
+                className="min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
               >
                 {detailTravels.image.map((image) => (
                   <img

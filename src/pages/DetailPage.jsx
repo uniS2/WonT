@@ -2,14 +2,15 @@ import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
+import useMemosStore from '@/store/memoStore';
 import { getPocketHostImageURL } from '@/utils';
 
 // 상세페이지
 function DetailPage() {
   const { data } = useRecommendsList();
-  const detailPlace = data?.items?.find(
-    (item) => item.id === '1htie0bs2d2cf0h'
-  );
+
+  const currentPath = window.location.pathname.replace('/bookmark/', '');
+  const detailPlace = data?.items?.find((item) => item.id === currentPath);
 
   if (data) {
     return (

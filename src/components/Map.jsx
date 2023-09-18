@@ -24,6 +24,8 @@ export default function Map({
     };
     // 지도 생성하기
     const map = new kakao.maps.Map(container, options);
+    // map.setZoomable(false);
+
     // 마커 생성
     let marker = new kakao.maps.Marker({ position: map.getCenter() });
     marker.setMap(map);
@@ -42,7 +44,7 @@ export default function Map({
       navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude; // 위도
         const lon = position.coords.longitude; // 경도
-        console.log(lat, lon);
+        // console.log(lat, lon);
         updateCenter(lat, lon);
       });
     } else {

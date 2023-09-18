@@ -34,7 +34,6 @@ const router = createBrowserRouter(
       <Route path="main" element={<MainPage />} />
       <Route path="triplocal" element={<TripLocalPage />} />
       <Route path="tripcalendar" element={<TripCalendarPage />}></Route>
-      {/* <Route path="triplocal/:localId" element={<TripCalendarPage />}></Route> */}
       {/* <Link to={`/triplocal/${item.id}`}>
               <button>예</button>
             </Link> */}
@@ -44,8 +43,8 @@ const router = createBrowserRouter(
       <Route path="mypage" element={<MyPage />} />
       <Route path="myschedule" element={<MySchedule />} />
       <Route path="bookmark" element={<BookmarkPage />} />
+      <Route path="bookmark/:recommendId" element={<DetailPage />} />
       <Route path="myschedule/detail" element={<MyScheduleDetailPage />} />
-      <Route path="detail" element={<DetailPage />} />
       <Route path="travels" element={<TravelsPage />} />
     </Route>
   )
