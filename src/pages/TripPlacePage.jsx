@@ -6,6 +6,7 @@ import HambugerButton from '@/components/TripSelect/HambugerButton';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/addPlaceItem';
+import MapSearch from '@/components/MapSearch';
 
 export default function TripPlacePage() {
   const {
@@ -20,7 +21,12 @@ export default function TripPlacePage() {
       <h1 className="sr-only">여행 장소 선택 페이지</h1>
       <TripHeader />
       <TripPlanMenu state={displayPlaceTripPlan} action={togglePlaceTripPlan} />
-      <Map width="w-full" height="min-h-[18.75rem]" restProps="mt-6" />
+      {/* <Map
+        width="w-full"
+        height="min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]"
+        restProps={'mt-6 modal mx-auto'}
+      /> */}
+      <MapSearch />
       <ul className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll">
         <TripPlaceItem />
         <TripPlaceItem />

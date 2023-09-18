@@ -19,7 +19,11 @@ export default function TripHotelPage() {
       <h1 className="sr-only">TripHotelPage</h1>
       <TripHeader />
       <TripPlanMenu state={displayHotelTripPlan} action={toggleHotelTripPlan} />
-      <Map width="w-full" height="min-h-[18.75rem]" className="mt-6" />
+      <Map
+        width="w-full"
+        height="min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]"
+        className="mt-6"
+      />
       <ul className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll">
         <TripPlaceItem />
       </ul>
