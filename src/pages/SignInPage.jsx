@@ -9,6 +9,8 @@ import debounce from '@/utils/debounce';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import FailModal from '@/components/Sign/FailModal';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { useAuth } from '@/contexts/Auth';    // 사용할건지 고민
 
 // 로그인 페이지
@@ -40,7 +42,8 @@ function SignInPage() {
         navigate(withLocationPath === '/signin' ? '/main' : withLocationPath);
       }
     } catch (error) {
-      setShowFailModal(true);
+      // setShowFailModal(true);
+      toast.error('회원 정보를 다시 확인해주세요.');
       // console.log(error); //modal 로 바꾸기
     }
   };
