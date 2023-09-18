@@ -6,7 +6,7 @@ import MyPageHeader from '@/components/PageHeader';
 export default function BookmarkPage() {
   return (
     <div className="container  mx-auto min-w-[22.5rem]">
-      <div className="flex flex-col items-center bg-background pb-14">
+      <div className="flex min-h-screen flex-col items-center bg-background pb-14">
         <h1 className="sr-only">MySchedule</h1>
         <MyPageHeader page="mypage" />
         <div className="flex flex-col items-center pb-11 pt-7">

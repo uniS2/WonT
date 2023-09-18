@@ -2,6 +2,7 @@ import BookMark from './BookMark';
 import BackIcon from './Header/BackIcon';
 import Logout from './MyPage/Logout';
 import Logo from '@/components/Logo';
+import { Link } from 'react-router-dom';
 
 export default function MyPageHeader({ page }) {
   return (
@@ -13,7 +14,9 @@ export default function MyPageHeader({ page }) {
           <BackIcon width={'1rem'} height={'1rem'} color={'#4EC3F9'} />
         )}
         <div className="flex flex-row items-center gap-6">
-          <BookMark />
+          <Link to="/bookmark">
+            <BookMark />
+          </Link>
 
           <Logout />
         </div>

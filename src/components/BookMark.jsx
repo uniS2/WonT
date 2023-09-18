@@ -1,6 +1,5 @@
 export default function BookMark({ color = 'none' }) {
   return (
-    // <a href="/bookmark">
     <svg
       width="16"
       height="22"
@@ -16,6 +15,5 @@ export default function BookMark({ color = 'none' }) {
         strokeLinejoin="round"
       />
     </svg>
-    // </a>
   );
 }

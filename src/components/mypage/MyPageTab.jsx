@@ -7,8 +7,8 @@ export default function MyPageTab({ position, tab, menu }) {
     tab === 'myschedule' ? useScheduleList() : useRecommendsList();
   if (data) {
     return (
-      <div className=" mx-auto min-w-[22.5rem]">
-        <div className="mb-3 flex justify-around">
+      <div className="container mx-auto w-screen xl:w-[1268px]">
+        <div className="mb-3 flex justify-around ">
           <Link to="/myschedule">
             <button type="button">나의 일정</button>
           </Link>

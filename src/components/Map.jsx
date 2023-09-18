@@ -25,6 +25,19 @@ export default function Map({
 
     // 지도 생성하기
     const map = new kakao.maps.Map(container, options);
+    // map.setZoomable(false);
+
+    // 마커 생성
+    let marker = new kakao.maps.Marker({ position: map.getCenter() });
+    marker.setMap(map);
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+      // 클릭한 위도, 경도 정보를 가져옵니다
+      let latlng = mouseEvent.latLng;
+
+      // 마커 위치를 클릭한 위치로 옮깁니다
+      marker.setPosition(latlng);
+    });
+
     const updateCenter = debounce((lat, lon) => {
       map.panTo(new kakao.maps.LatLng(lat, lon)); // setCenter -> panTo: 지도 중심좌표 부드럽게 이동시키기
     });
