@@ -14,6 +14,10 @@ export default function PlanPreview() {
     }
   }, []);
 
+  if (data.items.length === 0) {
+    return <div className="flex justify-center">나의 일정이 비어있습니다.</div>;
+  }
+
   if (data) {
     return (
       <div className="mx-auto flex flex-col gap-4 lg:w-[768px] xl:w-[1236px]">
