@@ -8,7 +8,6 @@ import { useState } from 'react';
 import debounce from '@/utils/debounce';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import FailModal from '@/components/Sign/FailModal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { useAuth } from '@/contexts/Auth';    // 사용할건지 고민
@@ -18,7 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function SignInPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [showFailModal, setShowFailModal] = useState(false);
   // const { isAuth } = useAuth();  // 사용할건지 고민
 
   const [formState, setFormState] = useState({
@@ -33,7 +31,6 @@ function SignInPage() {
       const response = await pocketbase
         .collection('users')
         .authWithPassword(formState.email, formState.password);
-      console.log(response);
 
       if (!state) {
         navigate('/main');
@@ -42,16 +39,12 @@ function SignInPage() {
         navigate(withLocationPath === '/signin' ? '/main' : withLocationPath);
       }
     } catch (error) {
-      // setShowFailModal(true);
       toast.error('회원 정보를 다시 확인해주세요.');
-      // console.log(error); //modal 로 바꾸기
     }
   };
 
   const handleInput = debounce((e) => {
     const { name, value } = e.target;
-    console.log(e.target);
-    console.log({ [name]: value });
     setFormState({
       ...formState,
       [name]: value,
@@ -94,10 +87,6 @@ function SignInPage() {
               name="password"
             />
             <SignInButton type="submit">로그인</SignInButton>
-            <FailModal
-              isOpen={showFailModal}
-              onClose={() => setShowFailModal(false)}
-            />
           </form>
         </div>
       </div>
