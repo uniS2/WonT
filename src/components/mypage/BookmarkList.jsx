@@ -1,11 +1,8 @@
 import pocketbase from '@/api/pocketbase';
 import { getPocketHostImageURL } from '@/utils';
 import BookMark from '../BookMark';
-import { useRef } from 'react';
 import useRecommendsList from '@/hooks/useRecommendsList';
-import useMemosStore from '@/store/memoStore';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {
@@ -63,8 +60,6 @@ export default function BookmarkList() {
               src={getPocketHostImageURL(item).split(',')[0]}
               alt=""
               className="box-content aspect-square  rounded-lg border-[1px] border-gray-2 object-cover md:h-[380px] lg:h-[420px] xl:h-[400px]"
-              // onClick={(e) => handleMoveDetail(e, item.id)}
-              // id={memo}
             />
           </Link>
         </li>

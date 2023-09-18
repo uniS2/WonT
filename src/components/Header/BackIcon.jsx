@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function BackIcon({
   width = '0.9375rem',
   height = '0.625rem',
   color = '#0D0D0D',
 }) {
+  const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
   };
