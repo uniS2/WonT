@@ -4,7 +4,7 @@ import { useDateStore } from '@/store/dateStore';
 import '@/styles/calendar.css';
 import { getTripDateKo } from '@/utils/index.js';
 
-// formatMonthYear - debounse 적용필요
+// formatMonthYear - debounce 적용필요
 const handleFormatMonthYear = (locale, date) => {
   const title = date
     .toLocaleString('ko')
@@ -20,7 +20,7 @@ const handleFormatMonthYear = (locale, date) => {
   );
 };
 
-const handleFormatNextMonthYear = (locale, date) => {
+/* const handleFormatNextMonthYear = (locale, date) => {
   const title = date
     .toLocaleString('ko')
     .replace(' ', '')
@@ -34,7 +34,7 @@ const handleFormatNextMonthYear = (locale, date) => {
       <dd>{`${title[0]}. ${month}`}</dd>
     </dl>
   );
-};
+}; */
 
 export default function TripCalendar() {
   const { tripDate, setDate } = useDateStore();
