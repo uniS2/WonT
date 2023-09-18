@@ -17,8 +17,8 @@ function MainPage() {
           <MainTitle text="국내 추천 여행지" />
           <MainPlace />
         </div>
-        <MainTitle text="Best 여행기" />
-        <div className="mb-[8.25rem]">
+        <div>
+          <MainTitle text="Best 여행기" />
           <MainTravels />
         </div>
       </div>
