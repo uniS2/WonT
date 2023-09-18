@@ -5,17 +5,21 @@ import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
-import { createRecord, getLocalName } from '@/utils/index.js';
+import { createRecord, getLocalName, getTripDateUTC } from '@/utils/index.js';
+import { useDateStore } from '@/store/dateStore';
+import Calendar from 'react-calendar';
 
-
-async function createMyScheduleTitle(title) {
+async function createMyScheduleTitle(title, date) {
   createRecord('mySchedule', {
     title: getLocalName(title),
+    start_date: getTripDateUTC(date[0]),
+    end_date: getTripDateUTC(date[1]),
   });
 }
 
 export default function TripCalendarPage() {
   const { selectName } = useLocalStore();
+  const { tripDate } = useDateStore();
 
   return (
     <section className="mx-auto flex min-h-[50rem] min-w-[22.5rem] flex-col items-center pb-[2.3125rem]">
@@ -27,11 +31,17 @@ export default function TripCalendarPage() {
       />
       <TripCalendar />
       {/* 수정시 : selectName, calendar 날짜 비교 => 틀리면 선택완료시 수정 */}
-      <Link to="/tripedit">
-        <ButtonLarge onClick={() => createMyScheduleTitle(selectName)}>
-          선택 완료
-        </ButtonLarge>
-      </Link>
+      {Array.isArray(tripDate) ? (
+        <Link to="/tripedit">
+          <ButtonLarge
+            onClick={() => createMyScheduleTitle(selectName, tripDate)}
+          >
+            선택 완료
+          </ButtonLarge>
+        </Link>
+      ) : (
+        <ButtonLarge>선택 완료</ButtonLarge>
+      )}
     </section>
   );
 }
