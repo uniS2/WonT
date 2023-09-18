@@ -1,20 +1,47 @@
+import pocketbase from '@/api/pocketbase';
 import SignInButton from '@/components/Sign/SignInButton';
 import BackButton from '@/components/Sign/BackButton';
 import { Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SignPart from '@/components/Sign/SignPart';
-import pocketbase from '@/api/pocketbase';
-
 import { useState } from 'react';
 import debounce from '@/utils/debounce';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { useAuth } from '@/contexts/Auth';    // 사용할건지 고민
 
 // 로그인 페이지
 
 function SignInPage() {
-  const [formData, setFormData] = useState({
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  // const { isAuth } = useAuth();  // 사용할건지 고민
+
+  const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await pocketbase
+        .collection('users')
+        .authWithPassword(formState.email, formState.password);
+
+      if (!state) {
+        navigate('/main');
+      } else {
+        const { withLocationPath } = state;
+        navigate(withLocationPath === '/signin' ? '/main' : withLocationPath);
+      }
+    } catch (error) {
+      toast.error('회원 정보를 다시 확인해주세요.');
+    }
+  };
 
   const handleInput = debounce((e) => {
     const { name, value } = e.target;
@@ -22,15 +49,7 @@ function SignInPage() {
       ...formState,
       [name]: value,
     });
-  });
-
-  async function fetchUsers() {
-    const response = await pocketbase.collection('users').getFullList();
-    console.log(response);
-    return response;
-  }
-
-  fetchUsers();
+  }, 400);
 
   return (
     <div className="container mx-auto flex flex-col items-center px-5">
@@ -47,21 +66,28 @@ function SignInPage() {
           <p>
             <span className="text-2xl font-bold">이메일로 로그인</span>
           </p>
-          <SignPart
-            information="이메일 주소"
-            placeholder="이메일 주소 입력"
-            type="email"
-            onChange={handleInput}
-          />
-          <SignPart
-            information="비밀번호"
-            placeholder="비밀번호 입력"
-            type="password"
-            onChange={handleInput}
-          />
-          <Link to="/main">
-            <SignInButton text="로그인" type="submit" />
-          </Link>
+          <form
+            onSubmit={handleSignIn}
+            className="flex flex-col items-center gap-10"
+          >
+            <SignPart
+              information="이메일 주소"
+              placeholder="이메일 주소 입력"
+              type="email"
+              defaultValue={formState.email}
+              onChange={handleInput}
+              name="email"
+            />
+            <SignPart
+              information="비밀번호"
+              placeholder="비밀번호 입력"
+              type="password"
+              defaultValue={formState.password}
+              onChange={handleInput}
+              name="password"
+            />
+            <SignInButton type="submit">로그인</SignInButton>
+          </form>
         </div>
       </div>
     </div>

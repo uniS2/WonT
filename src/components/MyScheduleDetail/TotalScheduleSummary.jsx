@@ -1,4 +1,4 @@
-import { getLocalName, getTripDays } from '@/utils';
+import { getLocalName, getTripDates } from '@/utils/index.js';
 import CalendarIcon from '@/assets/common-calendar.svg';
 
 export default function TotalScheduleSummary({
@@ -24,7 +24,7 @@ export default function TotalScheduleSummary({
             <span className="text-sm text-contentsPrimary">여행기간</span>
           </div>
           <span className="pl-1 text-xs font-light text-contentsSecondary">
-            {getTripDays(startDay, endDay)}
+            {getTripDates(startDay, endDay)}
           </span>
         </div>
       </div>

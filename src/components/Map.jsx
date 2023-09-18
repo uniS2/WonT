@@ -7,13 +7,13 @@ const { kakao } = window;
 export default function Map({
   width = 'w-[31.25rem]',
   height = 'h-[25rem]',
-  latitude = 33,
-  longtitude = 126,
+  latitude = 37.4812845080678,
+  longitude = 126.952713197762,
   level = 3,
   restProps,
 }) {
   const [center, setCenter] = useState(
-    new kakao.maps.LatLng(latitude, longtitude)
+    new kakao.maps.LatLng(latitude, longitude)
   );
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function Map({
       center: center, // 지도의 중심좌표. 33.450701, 126.570667
       level: level, // 지도의 확대 레벨. 3
     };
+
     // 지도 생성하기
     const map = new kakao.maps.Map(container, options);
     // map.setZoomable(false);
@@ -38,20 +39,27 @@ export default function Map({
     });
 
     const updateCenter = debounce((lat, lon) => {
-      map.setCenter(new kakao.maps.LatLng(lat, lon));
+      map.panTo(new kakao.maps.LatLng(lat, lon)); // setCenter -> panTo: 지도 중심좌표 부드럽게 이동시키기
     });
+
+    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성하기
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
+    map.setCursor('move'); // 커서 스타일을 변경
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude; // 위도
         const lon = position.coords.longitude; // 경도
-        // console.log(lat, lon);
+        console.log(
+          `현재 위치는 위도 ${lat}, 경도 ${lon}이고 지도 확대 레벨은 ${level}입니다.`
+        );
         updateCenter(lat, lon);
       });
     } else {
-      const defaultPosition = new kakao.maps.LatLng(
-        37.4812845080678,
-        126.952713197762
-      );
+      const defaultPosition = new kakao.maps.LatLng(latitude, longitude);
       setCenter(defaultPosition);
     }
   }, [center, level]);

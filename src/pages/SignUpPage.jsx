@@ -28,7 +28,7 @@ function SignUpPage() {
           <SignPart information="비밀번호" placeholder="비밀번호 입력" />
           <SignPart information="비밀번호 확인" placeholder="비밀번호 확인" />
           <Link to="/signin">
-            <SignInButton text="회원가입" />
+            <SignInButton>회원가입</SignInButton>
           </Link>
         </div>
       </div>

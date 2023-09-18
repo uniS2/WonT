@@ -1,4 +1,4 @@
-import { getLocalName, getTripDays } from '@/utils';
+import { getLocalName, getTripDates } from '@/utils/index.js';
 
 export default function TotalScheduleTitle({
   localName = '지역명',
@@ -13,7 +13,7 @@ export default function TotalScheduleTitle({
       </dd>
       <dt className="sr-only">여행기간</dt>
       <dd className="text-xs font-medium text-contentsSecondary">
-        {getTripDays(startDay, endDay)}
+        {getTripDates(startDay, endDay)}
       </dd>
     </dl>
   );

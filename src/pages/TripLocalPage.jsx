@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useLocalStore } from '@/store/localStore';
 
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import LocalItem from '@/components/TripLocal/LocalItem';
 import TripTitle from '@/components/TripTitle';
+import { useLocalStore } from '@/store/localStore';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 
 async function fetchLocals() {
@@ -44,7 +44,7 @@ export default function TripLocalPage() {
         {data?.items?.map((item) => (
           <LocalItem
             key={item.id}
-            image={getPocketHostImageURL(item)}
+            image={item.image ? getPocketHostImageURL(item) : null}
             name={item.name}
             index={item.id}
           />
