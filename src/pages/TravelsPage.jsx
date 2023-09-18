@@ -23,12 +23,12 @@ function TravelsPage() {
     (item) => item.id === '48trysq0ovuau3b'
   );
   const user = userData?.items?.find(
-    (item) => item.id === detailTravels.userEmail
+    (item) => item.id === detailTravels?.userEmail
   );
   if ((detailTravels, user)) {
     return (
-      <div className="container  mx-auto min-w-[22.5rem] bg-background pb-10">
-        <div className="mx-auto flex flex-col">
+      <div className="container  mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
+        <div className="mx-auto flex flex-col ">
           <h1 className="sr-only">TravelsPage</h1>
           <MyPageHeader page="detail" />
           <div className="container flex flex-col items-center justify-center">

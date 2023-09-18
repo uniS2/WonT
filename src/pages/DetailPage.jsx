@@ -13,7 +13,7 @@ function DetailPage() {
 
   if (data) {
     return (
-      <div className="container  mx-auto min-w-[22.5rem] bg-background pb-10">
+      <div className="container mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">
         <div className="flex flex-col items-center justify-center gap-4 ">
           <h1 className="sr-only">DetailPage</h1>
           <MyPageHeader page="detail" />

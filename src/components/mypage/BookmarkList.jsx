@@ -43,8 +43,6 @@ export default function BookmarkList() {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
-  // ^데이터가 빈배열일 때, 조건식 넣기
-  // console.log(data);
 
   // React Query를 사용한 데이터 수정(mutation) 요청
   const mutation = useMutation({

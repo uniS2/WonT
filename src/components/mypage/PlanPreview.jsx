@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 export default function PlanPreview() {
-  const { data } = useScheduleList();
+  const { data, isLoading } = useScheduleList();
   const [trip, setTrip] = useState();
 
   useEffect(() => {
@@ -14,7 +14,11 @@ export default function PlanPreview() {
     }
   }, []);
 
-  if (data.items.length === 0) {
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (data?.items?.length === 0) {
     return <div className="flex justify-center">나의 일정이 비어있습니다.</div>;
   }
 
