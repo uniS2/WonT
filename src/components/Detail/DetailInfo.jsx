@@ -71,7 +71,9 @@ export default function DetailInfo({ detailPlace }) {
           <span className="leading-normal text-gray-1">홈페이지</span>
         </dt>
         <dd className=" leading-normal text-contentsPrimary">
-          <a href={filterDetailPlace.url}>{filterDetailPlace.url}</a>
+          <a href={filterDetailPlace.url} className="break-words">
+            {filterDetailPlace.url}
+          </a>
         </dd>
         <hr className="col-span-3" />
       </dl>
