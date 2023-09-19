@@ -4,13 +4,13 @@ import { getDDay } from '@/utils/getDDay';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-export default function PlanPreview() {
+export default function PlanPreview({ userSchedule }) {
   const { data, isLoading } = useScheduleList();
   const [trip, setTrip] = useState();
 
   useEffect(() => {
     if (data) {
-      setTrip(data.items.filter((item) => item));
+      setTrip(data?.items?.filter((item) => item.username === userSchedule.id));
     }
   }, []);
 
@@ -22,10 +22,10 @@ export default function PlanPreview() {
     return <div className="flex justify-center">나의 일정이 비어있습니다.</div>;
   }
 
-  if (data) {
+  if (userSchedule) {
     return (
       <div className="mx-auto flex flex-col gap-4 lg:w-[768px] xl:w-[1236px]">
-        {data?.items.map((item) => (
+        {userSchedule?.map((item) => (
           <div
             key={item.id}
             className="relative mx-auto flex cursor-pointer justify-center  rounded-xl bg-[hsl(0,0%,90%,0.6)] 

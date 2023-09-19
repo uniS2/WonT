@@ -1,7 +1,8 @@
+// TripEditPage
 // 여행 일정 편집 페이지
 import Header from '@/components/Header/Header';
 import TripPlan from '@/components/TripPlan';
-import Map from './../components/Map';
+import Map from '@/components/Map';
 import AddPlan from '@/components/TripEdit/AddPlan';
 import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import { Link } from 'react-router-dom';
@@ -15,12 +16,12 @@ export default function TripEditPage() {
   };
 
   return (
-    <div className="mx-auto  min-w-[22.5rem] bg-background pb-14">
+    <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
       <h1 className="sr-only">TripEditPage</h1>
       <Header />
       <TripPlan />
-      <div className={`mx-auto mt-[10px] max-w-[1280px]  `}>
-        <Map width={'w-[80rem]'} height={'h-[31.25rem]'} />
+      <div className={`mx-auto mt-[10px] max-w-7xl`}>
+        <Map height={'h-[31.25rem]'} />
         <PlanDate toggleButton={handleToggle} toggleSchedule={toggleSchedule} />
         <div className={`${toggleSchedule ? 'hidden' : ''}`}>
           <AddPlan text="장소" />

@@ -12,7 +12,6 @@ const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());
 const getUser = () =>
   fetch(`${getPocketHostURL('users')}`).then((res) => res.json());
-
 // 여행기 페이지
 function TravelsPage() {
   const { displayDaySchedule, toggleDaySchedule } = useToggleTripMenuStore();

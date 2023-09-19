@@ -22,7 +22,6 @@ export default {
         'custom-color': 'rgba(79,212,230,0.5)',
       },
       backgroundImage: (theme) => ({
-        
         LandingCarouselOne: "url('./src/assets/LandingPage-carousel-one.svg')",
         LandingCarouselTwo: "url('./src/assets/LandingPage-carousel-two.svg')",
         LandingCarouselThree:
@@ -33,6 +32,10 @@ export default {
           "url('./src/assets/LandingPage-carousel-five.svg')",
         LandingCarouselSix: "url('./src/assets/LandingPage-carousel-six.svg')",
       }),
+      screens: {
+        smd: '530px',
+        xs: '529px',
+      },
     },
   },
   plugins: [],

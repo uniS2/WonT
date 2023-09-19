@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function MyPageHeader({ page }) {
   return (
-    <div className=" w-full bg-white">
+    <div className=" container w-screen bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-[1.0625rem] py-[1.125rem]">
         {page === 'mypage' ? (
           <Logo width={74} height={28} />
