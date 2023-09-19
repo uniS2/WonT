@@ -1,7 +1,7 @@
 import MainHeader from '@/components/main/MainHeader';
 import MainMakePlan from '@/components/main/MainMakePlan';
 import MainTitle from '@/components/main/MainTitle';
-import MainPlace from './../components/main/MainPlace';
+import MainPlace from '@/components/main/MainPlace';
 import MainTravels from '@/components/main/MainTravels';
 
 // 메인 페이지
