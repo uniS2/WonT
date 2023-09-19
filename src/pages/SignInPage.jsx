@@ -10,14 +10,13 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useAuth } from '@/contexts/Auth';    // 사용할건지 고민
-
+import { useAuth } from '@/contexts/Auth';
 // 로그인 페이지
 
 function SignInPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  // const { isAuth } = useAuth();  // 사용할건지 고민
+  const { isAuth } = useAuth();
 
   const [formState, setFormState] = useState({
     email: '',

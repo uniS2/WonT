@@ -15,7 +15,7 @@ function MainHeader() {
           <Link to="/bookmark">
             <BookMark />
           </Link>
-          <Link to="/mypage">
+          <Link to="/myschedule">
             <IconUser />
           </Link>
         </div>
