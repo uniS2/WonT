@@ -1,12 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-
 import pocketbase from '@/api/pocketbase';
 import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
+import useMemosStore from '@/store/memoStore';
 import { getPocketHostImageURL } from '@/utils';
-import pocketbase from '@/api/pocketbase';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -40,6 +38,10 @@ export default function DetailPage() {
   const detailPlace = recommendList?.items?.find(
     (item) => item.id === currentPath
   );
+  /* -------------------------------------------------------------------------- */
+
+  const { memo, setMemo } = useMemosStore();
+
   /* -------------------------------------------------------------------------- */
   const [bookmarkList, setBookmarkList] = useState();
   const user = pocketbase.authStore.model;
@@ -105,7 +107,10 @@ export default function DetailPage() {
 
     setBookmarkList(!bookmarkList); // 현재 bookmark 상태 반전
   };
-  console.log(data);
+  // console.log(detailPlace.id);
+  // const list = data?.find((item) => item.id === detailPlace.id);
+  // console.log(list);
+
   if (recommendList) {
     return (
       <div className="container mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">
@@ -125,14 +130,16 @@ export default function DetailPage() {
           </span>
           <div className="mb-1  mt-3 flex items-center gap-2">
             <h2 className=" text-2xl font-bold text-contentsPrimary">
-              {detailPlace.place}
+              {/* {detailPlace.place} */}
             </h2>
-            <button
-              type="button"
-              onClick={handleToggleBookmark(detailPlace.id, user.id)}
-            >
-              <BookMark color={bookmarkList ? '#C9ECFF' : ''} />
-            </button>
+            {data?.find((item) => (
+              <button
+                type="button"
+                onClick={handleToggleBookmark(detailPlace.id, user.id)}
+              >
+                <BookMark color={item.id === detailPlace.id ? '#C9ECFF' : ''} />
+              </button>
+            ))}
           </div>
           <p className="mb-3 text-[0.875rem] font-light text-gray-1">
             {detailPlace.address}
