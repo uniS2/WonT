@@ -17,7 +17,6 @@ const TripCalendarPage = lazy(() => import('./pages/TripCalendarPage'));
 const TripEditPage = lazy(() => import('./pages/TripEditPage'));
 const TripPlacePage = lazy(() => import('./pages/TripPlacePage'));
 const TripHotelPage = lazy(() => import('./pages/TripHotelPage'));
-const MyPage = lazy(() => import('./pages/MyPage/MyPage'));
 const MySchedule = lazy(() => import('./pages/MyPage/MySchedule'));
 const BookmarkPage = lazy(() => import('./pages/MyPage/BookmarkPage'));
 const MyScheduleDetailPage = lazy(() => import('./pages/MyScheduleDetailPage'));
@@ -36,7 +35,6 @@ const router = createBrowserRouter(
       <Route path="tripedit" element={<TripEditPage />} />
       <Route path="tripplace" element={<TripPlacePage />} />
       <Route path="triphotel" element={<TripHotelPage />} />
-      <Route path="mypage" element={<MyPage />} />
       <Route path="myschedule" element={<MySchedule />} />
       <Route path="bookmark" element={<BookmarkPage />} />
       <Route path="bookmark/:recommendId" element={<DetailPage />} />
