@@ -2,10 +2,8 @@ import MyPageHeader from '@/components/PageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
-import { useEffect } from 'react';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
-import useFetchData from '@/hooks/useFetchData';
 import pb from '@/api/pocketbase';
 
 const getUser = () =>
@@ -23,10 +21,11 @@ export default function MySchedule() {
   // console.log(userId.id);
   // console.log(getPocketHostURL('users'));
 
+  // console.log(userId);
   const userSchedule = myschedule?.items?.filter(
     (item) => item.username === userId.id
   );
-  console.log(userSchedule);
+  // console.log(userSchedule);
 
   if ((userId, userSchedule)) {
     return (
