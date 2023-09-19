@@ -41,7 +41,7 @@ function MainPlace(item) {
             key={item.id}
             className="relative mb-[1.625rem] flex h-[9.25rem] w-[9.25rem] transform overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg "
           >
-            <Link to={`/recommends/:${item.id}`}>
+            <Link to={`/bookmark/${item.id}`}>
               <img
                 src={getPocketHostImageURL(item).split(',')[0]}
                 className="h-[9.25rem] w-[9.25rem]"

@@ -6,6 +6,7 @@ function SignPart({
   placeholder = '',
   type = 'text',
   label,
+  inputRef,
   ...restProps
 }) {
   const id = useId();
@@ -23,6 +24,7 @@ function SignPart({
           id={id}
           type={type}
           placeholder={placeholder}
+          ref={inputRef}
           {...restProps}
         />
       </label>
