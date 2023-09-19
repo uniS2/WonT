@@ -1,16 +1,15 @@
+import { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import pocketbase from '@/api/pocketbase';
 import Logo from '@/components/Logo';
 import BackButton from '@/components/Sign/BackButton';
 import SignPart from '@/components/Sign/SignPart';
 import SignInButton from '@/components/Sign/SignInButton';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import pocketbase from '@/api/pocketbase';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useRef } from 'react';
 
-// 회원가입 페이지
-function SignUpPage() {
+export default function SignUpPage() {
   const navigate = useNavigate();
 
   const emailRef = useRef(null);
@@ -51,7 +50,7 @@ function SignUpPage() {
   };
   return (
     <div className="container mx-auto flex  flex-col items-center px-5">
-      <h1 className="sr-only">SignInPage</h1>
+      <h1 className="sr-only">로그인 페이지</h1>
       <div className="h-[8.125rem] w-[20rem] pt-[2.125rem]">
         <Link to="/">
           <BackButton />
@@ -96,5 +95,3 @@ function SignUpPage() {
     </div>
   );
 }
-
-export default SignUpPage;

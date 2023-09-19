@@ -10,7 +10,7 @@ function MainPage() {
     <div className="container mx-auto">
       <h1 className="sr-only">MainPage</h1>
       <MainHeader />
-      <div className="container mx-auto flex   flex-col items-center  bg-gray-100/30  ">
+      <div className="container mx-auto flex flex-col items-center bg-gray-100/30">
         <MainMakePlan />
         <div>
           <MainTitle text="국내 추천 여행지" />

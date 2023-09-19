@@ -1,11 +1,10 @@
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-
 import TripHeader from '@/components/Header/TripHeader';
 import MapSearch from '@/components/MapSearch';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/addPlaceItem';
+import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 export default function TripPlacePage() {
   const {

@@ -1,8 +1,9 @@
-import pocketbase from '@/api/pocketbase';
-import { getPocketHostImageURL } from '@/utils';
-import BookMark from '@/components/BookMark';
-import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+
+import pocketbase from '@/api/pocketbase';
+import BookMark from '@/components/BookMark';
+import { getPocketHostImageURL } from '@/utils/index.js';
 
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {

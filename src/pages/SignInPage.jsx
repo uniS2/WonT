@@ -1,19 +1,17 @@
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import pocketbase from '@/api/pocketbase';
 import SignInButton from '@/components/Sign/SignInButton';
 import BackButton from '@/components/Sign/BackButton';
-import { Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import SignPart from '@/components/Sign/SignPart';
-import { useState } from 'react';
 import debounce from '@/utils/debounce';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '@/contexts/Auth';
-// 로그인 페이지
 
-function SignInPage() {
+export default function SignInPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { isAuth } = useAuth();
@@ -92,5 +90,3 @@ function SignInPage() {
     </div>
   );
 }
-
-export default SignInPage;

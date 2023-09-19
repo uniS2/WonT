@@ -1,16 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { getPocketHostImageURL } from '@/utils';
-import pocketbase from '@/api/pocketbase';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BookMark from '../BookMark';
-async function fetchUsers() {
-  const response = await fetch(`${getPocketHostURL('recommends')}`);
-  return await response.json();
-}
 
-function MainPlace(item) {
+import pocketbase from '@/api/pocketbase';
+import BookMark from '@/components/BookMark';
+import { getPocketHostImageURL } from '@/utils/index.js';
+
+export default function MainPlace() {
   const [data, setData] = useState([]);
   const [buttonClicked, setButtonClicked] = useState({});
 
@@ -69,5 +64,3 @@ function MainPlace(item) {
     </div>
   );
 }
-
-export default MainPlace;

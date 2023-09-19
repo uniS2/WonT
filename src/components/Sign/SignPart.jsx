@@ -1,7 +1,7 @@
-import { oneOf, string } from 'prop-types';
 import { useId } from 'react';
+import { oneOf, string } from 'prop-types';
 
-function SignPart({
+export default function SignPart({
   information = '',
   placeholder = '',
   type = 'text',
@@ -36,5 +36,3 @@ SignPart.propTypes = {
   type: oneOf(['text', 'password', 'number', 'email', 'search']),
   placeholder: string.isRequired,
 };
-
-export default SignPart;

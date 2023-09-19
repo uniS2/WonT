@@ -1,12 +1,12 @@
-import MyPageTab from '@/components/MyPage/MyPageTab';
+import pocketbase from '@/api/pocketbase';
 import BookmarkList from '@/components/MyPage/BookmarkList';
+import MyPageTab from '@/components/MyPage/MyPageTab';
 import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
 import { getPocketHostImageURL } from '@/utils/index.js';
-import pb from '@/api/pocketbase';
 
 export default function BookmarkPage() {
-  const loginUser = pb.authStore.model;
+  const loginUser = pocketbase.authStore.model;
 
   if (loginUser) {
     return (

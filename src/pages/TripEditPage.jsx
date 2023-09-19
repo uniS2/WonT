@@ -1,12 +1,11 @@
-// TripEditPage
-// 여행 일정 편집 페이지
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import Header from '@/components/Header/Header';
 import TripPlan from '@/components/TripPlan';
 import Map from '@/components/Map';
 import AddPlan from '@/components/TripEdit/AddPlan';
 import ButtonMedium from '@/components/TripEdit/ButtonMedium';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import PlanDate from '@/components/TripEdit/PlanDate';
 import useScheduleList from '@/hooks/useScheduleList';
 
