@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       <Route path="myschedule" element={<MySchedule />} />
       <Route path="bookmark" element={<BookmarkPage />} />
       <Route path="bookmark/:recommendId" element={<DetailPage />} />
-      <Route path="myschedule/detail" element={<MyScheduleDetailPage />} />
+      <Route path="myschedule/:detailId" element={<MyScheduleDetailPage />} />
       <Route path="travels" element={<TravelsPage />} />
     </Route>
   )

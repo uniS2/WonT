@@ -1,8 +1,8 @@
-import BookMark from './BookMark';
-import BackIcon from './Header/BackIcon';
-import Logout from './MyPage/Logout';
+import BookMark from '@/components/BookMark';
+import Logout from '@/components/MyPage/Logout';
 import Logo from '@/components/Logo';
 import { Link } from 'react-router-dom';
+import BackIcon from '@/components/Header/BackIcon';
 
 export default function MyPageHeader({ page }) {
   return (

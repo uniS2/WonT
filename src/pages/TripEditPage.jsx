@@ -8,12 +8,19 @@ import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import PlanDate from '@/components/TripEdit/PlanDate';
+import useScheduleList from '@/hooks/useScheduleList';
 
 export default function TripEditPage() {
   const [toggleSchedule, setToggleSchedule] = useState(false);
   const handleToggle = () => {
     setToggleSchedule(!toggleSchedule);
   };
+  const { data } = useScheduleList();
+  console.log(data);
+
+  const currentPath = window.location.pathname.replace('/tripedit/', '');
+  console.log(currentPath);
+  const tripSchdeule = data?.items?.find((item) => item.id === currentPath);
 
   return (
     <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">

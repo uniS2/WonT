@@ -1,7 +1,6 @@
 import pocketbase from '@/api/pocketbase';
 import { getPocketHostImageURL } from '@/utils';
 import BookMark from '@/components/BookMark';
-import useRecommendsList from '@/hooks/useRecommendsList';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
