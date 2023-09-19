@@ -39,7 +39,7 @@ export default function MySchedule() {
             </span>
             {userId.profile ? (
               <img
-                src={userId.profile}
+                src={getPocketHostImageURL(userId, 'profile')}
                 alt={`${userId.username}의 프로필`}
                 className="h-[70px] w-[70px] rounded-full border-[0.0938rem] border-contentsSecondary"
               />
