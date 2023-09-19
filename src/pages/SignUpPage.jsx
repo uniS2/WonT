@@ -42,7 +42,7 @@ function SignUpPage() {
 
       toast.success('회원가입이 완료되었습니다', {});
 
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1초 대기
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       navigate('/signin');
     } catch (error) {

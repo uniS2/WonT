@@ -27,7 +27,7 @@ function MainTravels({ item, title = '', text = '' }) {
     <div className=" flex flex-col items-center">
       <ul className="grid grid-cols-1 gap-5 px-[1.688rem] pb-[1.25rem] pt-[0.625rem] md:grid md:grid-cols-2 md:gap-10">
         {data?.map((item) => (
-          <Link to={`/travels/:${item.id}`}>
+          <Link to={`/travels/${item.id}`}>
             <li
               key={item.id}
               className="overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg "
