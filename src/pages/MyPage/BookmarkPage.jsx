@@ -2,7 +2,7 @@ import MyPageTab from '@/components/MyPage/MyPageTab';
 import BookmarkList from '@/components/MyPage/BookmarkList';
 import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
-import { getPocketHostImageURL } from '@/utils';
+import { getPocketHostImageURL } from '@/utils/index.js';
 import pb from '@/api/pocketbase';
 
 export default function BookmarkPage() {
@@ -22,7 +22,7 @@ export default function BookmarkPage() {
               <img
                 src={getPocketHostImageURL(loginUser, 'profile')}
                 alt={`${loginUser.username}의 프로필`}
-                className="h-[70px] w-[70px] rounded-full border-[0.0938rem] border-contentsSecondary"
+                className="h-[4.375rem] w-[4.375rem] rounded-full border-[0.0938rem] border-contentsSecondary"
               />
             ) : (
               <Profile />

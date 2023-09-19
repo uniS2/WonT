@@ -3,7 +3,6 @@ import { useState } from 'react';
 import pocketbase from '@/api/pocketbase';
 import { useEffect } from 'react';
 import { getPocketHostTravelsURL, getPocketHostImageURL } from '@/utils';
-import MainMoreButton from './MainMoreButton';
 import { Link } from 'react-router-dom';
 
 async function fetchUsers() {
@@ -41,7 +40,6 @@ function MainTravels({ item, title = '', text = '' }) {
           </Link>
         ))}
       </ul>
-      {/* <MainMoreButton /> */}
     </div>
   );
 }
