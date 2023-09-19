@@ -1,10 +1,11 @@
 import React from 'react';
-import Logo from '@/components/Logo';
-import BookMark from '@/components/BookMark';
-import IconUser from '@/components/Header/UserIcon';
 import { Link } from 'react-router-dom';
 
-function MainHeader() {
+import Logo from '@/components/Logo';
+import BookMark from '@/components/BookMark';
+import UserIcon from '@/components/Header/UserIcon';
+
+export default function MainHeader() {
   return (
     <div>
       <div className="flex justify-between bg-white px-6 py-[1.063rem]">
@@ -16,12 +17,10 @@ function MainHeader() {
             <BookMark />
           </Link>
           <Link to="/myschedule">
-            <IconUser />
+            <UserIcon />
           </Link>
         </div>
       </div>
     </div>
   );
 }
-
-export default MainHeader;

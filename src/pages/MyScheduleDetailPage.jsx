@@ -1,6 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useButtonStore } from '@/store/buttonStore';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 import TripHeader from '@/components/Header/TripHeader';
 import Modal from '@/components/Modal';
@@ -11,6 +9,8 @@ import DeleteButton from '@/components/DeleteButton';
 import TotalScheduleSummary from '@/components/MyScheduleDetail/TotalScheduleSummary';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
+import { useButtonStore } from '@/store/buttonStore';
+import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 export default function MyScheduleDetailPage() {
   // 경로 지정

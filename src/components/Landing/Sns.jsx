@@ -1,6 +1,6 @@
-import Twitter from '../../assets/common-twitter.svg';
-import Facebook from '../../assets/common-facebook.svg';
-import Instagram from '../../assets/common-instagram.svg';
+import Twitter from '@/assets/common-twitter.svg';
+import Facebook from '@/assets/common-facebook.svg';
+import Instagram from '@/assets/common-instagram.svg';
 
 // 이미지 bakground-image
 export default function Sns() {

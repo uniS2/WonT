@@ -1,7 +1,6 @@
-import React from 'react';
 import Check from '@/assets/common-check.svg';
 
-function SuccessModal({ isOpen, onClose }) {
+export default function SuccessModal({ isOpen, onClose }) {
   if (!isOpen) {
     return null;
   }
@@ -18,5 +17,3 @@ function SuccessModal({ isOpen, onClose }) {
     </div>
   );
 }
-
-export default SuccessModal;

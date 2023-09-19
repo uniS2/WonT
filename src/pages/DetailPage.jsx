@@ -1,3 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
+
+import pocketbase from '@/api/pocketbase';
 import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';

@@ -1,8 +1,7 @@
-// TripPlan
 import { Link } from 'react-router-dom';
-import { useLocalStore } from '@/store/localStore';
 
 import TripPlanEditButton from '@/components/TripPlanEditButton';
+import { useLocalStore } from '@/store/localStore';
 
 export default function TripPlan({ background = 'bg-secondary/50' }) {
   const selectName = useLocalStore((set) => set.selectName);

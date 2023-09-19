@@ -1,6 +1,4 @@
-import React from 'react';
-
-function SignUpButton({ text = '' }) {
+export default function SignUpButton({ text = '' }) {
   return (
     <div>
       <button
@@ -12,5 +10,3 @@ function SignUpButton({ text = '' }) {
     </div>
   );
 }
-
-export default SignUpButton;

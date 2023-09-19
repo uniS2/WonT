@@ -1,12 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import MyPageHeader from '@/components/PageHeader';
 import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
-import { useQuery } from '@tanstack/react-query';
-import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
+import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());

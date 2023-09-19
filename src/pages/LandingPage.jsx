@@ -1,15 +1,7 @@
-import Logo from '@/components/Logo';
-import SignInButton from '@/components/Sign/SignInButton';
-import SignUpButton from '@/components/Sign/SignUpButton';
-import LandingPagePartOne from '@/components/Landing/LandingPagePartOne';
-import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo.jsx';
-import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
-import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
-import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import CarouselDiv from '@/components/Landing/CarouselDiv';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import Test1 from '@/assets/LandingPage-carousel-one.svg';
 import Test2 from '@/assets/LandingPage-carousel-two.svg';
 import Test3 from '@/assets/LandingPage-carousel-three.svg';
@@ -17,8 +9,18 @@ import Test4 from '@/assets/LandingPage-carousel-four.svg';
 import Test5 from '@/assets/LandingPage-carousel-five.svg';
 import Test6 from '@/assets/LandingPage-carousel-six.svg';
 
+import Logo from '@/components/Logo';
+import SignInButton from '@/components/Sign/SignInButton';
+import SignUpButton from '@/components/Sign/SignUpButton';
+import LandingPagePartOne from '@/components/Landing/LandingPagePartOne';
+import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo';
+import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
+import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
+import Footer from '@/components/Footer';
+import CarouselDiv from '@/components/Landing/CarouselDiv';
+
 // framer-motion 함수
-function LandingPage() {
+export default function LandingPage() {
   const MotionDiv = ({ children, delay }) => {
     return (
       <motion.div
@@ -85,5 +87,3 @@ function LandingPage() {
     </div>
   );
 }
-
-export default LandingPage;

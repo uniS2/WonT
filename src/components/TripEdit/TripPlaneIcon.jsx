@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function TripPlaneIcon() {
   return (
     <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">

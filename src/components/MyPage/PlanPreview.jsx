@@ -1,9 +1,8 @@
-import useScheduleList from '@/hooks/useScheduleList';
-import { getPocketHostImageURL } from '@/utils';
-import { getDDay } from '@/utils/getDDay';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import useScheduleList from '@/hooks/useScheduleList';
+import { getDDay, getPocketHostImageURL } from '@/utils/index.js';
 
 export default function PlanPreview({ userSchedule }) {
   const { data, isLoading } = useScheduleList();
