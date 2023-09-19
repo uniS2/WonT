@@ -6,6 +6,7 @@ import { getPocketHostImageURL } from '@/utils';
 import pocketbase from '@/api/pocketbase';
 import { useQuery } from '@tanstack/react-query';
 
+/* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {
   return await pocketbase.collection('recommends').getFullList({
@@ -19,8 +20,14 @@ const removeRecommend = async ({ recommendId, userId }) => {
     'userEmail-': userId,
   });
 };
+const addRecommend = async ({ recommendId, userId }) => {
+  return await pocketbase.collection('recommends').update(recommendId, {
+    'userEmail+': userId,
+  });
+};
+/* -------------------------------------------------------------------------- */
+// *상세페이지
 
-// 상세페이지
 export default function DetailPage() {
   const { data: recommendList } = useRecommendsList();
   const currentPath = window.location.pathname.replace('/bookmark/', '');
@@ -36,14 +43,14 @@ export default function DetailPage() {
     queryFn: () => getRecommends(loginUser.id),
     refetchOnWindowFocus: false,
   });
-  console.log(recommendList);
+  console.log(data);
+  console.log(detailPlace.id);
 
   const handleAddBookmark = (recommendId) => async () => {
-    // recommends 컬렉션의 recommendId 레코드에서 userEmail 필드(배열)에 user.id를 추가
-    // 참고: https://pocketbase.io/docs/working-with-relations
     await pocketbase.collection('recommends').update(recommendId, {
       'userEmail+': loginUser.id,
     });
+    console.log(handleAddBookmark);
 
     // 데이터 리패칭(서버에서 다시 가져오기 요청)
     refetch();
@@ -74,10 +81,10 @@ export default function DetailPage() {
               type="button"
               className="bg-orange-600"
               onClick={() => {
-                if (data) {
-                  handleAddBookmark(item.id);
+                if (detailPlace) {
+                  handleAddBookmark(detailPlace.id);
                 } else {
-                  handleRemoveBookmark(item.id);
+                  handleRemoveBookmark(detailPlace.id);
                 }
               }}
             >
