@@ -1,8 +1,8 @@
-import MainHeader from '@/components/main/MainHeader';
-import MainMakePlan from '@/components/main/MainMakePlan';
-import MainTitle from '@/components/main/MainTitle';
-import MainPlace from '@/components/main/MainPlace';
-import MainTravels from '@/components/main/MainTravels';
+import MainHeader from '@/components/Main/MainHeader';
+import MainMakePlan from '@/components/Main/MainMakePlan';
+import MainTitle from '@/components/Main/MainTitle';
+import MainPlace from '@/components/Main/MainPlace';
+import MainTravels from '@/components/Main/MainTravels';
 
 // 메인 페이지
 function MainPage() {
