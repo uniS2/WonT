@@ -34,9 +34,6 @@ const router = createBrowserRouter(
       <Route path="main" element={<MainPage />} />
       <Route path="triplocal" element={<TripLocalPage />} />
       <Route path="tripcalendar" element={<TripCalendarPage />}></Route>
-      {/* <Link to={`/triplocal/${item.id}`}>
-              <button>예</button>
-            </Link> */}
       <Route path="tripedit" element={<TripEditPage />} />
       <Route path="tripplace" element={<TripPlacePage />} />
       <Route path="triphotel" element={<TripHotelPage />} />
