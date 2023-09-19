@@ -68,7 +68,7 @@ export default function DetailPage() {
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
     },
-    onError: (error, removedBookmark, context) => {
+    onError: (context) => {
       queryClient.setQueryData(queryKey, context.previousList);
     },
   });
@@ -88,7 +88,7 @@ export default function DetailPage() {
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
     },
-    onError: (error, removedBookmark, context) => {
+    onError: (context) => {
       queryClient.setQueryData(queryKey, context.previousList);
     },
   });

@@ -29,7 +29,12 @@ export default function BookmarkList({ loginUser }) {
   const queryKey = ['recommends', user.id];
 
   // React Query를 사용한 데이터 쿼리(query) 요청
-  const { isFetching, isLoading, error, data } = useQuery({
+  const {
+    isFetching,
+    isLoading,
+    error,
+    data: bookmarkItems,
+  } = useQuery({
     queryKey: queryKey,
     queryFn: () => getRecommends(user.id),
     refetchOnReconnect: false,
@@ -57,6 +62,7 @@ export default function BookmarkList({ loginUser }) {
       queryClient.setQueryData(queryKey, context.previousList);
     },
   });
+  console.log(bookmarkItems);
 
   const handleRemoveBookmark = (recommendId, userId) => async () => {
     mutation.mutate({
@@ -73,13 +79,13 @@ export default function BookmarkList({ loginUser }) {
     return <div role="alert">{error.toString()}</div>;
   }
 
-  if (data?.length === 0) {
+  if (bookmarkItems?.length === 0) {
     return <div className=" flex justify-center ">북마크가 비어있습니다.</div>;
   }
 
   return (
     <ul className="mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-      {data?.map?.((item) => (
+      {bookmarkItems?.map?.((item) => (
         <li key={item.id} className="relative min-w-[360px]">
           <button
             type="button"
