@@ -5,7 +5,7 @@ import debounce from '@/utils/debounce';
 const { kakao } = window;
 
 export default function Map({
-  width = 'w-[31.25rem]',
+  width = 'w-full',
   height = 'h-[25rem]',
   latitude = 37.4812845080678,
   longitude = 126.952713197762,
