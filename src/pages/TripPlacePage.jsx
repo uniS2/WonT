@@ -1,12 +1,11 @@
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 import TripHeader from '@/components/Header/TripHeader';
-import Map from '@/components/Map';
+import MapSearch from '@/components/MapSearch';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/addPlaceItem';
-import MapSearch from '@/components/MapSearch';
 
 export default function TripPlacePage() {
   const {
@@ -21,12 +20,39 @@ export default function TripPlacePage() {
       <h1 className="sr-only">여행 장소 선택 페이지</h1>
       <TripHeader />
       <TripPlanMenu state={displayPlaceTripPlan} action={togglePlaceTripPlan} />
-      {/* <Map
-        width="w-full"
-        height="min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]"
-        restProps={'mt-6 modal mx-auto'}
-      /> */}
-      <MapSearch />
+      <div className="map_wrap relative">
+        <MapSearch />
+        <ul
+          id="category"
+          className="modal absolute left-3 top-3 z-10 flex gap-1 overflow-hidden rounded-md border border-solid border-primary bg-background"
+        >
+          <li id="BK9" data-order="0">
+            <span className="bank"></span>
+            은행
+          </li>
+          <li id="MT1" data-order="1">
+            <span className="mart"></span>
+            마트
+          </li>
+          <li id="PM9" data-order="2">
+            <span className="pharmacy"></span>
+            약국
+          </li>
+          <li id="OL7" data-order="3">
+            <span className="oil"></span>
+            주유소
+          </li>
+          <li id="CE7" data-order="4">
+            <span className="cafe"></span>
+            카페
+          </li>
+          <li id="CS2" data-order="5">
+            <span className="store"></span>
+            편의점
+          </li>
+        </ul>
+      </div>
+
       <ul className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll">
         <TripPlaceItem />
         <TripPlaceItem />
