@@ -35,27 +35,6 @@ export default function DetailPage() {
     (item) => item.id === currentPath
   );
 
-  const loginUser = pocketbase.authStore.model;
-  console.log(loginUser);
-
-  const { isFetching, isLoading, error, data, refetch } = useQuery({
-    queryKey: ['recommends', loginUser.id],
-    queryFn: () => getRecommends(loginUser.id),
-    refetchOnWindowFocus: false,
-  });
-  console.log(data);
-  console.log(detailPlace.id);
-
-  const handleAddBookmark = (recommendId) => async () => {
-    await pocketbase.collection('recommends').update(recommendId, {
-      'userEmail+': loginUser.id,
-    });
-    console.log(handleAddBookmark);
-
-    // 데이터 리패칭(서버에서 다시 가져오기 요청)
-    refetch();
-  };
-
   if (recommendList) {
     return (
       <div className="container mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">
