@@ -1,6 +1,7 @@
 // PocketBase SDK 활용편
 import { useState } from 'react';
-import pocketbase from './pocketbase';
+
+import pocketbase from '@/api/pocketbase';
 
 // SDK 처리 함수를 포함하는 사용자 정의 훅 작성
 export function useSDKData(collection) {

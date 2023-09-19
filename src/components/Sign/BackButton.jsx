@@ -1,7 +1,6 @@
-import React from 'react';
 import Back from '@/assets/common-toogle-left.svg';
 
-function BackButton() {
+export default function BackButton() {
   return (
     <div>
       <button type="button">
@@ -10,5 +9,3 @@ function BackButton() {
     </div>
   );
 }
-
-export default BackButton;

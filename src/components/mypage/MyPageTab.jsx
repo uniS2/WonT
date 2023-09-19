@@ -1,6 +1,7 @@
-import useRecommendsList from '@/hooks/useRecommendsList';
-import useScheduleList from '@/hooks/useScheduleList';
 import { Link } from 'react-router-dom';
+
+import useScheduleList from '@/hooks/useScheduleList';
+import useRecommendsList from '@/hooks/useRecommendsList';
 
 export default function MyPageTab({ position, tab, menu }) {
   const { data } =

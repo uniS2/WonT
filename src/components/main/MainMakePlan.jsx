@@ -1,8 +1,9 @@
 import React from 'react';
-import PaperAirPlane from '@/assets/MainPage-planeIcon.svg';
 import { Link } from 'react-router-dom';
 
-function MainMakePlan() {
+import PaperAirPlane from '@/assets/MainPage-planeIcon.svg';
+
+export default function MainMakePlan() {
   return (
     <div className="mx-5 mb-[40px] mt-[1.063rem] flex h-[8.125rem] w-[20rem] items-center justify-center rounded-[0.625rem] bg-white md:w-[568px] lg:w-[824px]">
       <div className="flex flex-col items-center">
@@ -24,5 +25,3 @@ function MainMakePlan() {
     </div>
   );
 }
-
-export default MainMakePlan;

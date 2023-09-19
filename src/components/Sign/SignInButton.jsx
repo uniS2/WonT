@@ -1,7 +1,10 @@
-import React from 'react';
 import { oneOf } from 'prop-types';
 
-function SignInButton({ type = 'button', children, ...restProps }) {
+export default function SignInButton({
+  type = 'button',
+  children,
+  ...restProps
+}) {
   return (
     <div>
       <button
@@ -18,5 +21,3 @@ function SignInButton({ type = 'button', children, ...restProps }) {
 SignInButton.propTypes = {
   type: oneOf(['button', 'submit', 'reset']),
 };
-
-export default SignInButton;

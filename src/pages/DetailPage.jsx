@@ -1,10 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
+
+import pocketbase from '@/api/pocketbase';
 import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
-import { getPocketHostImageURL } from '@/utils';
-import pocketbase from '@/api/pocketbase';
-import { useQuery } from '@tanstack/react-query';
+import { getPocketHostImageURL } from '@/utils/index.js';
 
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)

@@ -1,4 +1,4 @@
-export default function IconUser({ size = '1.5rem', color = '#4EC3F9' }) {
+export default function UserIcon({ size = '1.5rem', color = '#4EC3F9' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <path

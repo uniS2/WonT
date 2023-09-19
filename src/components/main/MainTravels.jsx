@@ -1,16 +1,18 @@
-import React from 'react';
-import { useState } from 'react';
-import pocketbase from '@/api/pocketbase';
-import { useEffect } from 'react';
-import { getPocketHostTravelsURL, getPocketHostImageURL } from '@/utils';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import pocketbase from '@/api/pocketbase';
+import {
+  getPocketHostTravelsURL,
+  getPocketHostImageURL,
+} from '@/utils/index.js';
 
 async function fetchUsers() {
   const response = await fetch(`${getPocketHostTravelsURL('travels')}`);
   return await response.json();
 }
 
-function MainTravels({ item, title = '', text = '' }) {
+export default function MainTravels() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -43,5 +45,3 @@ function MainTravels({ item, title = '', text = '' }) {
     </div>
   );
 }
-
-export default MainTravels;

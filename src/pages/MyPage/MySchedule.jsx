@@ -1,22 +1,25 @@
+import { useQuery } from '@tanstack/react-query';
+
+import pocketbase from '@/api/pocketbase';
 import MyPageHeader from '@/components/PageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
-import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
-import { useQuery } from '@tanstack/react-query';
-import pb from '@/api/pocketbase';
+import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 
 const getUser = () =>
-  fetch(`${getPocketHostURL('users')}`).then((res) => res.json());
+  fetch(`${getPocketHostURL('users')}`).then((response) => response.json());
 const getMyschedule = () =>
-  fetch(`${getPocketHostURL('mySchedule')}`).then((res) => res.json());
+  fetch(`${getPocketHostURL('mySchedule')}`).then((response) =>
+    response.json()
+  );
 
 export default function MySchedule() {
   const { data: userData } = useQuery(['users'], getUser);
   const { data: myschedule } = useQuery(['mySchedule'], getMyschedule);
   console.log(myschedule);
 
-  let userId = pb.authStore.model;
+  let userId = pocketbase.authStore.model;
 
   // console.log(userId.id);
   // console.log(getPocketHostURL('users'));
