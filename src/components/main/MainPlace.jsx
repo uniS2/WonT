@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import MainMoreButton from './MainMoreButton';
 import { getPocketHostImageURL } from '@/utils';
 import pocketbase from '@/api/pocketbase';
 import { Link } from 'react-router-dom';
@@ -67,7 +66,6 @@ function MainPlace(item) {
           </li>
         ))}
       </ul>
-      {/* <MainMoreButton /> */}
     </div>
   );
 }

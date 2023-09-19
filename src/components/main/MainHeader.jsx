@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from '../Logo';
-import BookMark from '../BookMark';
-import IconUser from '../Header/UserIcon';
+import Logo from '@/components/Logo';
+import BookMark from '@/components/BookMark';
+import IconUser from '@/components/Header/UserIcon';
 import { Link } from 'react-router-dom';
 
 function MainHeader() {
