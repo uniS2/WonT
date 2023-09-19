@@ -4,7 +4,8 @@ import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
 import { getPocketHostImageURL } from '@/utils';
 import pocketbase from '@/api/pocketbase';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
@@ -15,16 +16,18 @@ const getRecommends = async (userId) => {
   });
 };
 
-const removeRecommend = async ({ recommendId, userId }) => {
-  return await pocketbase.collection('recommends').update(recommendId, {
-    'userEmail-': userId,
-  });
-};
-const addRecommend = async ({ recommendId, userId }) => {
+// 데이터의 userEmail 필드에서 삭제 요청 함수 (mutation function)
+const addBookmark = async ({ recommendId, userId }) => {
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail+': userId,
   });
 };
+const removeBookmark = async ({ recommendId, userId }) => {
+  return await pocketbase.collection('recommends').update(recommendId, {
+    'userEmail-': userId,
+  });
+};
+
 /* -------------------------------------------------------------------------- */
 // *상세페이지
 
@@ -34,7 +37,72 @@ export default function DetailPage() {
   const detailPlace = recommendList?.items?.find(
     (item) => item.id === currentPath
   );
+  /* -------------------------------------------------------------------------- */
+  const [bookmarkList, setBookmarkList] = useState();
+  const user = pocketbase.authStore.model;
 
+  // console.log(getRecommends(user.id));
+  const queryClient = useQueryClient();
+  const queryKey = ['recommends', user.id];
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: queryKey,
+    queryFn: () => getRecommends(user.id),
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
+
+  const addMutation = useMutation({
+    mutationFn: addBookmark,
+    onMutate: async ({ recommendId }) => {
+      await queryClient.cancelQueries({ queryKey: queryKey });
+
+      const previousList = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, (list) => {
+        return list.filter((item) => item.id !== recommendId);
+      });
+
+      return { previousList };
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: (error, removedBookmark, context) => {
+      queryClient.setQueryData(queryKey, context.previousList);
+    },
+  });
+  const removeMutation = useMutation({
+    mutationFn: removeBookmark,
+    onMutate: async ({ recommendId }) => {
+      await queryClient.cancelQueries({ queryKey: queryKey });
+
+      const previousList = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, (list) => {
+        return list.filter((item) => item.id !== recommendId);
+      });
+
+      return { previousList };
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: (error, removedBookmark, context) => {
+      queryClient.setQueryData(queryKey, context.previousList);
+    },
+  });
+
+  const handleToggleBookmark = (recommendId, userId) => async () => {
+    if (bookmarkList) {
+      removeMutation.mutate({ recommendId, userId });
+    } else {
+      addMutation.mutate({ recommendId, userId });
+    }
+
+    setBookmarkList(!bookmarkList); // 현재 bookmark 상태 반전
+  };
+  console.log(data);
   if (recommendList) {
     return (
       <div className="container mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">
@@ -58,16 +126,9 @@ export default function DetailPage() {
             </h2>
             <button
               type="button"
-              className="bg-orange-600"
-              onClick={() => {
-                if (detailPlace) {
-                  handleAddBookmark(detailPlace.id);
-                } else {
-                  handleRemoveBookmark(detailPlace.id);
-                }
-              }}
+              onClick={handleToggleBookmark(detailPlace.id, user.id)}
             >
-              <BookMark />
+              <BookMark color={bookmarkList ? '#C9ECFF' : ''} />
             </button>
           </div>
           <p className="mb-3 text-[0.875rem] font-light text-gray-1">

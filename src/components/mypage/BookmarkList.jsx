@@ -2,7 +2,7 @@ import pocketbase from '@/api/pocketbase';
 import { getPocketHostImageURL } from '@/utils';
 import BookMark from '@/components/BookMark';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {
@@ -19,24 +19,50 @@ const removeRecommend = async ({ recommendId, userId }) => {
   });
 };
 
+/* -------------------------------------------------------------------------- */
 export default function BookmarkList({ loginUser }) {
-  const { isFetching, isLoading, error, data, refetch } = useQuery({
-    queryKey: ['recommends', loginUser.id],
-    queryFn: () => getRecommends(loginUser.id),
+  const user = pocketbase.authStore.model;
+  // 쿼리 클라이언트 인스턴스 가져오기
+  const queryClient = useQueryClient();
+
+  // 쿼리 키
+  const queryKey = ['recommends', user.id];
+
+  // React Query를 사용한 데이터 쿼리(query) 요청
+  const { isFetching, isLoading, error, data } = useQuery({
+    queryKey: queryKey,
+    queryFn: () => getRecommends(user.id),
+    refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
 
-  // 북마크 삭제 요청 함수
-  const handleRemoveBookmark = (recommendId) => async () => {
-    // recommends 콜렉션의 recommendId 레코드에서
-    // userEmail 필드(배열)에 포함된 아이템 중 user.id와 일치하는 값 삭제
-    // 참고: https://pocketbase.io/docs/working-with-relations
-    await pocketbase.collection('recommends').update(recommendId, {
-      'userEmail-': loginUser.id,
-    });
+  // React Query를 사용한 데이터 수정(mutation) 요청
+  const mutation = useMutation({
+    mutationFn: removeRecommend,
+    onMutate: async ({ recommendId }) => {
+      await queryClient.cancelQueries({ queryKey: queryKey });
 
-    // 데이터 리패칭(서버에서 다시 가져오기 요청)
-    refetch();
+      const previousList = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, (list) => {
+        return list.filter((item) => item.id !== recommendId);
+      });
+
+      return { previousList };
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: (error, removedBookmark, context) => {
+      queryClient.setQueryData(queryKey, context.previousList);
+    },
+  });
+
+  const handleRemoveBookmark = (recommendId, userId) => async () => {
+    mutation.mutate({
+      recommendId,
+      userId,
+    });
   };
 
   if (isLoading) {
@@ -58,7 +84,7 @@ export default function BookmarkList({ loginUser }) {
           <button
             type="button"
             className="absolute right-4 top-4 cursor-pointer "
-            onClick={handleRemoveBookmark(item.id)}
+            onClick={handleRemoveBookmark(item.id, user.id)}
           >
             <BookMark color="#C9ECFF" />
           </button>
