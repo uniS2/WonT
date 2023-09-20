@@ -11,7 +11,7 @@ const CarouselDiv = ({ images, children }) => {
         showStatus={false}
         showThumbs={false}
         autoPlay={true}
-        interval={1000}
+        interval={2000}
         infiniteLoop={true}
       >
         {images.map((image, index) => (
