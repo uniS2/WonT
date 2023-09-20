@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';

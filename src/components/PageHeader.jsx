@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import BookMark from '@/components/BookMark';
 import Logout from '@/components/MyPage/Logout';
 import Logo from '@/components/Logo';

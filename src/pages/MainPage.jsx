@@ -5,7 +5,7 @@ import MainPlace from '@/components/Main/MainPlace';
 import MainTravels from '@/components/Main/MainTravels';
 
 // 메인 페이지
-function MainPage() {
+export default function MainPage() {
   return (
     <div className="container mx-auto">
       <h1 className="sr-only">MainPage</h1>
@@ -24,5 +24,3 @@ function MainPage() {
     </div>
   );
 }
-
-export default MainPage;

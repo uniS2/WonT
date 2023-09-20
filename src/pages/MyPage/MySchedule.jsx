@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-
 import pocketbase from '@/api/pocketbase';
 import MyPageHeader from '@/components/PageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';

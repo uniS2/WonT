@@ -1,8 +1,8 @@
-import detailInfo from '@/assets/detail-info.svg';
-import detailCalendar from '@/assets/detail-calendar.svg';
-import detailTicket from '@/assets/detail-ticket.svg';
-import detailClock from '@/assets/detail-clock.svg';
-import detailHomepage from '@/assets/detail-homepage.svg';
+import detailInfo from '@/assets/detail-info.webp';
+import detailCalendar from '@/assets/detail-calendar.webp';
+import detailTicket from '@/assets/detail-ticket.webp';
+import detailClock from '@/assets/detail-clock.webp';
+import detailHomepage from '@/assets/detail-homepage.webp';
 
 export default function DetailInfo({ detailPlace }) {
   const filterDetailPlace = Object.fromEntries(

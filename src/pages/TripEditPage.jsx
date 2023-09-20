@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import Header from '@/components/Header/Header';
 import TripPlan from '@/components/TripPlan';
 import Map from '@/components/Map';

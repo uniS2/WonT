@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
 import Test1 from '@/assets/LandingPage-carousel-one.webp';
 import Test2 from '@/assets/LandingPage-carousel-two.webp';
 import Test3 from '@/assets/LandingPage-carousel-three.webp';
 import Test4 from '@/assets/LandingPage-carousel-four.webp';
 import Test5 from '@/assets/LandingPage-carousel-five.webp';
 import Test6 from '@/assets/LandingPage-carousel-six.webp';
-
 import Logo from '@/components/Logo';
 import SignInButton from '@/components/Sign/SignInButton';
 import SignUpButton from '@/components/Sign/SignUpButton';
