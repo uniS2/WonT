@@ -3,10 +3,10 @@ import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
-import { useBookmarkStore } from '@/store/bookmarkStore';
+import useBookmarkStore from '@/store/bookmarkStore';
 import { getPocketHostImageURL } from '@/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
@@ -39,8 +39,9 @@ export default function DetailPage() {
     (item) => item.id === currentPath
   );
 
+  // const [bookmarkList, setBookmarkList] = useState();
   const { bookmarkList, setBookmarkList } = useBookmarkStore();
-  // const { bookmarkList, setBookmarkList } = useState();
+  // console.log(bookmarkList);
   const user = pocketbase.authStore.model;
 
   const queryClient = useQueryClient();
@@ -52,6 +53,7 @@ export default function DetailPage() {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
+  const isBookmark = data?.map((item) => item?.id === detailPlace?.id);
 
   const addMutation = useMutation({
     mutationFn: addBookmark,
@@ -67,13 +69,14 @@ export default function DetailPage() {
       return { previousList };
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKey });
+      queryClient.invalidateQueries({ queryKey: queryKey });
       setBookmarkList(!bookmarkList);
     },
     onError: (context) => {
       queryClient.setQueryData(queryKey, context.previousList);
     },
   });
+
   const removeMutation = useMutation({
     mutationFn: removeBookmark,
     onMutate: async ({ recommendId }) => {
@@ -88,7 +91,7 @@ export default function DetailPage() {
       return { previousList };
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKey });
+      queryClient.invalidateQueries({ queryKey: queryKey });
       setBookmarkList(!bookmarkList);
     },
     onError: (context) => {
@@ -104,10 +107,7 @@ export default function DetailPage() {
     }
   };
   console.log(bookmarkList);
-  // console.log(data);
-
-  const isBookmark = data?.map((item) => item?.id === detailPlace?.id);
-  console.log(isBookmark);
+  console.log(data);
 
   if ((detailPlace, data, recommendList)) {
     return (
