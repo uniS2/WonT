@@ -104,11 +104,7 @@ export default function DetailPage() {
   };
 
   const listFin = data?.map((item) => item?.id === detailPlace?.id);
-  // console.log(listFin);
-  // console.log(listFin?.includes(true) ? '안녕' : '없음');
 
-  // console.log(data);
-  // console.log(recommendList);
   if ((detailPlace, data, recommendList)) {
     return (
       <div className="container mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">

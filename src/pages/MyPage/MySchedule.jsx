@@ -17,7 +17,7 @@ const getMyschedule = () =>
 export default function MySchedule() {
   const { data: userData } = useQuery(['users'], getUser);
   const { data: myschedule } = useQuery(['mySchedule'], getMyschedule);
-  console.log(myschedule);
+  // console.log(myschedule);
 
   let userId = pocketbase.authStore.model;
 
