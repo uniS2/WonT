@@ -1,4 +1,4 @@
-import Back from '@/assets/common-toogle-left.svg';
+import Back from '@/assets/common-toogle-left.webp';
 
 export default function BackButton() {
   return (

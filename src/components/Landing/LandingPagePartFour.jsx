@@ -1,5 +1,5 @@
 import React from 'react';
-import Gallery from '@/assets/LandingPage-gallery.svg';
+import Gallery from '@/assets/LandingPage-gallery.webp';
 
 function LandingPagePartFour() {
   return (

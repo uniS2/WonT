@@ -1,5 +1,5 @@
 import React from 'react';
-import PlaneIcon from '@/assets/LandingPage-plane.svg';
+import PlaneIcon from '@/assets/LandingPage-plane.webp';
 
 function LandingPagePartOne() {
   return (

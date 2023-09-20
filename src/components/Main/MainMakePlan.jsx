@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import PaperAirPlane from '@/assets/MainPage-planeIcon.svg';
+import PaperAirPlane from '@/assets/MainPage-planeIcon.webp';
 
 export default function MainMakePlan() {
   return (
