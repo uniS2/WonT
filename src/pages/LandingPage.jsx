@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-import Test1 from '@/assets/LandingPage-carousel-one.svg';
-import Test2 from '@/assets/LandingPage-carousel-two.svg';
-import Test3 from '@/assets/LandingPage-carousel-three.svg';
-import Test4 from '@/assets/LandingPage-carousel-four.svg';
-import Test5 from '@/assets/LandingPage-carousel-five.svg';
-import Test6 from '@/assets/LandingPage-carousel-six.svg';
+import Test1 from '@/assets/LandingPage-carousel-one.webp';
+import Test2 from '@/assets/LandingPage-carousel-two.webp';
+import Test3 from '@/assets/LandingPage-carousel-three.webp';
+import Test4 from '@/assets/LandingPage-carousel-four.webp';
+import Test5 from '@/assets/LandingPage-carousel-five.webp';
+import Test6 from '@/assets/LandingPage-carousel-six.webp';
 
 import Logo from '@/components/Logo';
 import SignInButton from '@/components/Sign/SignInButton';
@@ -80,7 +80,7 @@ export default function LandingPage() {
             <LandingPagePartFour />
           </MotionDiv>
         </div>
-        <div className="lg:w-[80rem]">
+        <div className="lg:w-[80rem] 2xl:w-[96rem]">
           <Footer />
         </div>
       </div>
