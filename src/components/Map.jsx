@@ -1,7 +1,8 @@
-import { useLocalStore } from '@/store/localStore';
-import { useMapStore } from '@/store/mapStore';
 import { useEffect, useState } from 'react';
+
 import debounce from '@/utils/debounce';
+import { useMapStore } from '@/store/mapStore';
+import { useLocalStore } from '@/store/localStore';
 
 const { kakao } = window;
 
@@ -19,7 +20,6 @@ export default function Map({
 
   // const selectName = useLocalStore((state) => state.selectName);
   const selectName = '부산';
-
   const { localData, setLocalData } = useMapStore();
 
   useEffect(() => {
@@ -31,6 +31,11 @@ export default function Map({
 
     // 지도 생성하기
     let map = new kakao.maps.Map(container, options);
+    //* 카테고리검색
+    //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+    //* 장소 검색 객체를 생성합니다
+    const places = new kakao.maps.services.Places(map);
 
     //^ 주소-좌표 변환 객체를 생성합니다
     const geocoder = new kakao.maps.services.Geocoder();
@@ -44,10 +49,15 @@ export default function Map({
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
         setLocalData(coords);
+
+        //^ 카테고리 검색 (SW8)
+        const categoryOptions = {
+          location: coords,
+          radius: 10000,
+        };
+        places.categorySearch('SW8', categorySearchCB, categoryOptions);
       }
     });
-
-    // map = new kakao.maps.Map(container, { center: localData, level: level });
 
     // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성하기
     const zoomControl = new kakao.maps.ZoomControl();
@@ -56,34 +66,8 @@ export default function Map({
     // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
     map.setCursor('move'); // 커서 스타일을 'move'로 변경
 
-    //* 카테고리검색
-    //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-
-    // 장소 검색 객체를 생성합니다
-    const places = new kakao.maps.services.Places(map);
-
-    places.setMap(localData);
-
     //* 카테고리로 관광명소를 검색합니다. 'AT4'
-    places.categorySearch('CE7', categorySearchCB);
-
-    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-    /* function categorySearchCB(data, status, pagination) {
-      if (status === kakao.maps.services.Status.OK) {
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-        const bounds = new kakao.maps.LatLngBounds();
-
-        for (let i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
-      }
-    } */
+    places.categorySearch('SW8', categorySearchCB);
 
     //* 카테고리 검색 완료 시 호출되는 콜백함수
     function categorySearchCB(data, status, pagination) {
@@ -91,6 +75,7 @@ export default function Map({
         for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
         }
+        console.log(data);
       }
     }
 
@@ -113,7 +98,17 @@ export default function Map({
         infowindow.open(map, marker);
       });
     }
-  }, []);
+
+    // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
+    kakao.maps.event.addListener(
+      map,
+      'center_changed',
+      debounce(function () {
+        const newCenter = map.getCenter();
+        setCenter(newCenter);
+      }, 1000)
+    );
+  }, [center, level]); // center 변경되면 실행
 
   return (
     <div

@@ -3,6 +3,7 @@ import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
+import { useBookmarkStore } from '@/store/bookmarkStore';
 import { getPocketHostImageURL } from '@/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -38,7 +39,8 @@ export default function DetailPage() {
     (item) => item.id === currentPath
   );
 
-  const [bookmarkList, setBookmarkList] = useState();
+  const { bookmarkList, setBookmarkList } = useBookmarkStore();
+  // const { bookmarkList, setBookmarkList } = useState();
   const user = pocketbase.authStore.model;
 
   const queryClient = useQueryClient();
@@ -58,8 +60,8 @@ export default function DetailPage() {
 
       const previousList = queryClient.getQueryData(queryKey);
 
-      queryClient.setQueryData(queryKey, (previousList) => {
-        return [...previousList, recommendId]; // newItem should be the actual data of the added item.
+      queryClient.setQueryData(queryKey, (previousList, recommendId) => {
+        return [...previousList, recommendId];
       });
 
       return { previousList };
@@ -101,10 +103,11 @@ export default function DetailPage() {
       addMutation.mutate({ recommendId, userId });
     }
   };
-  // console.log(bookmarkList);
+  console.log(bookmarkList);
   // console.log(data);
 
-  const listFin = data?.map((item) => item?.id === detailPlace?.id);
+  const isBookmark = data?.map((item) => item?.id === detailPlace?.id);
+  console.log(isBookmark);
 
   if ((detailPlace, data, recommendList)) {
     return (
@@ -132,7 +135,7 @@ export default function DetailPage() {
               onClick={handleToggleBookmark(detailPlace.id, user.id)}
               className="m-2"
             >
-              <BookMark color={listFin?.includes(true) ? '#C9ECFF' : ''} />
+              <BookMark color={isBookmark?.includes(true) ? '#C9ECFF' : ''} />
             </button>
           </div>
           <p className="mb-3 text-[0.875rem] font-light text-gray-1">
