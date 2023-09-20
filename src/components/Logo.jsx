@@ -15,7 +15,7 @@ export default function Logo({
   return (
     <>
       {isLogo ? (
-        <button type="button" onClick={handleLogo}>
+        <button type="button" onClick={handleLogo} aria-label="WonTLogoButton">
           <svg
             width={width}
             height={height}

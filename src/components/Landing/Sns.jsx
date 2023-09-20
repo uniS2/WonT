@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom';
 export default function Sns() {
   return (
     <div className="flex gap-3">
-      <Link to="/">
-        <img src={Twitter} alt="" />
+      <Link to="/" aria-label="트위터사진">
+        <img src={Twitter} alt="트위터사진" />
       </Link>
-      <Link to="/">
-        <img src={Facebook} alt="" />
+      <Link to="/" aria-label="페이스북사진">
+        <img src={Facebook} alt="페이스북사진" />
       </Link>
 
-      <Link to="/">
-        <img src={Instagram} alt="" />
+      <Link to="/" aria-label="인스타그램사진">
+        <img src={Instagram} alt="인스타그램사진" />
       </Link>
     </div>
   );

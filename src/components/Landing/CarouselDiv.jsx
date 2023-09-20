@@ -13,10 +13,15 @@ const CarouselDiv = ({ images, children }) => {
         autoPlay={true}
         interval={2000}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Image ${index}`} />
+            <img
+              src={image}
+              alt={`Image ${index}`}
+              style={{ width: '1536px', height: '850px' }}
+            />
           </div>
         ))}
       </Carousel>
