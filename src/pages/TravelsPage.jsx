@@ -19,8 +19,9 @@ function TravelsPage() {
   const { data: userData } = useQuery(['users'], getUser);
   // console.log(userData);
 
+  const currentPath = window.location.pathname.replace('/travels/', '');
   const detailTravels = travelsData?.items?.find(
-    (item) => item.id === '48trysq0ovuau3b'
+    (item) => item.id === currentPath
   );
   const user = userData?.items?.find(
     (item) => item.id === detailTravels?.userEmail
@@ -33,47 +34,49 @@ function TravelsPage() {
           <MyPageHeader page="detail" />
           <div className="container flex flex-col items-center justify-center">
             <section className="px-3">
-              <h2 className="my-4 ml-2 text-2xl font-bold text-contentsPrimary">
-                여행기록
-              </h2>
-              <hr className="aria-hidden" />
-              <div className="my-5 flex items-center gap-3">
-                <img
-                  src={getPocketHostImageURL(user, 'profile')}
-                  alt={`${user.username}님의 프로필`}
-                  className="h-16 w-16 rounded-full object-cover"
-                />
-                <div className="flex flex-col">
-                  <p className="text-lg font-semibold text-contentsPrimary">
-                    {detailTravels.title}
-                  </p>
-                  <p className="font-light text-gray-1">
-                    {user.username}님의 일정
-                  </p>
-                </div>
-              </div>
-              <Carousel
-                showArrows={true}
-                showStatus={false}
-                showThumbs={false}
-                interval={1000}
-                infiniteLoop={true}
-                className="min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
-              >
-                {detailTravels.image.map((image) => (
+              <div className="px-6">
+                <h2 className="my-4 ml-2 text-2xl font-bold text-contentsPrimary">
+                  여행기록
+                </h2>
+                <hr className="aria-hidden" />
+                <div className="my-5 flex items-center gap-3">
                   <img
-                    src={`${getPocketHostImageURL(detailTravels, '').replace(
-                      'undefined',
-                      ''
-                    )}/${image}`}
-                    alt="이미지"
-                    className="my-1 items-center rounded-xl  object-contain sm:object-contain md:h-[25rem] md:min-h-[22.5rem] md:object-cover lg:object-cover xl:object-cover"
+                    src={getPocketHostImageURL(user, 'profile')}
+                    alt={`${user.username}님의 프로필`}
+                    className="h-16 w-16 rounded-full object-cover"
                   />
-                ))}
-              </Carousel>
-              <p className="my-5 leading-normal text-contentsPrimary">
-                {detailTravels.text}
-              </p>
+                  <div className="flex flex-col">
+                    <p className="text-lg font-semibold text-contentsPrimary">
+                      {detailTravels.title}
+                    </p>
+                    <p className="font-light text-gray-1">
+                      {user.username}님의 일정
+                    </p>
+                  </div>
+                </div>
+                <Carousel
+                  showArrows={true}
+                  showStatus={false}
+                  showThumbs={false}
+                  interval={1000}
+                  infiniteLoop={true}
+                  className="min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
+                >
+                  {detailTravels.image.map((image) => (
+                    <img
+                      src={`${getPocketHostImageURL(detailTravels, '').replace(
+                        'undefined',
+                        ''
+                      )}/${image}`}
+                      alt="이미지"
+                      className="my-1 items-center rounded-xl  object-contain sm:object-contain md:h-[25rem] md:min-h-[22.5rem] md:object-cover lg:object-cover xl:object-cover"
+                    />
+                  ))}
+                </Carousel>
+                <p className="my-5 leading-normal text-contentsPrimary">
+                  {detailTravels.text}
+                </p>
+              </div>
             </section>
           </div>
           <section className="container flex w-[90%] flex-col items-center">

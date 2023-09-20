@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import defaultImage from '@/assets/common-trip-default.jpg';
+
 import useScheduleList from '@/hooks/useScheduleList';
 import { getDDay, getPocketHostImageURL } from '@/utils/index.js';
 
@@ -36,7 +38,7 @@ export default function PlanPreview({ userSchedule }) {
                   src={
                     item.place[0]
                       ? getPocketHostImageURL(item, 'place').split(',')[0]
-                      : '/src/assets/common-trip-default.jpg'
+                      : { defaultImage }
                   }
                   alt={`${item.title} 이미지`}
                   className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply "
