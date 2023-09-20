@@ -1,22 +1,22 @@
 import Twitter from '@/assets/common-twitter.svg';
 import Facebook from '@/assets/common-facebook.svg';
 import Instagram from '@/assets/common-instagram.svg';
+import { Link } from 'react-router-dom';
 
 // 이미지 bakground-image
 export default function Sns() {
   return (
     <div className="flex gap-3">
-      <a href="#" className="h-5 w-5 rounded-full ">
+      <Link to="/">
         <img src={Twitter} alt="" />
-      </a>
-
-      <a href="#" className="rounded-fullbg-secondary h-5 w-5">
+      </Link>
+      <Link to="/">
         <img src={Facebook} alt="" />
-      </a>
+      </Link>
 
-      <a href="#" className="h-5 w-5 rounded-full ">
+      <Link to="/">
         <img src={Instagram} alt="" />
-      </a>
+      </Link>
     </div>
   );
 }
