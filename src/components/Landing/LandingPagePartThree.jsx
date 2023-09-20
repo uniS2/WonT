@@ -1,5 +1,5 @@
 import React from 'react';
-import BookmarkIcon from '@/assets/LandingPage-bookmark.svg';
+import BookmarkIcon from '@/assets/LandingPage-bookmark.webp';
 
 function LandingPagePartThree() {
   return (

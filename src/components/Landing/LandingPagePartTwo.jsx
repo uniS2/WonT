@@ -1,5 +1,5 @@
 import React from 'react';
-import CalenderIcon from '@/assets/LandingPage-calender.svg';
+import CalenderIcon from '@/assets/LandingPage-calender.webp';
 
 function LandingPagePartTwo() {
   return (

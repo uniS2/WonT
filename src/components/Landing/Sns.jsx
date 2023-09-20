@@ -1,6 +1,6 @@
-import Twitter from '@/assets/common-twitter.svg';
-import Facebook from '@/assets/common-facebook.svg';
-import Instagram from '@/assets/common-instagram.svg';
+import Twitter from '@/assets/common-twitter.webp';
+import Facebook from '@/assets/common-facebook.webp';
+import Instagram from '@/assets/common-instagram.webp';
 import { Link } from 'react-router-dom';
 
 // 이미지 bakground-image
