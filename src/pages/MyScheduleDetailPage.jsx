@@ -1,5 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
+import pocketbase from '@/api/pocketbase';
 import TripHeader from '@/components/Header/TripHeader';
 import Modal from '@/components/Modal';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
@@ -11,10 +14,44 @@ import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { getPocketHostImageURL } from '@/utils';
+
+// 데이터 요청 함수 (query function)
+const fetchScheduleDetail = async (userId) => {
+  const response = await pocketbase.collection('mySchedule').getFullList({
+    filter: `(username?~'${userId}')`,
+    expand: 'users',
+  });
+  return response;
+};
 
 export default function MyScheduleDetailPage() {
   // 경로 지정
   const navigate = useNavigate();
+  // 현재 경로 찾기
+  const location = useLocation();
+
+  // 아이디 일치여부
+  let userId = pocketbase.authStore.model;
+
+  // Tanstack Query
+  const { data, error } = useQuery(
+    ['myScheduleDetail', userId.id],
+    () => fetchScheduleDetail(userId.id),
+    { refetchOnWindowFocus: false }
+  );
+
+  // 선택한 북마크 아이디
+  const [bookmarkId, setBookmarkId] = useState('');
+
+  useEffect(() => {
+    const bookmarkId = location.pathname.replace('/myschedule/', '');
+    setBookmarkId(bookmarkId);
+  }, [location.pathname]);
+
+  const selectBookmark = data?.filter((item) => item.id === bookmarkId);
+
+  console.log(selectBookmark);
 
   // Store: 전체일정, 모달, 날짜별 일정
   const {
@@ -36,6 +73,16 @@ export default function MyScheduleDetailPage() {
     navigate('/myschedule');
   };
 
+  // 오류가 발생한 경우 화면
+  if (error) {
+    return (
+      <div role="alert">
+        <h2>{error.type}</h2>
+        <p>{error.message}</p>
+      </div>
+    );
+  }
+
   return (
     <section className="container relative mx-auto flex min-h-screen max-w-7xl flex-col gap-[1.875rem] bg-background">
       <h1 className="sr-only">나의 일정 상세 페이지</h1>
@@ -53,7 +100,10 @@ export default function MyScheduleDetailPage() {
         <section className="flex flex-col gap-[1.875rem]">
           <h2 className="sr-only">전체 일정 한눈에 보기</h2>
           <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white">
-            <TotalScheduleSummary />
+            <TotalScheduleSummary
+            // imageURL={getPocketHostImageURL(selectBookmark, 'main')}
+            // localName={selectBookmark.title}
+            />
             <DeleteButton onClick={toggleDeleteModal} />
           </div>
           {displayDeleteModal && (

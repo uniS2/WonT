@@ -29,8 +29,6 @@ export default function SignUpPage() {
       passwordConfirm,
     };
 
-    console.log(userInfo);
-
     if (password !== passwordConfirm) {
       toast.warning('비밀번호가 일치하지 않습니다');
       return;

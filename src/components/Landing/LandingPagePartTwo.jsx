@@ -4,7 +4,7 @@ import CalenderIcon from '@/assets/LandingPage-calender.svg';
 function LandingPagePartTwo() {
   return (
     <div>
-      <div className="flex justify-around bg-gray-100/30 lg:w-[38.75rem]">
+      <div className="flex justify-around bg-gray-100/30 lg:w-[38.75rem] 2xl:w-[46.125rem]">
         <img src={CalenderIcon} alt="plane" />
 
         <div className="relative flex flex-col justify-center py-[1.6875rem]  pl-[1.723125rem] font-semibold text-contentsPrimary">

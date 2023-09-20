@@ -2,10 +2,35 @@ import { Link } from 'react-router-dom';
 
 import useScheduleList from '@/hooks/useScheduleList';
 import useRecommendsList from '@/hooks/useRecommendsList';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import pocketbase from '@/api/pocketbase';
+
+const getRecommends = async (userId) => {
+  return await pocketbase.collection('recommends').getFullList({
+    filter: `(userEmail?~'${userId}')`,
+    fields: 'collectionId,id,image',
+  });
+};
 
 export default function MyPageTab({ position, tab, menu }) {
+  const user = pocketbase.authStore.model;
   const { data } =
     tab === 'myschedule' ? useScheduleList() : useRecommendsList();
+  const queryKey = ['recommends', user.id];
+  const {
+    isLoading,
+    error,
+    data: bookmarkList,
+  } = useQuery({
+    queryKey: queryKey,
+    queryFn: () => getRecommends(user.id),
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
+  const scheduleList = data?.items?.filter(
+    (item) => item.username === user.id
+  ).length;
+
   if (data) {
     return (
       <div className="container mx-auto w-screen xl:w-[1268px]">
@@ -39,7 +64,7 @@ export default function MyPageTab({ position, tab, menu }) {
               <circle cx="9.5" cy="9.5" r="9.5" fill="#50D4E5" />
             </svg>
             <span className="absolute text-[0.875rem] font-medium text-white">
-              {data.totalItems}
+              {tab === 'myschedule' ? scheduleList : bookmarkList.length}
             </span>
           </div>
         </div>

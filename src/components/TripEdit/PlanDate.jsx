@@ -1,3 +1,6 @@
+import toggleDown from '@/assets/common-toogle-down.svg';
+import toggleUp from '@/assets/common-toogle-up.svg';
+
 export default function PlanDate({ toggleButton, toggleSchedule }) {
   const handleToggleButton = () => {
     toggleButton();
@@ -9,14 +12,7 @@ export default function PlanDate({ toggleButton, toggleSchedule }) {
       <span className="aria-hidden:">|</span>
       <span className="text-[14px] text-contentsSecondary">2023.10.01</span>
       <button type="button" onClick={handleToggleButton}>
-        <img
-          src={
-            toggleSchedule
-              ? '/src/assets/common-toogle-down.svg'
-              : '/src/assets/common-toogle-up.svg'
-          }
-          alt="일정 펼치기"
-        />
+        <img src={toggleSchedule ? toggleDown : toggleUp} alt="일정 펼치기" />
       </button>
     </div>
   );

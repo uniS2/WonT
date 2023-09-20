@@ -26,9 +26,8 @@ export default function PlanPreview({ userSchedule }) {
     return (
       <div className="mx-auto flex flex-col gap-4 lg:w-[768px] xl:w-[1236px]">
         {userSchedule?.map((item) => (
-          <Link to={`/myschedule/${item.id}`}>
+          <Link to={`/myschedule/${item.id}`} key={item.id}>
             <div
-              key={item.id}
               className="relative mx-auto flex cursor-pointer justify-center  rounded-xl border-2 
              bg-[hsl(0,0%,90%,0.6)]  bg-fixed 
             opacity-80 transition duration-300 ease-in-out hover:opacity-100 hover:contrast-125"

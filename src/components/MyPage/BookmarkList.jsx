@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-
 import pocketbase from '@/api/pocketbase';
+import { getPocketHostImageURL } from '@/utils';
 import BookMark from '@/components/BookMark';
-import { getPocketHostImageURL } from '@/utils/index.js';
+import { Link } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import useMemosStore from '@/store/memoStore';
 
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {
@@ -20,24 +20,59 @@ const removeRecommend = async ({ recommendId, userId }) => {
   });
 };
 
+/* -------------------------------------------------------------------------- */
 export default function BookmarkList({ loginUser }) {
-  const { isFetching, isLoading, error, data, refetch } = useQuery({
-    queryKey: ['recommends', loginUser.id],
-    queryFn: () => getRecommends(loginUser.id),
+  const user = pocketbase.authStore.model;
+
+  const { memo, setMemo } = useMemosStore();
+
+  // 쿼리 클라이언트 인스턴스 가져오기
+  const queryClient = useQueryClient();
+
+  // 쿼리 키
+  const queryKey = ['recommends', user.id];
+
+  // React Query를 사용한 데이터 쿼리(query) 요청
+  const {
+    isFetching,
+    isLoading,
+    error,
+    data: bookmarkItems,
+  } = useQuery({
+    queryKey: queryKey,
+    queryFn: () => getRecommends(user.id),
+    refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
 
-  // 북마크 삭제 요청 함수
-  const handleRemoveBookmark = (recommendId) => async () => {
-    // recommends 콜렉션의 recommendId 레코드에서
-    // userEmail 필드(배열)에 포함된 아이템 중 user.id와 일치하는 값 삭제
-    // 참고: https://pocketbase.io/docs/working-with-relations
-    await pocketbase.collection('recommends').update(recommendId, {
-      'userEmail-': loginUser.id,
-    });
+  // React Query를 사용한 데이터 수정(mutation) 요청
+  const mutation = useMutation({
+    mutationFn: removeRecommend,
+    onMutate: async ({ recommendId }) => {
+      await queryClient.cancelQueries({ queryKey: queryKey });
 
-    // 데이터 리패칭(서버에서 다시 가져오기 요청)
-    refetch();
+      const previousList = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, (list) => {
+        return list.filter((item) => item.id !== recommendId);
+      });
+      return { previousList };
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: (error, removedBookmark, context) => {
+      queryClient.setQueryData(queryKey, context.previousList);
+    },
+  });
+  // console.log(bookmarkItems);
+  // setMemo(bookmarkItems);
+
+  const handleRemoveBookmark = (recommendId, userId) => async () => {
+    mutation.mutate({
+      recommendId,
+      userId,
+    });
   };
 
   if (isLoading) {
@@ -48,18 +83,18 @@ export default function BookmarkList({ loginUser }) {
     return <div role="alert">{error.toString()}</div>;
   }
 
-  if (data?.length === 0) {
+  if (bookmarkItems?.length === 0) {
     return <div className=" flex justify-center ">북마크가 비어있습니다.</div>;
   }
 
   return (
     <ul className="mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-      {data?.map?.((item) => (
+      {bookmarkItems?.map?.((item) => (
         <li key={item.id} className="relative min-w-[360px]">
           <button
             type="button"
             className="absolute right-4 top-4 cursor-pointer "
-            onClick={handleRemoveBookmark(item.id)}
+            onClick={handleRemoveBookmark(item.id, user.id)}
           >
             <BookMark color="#C9ECFF" />
           </button>
