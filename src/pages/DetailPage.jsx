@@ -58,8 +58,8 @@ export default function DetailPage() {
 
       const previousList = queryClient.getQueryData(queryKey);
 
-      queryClient.setQueryData(queryKey, (list, recommendId) => {
-        return [...list, recommendId];
+      queryClient.setQueryData(queryKey, (previousList, recommendId) => {
+        return [...previousList, recommendId];
       });
 
       return { previousList };
@@ -101,6 +101,8 @@ export default function DetailPage() {
       addMutation.mutate({ recommendId, userId });
     }
   };
+  console.log(bookmarkList);
+  console.log(data);
 
   const listFin = data?.map((item) => item?.id === detailPlace?.id);
 
@@ -121,13 +123,14 @@ export default function DetailPage() {
           <span className=" h-4 rounded-full bg-secondary px-2 py-1 text-[0.875rem]">
             {detailPlace.localMain}
           </span>
-          <div className="mb-1  mt-3 flex items-center gap-2">
+          <div className="mb-1  mt-3 flex items-center">
             <h2 className=" text-2xl font-bold text-contentsPrimary">
               {detailPlace.place}
             </h2>
             <button
               type="button"
               onClick={handleToggleBookmark(detailPlace.id, user.id)}
+              className="m-2"
             >
               <BookMark color={listFin?.includes(true) ? '#C9ECFF' : ''} />
             </button>
