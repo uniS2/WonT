@@ -33,7 +33,6 @@ export default {
         LandingCarouselSix: "url('./src/assets/LandingPage-carousel-six.svg')",
       }),
       screens: {
-        smd: '530px',
         xs: '529px',
       },
     },

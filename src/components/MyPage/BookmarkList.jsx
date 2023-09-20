@@ -24,8 +24,6 @@ const removeRecommend = async ({ recommendId, userId }) => {
 export default function BookmarkList({ loginUser }) {
   const user = pocketbase.authStore.model;
 
-  // const { memo, setMemo } = useMemosStore();
-
   // 쿼리 클라이언트 인스턴스 가져오기
   const queryClient = useQueryClient();
 
@@ -88,12 +86,15 @@ export default function BookmarkList({ loginUser }) {
   }
 
   return (
-    <ul className="mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+    <ul className="sm:gird-cols-2 mx-auto grid grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
       {bookmarkItems?.map?.((item) => (
-        <li key={item.id} className="relative min-w-[360px]">
+        <li
+          key={item.id}
+          className=" relative mx-auto w-auto  min-w-[360px] sm:min-w-min lg:min-w-min"
+        >
           <button
             type="button"
-            className="absolute right-4 top-4 cursor-pointer "
+            className="absolute right-4 top-4 cursor-pointer"
             onClick={handleRemoveBookmark(item.id, user.id)}
           >
             <BookMark color="#C9ECFF" />
@@ -102,7 +103,7 @@ export default function BookmarkList({ loginUser }) {
             <img
               src={getPocketHostImageURL(item).split(',')[0]}
               alt=""
-              className="aspect-square rounded-lg border-[1px] border-gray-2 object-cover "
+              className="aspect-square rounded-lg border-[1px] border-gray-2 object-cover sm:h-[300px] md:h-auto lg:h-[320px] xl:h-[401px]"
             />
           </Link>
         </li>

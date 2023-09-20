@@ -29,7 +29,7 @@ export default function MyPageTab({ position, tab, menu }) {
   });
   const scheduleList = data?.items?.filter(
     (item) => item.username === user.id
-  ).length;
+  )?.length;
 
   if (data) {
     return (
