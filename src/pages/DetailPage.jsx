@@ -3,7 +3,6 @@ import BookMark from '@/components/BookMark';
 import DetailInfo from '@/components/Detail/DetailInfo';
 import MyPageHeader from '@/components/PageHeader';
 import useRecommendsList from '@/hooks/useRecommendsList';
-import useMemosStore from '@/store/memoStore';
 import { getPocketHostImageURL } from '@/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
