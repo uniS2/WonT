@@ -38,15 +38,10 @@ export default function DetailPage() {
   const detailPlace = recommendList?.items?.find(
     (item) => item.id === currentPath
   );
-  /* -------------------------------------------------------------------------- */
 
-  const { memo, setMemo } = useMemosStore();
-
-  /* -------------------------------------------------------------------------- */
   const [bookmarkList, setBookmarkList] = useState();
   const user = pocketbase.authStore.model;
 
-  // console.log(getRecommends(user.id));
   const queryClient = useQueryClient();
   const queryKey = ['recommends', user.id];
 
@@ -72,6 +67,7 @@ export default function DetailPage() {
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
+      setBookmarkList(!bookmarkList);
     },
     onError: (context) => {
       queryClient.setQueryData(queryKey, context.previousList);
@@ -92,6 +88,7 @@ export default function DetailPage() {
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
+      setBookmarkList(!bookmarkList);
     },
     onError: (context) => {
       queryClient.setQueryData(queryKey, context.previousList);
@@ -104,14 +101,15 @@ export default function DetailPage() {
     } else {
       addMutation.mutate({ recommendId, userId });
     }
-
-    setBookmarkList(!bookmarkList); // 현재 bookmark 상태 반전
   };
-  // console.log(detailPlace.id);
-  // const list = data?.find((item) => item.id === detailPlace.id);
-  // console.log(list);
 
-  if (recommendList) {
+  const listFin = data?.map((item) => item?.id === detailPlace?.id);
+  // console.log(listFin);
+  // console.log(listFin?.includes(true) ? '안녕' : '없음');
+
+  // console.log(data);
+  // console.log(recommendList);
+  if ((detailPlace, data, recommendList)) {
     return (
       <div className="container mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">
         <div className="flex flex-col items-center justify-center gap-4 ">
@@ -130,16 +128,14 @@ export default function DetailPage() {
           </span>
           <div className="mb-1  mt-3 flex items-center gap-2">
             <h2 className=" text-2xl font-bold text-contentsPrimary">
-              {/* {detailPlace.place} */}
+              {detailPlace.place}
             </h2>
-            {data?.find((item) => (
-              <button
-                type="button"
-                onClick={handleToggleBookmark(detailPlace.id, user.id)}
-              >
-                <BookMark color={item.id === detailPlace.id ? '#C9ECFF' : ''} />
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={handleToggleBookmark(detailPlace.id, user.id)}
+            >
+              <BookMark color={listFin?.includes(true) ? '#C9ECFF' : ''} />
+            </button>
           </div>
           <p className="mb-3 text-[0.875rem] font-light text-gray-1">
             {detailPlace.address}

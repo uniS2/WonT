@@ -7,7 +7,7 @@ import pb from '@/api/pocketbase';
 
 export default function BookmarkPage() {
   const user = pb.authStore.model;
-  console.log(user);
+  // console.log(user);
 
   if (user) {
     return (
