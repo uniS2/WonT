@@ -4,7 +4,8 @@ import { devtools } from "zustand/middleware";
 export const useMapStore = create(
   devtools((set) => ({
     localData: [],
-    category: [],
+    category: 'SW8',
+    markers: [],
     setLocalData: (data) =>
       set((state) => ({
         localData: [
@@ -16,8 +17,15 @@ export const useMapStore = create(
       ),
     setCategory: (data) =>
       set((state) => ({
-        Category: [
-          ...state.category,
+        category: data
+      }),
+        false,
+        'category'
+      ),
+    setMarkers: (data) =>
+      set((state) => ({
+        markers: [
+          ...state.markers,
           {
             id: data.id,
             ...data,
@@ -25,7 +33,7 @@ export const useMapStore = create(
         ]
       }),
         false,
-        'category'
+        'markers'
       )
   }))
 )
