@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import debounce from '@/utils/debounce';
 import { useMapStore } from '@/store/mapStore';
 import { useLocalStore } from '@/store/localStore';
 
 const { kakao } = window;
 
-export default function Map({
+export default function MapSearch({
   width = 'w-full',
   height = 'min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]',
   latitude = 37.4812845080678, // 위도
@@ -18,9 +19,9 @@ export default function Map({
   );
 
   // const selectName = useLocalStore((state) => state.selectName);
-  const selectName = '부산';
-
-  const { localData, setLocalData } = useMapStore();
+  const selectName = '서울';
+  //$ 마커, 카테고리를 관리할 배열을 생성합니다.
+  const { category, markers, setMarkers } = useMapStore();
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -31,6 +32,11 @@ export default function Map({
 
     // 지도 생성하기
     let map = new kakao.maps.Map(container, options);
+    //* 카테고리검색
+    //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+    //* 장소 검색 객체를 생성합니다
+    const places = new kakao.maps.services.Places(map);
 
     //^ 주소-좌표 변환 객체를 생성합니다
     const geocoder = new kakao.maps.services.Geocoder();
@@ -43,14 +49,13 @@ export default function Map({
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-        setLocalData(coords);
 
         //^ 카테고리 검색 (SW8)
         const categoryOptions = {
           location: coords,
-          radius: 10000, // 1km 이내에서 검색
+          radius: 10000,
         };
-        places.categorySearch('SW8', categorySearchCB, categoryOptions);
+        places.categorySearch(category, categorySearchCB, categoryOptions);
       }
     });
 
@@ -61,25 +66,13 @@ export default function Map({
     // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
     map.setCursor('move'); // 커서 스타일을 'move'로 변경
 
-    //* 카테고리검색
-    //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-
-    // 장소 검색 객체를 생성합니다
-    const places = new kakao.maps.services.Places(map);
-
-    places.setMap(localData);
-
-    //* 카테고리로 관광명소를 검색합니다. 'AT4'
-    places.categorySearch('SW8', categorySearchCB);
-
     //* 카테고리 검색 완료 시 호출되는 콜백함수
     function categorySearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
         for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
-          console.log(data);
         }
+        console.log(data);
       }
     }
 
@@ -101,8 +94,26 @@ export default function Map({
         );
         infowindow.open(map, marker);
       });
+
+      //$ 생성된 마커를 markers 배열에 추가합니다.
+      setMarkers((prevMarkers) => [...prevMarkers, marker]);
     }
-  }, []);
+
+    // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
+    kakao.maps.event.addListener(
+      map,
+      'center_changed',
+      debounce(function () {
+        // setMarkers([]); // 중심 좌표가 변경될 때 마커를 업데이트합니다.
+
+        const newCenter = map.getCenter();
+        places.categorySearch(category, categorySearchCB, {
+          location: newCenter,
+          radius: 10000,
+        });
+      }, 1000)
+    );
+  }, [center, level, category, setMarkers]);
 
   return (
     <div
