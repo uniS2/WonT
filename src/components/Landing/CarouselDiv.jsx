@@ -13,6 +13,7 @@ const CarouselDiv = ({ images, children }) => {
         autoPlay={true}
         interval={2000}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {images.map((image, index) => (
           <div key={index}>
