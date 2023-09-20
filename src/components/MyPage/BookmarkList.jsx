@@ -24,7 +24,7 @@ const removeRecommend = async ({ recommendId, userId }) => {
 export default function BookmarkList({ loginUser }) {
   const user = pocketbase.authStore.model;
 
-  const { memo, setMemo } = useMemosStore();
+  // const { memo, setMemo } = useMemosStore();
 
   // 쿼리 클라이언트 인스턴스 가져오기
   const queryClient = useQueryClient();

@@ -79,8 +79,8 @@ export default function DetailPage() {
 
       const previousList = queryClient.getQueryData(queryKey);
 
-      queryClient.setQueryData(queryKey, (list) => {
-        return list.filter((item) => item.id !== recommendId);
+      queryClient.setQueryData(queryKey, (list, recommendId) => {
+        return [...list, recommendId];
       });
 
       return { previousList };
