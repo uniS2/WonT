@@ -1,51 +1,33 @@
-import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pocketbase from '@/api/pocketbase';
 import SignInButton from '@/components/Sign/SignInButton';
 import BackButton from '@/components/Sign/BackButton';
 import Logo from '@/components/Logo';
 import SignPart from '@/components/Sign/SignPart';
-import debounce from '@/utils/debounce';
 import { useAuth } from '@/contexts/Auth';
+import { useRef } from 'react';
 
 export default function SignInPage() {
-  const { state } = useLocation();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
-  const { isAuth } = useAuth();
 
-  const [formState, setFormState] = useState({
-    email: '',
-    password: '',
-  });
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
 
     try {
-      const response = await pocketbase
-        .collection('users')
-        .authWithPassword(formState.email, formState.password);
-
-      if (!state) {
-        navigate('/main');
-      } else {
-        const { withLocationPath } = state;
-        navigate(withLocationPath === '/signin' ? '/main' : withLocationPath);
-      }
+      await signIn(email, password);
+      navigate('/main');
     } catch (error) {
       toast.error('회원 정보를 다시 확인해주세요.');
     }
   };
-
-  const handleInput = debounce((e) => {
-    const { name, value } = e.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  }, 400);
 
   return (
     <div className="container mx-auto flex flex-col items-center px-5">
@@ -70,22 +52,32 @@ export default function SignInPage() {
               information="이메일 주소"
               placeholder="이메일 주소 입력"
               type="email"
-              defaultValue={formState.email}
-              onChange={handleInput}
+              inputRef={emailRef}
               name="email"
             />
             <SignPart
               information="비밀번호"
               placeholder="비밀번호 입력"
               type="password"
-              defaultValue={formState.password}
-              onChange={handleInput}
+              inputRef={passwordRef}
               name="password"
             />
             <SignInButton type="submit">로그인</SignInButton>
           </form>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

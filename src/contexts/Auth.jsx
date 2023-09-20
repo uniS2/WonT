@@ -51,10 +51,10 @@ function AuthProvider({ displayName = 'AuthProvider', children }) {
     return await pocketbase.collection('users').create(registerUser);
   };
 
-  const signIn = async (usernameOrEmail, password) => {
+  const signIn = async (email, password) => {
     return await pocketbase
       .collection('users')
-      .authWithPassword(usernameOrEmail, password);
+      .authWithPassword(email, password);
   };
 
   const signOut = async () => {
