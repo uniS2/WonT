@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useMapStore } from '@/store/mapStore';
+import { useLocalStore } from '@/store/localStore';
 
 const { kakao } = window;
 
@@ -47,13 +48,11 @@ export default function Map({
         //^ 카테고리 검색 (SW8)
         const categoryOptions = {
           location: coords,
-          radius: 1000, // 1km 이내에서 검색
+          radius: 10000, // 1km 이내에서 검색
         };
         places.categorySearch('SW8', categorySearchCB, categoryOptions);
       }
     });
-
-    // map = new kakao.maps.Map(container, { center: localData, level: level });
 
     // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성하기
     const zoomControl = new kakao.maps.ZoomControl();
