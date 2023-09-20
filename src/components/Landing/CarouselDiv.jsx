@@ -17,7 +17,11 @@ const CarouselDiv = ({ images, children }) => {
       >
         {images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Image ${index}`} />
+            <img
+              src={image}
+              alt={`Image ${index}`}
+              style={{ width: '1536px', height: '850px' }}
+            />
           </div>
         ))}
       </Carousel>

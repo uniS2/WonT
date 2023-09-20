@@ -13,7 +13,7 @@ function LandingPagePartThree() {
 bottom-6  h-2 w-[4.8375rem] bg-custom-color/40"
           ></div>
         </div>
-        <img src={BookmarkIcon} alt="plane" />
+        <img src={BookmarkIcon} alt="plane" className="max-h-90 max-w-90" />
       </div>
     </div>
   );

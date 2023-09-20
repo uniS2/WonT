@@ -5,7 +5,7 @@ function LandingPagePartTwo() {
   return (
     <div>
       <div className="flex h-[5.625rem] justify-around bg-gray-100/30 lg:w-[38.75rem] 2xl:w-[46.125rem]">
-        <img src={CalenderIcon} alt="plane" />
+        <img src={CalenderIcon} alt="plane" className="max-h-90 max-w-90" />
 
         <div className="relative flex flex-col justify-center py-[1.6875rem]  pl-[1.723125rem] font-semibold text-contentsPrimary">
           <p>리뷰를 확인하고</p>
