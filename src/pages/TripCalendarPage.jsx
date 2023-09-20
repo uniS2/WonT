@@ -33,7 +33,7 @@ export default function TripCalendarPage() {
       {Array.isArray(tripDate) ? (
         <Link to="/tripedit">
           <ButtonLarge
-            onClick={() => createMyScheduleTitle(selectName, tripDate)}
+          // onClick={() => createMyScheduleTitle(selectName, tripDate)}
           >
             선택 완료
           </ButtonLarge>
