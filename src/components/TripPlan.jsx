@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import TripPlanEditButton from '@/components/TripPlanEditButton';
 import { useLocalStore } from '@/store/localStore';
 

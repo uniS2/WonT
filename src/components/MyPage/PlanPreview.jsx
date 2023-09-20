@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import useScheduleList from '@/hooks/useScheduleList';
 import { getDDay, getPocketHostImageURL } from '@/utils/index.js';
 

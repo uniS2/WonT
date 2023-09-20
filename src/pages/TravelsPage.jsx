@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
 import MyPageHeader from '@/components/PageHeader';
 import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
