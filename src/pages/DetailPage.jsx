@@ -9,7 +9,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 /* -------------------------------------------------------------------------- */
-// 데이터 요청 함수 (query function)
+
 const getRecommends = async (userId) => {
   return await pocketbase.collection('recommends').getFullList({
     filter: `(userEmail?~'${userId}')`,
@@ -17,7 +17,6 @@ const getRecommends = async (userId) => {
   });
 };
 
-// 데이터의 userEmail 필드에서 삭제 요청 함수 (mutation function)
 const addBookmark = async ({ recommendId, userId }) => {
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail+': userId,
@@ -41,7 +40,6 @@ export default function DetailPage() {
 
   // const [bookmarkList, setBookmarkList] = useState();
   const { bookmarkList, setBookmarkList } = useBookmarkStore();
-  // console.log(bookmarkList);
   const user = pocketbase.authStore.model;
 
   const queryClient = useQueryClient();
