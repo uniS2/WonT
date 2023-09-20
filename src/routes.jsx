@@ -39,7 +39,7 @@ const router = createBrowserRouter(
       <Route path="bookmark" element={<BookmarkPage />} />
       <Route path="bookmark/:recommendId" element={<DetailPage />} />
       <Route path="myschedule/:detailId" element={<MyScheduleDetailPage />} />
-      <Route path="travels" element={<TravelsPage />} />
+      <Route path="travels/:travelsId" element={<TravelsPage />} />
     </Route>
   )
 );
