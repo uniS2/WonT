@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';
@@ -33,7 +32,7 @@ export default function TripCalendarPage() {
       {Array.isArray(tripDate) ? (
         <Link to="/tripedit">
           <ButtonLarge
-            onClick={() => createMyScheduleTitle(selectName, tripDate)}
+          // onClick={() => createMyScheduleTitle(selectName, tripDate)}
           >
             선택 완료
           </ButtonLarge>

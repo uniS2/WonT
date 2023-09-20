@@ -4,10 +4,20 @@ import { devtools } from "zustand/middleware";
 export const useMapStore = create(
   devtools((set) => ({
     localData: [],
-    setLocationData: (data) =>
+    category: [],
+    setLocalData: (data) =>
       set((state) => ({
         localData: [
-          ...state.localData,
+          data
+        ]
+      }),
+        false,
+        'localData/map'
+      ),
+    setCategory: (data) =>
+      set((state) => ({
+        Category: [
+          ...state.category,
           {
             id: data.id,
             ...data,
@@ -15,7 +25,7 @@ export const useMapStore = create(
         ]
       }),
         false,
-        'localData/map'
+        'category'
       )
   }))
 )

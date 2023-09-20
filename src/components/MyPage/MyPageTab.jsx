@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import useScheduleList from '@/hooks/useScheduleList';
 import useRecommendsList from '@/hooks/useRecommendsList';
 import { useQuery, useQueryClient } from '@tanstack/react-query';

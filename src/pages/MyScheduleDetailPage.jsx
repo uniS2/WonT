@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-
 import pocketbase from '@/api/pocketbase';
 import TripHeader from '@/components/Header/TripHeader';
 import Modal from '@/components/Modal';

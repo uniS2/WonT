@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import LocalItem from '@/components/TripLocal/LocalItem';

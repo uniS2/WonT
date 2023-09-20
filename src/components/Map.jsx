@@ -1,6 +1,7 @@
 import { useLocalStore } from '@/store/localStore';
 import { useMapStore } from '@/store/mapStore';
 import { useEffect, useState } from 'react';
+import debounce from '@/utils/debounce';
 
 const { kakao } = window;
 

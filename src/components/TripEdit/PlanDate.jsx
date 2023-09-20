@@ -1,5 +1,5 @@
-import toggleDown from '@/assets/common-toogle-down.svg';
-import toggleUp from '@/assets/common-toogle-up.svg';
+import toggleDown from '@/assets/common-toogle-down.webp';
+import toggleUp from '@/assets/common-toogle-up.webp';
 
 export default function PlanDate({ toggleButton, toggleSchedule }) {
   const handleToggleButton = () => {

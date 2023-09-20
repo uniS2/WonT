@@ -3,10 +3,10 @@ import BookmarkList from '@/components/MyPage/BookmarkList';
 import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
 import { getPocketHostImageURL } from '@/utils/index.js';
-import pb from '@/api/pocketbase';
+import pocketbase from '@/api/pocketbase';
 
 export default function BookmarkPage() {
-  const user = pb.authStore.model;
+  const user = pocketbase.authStore.model;
   // console.log(user);
 
   if (user) {
