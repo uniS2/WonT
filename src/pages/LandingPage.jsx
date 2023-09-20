@@ -80,7 +80,7 @@ export default function LandingPage() {
             <LandingPagePartFour />
           </MotionDiv>
         </div>
-        <div className="lg:w-[80rem]">
+        <div className="lg:w-[80rem] 2xl:w-[96rem]">
           <Footer />
         </div>
       </div>
