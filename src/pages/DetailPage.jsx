@@ -58,14 +58,14 @@ export default function DetailPage() {
 
       const previousList = queryClient.getQueryData(queryKey);
 
-      queryClient.setQueryData(queryKey, (previousList, recommendId) => {
-        return [...previousList, recommendId];
+      queryClient.setQueryData(queryKey, (previousList) => {
+        return [...previousList, recommendId]; // newItem should be the actual data of the added item.
       });
 
       return { previousList };
     },
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: queryKey });
+      await queryClient.invalidateQueries({ queryKey: queryKey });
       setBookmarkList(!bookmarkList);
     },
     onError: (context) => {
@@ -86,7 +86,7 @@ export default function DetailPage() {
       return { previousList };
     },
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: queryKey });
+      await queryClient.invalidateQueries({ queryKey: queryKey });
       setBookmarkList(!bookmarkList);
     },
     onError: (context) => {
@@ -101,8 +101,8 @@ export default function DetailPage() {
       addMutation.mutate({ recommendId, userId });
     }
   };
-  console.log(bookmarkList);
-  console.log(data);
+  // console.log(bookmarkList);
+  // console.log(data);
 
   const listFin = data?.map((item) => item?.id === detailPlace?.id);
 
