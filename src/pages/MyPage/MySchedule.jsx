@@ -5,6 +5,7 @@ import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
+import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 
 const getUser = () =>
   fetch(`${getPocketHostURL('users')}`).then((response) => response.json());
@@ -47,9 +48,12 @@ export default function MySchedule() {
               {userId.username}
             </span>
           </div>
+          <div>
+            <MyPageTab position="left" />
+          </div>
           <div className="container mx-auto">
-            <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
             <div className="px-4">
+              <MyPageTabInfo tab="myschedule" menu="나의 일정" />
               <PlanPreview userSchedule={userSchedule} />
             </div>
           </div>
