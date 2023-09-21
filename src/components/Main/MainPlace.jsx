@@ -48,13 +48,8 @@ export default function MainPlace() {
               type="button"
               className={`absolute right-3 top-3`}
               onClick={() => handleClick(item.id)}
-              style={{
-                backgroundColor: buttonClicked[item.id]
-                  ? '#4EC3F9'
-                  : 'transparent',
-              }}
             >
-              <BookMark color={buttonClicked[item.id] ? '#4EC3F9' : 'none'} />
+              <BookMark color={buttonClicked[item.id] ? '#C9ECFF' : ''} />
             </button>
           </li>
         ))}
