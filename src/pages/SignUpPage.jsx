@@ -55,7 +55,7 @@ export default function SignUpPage() {
         </Link>
       </div>
       <div className="mx-auto flex min-h-[50rem] max-w-[80rem] flex-col items-center px-5">
-        <Logo width={'10.161rem'} height={'2.625rem'} isLogo={false} />
+        <Logo width={'10.161rem'} height={'2.625rem'} />
 
         <div className="flex flex-col items-center gap-[1.688rem] pt-3">
           <p>
