@@ -45,6 +45,7 @@ export default function LandingPage() {
                 width={'11.375rem'}
                 height={'4.1688rem'}
                 colors={['#fff', '#fff']}
+                isLogo={false}
               />
             </div>
           </MotionDiv>

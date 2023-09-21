@@ -121,7 +121,7 @@ export default function Logo({
           </svg>
         </button>
       ) : (
-        <button type="button">
+        <button type="button" aria-label="WonTLogoButton">
           <svg
             width={width}
             height={height}
