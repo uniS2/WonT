@@ -6,7 +6,7 @@ import { useLocalStore } from '@/store/localStore';
 
 const { kakao } = window;
 
-export default function MapSearch({
+export default function MapPlace({
   width = 'w-full',
   height = 'min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]',
   latitude = 37.4812845080678, // 위도
@@ -21,17 +21,18 @@ export default function MapSearch({
   // const selectName = useLocalStore((state) => state.selectName);
   const selectName = '서울';
   //$ 마커, 카테고리를 관리할 배열을 생성합니다.
-  const { category, markers, setMarkers } = useMapStore();
+  const category = 'SW8';
+  const { placeMarkers, setPlaceMarkers } = useMapStore();
 
   useEffect(() => {
-    const container = document.getElementById('map');
+    const container = document.getElementById('mapPlace');
     const options = {
       center: center, // 지도의 중심좌표. 33.450701, 126.570667
       level: level, // 지도의 확대 레벨. 3
     };
 
     // 지도 생성하기
-    let map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container, options);
     //* 카테고리검색
     //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
     const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
@@ -96,7 +97,7 @@ export default function MapSearch({
       });
 
       //$ 생성된 마커를 markers 배열에 추가합니다.
-      setMarkers((prevMarkers) => [...prevMarkers, marker]);
+      setPlaceMarkers((prevMarkers) => [...prevMarkers, marker]);
     }
 
     // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
@@ -104,7 +105,7 @@ export default function MapSearch({
       map,
       'center_changed',
       debounce(function () {
-        // setMarkers([]); // 중심 좌표가 변경될 때 마커를 업데이트합니다.
+        // setPlaceMarkers([]); // 중심 좌표가 변경될 때 마커를 업데이트합니다.
 
         const newCenter = map.getCenter();
         places.categorySearch(category, categorySearchCB, {
@@ -113,11 +114,11 @@ export default function MapSearch({
         });
       }, 1000)
     );
-  }, [center, level, category, setMarkers]);
+  }, [center, level, category, setPlaceMarkers]);
 
   return (
     <div
-      id="map"
+      id="mapPlace"
       className={`${height} ${width} modal mx-auto mt-6 ${restProps}`}
     ></div>
   );

@@ -3,7 +3,7 @@ import HambugerButton from '@/components/TripSelect/HambugerButton';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
-import MapSearch from '@/components/TripSelect/MapSearch';
+import MapPlace from '@/components/TripSelect/MapPlace';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 export default function TripPlacePage() {
@@ -20,34 +20,26 @@ export default function TripPlacePage() {
       <TripHeader />
       <TripPlanMenu state={displayPlaceTripPlan} action={togglePlaceTripPlan} />
       <div className="map_wrap relative">
-        <MapSearch />
+        <MapPlace />
         <ul
           id="category"
           className="modal absolute left-3 top-3 z-10 flex gap-1 overflow-hidden rounded-md border border-solid border-primary bg-background"
         >
-          <li id="BK9" data-order="0">
-            <span className="bank"></span>
-            은행
+          <li id="CT1" data-order="0">
+            <span className="cultural"></span>
+            문화시설
           </li>
-          <li id="MT1" data-order="1">
-            <span className="mart"></span>
-            마트
+          <li id="AT4" data-order="1">
+            <span className="attractions"></span>
+            관광명소
           </li>
-          <li id="PM9" data-order="2">
-            <span className="pharmacy"></span>
-            약국
+          <li id="FD6" data-order="2">
+            <span className="restaurant"></span>
+            음식점
           </li>
-          <li id="OL7" data-order="3">
-            <span className="oil"></span>
-            주유소
-          </li>
-          <li id="CE7" data-order="4">
+          <li id="CE7" data-order="3">
             <span className="cafe"></span>
             카페
-          </li>
-          <li id="CS2" data-order="5">
-            <span className="store"></span>
-            편의점
           </li>
         </ul>
       </div>

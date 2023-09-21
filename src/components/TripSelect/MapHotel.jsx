@@ -22,10 +22,10 @@ export default function MapHotel({
   const selectName = '서울';
   const hotelCategory = 'AD5';
   //$ 카테고리를 관리할 배열을 생성합니다.
-  const { markers, setMarkers } = useMapStore();
+  const { hotelMarkers, setHotelMarkers } = useMapStore();
 
   useEffect(() => {
-    const container = document.getElementById('map');
+    const container = document.getElementById('mapHotel');
     const options = {
       center: center, // 지도의 중심좌표. 33.450701, 126.570667
       level: level, // 지도의 확대 레벨. 3
@@ -33,16 +33,17 @@ export default function MapHotel({
 
     // 지도 생성하기
     let map = new kakao.maps.Map(container, options);
-    //* 카테고리검색
-    //* 장소 검색 객체를 생성합니다
+
+    // 카테고리검색
+    // 장소 검색 객체를 생성합니다
     const places = new kakao.maps.services.Places(map);
-    //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+    // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
     const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-    //^ 주소-좌표 변환 객체를 생성합니다
+    // 주소 - 좌표 변환 객체를 생성합니다
     const geocoder = new kakao.maps.services.Geocoder();
 
-    //^ 주소로 좌표를 검색합니다
+    // 주소로 좌표를 검색합니다
     geocoder.addressSearch(selectName, function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
@@ -73,7 +74,6 @@ export default function MapHotel({
         for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
         }
-        console.log(data);
       }
     }
 
@@ -97,7 +97,7 @@ export default function MapHotel({
       });
 
       //$ 생성된 마커를 markers 배열에 추가합니다.
-      setMarkers((prevMarkers) => [...prevMarkers, marker]);
+      setHotelMarkers((prevMarkers) => [...prevMarkers, marker]);
     }
 
     // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
@@ -114,12 +114,13 @@ export default function MapHotel({
         });
       }, 1000)
     );
-  }, [center, level, hotelCategory, setMarkers]);
+  }, [center, level, hotelCategory, setHotelMarkers]);
 
   return (
     <div
-      id="map"
+      id="mapHotel"
       className={`${height} ${width} modal mx-auto mt-6 ${restProps}`}
-    ></div>
+    >
+    </div>
   );
 }
