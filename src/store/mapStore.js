@@ -3,29 +3,12 @@ import { devtools } from "zustand/middleware";
 
 export const useMapStore = create(
   devtools((set) => ({
-    localData: [],
-    category: 'SW8',
-    markers: [],
-    setLocalData: (data) =>
+    hotelMarkers: [],
+    placeMarkers: [],
+    setHotelMarkers: (data) =>
       set((state) => ({
-        localData: [
-          data
-        ]
-      }),
-        false,
-        'localData/map'
-      ),
-    setCategory: (data) =>
-      set((state) => ({
-        category: data
-      }),
-        false,
-        'category'
-      ),
-    setMarkers: (data) =>
-      set((state) => ({
-        markers: [
-          ...state.markers,
+        hotelMarkers: [
+          ...state.hotelMarkers,
           {
             id: data.id,
             ...data,
@@ -33,7 +16,20 @@ export const useMapStore = create(
         ]
       }),
         false,
-        'markers'
+        'hotel/markers'
+      ),
+    setPlaceMarkers: (data) =>
+      set((state) => ({
+        placeMarkers: [
+          ...state.placeMarkers,
+          {
+            id: data.id,
+            ...data,
+          }
+        ]
+      }),
+        false,
+        'place/markers'
       )
   }))
 )
