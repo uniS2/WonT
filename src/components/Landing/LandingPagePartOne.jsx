@@ -12,7 +12,7 @@ function LandingPagePartOne() {
 bottom-6  h-2 w-[8.775rem] bg-custom-color/40"
         ></div>
       </div>
-      <img src={PlaneIcon} alt="plane" className="max-h-90 max-w-90" />
+      <img src={PlaneIcon} alt="plane" className="h-[5.625rem] w-[5.625rem]" />
     </div>
   );
 }
