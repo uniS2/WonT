@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import defaultImage from '@/assets/common-trip-default.jpg';
+import defaultImage from '@/assets/common-trip-default.webp';
 
 import useScheduleList from '@/hooks/useScheduleList';
 import { getDDay, getPocketHostImageURL } from '@/utils/index.js';
