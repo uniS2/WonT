@@ -11,17 +11,18 @@ const CarouselDiv = ({ images, children }) => {
         showStatus={false}
         showThumbs={false}
         autoPlay={true}
-        interval={2000}
+        interval={3000}
         infiniteLoop={true}
         showIndicators={false}
+        transitionTime={500}
+        transitionEasing="ease-in-out"
       >
         {images.map((image, index) => (
-          <div key={index}>
-            <img
-              src={image}
-              alt={`Image ${index}`}
-              style={{ width: '1536px', height: '850px' }}
-            />
+          <div
+            key={index}
+            className="h-[26.25rem] w-[40rem] object-fill sm:h-[43.75rem] sm:w-[48rem] md:h-[50rem] md:w-[64rem] lg:h-[50rem] lg:w-[80rem] 2xl:h-[53.125rem] 2xl:w-[96rem]"
+          >
+            <img src={image} alt={`Image ${index}`} className="h-full w-full" />
           </div>
         ))}
       </Carousel>
@@ -30,5 +31,3 @@ const CarouselDiv = ({ images, children }) => {
 };
 
 export default CarouselDiv;
-
-// 개별적으로 돌려보기
