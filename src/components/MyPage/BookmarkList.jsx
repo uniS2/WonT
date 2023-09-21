@@ -63,8 +63,6 @@ export default function BookmarkList({ loginUser }) {
       queryClient.setQueryData(queryKey, context.previousList);
     },
   });
-  // console.log(bookmarkItems);
-  // setMemo(bookmarkItems);
 
   const handleRemoveBookmark = (recommendId, userId) => async () => {
     mutation.mutate({
@@ -86,11 +84,11 @@ export default function BookmarkList({ loginUser }) {
   }
 
   return (
-    <ul className="sm:gird-cols-2 mx-auto grid grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <ul className="sm:gird-cols-2 mx-auto grid grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 ">
       {bookmarkItems?.map?.((item) => (
         <li
           key={item.id}
-          className=" relative mx-auto w-auto  min-w-[360px] sm:min-w-min lg:min-w-min"
+          className=" relative mx-auto w-auto  min-w-[360px] opacity-80 transition duration-300 ease-in-out hover:opacity-100 hover:contrast-125 sm:min-w-min lg:min-w-min"
         >
           <button
             type="button"

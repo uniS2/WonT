@@ -34,7 +34,7 @@ export default function BookmarkPage() {
           </div>
           <div className="mx-auto">
             <MyPageTab position="right" tab="bookmark" menu="북마크" />
-            <div className="flex max-w-[1268px] justify-center   px-3 md:px-4">
+            <div className="flex max-w-[1268px]   justify-center px-3 md:px-4">
               <BookmarkList user={user} />
             </div>
           </div>
