@@ -13,7 +13,7 @@ export default function TripHotelPage() {
     toggleHotelTripPlan,
     toggleHotelList,
   } = useToggleTripMenuStore();
-  const { hotelList } = useMapStore();
+  const { hotelList, hotelMarker } = useMapStore();
 
   return (
     <section className="container relative mx-auto min-h-[50rem]">
@@ -21,7 +21,10 @@ export default function TripHotelPage() {
       <TripHeader />
       <TripPlanMenu state={displayHotelTripPlan} action={toggleHotelTripPlan} />
       <MapHotel />
-      <ul className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll">
+      <ul
+        id="hotelsList"
+        className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll sm:h-[28.5625rem] xl:h-[34.5rem]"
+      >
         {hotelList?.map((hotel) => (
           <TripPlaceItem
             key={hotel.id}
