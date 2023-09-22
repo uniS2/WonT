@@ -51,6 +51,7 @@ export default function MapHotel({
     // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
     map.setCursor('move'); // 커서 스타일을 'move'로 변경
 
+    //# 카테고리 삭제 함수
     function removeMarker() {
       for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -58,11 +59,11 @@ export default function MapHotel({
       markers = [];
     }
 
-    //! 15번씩 리렌더링중
     //# 카테고리 검색 완료 시 호출되는 콜백함수
     function categorySearchCB(data, status, pagination) {
       removeMarker();
       setHotelList(data);
+
       if (status === kakao.maps.services.Status.OK) {
         for (let i = data.length - 15; i < data.length; i++) {
           displayMarker(data[i]);
