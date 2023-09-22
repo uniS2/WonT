@@ -22,7 +22,8 @@ export default function MapHotel({
   const selectName = '서울';
   const hotelCategory = 'AD5';
   //$ 카테고리를 관리할 배열을 생성합니다.
-  const { hotelMarkers, setHotelMarkers } = useMapStore();
+  const { hotelMarkers, hotelList, setHotelMarkers, setHotelList } =
+    useMapStore();
 
   useEffect(() => {
     const container = document.getElementById('mapHotel');
@@ -70,6 +71,7 @@ export default function MapHotel({
 
     //* 카테고리 검색 완료 시 호출되는 콜백함수
     function categorySearchCB(data, status, pagination) {
+      setHotelList(data);
       if (status === kakao.maps.services.Status.OK) {
         for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
@@ -77,6 +79,7 @@ export default function MapHotel({
       }
     }
 
+    //! marker 수 마다 출력되는 중
     // 지도에 마커를 표시하는 함수입니다
     function displayMarker(place) {
       // 마커를 생성하고 지도에 표시합니다
@@ -86,41 +89,38 @@ export default function MapHotel({
       });
 
       // 마커에 클릭이벤트를 등록합니다
-      kakao.maps.event.addListener(marker, 'click', function () {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent(
-          '<div style="padding:5px;font-size:12px;">' +
-            place.place_name +
-            '</div>'
-        );
-        infowindow.open(map, marker);
-      });
+      kakao.maps.event.addListener(
+        marker,
+        'click',
+        debounce(function () {
+          // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+          infowindow.setContent(
+            '<div style="padding:0.3125rem;font-size:0.75rem;">' +
+              place.place_name +
+              '</div>'
+          );
+          infowindow.open(map, marker);
+        })
+      );
 
       //$ 생성된 마커를 markers 배열에 추가합니다.
-      setHotelMarkers((prevMarkers) => [...prevMarkers, marker]);
+      setHotelMarkers(marker);
     }
 
     // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
-    kakao.maps.event.addListener(
-      map,
-      'center_changed',
-      debounce(function () {
-        // setMarkers([]); // 중심 좌표가 변경될 때 마커를 업데이트합니다.
-
-        const newCenter = map.getCenter();
-        places.categorySearch(hotelCategory, categorySearchCB, {
-          location: newCenter,
-          radius: 10000,
-        });
-      }, 1000)
-    );
-  }, [center, level, hotelCategory, setHotelMarkers]);
+    kakao.maps.event.addListener(map, 'idle', function () {
+      const newCenter = map.getCenter();
+      places.categorySearch(hotelCategory, categorySearchCB, {
+        location: newCenter,
+        radius: 10000,
+      });
+    });
+  }, [center, level, setHotelMarkers]);
 
   return (
     <div
       id="mapHotel"
       className={`${height} ${width} modal mx-auto mt-6 ${restProps}`}
-    >
-    </div>
+    ></div>
   );
 }
