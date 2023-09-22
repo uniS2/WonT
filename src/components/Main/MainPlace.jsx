@@ -3,11 +3,18 @@ import { Link } from 'react-router-dom';
 import pocketbase from '@/api/pocketbase';
 import BookMark from '@/components/BookMark';
 import { getPocketHostImageURL } from '@/utils/index.js';
+import { useRef } from 'react';
 
 export default function MainPlace() {
   const [data, setData] = useState([]);
-  const [buttonClicked, setButtonClicked] = useState({});
+  const [buttonClicked, setButtonClicked] = useState([]);
+  const user = pocketbase.authStore.model;
+  const userId = user.id;
+  const buttonClickedRef = useRef([]);
 
+  console.log(buttonClickedRef.current);
+
+  console.log(buttonClicked);
   useEffect(() => {
     async function fetchUsers() {
       const usersList = await pocketbase
@@ -19,13 +26,20 @@ export default function MainPlace() {
     fetchUsers();
   }, []);
 
-  const handleClick = (itemId) => {
-    setButtonClicked((prevState) => ({
-      ...prevState,
-      [itemId]: !prevState[itemId],
-    }));
+  const handleClick = async (itemId) => {
+    if (!buttonClicked.includes(itemId)) {
+      await pocketbase.collection('recommends').update(itemId, {
+        'userEmail+': userId,
+      });
+      buttonClickedRef.current = [...buttonClickedRef.current, itemId];
+      setButtonClicked([...buttonClicked, itemId]);
+    } else {
+      const updataedButtons = buttonClicked.filter((id) => id !== itemId);
+      setButtonClicked(updataedButtons);
+    }
   };
-
+  // 조건걸어서 사라지게도 만들자.
+  console.log(buttonClicked);
   return (
     <div className="flex flex-col items-center">
       <ul className="grid grid-cols-2 gap-5 px-[1.688rem] md:grid md:grid-cols-4 md:gap-5 lg:grid lg:grid-cols-4 lg:gap-5 2xl:grid 2xl:grid-cols-8 2xl:gap-5 ">
@@ -49,7 +63,9 @@ export default function MainPlace() {
               className={`absolute right-3 top-3`}
               onClick={() => handleClick(item.id)}
             >
-              <BookMark color={buttonClicked[item.id] ? '#C9ECFF' : ''} />
+              <BookMark
+                color={buttonClicked.includes(String(item.id)) ? '#C9ECFF' : ''}
+              />
             </button>
           </li>
         ))}
