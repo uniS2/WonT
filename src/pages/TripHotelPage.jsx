@@ -3,6 +3,7 @@ import HambugerButton from '@/components/TripSelect/HambugerButton';
 import MapHotel from '@/components/TripSelect/MapHotel';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
+import { useMapStore } from '@/store/mapStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 export default function TripHotelPage() {
@@ -12,6 +13,7 @@ export default function TripHotelPage() {
     toggleHotelTripPlan,
     toggleHotelList,
   } = useToggleTripMenuStore();
+  const { hotelList } = useMapStore();
 
   return (
     <section className="container relative mx-auto min-h-[50rem]">
@@ -20,9 +22,13 @@ export default function TripHotelPage() {
       <TripPlanMenu state={displayHotelTripPlan} action={toggleHotelTripPlan} />
       <MapHotel />
       <ul className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll">
-        <TripPlaceItem />
-        <TripPlaceItem />
-        <TripPlaceItem />
+        {hotelList?.map((hotel) => (
+          <TripPlaceItem
+            key={hotel.id}
+            placeName={hotel.place_name}
+            address={hotel.address_name}
+          />
+        ))}
       </ul>
       <div className="modal absolute bottom-0 z-10 w-full rounded-t-3xl bg-[#E4F5FF]">
         <HambugerButton onClick={toggleHotelList} />

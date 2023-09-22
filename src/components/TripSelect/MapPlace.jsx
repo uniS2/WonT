@@ -11,7 +11,7 @@ export default function MapPlace({
   height = 'min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]',
   latitude = 37.4812845080678, // 위도
   longitude = 126.952713197762, // 경도
-  level = 7, // 지도 확대 레벨
+  level = 6, // 지도 확대 레벨
   restProps,
 }) {
   const [center, setCenter] = useState(
