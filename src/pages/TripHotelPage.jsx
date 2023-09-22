@@ -13,7 +13,7 @@ export default function TripHotelPage() {
     toggleHotelTripPlan,
     toggleHotelList,
   } = useToggleTripMenuStore();
-  const { hotelList, hotelMarker } = useMapStore();
+  const { hotelList } = useMapStore();
 
   return (
     <section className="container relative mx-auto min-h-[50rem]">
