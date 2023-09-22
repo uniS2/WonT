@@ -33,6 +33,7 @@ const removeBookmark = async ({ recommendId, userId }) => {
 export default function DetailPage() {
   // 루트에서 추천 장소 ID 읽기
   const { recommendId } = useParams();
+  console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
   const user = pocketbase.authStore.model;
@@ -51,6 +52,7 @@ export default function DetailPage() {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
+  console.log(data);
 
   // 데이터 뮤테이션 (추가)
   const addMutation = useMutation({
@@ -126,6 +128,7 @@ export default function DetailPage() {
       const mutationMethod = isBookmark ? removeMutation : addMutation;
       mutationMethod.mutate({ recommendId, userId });
     };
+    console.log(isBookmark);
 
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
@@ -138,9 +141,9 @@ export default function DetailPage() {
             <img
               src={getPocketHostImageURL(detailPlace, 'image')}
               alt={`${detailPlace.place} 이미지`}
-              className="  mx-auto my-10 h-[22.5rem] min-h-[22.5rem] w-[77.25rem] min-w-[20rem] rounded-xl object-cover "
+              className="  mx-auto my-10 h-[31.25rem] min-h-[22.5rem] w-[77.25rem] min-w-[20rem] rounded-xl object-cover "
             />
-            <div className="mx-auto  my-5 max-w-[1236px] px-4">
+            <div className="mx-auto  my-5 max-w-[77.25rem] px-4">
               <span className=" h-4 rounded-full bg-secondary px-2 py-1 text-[0.875rem]">
                 {detailPlace.localMain}
               </span>

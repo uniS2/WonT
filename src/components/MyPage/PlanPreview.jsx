@@ -37,7 +37,7 @@ export default function PlanPreview({ userSchedule }) {
                 <img
                   src={
                     item.place[0]
-                      ? getPocketHostImageURL(item, 'place').split(',')[0]
+                      ? getPocketHostImageURL(item, 'main').split(',')[0]
                       : { defaultImage }
                   }
                   alt={`${item.title} 이미지`}
