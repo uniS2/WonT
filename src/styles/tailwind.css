@@ -25,3 +25,24 @@
   padding-bottom: 4px;
   background-size: auto 4px;
 }
+.airplain {
+  fill: blue;
+  stroke: red;
+  stroke-width: 2;
+
+  animation-name: planeAnimation;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes planeAnimation {
+  0% {
+    transform: translateY(30px) translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

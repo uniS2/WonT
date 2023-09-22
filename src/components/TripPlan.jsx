@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
 import TripPlanEditButton from '@/components/TripPlanEditButton';
 import { useLocalStore } from '@/store/localStore';
+import { useQuery } from '@tanstack/react-query';
+import { getPocketHostURL } from '@/utils';
+
+const getMySchedule = () =>
+  fetch(`${getPocketHostURL('mySchedule')}`).then((res) => res.json());
 
 export default function TripPlan({ background = 'bg-secondary/50' }) {
   const selectName = useLocalStore((set) => set.selectName);
+  const { data } = useQuery(['mySchedule'], getMySchedule);
+  console.log(data);
 
   return (
-    <div className={`${background} px-6 py-[1.125rem]`}>
+    <div className={`${background} px-6 py-[1.125rem] md:px-10 lg:px-8`}>
       <div className="mx-auto max-w-7xl">
         <div className="flex gap-2">
           <dl>

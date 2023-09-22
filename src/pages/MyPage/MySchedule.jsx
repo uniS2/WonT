@@ -32,14 +32,14 @@ export default function MySchedule() {
           <h1 className="sr-only">MySchedule</h1>
           <MyPageHeader page="mypage" />
           <div className="flex flex-col items-center pb-11 pt-7">
-            <span className=" mb-[1.375rem] text-[1.5rem] font-extrabold leading-normal text-contentsPrimary">
+            <span className="mb-[1.375rem] text-[1.5rem] font-extrabold leading-normal text-contentsPrimary ">
               마이 페이지
             </span>
             {userId.profile ? (
               <img
                 src={getPocketHostImageURL(userId, 'profile')}
                 alt={`${userId.username}의 프로필`}
-                className=" h-[70px] w-[70px] rounded-full border-[0.0938rem] border-contentsSecondary"
+                className=" h-[70px] w-[70px] rounded-full border-[0.0938rem] border-contentsSecondary "
               />
             ) : (
               <Profile />
