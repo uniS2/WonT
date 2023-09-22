@@ -88,9 +88,9 @@ export default function MapHotel({
 
       markers.push(marker);
 
+      // 마커에 이벤트를 등록합니다.
       //- mouseover
       kakao.maps.event.addListener(marker, 'mouseover', function () {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
         infowindow.setContent(
           '<div style="padding:0.3125rem;font-size:0.75rem;">' +
             place.place_name +
@@ -101,7 +101,6 @@ export default function MapHotel({
 
       //- click
       kakao.maps.event.addListener(marker, 'click', function () {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
         infowindow.setContent(
           '<div style="padding:0.3125rem;font-size:0.75rem;">' +
             place.place_name +
@@ -128,7 +127,7 @@ export default function MapHotel({
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
 
-        //^ 카테고리 검색 (SW8)
+        // 카테고리 - 숙박(숙소) 검색
         const categoryOptions = {
           location: coords,
           radius: 10000,
