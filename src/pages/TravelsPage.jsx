@@ -7,6 +7,7 @@ import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedu
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { Helmet } from 'react-helmet-async';
 
 const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());
@@ -29,8 +30,10 @@ function TravelsPage() {
   if ((detailTravels, user)) {
     return (
       <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
+        <Helmet>
+          <h1 className="sr-only">Travels - WonT</h1>
+        </Helmet>
         <div>
-          <h1 className="sr-only">TravelsPage</h1>
           <MyPageHeader page="detail" />
           <div className="container flex flex-col items-center justify-center">
             <section className="px-3">

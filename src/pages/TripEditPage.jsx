@@ -8,6 +8,7 @@ import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import PlanDate from '@/components/TripEdit/PlanDate';
 import useScheduleList from '@/hooks/useScheduleList';
 import ScheduleMap from '@/components/TripEdit/ScheduleMap';
+import { Helmet } from 'react-helmet-async';
 
 export default function TripEditPage() {
   const [toggleSchedule, setToggleSchedule] = useState(false);
@@ -23,12 +24,14 @@ export default function TripEditPage() {
 
   return (
     <div className="bg-background">
+      <Helmet>
+        <title className="sr-only">TripEdit - Wont</title>
+      </Helmet>
       <Header />
       <div className="w-auto ">
         <TripPlan />
       </div>
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
-        <h1 className="sr-only">TripEditPage</h1>
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           {/* <Map height={'h-[31.25rem]'} /> */}
           <ScheduleMap height={'h-[31.25rem]'} />
