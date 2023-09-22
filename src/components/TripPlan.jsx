@@ -10,7 +10,6 @@ const getMySchedule = () =>
 export default function TripPlan({ background = 'bg-secondary/50' }) {
   const selectName = useLocalStore((set) => set.selectName);
   const { data } = useQuery(['mySchedule'], getMySchedule);
-  console.log(data);
 
   return (
     <div className={`${background} px-6 py-[1.125rem] md:px-10 lg:px-8`}>
