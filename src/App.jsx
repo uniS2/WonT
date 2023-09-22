@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import router from '@/routes';
@@ -20,17 +21,17 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <>
-      {/* <HelmetProvider> */}
-      {/* <ThemeProvider> */}
-      <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          <Suspense fallback={<Spinner />}>
-            <RouterProvider router={router} />
-          </Suspense>
-          {/* 텐스텍 쿼리 개발 도구 */}
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-      </AuthProvider>
+      <HelmetProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <Suspense fallback={<Spinner />}>
+              <RouterProvider router={router} />
+            </Suspense>
+            {/* 텐스텍 쿼리 개발 도구 */}
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </AuthProvider>
+      </HelmetProvider>
     </>
   );
 }

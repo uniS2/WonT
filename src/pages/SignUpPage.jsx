@@ -7,6 +7,7 @@ import Logo from '@/components/Logo';
 import BackButton from '@/components/Sign/BackButton';
 import SignPart from '@/components/Sign/SignPart';
 import SignInButton from '@/components/Sign/SignInButton';
+import { Helmet } from 'react-helmet-async';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -47,7 +48,10 @@ export default function SignUpPage() {
   };
   return (
     <div className="container mx-auto flex  flex-col items-center px-5">
-      <h1 className="sr-only">로그인 페이지</h1>
+      <Helmet>
+        <title className="sr-only">SignUp - WonT</title>
+      </Helmet>
+
       <div className="h-[8.125rem] w-[20rem] pt-[2.125rem]">
         <Link to="/">
           <BackButton />
