@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import pocketbase from '@/api/pocketbase';
 import TripHeader from '@/components/Header/TripHeader';
@@ -11,9 +11,9 @@ import DeleteButton from '@/components/DeleteButton';
 import TotalScheduleSummary from '@/components/MyScheduleDetail/TotalScheduleSummary';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
+import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import { getPocketHostImageURL } from '@/utils';
 
 // 데이터 요청 함수 (query function)
 const fetchScheduleDetail = async (userId) => {
@@ -27,8 +27,6 @@ const fetchScheduleDetail = async (userId) => {
 export default function MyScheduleDetailPage() {
   // 경로 지정
   const navigate = useNavigate();
-  // 현재 경로 찾기
-  const location = useLocation();
 
   // 아이디 일치여부
   let userId = pocketbase.authStore.model;
@@ -41,16 +39,14 @@ export default function MyScheduleDetailPage() {
   );
 
   // 선택한 북마크 아이디
-  const [bookmarkId, setBookmarkId] = useState('');
+  const [bookmarkId, setBookmarkId] = useState([]);
+  const params = useParams();
 
   useEffect(() => {
-    const bookmarkId = location.pathname.replace('/myschedule/', '');
-    setBookmarkId(bookmarkId);
-  }, [location.pathname]);
+    setBookmarkId(params.detailId);
+  }, [params.detailId]);
 
-  const selectBookmark = data?.filter((item) => item.id === bookmarkId);
-
-  console.log(selectBookmark);
+  const selectBookmark = data?.filter((item) => item.id === params.detailId)[0];
 
   // Store: 전체일정, 모달, 날짜별 일정
   const {
@@ -100,8 +96,10 @@ export default function MyScheduleDetailPage() {
           <h2 className="sr-only">전체 일정 한눈에 보기</h2>
           <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white">
             <TotalScheduleSummary
-            // imageURL={getPocketHostImageURL(selectBookmark, 'main')}
-            // localName={selectBookmark.title}
+              imageURL={getPocketHostImageURL(selectBookmark, 'main')}
+              localName={setLocalName(selectBookmark.title)}
+              startDay={getTripDate(selectBookmark.start_date)}
+              endDay={getTripDate(selectBookmark.end_date)}
             />
             <DeleteButton onClick={toggleDeleteModal} />
           </div>
