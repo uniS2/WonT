@@ -33,7 +33,7 @@ export default {
         LandingCarouselSix: "url('./src/assets/LandingPage-carousel-six.svg')",
       }),
       keyframes: {
-        'fade-slide-in': {
+        'fade-animate-in': {
           '0%': {
             transform: 'translateY(30px)',
             opacity: '0',
@@ -45,7 +45,7 @@ export default {
         },
       },
       animation: {
-        'fade-slide': 'fade-slide-in 0.8s ease-out',
+        'fade-animate': 'fade-animate-in 0.6s ease-out',
       },
     },
   },
