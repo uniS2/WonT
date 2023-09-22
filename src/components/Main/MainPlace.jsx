@@ -13,7 +13,7 @@ export default function MainPlace() {
   const user = pocketbase.authStore.model;
   const userId = user.id;
 
-  console.log(bookmarkList);
+  // console.log(bookmarkList);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -39,7 +39,7 @@ export default function MainPlace() {
       deleteBookmarkList(itemId);
     }
   };
-  console.log(bookmarkList);
+  // console.log(bookmarkList);
   return (
     <div className="flex flex-col items-center">
       <ul className="grid grid-cols-2 gap-5 px-[1.688rem] md:grid md:grid-cols-4 md:gap-5 lg:grid lg:grid-cols-4 lg:gap-5 2xl:grid 2xl:grid-cols-8 2xl:gap-5 ">
