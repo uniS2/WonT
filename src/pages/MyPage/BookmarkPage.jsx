@@ -4,6 +4,7 @@ import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
 import { getPocketHostImageURL } from '@/utils/index.js';
 import pocketbase from '@/api/pocketbase';
+import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 
 export default function BookmarkPage() {
   const user = pocketbase.authStore.model;
@@ -12,9 +13,9 @@ export default function BookmarkPage() {
   if (user) {
     return (
       <div className="mx-auto w-screen bg-background ">
+        <h1 className="sr-only">MySchedule</h1>
+        <MyPageHeader page="mypage" />
         <div className="container mx-auto flex min-h-screen min-w-[22.5rem] flex-col items-center  bg-background pb-14">
-          <h1 className="sr-only">MySchedule</h1>
-          <MyPageHeader page="mypage" />
           <div className="flex flex-col items-center pb-11 pt-7">
             <span className="mb-[1.375rem] text-[1.5rem] font-extrabold leading-normal text-contentsPrimary">
               마이 페이지
@@ -32,14 +33,14 @@ export default function BookmarkPage() {
               {user.username}
             </span>
           </div>
-          <div className="mx-auto">
-            <MyPageTab position="right" tab="bookmark" menu="북마크" />
-            <div className="flex   max-w-[1268px] justify-center px-3 md:px-4">
+          <div className="mx-auto ">
+            <MyPageTab position="right" />
+            <div className="flex max-w-[1268px]   flex-col justify-center px-3 md:px-4">
+              <MyPageTabInfo tab="북마크" />
               <BookmarkList user={user} />
             </div>
           </div>
         </div>
-        <hr className="hr" />
       </div>
     );
   }

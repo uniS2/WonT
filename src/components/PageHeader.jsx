@@ -6,8 +6,8 @@ import BackIcon from '@/components/Header/BackIcon';
 
 export default function MyPageHeader({ page }) {
   return (
-    <div className=" w-screen  min-w-min bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-[1.0625rem] py-[1.125rem]">
+    <div className="h-[64px] w-full bg-white px-10">
+      <div className=" mx-auto flex max-w-7xl items-center justify-between  px-[1.0625rem] py-[1.125rem]">
         {page === 'mypage' ? (
           <Logo width={74} height={28} />
         ) : (

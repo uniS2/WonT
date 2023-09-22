@@ -129,11 +129,11 @@ export default function DetailPage() {
 
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
+        <div className=" flex flex-col items-center justify-center gap-10 ">
+          <MyPageHeader page="detail" />
+          <h1 className="sr-only">추천 장소</h1>
+        </div>
         <div className="container">
-          <div className=" flex flex-col items-center justify-center gap-10 ">
-            <MyPageHeader page="detail" />
-            <h1 className="sr-only">추천 장소</h1>
-          </div>
           <section className="animate-fade-animate px-6">
             <img
               src={getPocketHostImageURL(detailPlace, 'image')}

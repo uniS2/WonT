@@ -27,7 +27,7 @@ export default function MySchedule() {
 
   if ((userId, userSchedule)) {
     return (
-      <div className="mx-auto w-screen min-w-[22.5rem] bg-yellow-200 ">
+      <div className="mx-auto w-screen min-w-[22.5rem]  ">
         <div className="flex  min-h-screen flex-col items-center bg-background pb-14">
           <h1 className="sr-only">MySchedule</h1>
           <MyPageHeader page="mypage" />
@@ -48,12 +48,11 @@ export default function MySchedule() {
               {userId.username}
             </span>
           </div>
-          <div>
-            <MyPageTab position="left" />
-          </div>
-          <div className="container mx-auto">
-            <div className="px-4">
-              <MyPageTabInfo tab="myschedule" menu="나의 일정" />
+
+          <div className="container mx-auto flex flex-col justify-center">
+            <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
+            <div className=" max-w-[1280px] self-center  px-3 md:px-4">
+              <MyPageTabInfo tab="나의 일정" />
               <PlanPreview userSchedule={userSchedule} />
             </div>
           </div>

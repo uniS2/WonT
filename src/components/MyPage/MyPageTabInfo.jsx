@@ -10,16 +10,13 @@ const getRecommends = async (userId) => {
   });
 };
 
-export default function MyPageTabInfo({ tab, menu }) {
+export default function MyPageTabInfo({ tab }) {
   const user = pocketbase.authStore.model;
+
   const { data } =
-    tab === 'myschedule' ? useScheduleList() : useRecommendsList();
+    tab === '나의 일정' ? useScheduleList() : useRecommendsList();
   const queryKey = ['recommends', user.id];
-  const {
-    isLoading,
-    error,
-    data: bookmarkList,
-  } = useQuery({
+  const { data: bookmarkList } = useQuery({
     queryKey: queryKey,
     queryFn: () => getRecommends(user.id),
     refetchOnReconnect: false,
@@ -28,10 +25,15 @@ export default function MyPageTabInfo({ tab, menu }) {
   const scheduleList = data?.items?.filter(
     (item) => item.username === user.id
   )?.length;
+
   if (data) {
     return (
-      <div className="mx-8 mb-3 mt-6 flex items-center justify-start gap-[10px]">
-        <span className=" flex font-medium text-contentsPrimary">{menu}</span>
+      <div className=" mx-8 mb-4  flex h-6 items-center justify-start gap-[10px] ">
+        <div className="w-auto">
+          <span className=" flex font-medium text-contentsPrimary">
+            {tab === '나의 일정' ? '나의 일정' : '북마크'}
+          </span>
+        </div>
 
         <div className="flex items-center justify-center">
           <svg
@@ -45,7 +47,7 @@ export default function MyPageTabInfo({ tab, menu }) {
             <circle cx="9.5" cy="9.5" r="9.5" fill="#50D4E5" />
           </svg>
           <span className="absolute text-[0.875rem] font-medium text-white">
-            {tab === 'myschedule' ? scheduleList : bookmarkList?.length}
+            {tab === '나의 일정' ? scheduleList : bookmarkList?.length}
           </span>
         </div>
       </div>

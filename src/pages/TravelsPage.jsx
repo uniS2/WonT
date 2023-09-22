@@ -28,8 +28,8 @@ function TravelsPage() {
   );
   if ((detailTravels, user)) {
     return (
-      <div className="container  mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
-        <div className=" mx-auto flex flex-col">
+      <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
+        <div>
           <h1 className="sr-only">TravelsPage</h1>
           <MyPageHeader page="detail" />
           <div className="container flex flex-col items-center justify-center">
@@ -58,9 +58,8 @@ function TravelsPage() {
                   showArrows={true}
                   showStatus={false}
                   showThumbs={false}
-                  interval={1000}
-                  infiniteLoop={true}
-                  className="min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
+                  showIndicators={false}
+                  className="mx-auto min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
                 >
                   {detailTravels.image.map((image) => (
                     <img
