@@ -18,7 +18,7 @@ export default function TripHeader({
           {isBack ? (
             <BackIcon width={'1rem'} height={'1rem'} color={'#4EC3F9'} />
           ) : (
-            <Link to="/main">
+            <Link to="/main" aria-label="현재 페이지 닫음">
               <CloseIcon size={'1.25rem'} color={'#4EC3F9'} />
             </Link>
           )}
@@ -32,7 +32,7 @@ export default function TripHeader({
         )}
         {isUserIcon && (
           <li>
-            <Link to="/mypage">
+            <Link to="/myschedule" aria-label="나의 일정 페이지로 이동">
               <UserIcon />
             </Link>
           </li>
