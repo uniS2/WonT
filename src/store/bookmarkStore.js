@@ -1,12 +1,24 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-const useBookmarkStore = create(
+export const useBookmarkStore = create(
   devtools((set) => ({
-    bookmarkList: false,
-    setBookmarkList: (isBookmark) =>
-      set(() => ({ bookmarkList: isBookmark }), false, 'bookmarkList'),
+    bookmarkList: [],
+    setBookmarkList: (itemId) =>
+      set(
+        (state) => ({
+          bookmarkList: [...state.bookmarkList, itemId],
+        }),
+        false,
+        'bookmarkList'
+      ),
+    deleteBookmarkList: (itemId) =>
+      set(
+        (state) => ({
+          bookmarkList: state.bookmarkList.filter((item) => item !== itemId),
+        }),
+        false,
+        'bookmarkList/delete'
+      ),
   }))
 );
-
-export default useBookmarkStore;
