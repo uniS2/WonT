@@ -6,16 +6,8 @@ export const useMapStore = create(
     // state - 장소 선택
     placeMarkers: [],
     // state - 숙소 선택
-    hotelMarkers: [],
     hotelList: [],
     // action - 숙소 선택
-    setHotelMarkers: (data) =>
-      set((state) => ({
-        hotelMarkers: data
-      }),
-        false,
-        'hotel/markers'
-      ),
     setHotelList: (data) =>
       set((state) => ({
         hotelList: data
