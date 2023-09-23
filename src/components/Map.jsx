@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useMapStore } from '@/store/mapStore';
 
 import debounce from '@/utils/debounce';
 
@@ -15,6 +16,9 @@ export default function Map({
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longitude)
   );
+  const { hotelList, setHotelList } = useMapStore();
+  console.log(hotelList);
+
   // console.log(center);
 
   useEffect(() => {
@@ -27,16 +31,19 @@ export default function Map({
     // 지도 생성하기
     const map = new kakao.maps.Map(container, options);
 
-    // 마커 생성
-    let marker = new kakao.maps.Marker({ position: map.getCenter() });
-    marker.setMap(map);
-    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-      // 클릭한 위도, 경도 정보를 가져옵니다
-      let latlng = mouseEvent.latLng;
+    // // 마커 생성
+    // let marker = new kakao.maps.Marker({ position: map.getCenter() });
+    // marker.setMap(map);
+    // kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+    //   // 클릭한 위도, 경도 정보를 가져옵니다
+    //   let latlng = mouseEvent.latLng;
 
-      // 마커 위치를 클릭한 위치로 옮깁니다
-      marker.setPosition(latlng);
-    });
+    //   // 마커 위치를 클릭한 위치로 옮깁니다
+    //   marker.setPosition(latlng);
+    // });
+    let positon = [
+      { title: '', latlng: new kakao.maps.LatLng(33.450705, 126.570677) },
+    ];
 
     const updateCenter = debounce((lat, lon) => {
       map.panTo(new kakao.maps.LatLng(lat, lon)); // setCenter -> panTo: 지도 중심좌표 부드럽게 이동시키기

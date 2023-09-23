@@ -2,12 +2,7 @@ import { Link } from 'react-router-dom';
 import TripPlanEditButton from '@/components/TripPlanEditButton';
 import { useLocalStore } from '@/store/localStore';
 import { useQuery } from '@tanstack/react-query';
-import {
-  getPocketHostURL,
-  getTripDate,
-  getTripDateDot,
-  getTripDateUTC,
-} from '@/utils';
+import { getPocketHostURL, getTripDate, getTripDateUTC } from '@/utils';
 import { useDateStore } from '@/store/dateStore';
 
 const getMySchedule = () =>

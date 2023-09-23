@@ -13,18 +13,17 @@ import { useDateStore } from '@/store/dateStore';
 import { useParams } from 'react-router-dom';
 import { getRangeDay } from '@/utils/getRangeDay';
 
+/* -------------------------------------------------------------------------- */
+
 export default function TripEditPage() {
+  const currentPath = useParams();
   const [toggleSchedule, setToggleSchedule] = useState(false);
   const handleToggle = () => {
     setToggleSchedule(!toggleSchedule);
   };
   const { data } = useScheduleList();
   const selectDate = useDateStore((set) => set.tripDate);
-  console.log(selectDate);
-  const rangeDays = getRangeDay(selectDate[0], selectDate[1]);
-
-  const currentPath = useParams();
-  const tripSchdeule = data?.items?.find((item) => item.id === currentPath);
+  const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
   return (
     <div className="bg-background">
@@ -39,12 +38,15 @@ export default function TripEditPage() {
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           <Map height={'h-[31.25rem]'} />
           {/* <ScheduleMap height={'h-[31.25rem]'} /> */}
-          {rangeDays?.map((item) => (
+          {selectRangeDate?.map((item, index) => (
             <>
               <PlanDate
                 toggleButton={handleToggle}
                 toggleSchedule={toggleSchedule}
+                item={item}
+                index={index}
               />
+
               <div className={`${toggleSchedule ? 'hidden' : ''}`}>
                 <AddPlan text="장소" />
                 <Link to="/tripplace">
