@@ -20,22 +20,6 @@ const handleFormatMonthYear = (locale, date) => {
   );
 };
 
-/* const handleFormatNextMonthYear = (locale, date) => {
-  const title = date
-    .toLocaleString('ko')
-    .replace(' ', '')
-    .slice(0, 8)
-    .split('.');
-  const month =
-    (+title[1] + 1).length < 2 ? `0${+title[1] + 1}` : +title[1] + 1;
-  return (
-    <dl>
-      <dt className="sr-only">표시된 달력의 년도, 월</dt>
-      <dd>{`${title[0]}. ${month}`}</dd>
-    </dl>
-  );
-}; */
-
 export default function TripCalendar() {
   const { tripDate, setDate } = useDateStore();
 
@@ -55,7 +39,9 @@ export default function TripCalendar() {
         prev2Label={null}
         prevAriaLabel={'전 달로 이동'}
         nextAriaLabel={'다음 달로 이동'}
-        tileDisabled={({ activeStartDate, date, view }) => date < new Date()}
+        tileDisabled={({ date }) =>
+          date < new Date(new Date().setDate(new Date().getDate() - 1))
+        }
         className={
           'h-[19.875rem w-[19.875rem] p-[1.3475rem] text-contentsPrimary'
         }
