@@ -31,7 +31,7 @@ function TravelsPage() {
     return (
       <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
         <Helmet>
-          <h1 className="sr-only">Travels - WonT</h1>
+          <title className="sr-only">Travels - WonT</title>
         </Helmet>
         <div>
           <MyPageHeader page="detail" />

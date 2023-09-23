@@ -47,20 +47,10 @@ export default {
           '0%': { transform: 'translate(-30,30)', opacity: '1' },
           '100%': { transform: 'translate(30px, -30px)', opacity: '1' },
         },
-        'underline-animate': {
-          '0%': { height: '1px', repeat: 'repeat-x' },
-          '100%': { height: '6px', repeat: 'repeat-x' },
-        },
       },
       animation: {
         'fade-animate': 'fade-animate-in 0.6s ease-out',
         'plain-animate': 'plain-animate 1s 0.2s ease-in-out infinite',
-        'underline-animate-transition': {
-          from: { height: '1px' },
-          to: { height: '6px' },
-          transitionProperty: ['height'],
-          transitionDuration: ['0.2s'],
-        },
       },
     },
   },

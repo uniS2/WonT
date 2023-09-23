@@ -6,6 +6,7 @@ import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
+import { Helmet } from 'react-helmet-async';
 
 const getUser = () =>
   fetch(`${getPocketHostURL('users')}`).then((response) => response.json());
@@ -29,7 +30,7 @@ export default function MySchedule() {
     return (
       <div className="mx-auto w-screen min-w-[22.5rem]  ">
         <Helmet>
-          <h1 className="sr-only">MySchedule - WonT</h1>
+          <title className="sr-only">MySchedule - WonT</title>
         </Helmet>
         <div className="flex  min-h-screen flex-col items-center bg-background pb-14">
           <MyPageHeader page="mypage" />

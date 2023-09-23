@@ -15,7 +15,7 @@ export default function BookmarkPage() {
     return (
       <div className="mx-auto w-screen bg-background ">
         <Helmet>
-          <h1 className="sr-only">MySchedule - WonT</h1>
+          <title className="sr-only">MySchedule - WonT</title>
         </Helmet>
         <MyPageHeader page="mypage" />
         <div className="container mx-auto flex min-h-screen min-w-[22.5rem] flex-col items-center  bg-background pb-14">

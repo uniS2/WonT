@@ -134,7 +134,7 @@ export default function DetailPage() {
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
         <Helmet>
-          <h1 className="sr-only">Detail - WonT</h1>
+          <title className="sr-only">Detail - WonT</title>
         </Helmet>
         <div className=" flex h-[64px] flex-col items-center justify-center gap-10">
           <MyPageHeader page="detail" />
