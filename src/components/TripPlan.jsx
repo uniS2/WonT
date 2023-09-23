@@ -14,14 +14,11 @@ const getMySchedule = () =>
   fetch(`${getPocketHostURL('mySchedule')}`).then((res) => res.json());
 
 export default function TripPlan({ background = 'bg-secondary/50' }) {
-  const { tripDate } = useDateStore();
   const selectName = useLocalStore((set) => set.selectName);
   const selectDate = useDateStore((set) => set.tripDate);
+
   const { data } = useQuery(['mySchedule'], getMySchedule);
-  const scheduleDate = tripDate?.items?.map(
-    (item) => item?.toISOString().split('T')[0]
-  );
-  console.log(scheduleDate);
+
   return (
     <div className={`${background} px-6 py-[1.125rem] md:px-10 lg:px-8`}>
       <div className="mx-auto max-w-7xl">

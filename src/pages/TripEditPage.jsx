@@ -9,6 +9,9 @@ import PlanDate from '@/components/TripEdit/PlanDate';
 import useScheduleList from '@/hooks/useScheduleList';
 // import ScheduleMap from '@/components/TripEdit/ScheduleMap';
 import { Helmet } from 'react-helmet-async';
+import { useDateStore } from '@/store/dateStore';
+import { useParams } from 'react-router-dom';
+import { getRangeDay } from '@/utils/getRangeDay';
 
 export default function TripEditPage() {
   const [toggleSchedule, setToggleSchedule] = useState(false);
@@ -16,11 +19,12 @@ export default function TripEditPage() {
     setToggleSchedule(!toggleSchedule);
   };
   const { data } = useScheduleList();
-  console.log(data);
+  const selectDate = useDateStore((set) => set.tripDate);
+  console.log(selectDate);
+  const rangeDays = getRangeDay(selectDate[0], selectDate[1]);
 
-  const currentPath = window.location.pathname.replace('/tripedit/', '');
+  const currentPath = useParams();
   const tripSchdeule = data?.items?.find((item) => item.id === currentPath);
-  console.log(tripSchdeule);
 
   return (
     <div className="bg-background">
@@ -35,23 +39,27 @@ export default function TripEditPage() {
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           <Map height={'h-[31.25rem]'} />
           {/* <ScheduleMap height={'h-[31.25rem]'} /> */}
-          <PlanDate
-            toggleButton={handleToggle}
-            toggleSchedule={toggleSchedule}
-          />
-          <div className={`${toggleSchedule ? 'hidden' : ''}`}>
-            <AddPlan text="장소" />
-            <Link to="/tripplace">
-              <ButtonMedium fill={false} text="일정 추가" />
-            </Link>
-            <AddPlan text="숙소" />
-            <Link to="/triphotel">
-              <ButtonMedium fill={false} text="숙소 추가" />
-            </Link>
-          </div>
-          <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
-            <ButtonMedium fill={true} text="저장" />
-          </div>
+          {rangeDays?.map((item) => (
+            <>
+              <PlanDate
+                toggleButton={handleToggle}
+                toggleSchedule={toggleSchedule}
+              />
+              <div className={`${toggleSchedule ? 'hidden' : ''}`}>
+                <AddPlan text="장소" />
+                <Link to="/tripplace">
+                  <ButtonMedium fill={false} text="일정 추가" />
+                </Link>
+                <AddPlan text="숙소" />
+                <Link to="/triphotel">
+                  <ButtonMedium fill={false} text="숙소 추가" />
+                </Link>
+              </div>
+              <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
+                <ButtonMedium fill={true} text="저장" />
+              </div>
+            </>
+          ))}
         </div>
       </div>
     </div>
