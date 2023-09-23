@@ -8,6 +8,7 @@ import Logo from '@/components/Logo';
 import SignPart from '@/components/Sign/SignPart';
 import { useAuth } from '@/contexts/Auth';
 import { useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export default function SignInPage() {
   const { signIn } = useAuth();
@@ -31,7 +32,9 @@ export default function SignInPage() {
 
   return (
     <div className="container mx-auto flex flex-col items-center px-5">
-      <h1 className="sr-only">SignInPage</h1>
+      <Helmet>
+        <title className="sr-only">SignIn - WonT</title>
+      </Helmet>
       <div className="h-[8.125rem] w-[20rem] pt-[2.125rem]">
         <Link to="/">
           <BackButton />

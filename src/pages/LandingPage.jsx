@@ -16,6 +16,7 @@ import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
 import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
 import Footer from '@/components/Footer';
 import CarouselDiv from '@/components/Landing/CarouselDiv';
+import { Helmet } from 'react-helmet-async';
 
 // framer-motion 함수
 export default function LandingPage() {
@@ -35,7 +36,9 @@ export default function LandingPage() {
 
   return (
     <div className="container mx-auto flex min-h-[50rem] flex-col">
-      <h1 className="sr-only">LandingPage</h1>
+      <Helmet>
+        <title className="sr-only">Landing - WonT</title>
+      </Helmet>
 
       <CarouselDiv images={images}>
         <div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center pt-[10.625rem]">

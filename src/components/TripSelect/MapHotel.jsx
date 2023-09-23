@@ -20,10 +20,10 @@ export default function MapHotel({
 
   // const selectName = useLocalStore((state) => state.selectName);
   const selectName = '서울';
-  const hotelCategory = 'AD5';
-  //$ 카테고리를 관리할 배열을 생성합니다.
-  const { hotelMarkers, hotelList, setHotelMarkers, setHotelList } =
-    useMapStore();
+  const hotelCategory = 'AD5'; // 숙소 카테고리
+
+  let markers = []; // 마커
+  const { hotelList, setHotelList } = useMapStore(); // 호텔 목록
 
   useEffect(() => {
     const container = document.getElementById('mapHotel');
@@ -33,20 +33,94 @@ export default function MapHotel({
     };
 
     // 지도 생성하기
-    let map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container, options);
 
-    // 카테고리검색
-    // 장소 검색 객체를 생성합니다
-    const places = new kakao.maps.services.Places(map);
-    // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-
-    // 주소 - 좌표 변환 객체를 생성합니다
+    // 주소 - 좌표 변환 객체
     const geocoder = new kakao.maps.services.Geocoder();
 
-    // 주소로 좌표를 검색합니다
+    // 장소 검색 객체 - 카테고리 및 키워드 검색
+    const places = new kakao.maps.services.Places(map);
+
+    // 인포 윈도우 - 마커 클릭, hover 시 장소명을 표출
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+    // 지도 줌 컨트롤, 스크롤 이벤트, 커서 스타일 관리하기
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
+    map.setCursor('move'); // 커서 스타일을 'move'로 변경
+
+    function removeMarker() {
+      for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers = [];
+    }
+
+    //! 15번씩 리렌더링중
+    //# 카테고리 검색 완료 시 호출되는 콜백함수
+    function categorySearchCB(data, status, pagination) {
+      removeMarker();
+      setHotelList(data);
+      if (status === kakao.maps.services.Status.OK) {
+        for (let i = data.length - 15; i < data.length; i++) {
+          displayMarker(data[i]);
+        }
+      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        alert('해당 지역에는 원하는 숙소가 없습니다.');
+        return;
+      } else if (status === kakao.maps.services.Status.ERROR) {
+        alert('숙소 검색 중 오류가 발생했습니다.');
+        return;
+      }
+    }
+
+    //# 지도에 마커를 표시하는 함수
+    function displayMarker(place) {
+      // 마커를 생성하고 지도에 표시합니다
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x),
+        // image
+      });
+
+      markers.push(marker);
+
+      //- mouseover
+      kakao.maps.event.addListener(marker, 'mouseover', function () {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent(
+          '<div style="padding:0.3125rem;font-size:0.75rem;">' +
+            place.place_name +
+            '</div>'
+        );
+        infowindow.open(map, marker);
+      });
+
+      //- click
+      kakao.maps.event.addListener(marker, 'click', function () {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent(
+          '<div style="padding:0.3125rem;font-size:0.75rem;">' +
+            place.place_name +
+            '</div>'
+        );
+        infowindow.open(map, marker);
+      });
+
+      //- mouseout
+      kakao.maps.event.addListener(
+        marker,
+        'mouseout',
+        debounce(function () {
+          infowindow.close();
+        }, 3000)
+      );
+    }
+
+    //# 1. 현재 선택한 지역으로 좌표를 검색합니다
     geocoder.addressSearch(selectName, function (result, status) {
-      // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -62,60 +136,19 @@ export default function MapHotel({
       }
     });
 
-    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성하기
-    const zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-    // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
-    map.setCursor('move'); // 커서 스타일을 'move'로 변경
-
-    //* 카테고리 검색 완료 시 호출되는 콜백함수
-    function categorySearchCB(data, status, pagination) {
-      setHotelList(data);
-      if (status === kakao.maps.services.Status.OK) {
-        for (let i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
-        }
-      }
-    }
-
-    //! marker 수 마다 출력되는 중
-    // 지도에 마커를 표시하는 함수입니다
-    function displayMarker(place) {
-      // 마커를 생성하고 지도에 표시합니다
-      const marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x),
-      });
-
-      // 마커에 클릭이벤트를 등록합니다
-      kakao.maps.event.addListener(
-        marker,
-        'click',
-        debounce(function () {
-          // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-          infowindow.setContent(
-            '<div style="padding:0.3125rem;font-size:0.75rem;">' +
-              place.place_name +
-              '</div>'
-          );
-          infowindow.open(map, marker);
-        })
-      );
-
-      //$ 생성된 마커를 markers 배열에 추가합니다.
-      setHotelMarkers(marker);
-    }
-
-    // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
-    kakao.maps.event.addListener(map, 'idle', function () {
-      const newCenter = map.getCenter();
-      places.categorySearch(hotelCategory, categorySearchCB, {
-        location: newCenter,
-        radius: 10000,
-      });
-    });
-  }, [center, level, setHotelMarkers]);
+    //# 2. 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
+    kakao.maps.event.addListener(
+      map,
+      'idle',
+      debounce(function () {
+        const newCenter = map.getCenter();
+        places.categorySearch(hotelCategory, categorySearchCB, {
+          location: newCenter,
+          radius: 10000,
+        });
+      })
+    );
+  }, [center, level, setHotelList]);
 
   return (
     <div
