@@ -13,9 +13,6 @@ export default function TripPlan({ background = 'bg-secondary/50' }) {
   const selectName = useLocalStore((set) => set.selectName);
   const selectDate = useDateStore((set) => set.tripDate);
   const { data } = useQuery(['mySchedule'], getMySchedule);
-  console.log(selectDate);
-  console.log(selectDate[0]?.toISOString());
-  console.log(tripDate);
   const scheduleDate = tripDate?.items?.map(
     (item) => item?.toISOString().split('T')[0]
   );
