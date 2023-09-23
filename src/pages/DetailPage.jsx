@@ -33,6 +33,7 @@ const removeBookmark = async ({ recommendId, userId }) => {
 export default function DetailPage() {
   // 루트에서 추천 장소 ID 읽기
   const { recommendId } = useParams();
+  console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
   const user = pocketbase.authStore.model;
@@ -42,6 +43,7 @@ export default function DetailPage() {
 
   // 쿼리 키
   const queryKey = ['recommends', recommendId];
+  console.log(queryKey);
 
   // 데이터 쿼리
   const { isLoading, error, data } = useQuery({
@@ -50,6 +52,7 @@ export default function DetailPage() {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
+  console.log(data);
 
   // 데이터 뮤테이션 (추가)
   const addMutation = useMutation({
@@ -117,47 +120,52 @@ export default function DetailPage() {
 
     // 로그인 사용자 북마크 여부
     const isBookmark = detailPlace.userEmail.includes(user.id);
+    // console.log(detailPlace);
+    // console.log(isBookmark);
 
     // 북마크 토글 함수
     const handleToggleBookmark = (recommendId, userId) => async () => {
       const mutationMethod = isBookmark ? removeMutation : addMutation;
       mutationMethod.mutate({ recommendId, userId });
     };
+    console.log(isBookmark);
 
     return (
-      <div className=" mx-auto  min-h-screen min-w-[22.5rem] bg-background pb-10">
+      <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
+        <div className=" flex flex-col items-center justify-center gap-10 ">
+          <MyPageHeader page="detail" />
+          <h1 className="sr-only">추천 장소</h1>
+        </div>
         <div className="container">
-          <div className=" flex flex-col items-center justify-center gap-10 ">
-            <h1 className="sr-only">추천 장소</h1>
-            <MyPageHeader page="detail" />
+          <section className="animate-fade-animate px-6">
             <img
               src={getPocketHostImageURL(detailPlace, 'image')}
               alt={`${detailPlace.place} 이미지`}
-              className="  mx-3 h-[22.5rem] min-h-[22.5rem] w-[77.25rem] min-w-[20rem] rounded-xl object-cover"
+              className="  mx-auto my-10 h-[31.25rem] min-h-[22.5rem] w-[77.25rem] min-w-[20rem] rounded-xl object-cover "
             />
-          </div>
-          <div className="mx-auto  my-5 max-w-[1236px] px-4">
-            <span className=" h-4 rounded-full bg-secondary px-2 py-1 text-[0.875rem]">
-              {detailPlace.localMain}
-            </span>
-            <div className="mb-1  mt-3 flex items-center">
-              <h2 className=" text-2xl font-bold text-contentsPrimary">
-                {detailPlace.place}
-              </h2>
-              <button
-                type="button"
-                onClick={handleToggleBookmark(detailPlace.id, user.id)}
-                className="m-2"
-              >
-                <BookMark color={isBookmark ? '#C9ECFF' : ''} />
-              </button>
+            <div className="mx-auto  my-5 max-w-[77.25rem] px-4">
+              <span className=" h-4 rounded-full bg-secondary px-2 py-1 text-[0.875rem]">
+                {detailPlace.localMain}
+              </span>
+              <div className="mb-1  mt-3 flex items-center">
+                <h2 className=" text-2xl font-bold text-contentsPrimary">
+                  {detailPlace.place}
+                </h2>
+                <button
+                  type="button"
+                  onClick={handleToggleBookmark(detailPlace.id, user.id)}
+                  className="m-2"
+                >
+                  <BookMark color={isBookmark ? '#C9ECFF' : ''} />
+                </button>
+              </div>
+              <p className="mb-3 text-[0.875rem] font-light text-gray-1">
+                {detailPlace.address}
+              </p>
+              <div className="border-b-[0.0625rem] border-contentsPrimary"></div>
             </div>
-            <p className="mb-3 text-[0.875rem] font-light text-gray-1">
-              {detailPlace.address}
-            </p>
-            <div className="border-b-[0.0625rem] border-contentsPrimary"></div>
-          </div>
-          <DetailInfo detailPlace={detailPlace} />
+            <DetailInfo detailPlace={detailPlace} />
+          </section>
         </div>
       </div>
     );

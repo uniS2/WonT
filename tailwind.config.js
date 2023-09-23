@@ -33,7 +33,7 @@ export default {
         LandingCarouselSix: "url('./src/assets/LandingPage-carousel-six.svg')",
       }),
       keyframes: {
-        'fade-slide-in': {
+        'fade-animate-in': {
           '0%': {
             transform: 'translateY(30px)',
             opacity: '0',
@@ -43,9 +43,14 @@ export default {
             opacity: '1',
           },
         },
+        'plain-animate': {
+          '0%': { transform: 'translate(-30px, 30px)', opacity: '0' },
+          '100%': { transform: 'translate(0, 0)', opacity: '1' },
+        },
       },
       animation: {
-        'fade-slide': 'fade-slide-in 0.8s ease-out',
+        'fade-animate': 'fade-animate-in 0.6s ease-out',
+        'plain-animate': 'plain-animate 0.8s 0.2s ease-in-out infinite',
       },
     },
   },

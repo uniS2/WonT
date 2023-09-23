@@ -3,21 +3,17 @@ import { devtools } from "zustand/middleware";
 
 export const useMapStore = create(
   devtools((set) => ({
-    hotelMarkers: [],
+    // state - 장소 선택
     placeMarkers: [],
-    setHotelMarkers: (data) =>
+    // state - 숙소 선택
+    hotelList: [],
+    // action - 숙소 선택
+    setHotelList: (data) =>
       set((state) => ({
-        hotelMarkers: [
-          ...state.hotelMarkers,
-          {
-            id: data.id,
-            ...data,
-          }
-        ]
+        hotelList: data
       }),
         false,
-        'hotel/markers'
-      ),
+        'hotel/list'),
     setPlaceMarkers: (data) =>
       set((state) => ({
         placeMarkers: [

@@ -28,13 +28,13 @@ function TravelsPage() {
   );
   if ((detailTravels, user)) {
     return (
-      <div className="container  mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
-        <div className="mx-auto flex flex-col ">
+      <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
+        <div>
           <h1 className="sr-only">TravelsPage</h1>
           <MyPageHeader page="detail" />
           <div className="container flex flex-col items-center justify-center">
             <section className="px-3">
-              <div className="px-6">
+              <div className=" px-6">
                 <h2 className="my-4 ml-2 text-2xl font-bold text-contentsPrimary">
                   여행기록
                 </h2>
@@ -43,7 +43,7 @@ function TravelsPage() {
                   <img
                     src={getPocketHostImageURL(user, 'profile')}
                     alt={`${user.username}님의 프로필`}
-                    className="h-16 w-16 rounded-full object-cover"
+                    className=" h-16 w-16 rounded-full object-cover"
                   />
                   <div className="flex flex-col">
                     <p className="text-lg font-semibold text-contentsPrimary">
@@ -58,9 +58,8 @@ function TravelsPage() {
                   showArrows={true}
                   showStatus={false}
                   showThumbs={false}
-                  interval={1000}
-                  infiniteLoop={true}
-                  className="min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
+                  showIndicators={false}
+                  className="mx-auto min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
                 >
                   {detailTravels.image.map((image) => (
                     <img
@@ -69,7 +68,7 @@ function TravelsPage() {
                         ''
                       )}/${image}`}
                       alt="이미지"
-                      className="my-1 items-center rounded-xl  object-contain sm:object-contain md:h-[25rem] md:min-h-[22.5rem] md:object-cover lg:object-cover xl:object-cover"
+                      className=" my-1 items-center  rounded-xl object-contain sm:object-contain md:h-[25rem] md:min-h-[22.5rem] md:object-cover lg:object-cover xl:object-cover"
                     />
                   ))}
                 </Carousel>

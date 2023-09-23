@@ -10,6 +10,7 @@ const RootLayout = lazy(() => import('./pages/RootLayout'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage'));
+// const ProtectRoute = lazy(() => import('@/components/ProtectRoute'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const TripLocalPage = lazy(() => import('./pages/TripLocalPage'));
 const TripCalendarPage = lazy(() => import('./pages/TripCalendarPage'));

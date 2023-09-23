@@ -88,7 +88,7 @@ export default function BookmarkList({ loginUser }) {
       {bookmarkItems?.map?.((item) => (
         <li
           key={item.id}
-          className=" relative mx-auto w-auto  min-w-[360px] opacity-80 transition duration-300 ease-in-out hover:opacity-100 hover:contrast-125 sm:min-w-min lg:min-w-min"
+          className=" relative mx-auto w-auto  min-w-[360px] opacity-80 transition duration-300 ease-in-out hover:opacity-100 hover:contrast-125 sm:min-w-min lg:min-w-min "
         >
           <button
             type="button"
@@ -101,7 +101,7 @@ export default function BookmarkList({ loginUser }) {
             <img
               src={getPocketHostImageURL(item).split(',')[0]}
               alt=""
-              className="aspect-square rounded-lg border-[1px] border-gray-2 object-cover sm:h-[300px] md:h-auto lg:h-[320px] xl:h-[401px]"
+              className="aspect-square overflow-x-hidden rounded-lg border-[1px] border-gray-2 object-cover sm:h-[300px] md:h-auto lg:h-[320px] xl:h-[401px]"
             />
           </Link>
         </li>
