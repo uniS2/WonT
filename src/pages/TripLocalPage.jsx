@@ -13,7 +13,6 @@ async function fetchLocals() {
 }
 
 export default function TripLocalPage() {
-  // Tanstack Query
   const { data, error } = useQuery(['locals'], fetchLocals, {
     retry: 2,
   });
@@ -21,7 +20,6 @@ export default function TripLocalPage() {
   const selectIndex = useLocalStore((state) => state.selectIndex);
   const isSelect = selectIndex !== null;
 
-  // 오류가 발생한 경우 화면
   if (error) {
     return (
       <div role="alert">
