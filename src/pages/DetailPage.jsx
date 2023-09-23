@@ -5,6 +5,7 @@ import pocketbase from '@/api/pocketbase';
 import BookMark from '@/components/BookMark';
 import MyPageHeader from '@/components/PageHeader';
 import DetailInfo from '@/components/Detail/DetailInfo';
+import { Helmet } from 'react-helmet-async';
 
 // 전선용이 피드백받고 추가한 함수
 import { useBookmarkStore } from '@/store/bookmarkStore';
@@ -145,9 +146,11 @@ export default function DetailPage({ loginUser }) {
 
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
-        <div className=" flex flex-col items-center justify-center gap-10 ">
+        <Helmet>
+          <title className="sr-only">Detail - WonT</title>
+        </Helmet>
+        <div className=" flex h-[64px] flex-col items-center justify-center gap-10">
           <MyPageHeader page="detail" />
-          <h1 className="sr-only">추천 장소</h1>
         </div>
         <div className="container">
           <section className="animate-fade-animate px-6">

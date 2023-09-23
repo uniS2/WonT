@@ -5,6 +5,7 @@ import MyPageHeader from '@/components/PageHeader';
 import { getPocketHostImageURL } from '@/utils/index.js';
 import pocketbase from '@/api/pocketbase';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
+import { Helmet } from 'react-helmet-async';
 
 export default function BookmarkPage() {
   const user = pocketbase.authStore.model;
@@ -13,7 +14,9 @@ export default function BookmarkPage() {
   if (user) {
     return (
       <div className="mx-auto w-screen bg-background ">
-        <h1 className="sr-only">MySchedule</h1>
+        <Helmet>
+          <title className="sr-only">MySchedule - WonT</title>
+        </Helmet>
         <MyPageHeader page="mypage" />
         <div className="container mx-auto flex min-h-screen min-w-[22.5rem] flex-col items-center  bg-background pb-14">
           <div className="flex flex-col items-center pb-11 pt-7">

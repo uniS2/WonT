@@ -30,7 +30,7 @@ export default function PlanPreview({ userSchedule }) {
           <Link to={`/myschedule/${item.id}`} key={item.id}>
             <div
               className="  relative mx-auto flex  cursor-pointer justify-center 
-             rounded-xl  border-2 
+            rounded-xl  border-2 
             bg-[hsl(0,0%,90%,0.6)] bg-fixed opacity-80 transition duration-300 ease-in-out hover:opacity-100 hover:contrast-125"
             >
               <div className=" rounded-xl bg-gradient-to-t from-slate-800/40 via-white/10">

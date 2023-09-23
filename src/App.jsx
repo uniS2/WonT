@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import router from '@/routes';
 import Spinner from '@/components/Spinner/Spinner';
 import AuthProvider from '@/contexts/Auth';
+import { HelmetProvider } from 'react-helmet-async';
 
 // 쿼리 클라이언트 객체 생성
 const queryClient = new QueryClient({
