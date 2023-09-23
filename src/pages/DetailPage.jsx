@@ -6,6 +6,9 @@ import BookMark from '@/components/BookMark';
 import MyPageHeader from '@/components/PageHeader';
 import DetailInfo from '@/components/Detail/DetailInfo';
 
+// 전선용이 피드백받고 추가한 함수
+import { useBookmarkStore } from '@/store/bookmarkStore';
+
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
 
@@ -30,7 +33,13 @@ const removeBookmark = async ({ recommendId, userId }) => {
 /* -------------------------------------------------------------------------- */
 // *상세페이지
 
-export default function DetailPage() {
+export default function DetailPage({ loginUser }) {
+  // 전선용이 피드백받고 추가한 함수
+  const { setBookmarkList, deleteBookmarkList } = useBookmarkStore((state) => ({
+    setBookmarkList: state.setBookmarkList,
+    deleteBookmarkList: state.deleteBookmarkList,
+  }));
+
   // 루트에서 추천 장소 ID 읽기
   const { recommendId } = useParams();
   console.log(recommendId);
@@ -125,10 +134,14 @@ export default function DetailPage() {
 
     // 북마크 토글 함수
     const handleToggleBookmark = (recommendId, userId) => async () => {
-      const mutationMethod = isBookmark ? removeMutation : addMutation;
-      mutationMethod.mutate({ recommendId, userId });
+      if (isBookmark) {
+        await removeMutation.mutate({ recommendId, userId });
+        deleteBookmarkList(recommendId);
+      } else {
+        await addMutation.mutate({ recommendId, userId });
+        setBookmarkList(recommendId);
+      }
     };
-    console.log(isBookmark);
 
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
