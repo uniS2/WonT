@@ -1,13 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
+import { useId } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Helmet } from 'react-helmet-async';
+import { useQuery } from '@tanstack/react-query';
 import MyPageHeader from '@/components/PageHeader';
 import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import { Helmet } from 'react-helmet-async';
 
 const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());
@@ -27,6 +28,8 @@ function TravelsPage() {
   const user = userData?.items?.find(
     (item) => item.id === detailTravels?.userEmail
   );
+
+  const id = useId();
   if ((detailTravels, user)) {
     return (
       <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
@@ -62,16 +65,17 @@ function TravelsPage() {
                   showStatus={false}
                   showThumbs={false}
                   showIndicators={false}
-                  className="mx-auto min-w-[90%] sm:w-[40rem] sm:object-contain md:w-[48rem] lg:w-[64rem] xl:w-[77.25rem]"
+                  className="mx-auto flex min-w-[90%] items-center justify-center overflow-hidden rounded-xl sm:w-[40rem] md:h-[25rem] md:w-[48rem] lg:h-[31.25rem] lg:w-[64rem] xl:w-[77.25rem]"
                 >
                   {detailTravels.image.map((image) => (
                     <img
+                      key={id}
                       src={`${getPocketHostImageURL(detailTravels, '').replace(
                         'undefined',
                         ''
                       )}/${image}`}
                       alt="이미지"
-                      className=" my-1 items-center  rounded-xl object-contain sm:object-contain md:h-[25rem] md:min-h-[22.5rem] md:object-cover lg:object-cover xl:object-cover"
+                      className="my-1 h-full items-center object-fill"
                     />
                   ))}
                 </Carousel>
