@@ -44,13 +44,13 @@ export default {
           },
         },
         'plain-animate': {
-          '0%': { transform: 'translate(-30px, 30px)', opacity: '0' },
-          '100%': { transform: 'translate(0, 0)', opacity: '1' },
+          '0%': { transform: 'translate(-30,30)', opacity: '1' },
+          '100%': { transform: 'translate(30px, -30px)', opacity: '1' },
         },
       },
       animation: {
         'fade-animate': 'fade-animate-in 0.6s ease-out',
-        'plain-animate': 'plain-animate 0.8s 0.2s ease-in-out infinite',
+        'plain-animate': 'plain-animate 1s 0.2s ease-in-out infinite',
       },
     },
   },

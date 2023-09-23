@@ -3,13 +3,17 @@ import TripPlanEditButton from '@/components/TripPlanEditButton';
 import { useLocalStore } from '@/store/localStore';
 import { useQuery } from '@tanstack/react-query';
 import { getPocketHostURL } from '@/utils';
+import { useDateStore } from '@/store/dateStore';
 
 const getMySchedule = () =>
   fetch(`${getPocketHostURL('mySchedule')}`).then((res) => res.json());
 
 export default function TripPlan({ background = 'bg-secondary/50' }) {
+  const { tripDate } = useDateStore();
   const selectName = useLocalStore((set) => set.selectName);
+  const selectDate = useDateStore((set) => set.tripDate);
   const { data } = useQuery(['mySchedule'], getMySchedule);
+  console.log(data);
 
   return (
     <div className={`${background} px-6 py-[1.125rem] md:px-10 lg:px-8`}>
@@ -27,7 +31,8 @@ export default function TripPlan({ background = 'bg-secondary/50' }) {
           <dl>
             <dt className="sr-only">여행 기간</dt>
             <dd className="text-base font-light text-contentsSecondary">
-              2023.10.10 - 2023.10.20
+              {selectDate[0]?.toISOString().split('T')[0]} -
+              {selectDate[1]?.toISOString().split('T')[0]}
             </dd>
           </dl>
           <Link to="/tripcalendar">

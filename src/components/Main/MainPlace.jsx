@@ -46,12 +46,13 @@ export default function MainPlace() {
         {data?.map((item) => (
           <li
             key={item.id}
-            className="relative mb-[1.625rem] flex h-[9.25rem] w-[9.25rem] transform overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg lg:h-[15rem] lg:w-[15rem] xl:h-[18.125rem] xl:w-[18.125rem] 2xl:h-[9.25rem] 2xl:w-[9.25rem] "
+            className="relative mb-[1.625rem] flex h-[9.25rem]  w-[9.25rem] transform overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg lg:h-[15rem] lg:w-[15rem] xl:h-[18.125rem] xl:w-[18.125rem] 2xl:h-[9.25rem] 2xl:w-[9.25rem]"
           >
             <Link to={`/bookmark/${item.id}`}>
               <img
                 src={getPocketHostImageURL(item).split(',')[0]}
                 className="h-[9.25rem] w-[9.25rem] md:h-[9.25rem] md:w-[9.25rem] lg:h-[15rem] lg:w-[15rem] xl:h-[18.125rem] xl:w-[18.125rem]  2xl:h-[9.25rem] 2xl:w-[9.25rem] "
+                alt={item.place}
               />
               <div className="absolute bottom-1 left-1 font-bold text-white">
                 <p>{item.place}</p>

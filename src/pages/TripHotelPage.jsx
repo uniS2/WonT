@@ -14,7 +14,7 @@ export default function TripHotelPage() {
     toggleHotelTripPlan,
     toggleHotelList,
   } = useToggleTripMenuStore();
-  const { hotelList, hotelMarker } = useMapStore();
+  const { hotelList } = useMapStore();
 
   return (
     <>

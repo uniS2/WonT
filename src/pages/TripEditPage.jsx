@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header/Header';
 import TripPlan from '@/components/TripPlan';
-// import Map from '@/components/Map';
+import Map from '@/components/Map';
 import AddPlan from '@/components/TripEdit/AddPlan';
 import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import PlanDate from '@/components/TripEdit/PlanDate';
 import useScheduleList from '@/hooks/useScheduleList';
-import ScheduleMap from '@/components/TripEdit/ScheduleMap';
+// import ScheduleMap from '@/components/TripEdit/ScheduleMap';
+import { Helmet } from 'react-helmet-async';
 
 export default function TripEditPage() {
   const [toggleSchedule, setToggleSchedule] = useState(false);
@@ -18,20 +19,22 @@ export default function TripEditPage() {
   console.log(data);
 
   const currentPath = window.location.pathname.replace('/tripedit/', '');
-  console.log(currentPath);
   const tripSchdeule = data?.items?.find((item) => item.id === currentPath);
+  console.log(tripSchdeule);
 
   return (
     <div className="bg-background">
+      <Helmet>
+        <title className="sr-only">TripEdit - Wont</title>
+      </Helmet>
       <Header />
       <div className="w-auto ">
         <TripPlan />
       </div>
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
-        <h1 className="sr-only">TripEditPage</h1>
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
-          {/* <Map height={'h-[31.25rem]'} /> */}
-          <ScheduleMap height={'h-[31.25rem]'} />
+          <Map height={'h-[31.25rem]'} />
+          {/* <ScheduleMap height={'h-[31.25rem]'} /> */}
           <PlanDate
             toggleButton={handleToggle}
             toggleSchedule={toggleSchedule}
