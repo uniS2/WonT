@@ -37,9 +37,7 @@ export default function TripHeader({
         </li>
         {isLogo && (
           <li className={`ml-[0.4375rem] ${restProps}`}>
-            <Link to="/main">
-              <Logo width={'3.75rem'} height={'1.375rem'} />
-            </Link>
+            <Logo width={'3.75rem'} height={'1.375rem'} />
           </li>
         )}
         {isUserIcon && (
