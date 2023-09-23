@@ -15,7 +15,7 @@ export default function AddPlaceItemContent({
           {count}
         </span>
       </div>
-      <dl>
+      <dl className="flex h-[2.75rem] items-center">
         <dt className="sr-only">추가한 장소명</dt>
         <dd className={`${placeNameFont} text-contentsPrimary`}>{placeName}</dd>
       </dl>
