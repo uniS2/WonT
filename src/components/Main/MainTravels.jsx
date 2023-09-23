@@ -31,7 +31,10 @@ export default function MainTravels() {
               key={item.id}
               className="overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg"
             >
-              <img src={getPocketHostImageURL(item).split(',')[0]} alt="" />
+              <img
+                src={getPocketHostImageURL(item).split(',')[0]}
+                alt={item.info}
+              />
               <div className="pb-[1.25rem] pt-[0.625rem]">
                 <p className="text-base font-semibold">{item.title}</p>
                 <p className="text-sm font-light text-gray-500">{item.text}</p>
