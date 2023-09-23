@@ -15,7 +15,7 @@ export default function Map({
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longitude)
   );
-  console.log(center);
+  // console.log(center);
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -53,9 +53,9 @@ export default function Map({
       navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude; // 위도
         const lon = position.coords.longitude; // 경도
-        console.log(
-          `현재 위치는 위도 ${lat}, 경도 ${lon}이고 지도 확대 레벨은 ${level}입니다.`
-        );
+        // console.log(
+        //   `현재 위치는 위도 ${lat}, 경도 ${lon}이고 지도 확대 레벨은 ${level}입니다.`
+        // );
         updateCenter(lat, lon);
       });
     } else {

@@ -9,14 +9,14 @@ export default function MainMakePlan() {
 
   return (
     <div
-      className={`mx-5 mb-[40px] mt-[1.063rem] flex h-[8.125rem] w-[20rem] items-center justify-center rounded-[0.625rem] bg-white md:w-[568px] lg:w-[824px] ${
+      className={`mx-5 mb-[40px] mt-[1.063rem] flex h-[140px] w-[20rem] items-center justify-center rounded-[0.625rem] bg-white shadow-md shadow-secondary/50 md:w-[568px] lg:w-[824px] ${
         hover ? 'hovered-style' : ''
       }`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <Link to="/triplocal">
-        <button type="button" className="flex flex-col items-center">
+        <button type="button" className="flex flex-col items-center ">
           <div
             type="button"
             className="border-secondary/0.8 relative flex overflow-hidden rounded-full border-[1px]"
