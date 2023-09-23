@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import pocketbase from '@/api/pocketbase';
@@ -14,6 +14,7 @@ import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
 import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { useScheduleStore } from '@/store/scheduleStore';
 
 // 데이터 요청 함수 (query function)
 const fetchScheduleDetail = async (userId) => {
@@ -28,6 +29,9 @@ export default function MyScheduleDetailPage() {
   // 경로 지정
   const navigate = useNavigate();
 
+  // 키 지정
+  const ID = useId();
+
   // 아이디 일치여부
   let userId = pocketbase.authStore.model;
 
@@ -38,7 +42,7 @@ export default function MyScheduleDetailPage() {
     { refetchOnWindowFocus: false }
   );
 
-  // 선택한 북마크 아이디
+  // 선택한 북마크 아이디 및 store 저장
   const [bookmarkId, setBookmarkId] = useState([]);
   const params = useParams();
 
@@ -46,7 +50,7 @@ export default function MyScheduleDetailPage() {
     setBookmarkId(params.detailId);
   }, [params.detailId]);
 
-  const selectBookmark = data?.filter((item) => item.id === params.detailId)[0];
+  const selectBookmark = data?.filter((item) => item.id === bookmarkId);
 
   // Store: 전체일정, 모달, 날짜별 일정
   const {
@@ -95,12 +99,17 @@ export default function MyScheduleDetailPage() {
         <section className="flex flex-col gap-[1.875rem]">
           <h2 className="sr-only">전체 일정 한눈에 보기</h2>
           <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white">
-            <TotalScheduleSummary
-              imageURL={getPocketHostImageURL(selectBookmark, 'main')}
-              localName={setLocalName(selectBookmark.title)}
-              startDay={getTripDate(selectBookmark.start_date)}
-              endDay={getTripDate(selectBookmark.end_date)}
-            />
+            {selectBookmark?.map((item) => (
+              <TotalScheduleSummary
+                key={ID}
+                imageURL={
+                  item.main ? getPocketHostImageURL(item, 'main') : null
+                }
+                localName={setLocalName(item.title)}
+                startDay={getTripDate(item.start_date)}
+                endDay={getTripDate(item.end_date)}
+              />
+            ))}
             <DeleteButton onClick={toggleDeleteModal} />
           </div>
           {displayDeleteModal && (
@@ -108,7 +117,13 @@ export default function MyScheduleDetailPage() {
               정말 삭제하시겠습니까?
             </Modal>
           )}
-          <TotalScheduleView />
+          {selectBookmark?.map((item) => (
+            <TotalScheduleView
+              localName={setLocalName(item.title)}
+              startDay={getTripDate(item.start_date)}
+              endDay={getTripDate(item.end_date)}
+            />
+          ))}
         </section>
       )}
       <hr className="aria-hidden mx-5" />
