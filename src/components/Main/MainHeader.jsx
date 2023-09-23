@@ -9,9 +9,7 @@ export default function MainHeader() {
   return (
     <div>
       <div className="flex justify-between bg-white px-6 py-[1.063rem]">
-        <Link to="/main">
-          <Logo width={'4.625rem'} height={'1.75rem'} />
-        </Link>
+        <Logo width={'4.625rem'} height={'1.75rem'} />
         <div className="flex gap-6">
           <Link to="/bookmark">
             <BookMark />

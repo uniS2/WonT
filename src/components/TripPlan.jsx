@@ -2,7 +2,12 @@ import { Link } from 'react-router-dom';
 import TripPlanEditButton from '@/components/TripPlanEditButton';
 import { useLocalStore } from '@/store/localStore';
 import { useQuery } from '@tanstack/react-query';
-import { getPocketHostURL } from '@/utils';
+import {
+  getPocketHostURL,
+  getTripDate,
+  getTripDateDot,
+  getTripDateUTC,
+} from '@/utils';
 import { useDateStore } from '@/store/dateStore';
 
 const getMySchedule = () =>
@@ -33,8 +38,8 @@ export default function TripPlan({ background = 'bg-secondary/50' }) {
           <dl>
             <dt className="sr-only">여행 기간</dt>
             <dd className="text-base font-light text-contentsSecondary">
-              {selectDate[0]?.toISOString().split('T')[0]} -
-              {selectDate[1]?.toISOString().split('T')[0]}
+              {getTripDate(getTripDateUTC(selectDate[0]))} -
+              {getTripDate(getTripDateUTC(selectDate[1]))}
             </dd>
           </dl>
           <Link to="/tripcalendar">

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// import PaperAirPlane from '@/assets/MainPage-planeIcon.webp';
+import airplain from '@/assets/common-favicon.svg';
 import { useState } from 'react';
 
 export default function MainMakePlan() {
@@ -22,14 +21,13 @@ export default function MainMakePlan() {
             className="border-secondary/0.8 relative flex overflow-hidden rounded-full border-[1px]"
           >
             <img
-              src="/src/assets/common-favicon.svg"
-              alt=""
+              src={airplain}
+              alt="비행기 아이콘"
               className={`absolute left-[12px] top-[14px] delay-75 ${
                 hover ? 'animate-plain-animate ' : ''
               }`}
             />
-            <div class="bottom-3 right-5 flex h-14 w-14 items-center rounded-full bg-[#ECFFFE] p-1"></div>
-            {/* <img src={PaperAirPlane} alt="" /> */}
+            <div className="bottom-3 right-5 flex h-14 w-14 items-center rounded-full bg-[#ECFFFE] p-1"></div>
           </div>
 
           <div className="relative flex flex-col items-center pt-[0.625rem]">

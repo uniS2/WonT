@@ -13,13 +13,9 @@ export default function MainPlace() {
   const user = pocketbase.authStore.model;
   const userId = user.id;
 
-  // console.log(bookmarkList);
-
   useEffect(() => {
     async function fetchUsers() {
-      const usersList = await pocketbase
-        .collection('recommends')
-        .getFullList({});
+      const usersList = await pocketbase.collection('recommends').getFullList();
       setData(usersList);
     }
 
