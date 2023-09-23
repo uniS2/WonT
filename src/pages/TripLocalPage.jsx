@@ -7,6 +7,7 @@ import TripTitle from '@/components/TripTitle';
 import { useLocalStore } from '@/store/localStore';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
 import { Helmet } from 'react-helmet-async';
+import Spinner from '@/components/Spinner/Spinner';
 
 async function fetchLocals() {
   const response = await fetch(`${getPocketHostURL('locals')}`);
@@ -14,7 +15,7 @@ async function fetchLocals() {
 }
 
 export default function TripLocalPage() {
-  const { data, error } = useQuery(['locals'], fetchLocals, {
+  const { data, isLoading, error } = useQuery(['locals'], fetchLocals, {
     retry: 2,
   });
 
@@ -42,22 +43,28 @@ export default function TripLocalPage() {
           question={'어디로 떠나시나요?'}
           guide={'여행할 지역을 선택하세요.'}
         />
-        <ul className="mb-9 flex w-full flex-col gap-[0.625rem] md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-          {data?.items?.map((item) => (
-            <LocalItem
-              key={item.id}
-              image={item.image ? getPocketHostImageURL(item) : null}
-              name={item.name}
-              index={item.id}
-            />
-          ))}
-        </ul>
-        {isSelect ? (
-          <Link to="/tripcalendar">
-            <ButtonLarge>선택 완료</ButtonLarge>
-          </Link>
+        {isLoading ? (
+          <Spinner />
         ) : (
-          <ButtonLarge>선택 완료</ButtonLarge>
+          <>
+            <ul className="mb-9 flex w-full flex-col gap-[0.625rem] md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+              {data?.items?.map((item) => (
+                <LocalItem
+                  key={item.id}
+                  image={item.image ? getPocketHostImageURL(item) : null}
+                  name={item.name}
+                  index={item.id}
+                />
+              ))}
+            </ul>
+            {isSelect ? (
+              <Link to="/tripcalendar">
+                <ButtonLarge>선택 완료</ButtonLarge>
+              </Link>
+            ) : (
+              <ButtonLarge>선택 완료</ButtonLarge>
+            )}
+          </>
         )}
       </section>
     </>

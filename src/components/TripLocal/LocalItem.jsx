@@ -10,14 +10,21 @@ export default function LocalItem({ image, name = '지역명', index }) {
   return (
     <li className="flex items-center justify-between bg-white px-5 py-[0.9375rem]">
       <div className="flex items-center gap-5">
-        <LocalImage image={image} />
+        <LocalImage image={image} alt={name} />
         <LocalName>{name}</LocalName>
       </div>
       <ButtonSmall
-        onClick={() => {
-          setSelectIndex(index);
-          setSelectName(name);
-        }}
+        onClick={
+          isSelect
+            ? () => {
+                setSelectIndex(null);
+                setSelectName(null);
+              }
+            : () => {
+                setSelectIndex(index);
+                setSelectName(name);
+              }
+        }
         color={isSelect ? 'bg-point' : 'bg-primary'}
       >
         {isSelect ? '취소' : '선택'}
