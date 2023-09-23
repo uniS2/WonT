@@ -20,9 +20,10 @@ export default function MapPlace({
 
   // const selectName = useLocalStore((state) => state.selectName);
   const selectName = '서울';
-  //$ 마커, 카테고리를 관리할 배열을 생성합니다.
   const category = 'SW8';
-  const { placeMarkers, setPlaceMarkers } = useMapStore();
+
+  let markers = []; // 마커
+  const { placeList, setPlaceList } = useMapStore();
 
   useEffect(() => {
     const container = document.getElementById('mapPlace');
@@ -33,16 +34,72 @@ export default function MapPlace({
 
     // 지도 생성하기
     const map = new kakao.maps.Map(container, options);
-    //* 카테고리검색
-    //* 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-    //* 장소 검색 객체를 생성합니다
-    const places = new kakao.maps.services.Places(map);
 
-    //^ 주소-좌표 변환 객체를 생성합니다
+    // 주소 - 좌표 변환 객체
     const geocoder = new kakao.maps.services.Geocoder();
 
-    //^ 주소로 좌표를 검색합니다
+    // 장소 검색 객체 - 카테고리 및 키워드 검색
+    const places = new kakao.maps.services.Places(map);
+
+    // 인포 윈도우 - 마커 클릭, hover 시 장소명을 표출
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+    // 지도 줌 컨트롤, 스크롤 이벤트, 커서 스타일 관리하기
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
+    map.setCursor('move'); // 커서 스타일을 'move'로 변경
+
+    //# 카테고리 삭제 함수
+    function removeMarker() {
+      for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers = [];
+    }
+
+    //# 카테고리 검색 완료 시 호출되는 콜백함수
+    function categorySearchCB(data, status, pagination) {
+      removeMarker();
+      setPlaceList(data);
+
+      if (status === kakao.maps.services.Status.OK) {
+        for (let i = 0; i < data.length; i++) {
+          displayMarker(data[i]);
+        }
+      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        alert('해당 지역에는 원하는 카테고리가 없습니다.');
+        return;
+      } else if (status === kakao.maps.services.Status.ERROR) {
+        alert('검색 중 오류가 발생했습니다.');
+        return;
+      }
+    }
+
+    //# 지도에 마커를 표시하는 함수
+    function displayMarker(place) {
+      // 마커를 생성하고 지도에 표시합니다
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x),
+      });
+
+      markers.push(marker);
+
+      // 마커에 이벤트를 등록합니다.
+      //- click
+      kakao.maps.event.addListener(marker, 'click', function () {
+        infowindow.setContent(
+          '<div style="padding:5px;font-size:12px;">' +
+            place.place_name +
+            '</div>'
+        );
+        infowindow.open(map, marker);
+      });
+    }
+
+    //# 1. 현재 선택한 지역으로 좌표를 검색합니다
     geocoder.addressSearch(selectName, function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
@@ -51,7 +108,7 @@ export default function MapPlace({
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
 
-        //^ 카테고리 검색 (SW8)
+        //^ 카테고리 검색
         const categoryOptions = {
           location: coords,
           radius: 10000,
@@ -60,61 +117,19 @@ export default function MapPlace({
       }
     });
 
-    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성하기
-    const zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-    // map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
-    map.setCursor('move'); // 커서 스타일을 'move'로 변경
-
-    //* 카테고리 검색 완료 시 호출되는 콜백함수
-    function categorySearchCB(data, status, pagination) {
-      if (status === kakao.maps.services.Status.OK) {
-        for (let i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
-        }
-        console.log(data);
-      }
-    }
-
-    // 지도에 마커를 표시하는 함수입니다
-    function displayMarker(place) {
-      // 마커를 생성하고 지도에 표시합니다
-      const marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x),
-      });
-
-      // 마커에 클릭이벤트를 등록합니다
-      kakao.maps.event.addListener(marker, 'click', function () {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent(
-          '<div style="padding:5px;font-size:12px;">' +
-            place.place_name +
-            '</div>'
-        );
-        infowindow.open(map, marker);
-      });
-
-      //$ 생성된 마커를 markers 배열에 추가합니다.
-      setPlaceMarkers((prevMarkers) => [...prevMarkers, marker]);
-    }
-
-    // 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
+    //# 2. 지도 이동 이벤트를 감지하여 중심 좌표를 업데이트합니다.
     kakao.maps.event.addListener(
       map,
-      'center_changed',
+      'idle',
       debounce(function () {
-        // setPlaceMarkers([]); // 중심 좌표가 변경될 때 마커를 업데이트합니다.
-
         const newCenter = map.getCenter();
         places.categorySearch(category, categorySearchCB, {
           location: newCenter,
           radius: 10000,
         });
-      }, 1000)
+      })
     );
-  }, [center, level, category, setPlaceMarkers]);
+  }, [center, level, category, setPlaceList]);
 
   return (
     <div
