@@ -1,19 +1,26 @@
-import { getLocalName, getTripDates } from '@/utils/index.js';
 import CalendarIcon from '@/assets/common-calendar.webp';
+import { getLocalName, getTripDates } from '@/utils/index.js';
+import DefaultImage from '@/components/DefaultImage';
 
 export default function TotalScheduleSummary({
-  imageURL = '#',
+  imageURL,
   localName = '지역명',
   startDay,
   endDay,
 }) {
   return (
     <>
-      <img
-        src={imageURL}
-        alt={localName}
-        className="h-full w-[43.75%] bg-background"
-      />
+      {imageURL ? (
+        <img
+          src={imageURL}
+          alt={localName}
+          className="h-full w-[43.75%] bg-background"
+        />
+      ) : (
+        <div className="flex h-full w-[43.77%] items-center justify-center bg-[#EFF2F6]">
+          <DefaultImage />
+        </div>
+      )}
       <div className="absolute right-0 top-0 flex h-full w-[56.23%] flex-col justify-center gap-3 pl-[1.25rem]">
         <span className="font-semibold text-contentsPrimary">
           {getLocalName(localName)}

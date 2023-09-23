@@ -3,10 +3,14 @@ import TotalScheduleViewImageList from '@/components/MyScheduleDetail/TotalSched
 import TotalScheduleViewTitle from '@/components/MyScheduleDetail/TotalScheduleViewTitle';
 import TotalScheduleViewTopic from '@/components/MyScheduleDetail/TotalScheduleViewTopic';
 
-export default function TotalScheduleView() {
+export default function TotalScheduleView({ localName, startDay, endDay }) {
   return (
     <div className="modal relative mx-[1.25rem] flex min-h-[20.4375rem] flex-col justify-center gap-[1.25rem] overflow-hidden rounded-md bg-white pl-[1.25rem] pr-[0.625rem]">
-      <TotalScheduleViewTitle />
+      <TotalScheduleViewTitle
+        localName={localName}
+        startDay={startDay}
+        endDay={endDay}
+      />
       <div className="flex flex-col gap-[0.625rem]">
         <TotalScheduleViewTopic>선택한 장소</TotalScheduleViewTopic>
         <TotalScheduleViewImageList className={'ml-1'} />

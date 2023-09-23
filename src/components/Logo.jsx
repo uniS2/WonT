@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Logo({
   width = '8.5rem',
@@ -8,14 +8,10 @@ export default function Logo({
   isLogo = true,
   ...restProps
 }) {
-  const navigate = useNavigate();
-  const handleLogo = () => {
-    navigate('/main');
-  };
   return (
     <>
       {isLogo ? (
-        <button type="button" onClick={handleLogo} aria-label="WonTLogoButton">
+        <Link to="/main" aria-label="WonTLogoButton">
           <svg
             width={width}
             height={height}
@@ -119,7 +115,7 @@ export default function Logo({
               </linearGradient>
             </defs>
           </svg>
-        </button>
+        </Link>
       ) : (
         <button type="button" aria-label="WonTLogoButton">
           <svg
