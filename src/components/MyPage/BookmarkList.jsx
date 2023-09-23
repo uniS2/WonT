@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useMemosStore from '@/store/memoStore';
 
+// 전선용이 피드백 받고 추가한 코드
+import { useBookmarkStore } from '@/store/bookmarkStore';
+
 // 데이터 요청 함수 (query function)
 const getRecommends = async (userId) => {
   return await pocketbase.collection('recommends').getFullList({
@@ -22,6 +25,11 @@ const removeRecommend = async ({ recommendId, userId }) => {
 
 /* -------------------------------------------------------------------------- */
 export default function BookmarkList({ loginUser }) {
+  // 전선용이 피드백 받고 추가한 코드
+  const deleteBookmarkList = useBookmarkStore(
+    (state) => state.deleteBookmarkList
+  );
+
   const user = pocketbase.authStore.model;
 
   // 쿼리 클라이언트 인스턴스 가져오기
@@ -69,6 +77,8 @@ export default function BookmarkList({ loginUser }) {
       recommendId,
       userId,
     });
+    // 전선용이 피드백받고 추가한 코드
+    deleteBookmarkList(recommendId);
   };
 
   if (isLoading) {
