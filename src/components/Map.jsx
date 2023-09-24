@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useMapStore } from '@/store/mapStore';
 
 import debounce from '@/utils/debounce';
 
@@ -15,7 +16,8 @@ export default function Map({
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longitude)
   );
-  // console.log(center);
+  const { hotelList, setHotelList } = useMapStore();
+  console.log(hotelList);
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -27,16 +29,28 @@ export default function Map({
     // 지도 생성하기
     const map = new kakao.maps.Map(container, options);
 
-    // 마커 생성
-    let marker = new kakao.maps.Marker({ position: map.getCenter() });
-    marker.setMap(map);
-    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-      // 클릭한 위도, 경도 정보를 가져옵니다
-      let latlng = mouseEvent.latLng;
+    // 마커를 표시할 위치와 title 객체 배열입니다
+    let positions = [];
 
-      // 마커 위치를 클릭한 위치로 옮깁니다
-      marker.setPosition(latlng);
+    // hotelList 배열을 순회하면서 positions 배열에 데이터를 추가
+    hotelList?.forEach((item) => {
+      positions.push({
+        title: item.place_name,
+        latlng: new kakao.maps.LatLng(item.x, item.y),
+      });
     });
+
+    for (var i = 0; i < positions.length; i++) {
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+      });
+    }
+
+    // console.log(marker);
+    console.log(positions[0]);
 
     const updateCenter = debounce((lat, lon) => {
       map.panTo(new kakao.maps.LatLng(lat, lon)); // setCenter -> panTo: 지도 중심좌표 부드럽게 이동시키기
@@ -46,23 +60,23 @@ export default function Map({
     const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-    map.setZoomable(false); // 지도 스크롤 이벤트 - 확대, 축소 막기
+    map.setZoomable(true); // 지도 스크롤 이벤트 - 확대, 축소 막기
     map.setCursor('move'); // 커서 스타일을 변경
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude; // 위도
         const lon = position.coords.longitude; // 경도
-        // console.log(
-        //   `현재 위치는 위도 ${lat}, 경도 ${lon}이고 지도 확대 레벨은 ${level}입니다.`
-        // );
+        console.log(
+          `현재 위치는 위도 ${lat}, 경도 ${lon}이고 지도 확대 레벨은 ${level}입니다.`
+        );
         updateCenter(lat, lon);
       });
     } else {
       const defaultPosition = new kakao.maps.LatLng(latitude, longitude);
       setCenter(defaultPosition);
     }
-  }, [center, level]);
+  }, []);
 
   return <div id="map" className={`${height} ${width} ${restProps}`}></div>;
 }

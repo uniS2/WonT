@@ -50,7 +50,7 @@ export default {
       },
       animation: {
         'fade-animate': 'fade-animate-in 0.6s ease-out',
-        'plain-animate': 'plain-animate 1s 0.2s ease-in-out infinite',
+        'plain-animate': 'plain-animate 1s 0.2s ease-in-out ',
       },
     },
   },
