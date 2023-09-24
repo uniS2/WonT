@@ -1,7 +1,7 @@
 import { useState, useId } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import pocketbase from '@/api/pocketbase';
 import Header from '@/components/Header/Header';
@@ -27,8 +27,22 @@ const fetchMySchedule = async (userId) => {
   return response[0];
 };
 
+const saveSchedule = async ({ places, hotels, userId }) => {
+  return await pocketbase.collection('mySchedule').update(places, hotels, {
+    'places+': userId,
+    'hotels+': userId,
+  });
+};
+/* -------------------------------------------------------------------------- */
+
 export default function TripEditPage() {
   const user = pocketbase.authStore.model; // 로그인 유저 정보
+
+  const currentPath = useParams();
+  const [toggleSchedule, setToggleSchedule] = useState(false);
+  const handleToggle = () => {
+    setToggleSchedule(!toggleSchedule);
+  };
 
   // Tanstack Query
   const { data, error, isLoading } = useQuery(
@@ -36,21 +50,43 @@ export default function TripEditPage() {
     () => fetchMySchedule(user.id),
     { refetchOnWindowFocus: false }
   );
-  const currentPath = useParams();
-  const [toggleSchedule, setToggleSchedule] = useState(false);
-  const handleToggle = () => {
-    setToggleSchedule(!toggleSchedule);
-  };
 
-  // const startDate = new Date(data?.start_date);
-  // const endDate = new Date(data?.end_date);
+  // 데이터 뮤테이션 (추가)
+  const addMutation = useMutation({
+    mutationFn: saveSchedule,
+    onMutate: async ({ places, hotels, userId }) => {
+      await queryClient.cancelQueries({ queryKey: queryKey });
+
+      const previousData = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, (tripData) => ({
+        ...tripData,
+        username: [...recommendData.username, userId],
+      }));
+
+      return { previousData };
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: (context) => {
+      queryClient.setQueryData(queryKey, context.previousData);
+    },
+  });
+
+  const handleRemoveBookmark = (places, hotels, userId) => async () => {
+    mutation.mutate({
+      places,
+      hotels,
+      userId,
+    });
+  };
 
   const selectDate = useDateStore((set) => set.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
   const { hotelPositions } = useScheduleStore();
   const hotelList = Object.values(hotelPositions);
-  console.log(hotelList);
 
   const id = useId();
 
@@ -122,7 +158,11 @@ export default function TripEditPage() {
               ))}
 
           <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
-            <ButtonMedium fill={true} text="저장" />
+            <ButtonMedium
+              fill={true}
+              text="저장"
+              onClick={handleRemoveBookmark(hotelList, user.id)}
+            />
           </div>
         </div>
       </div>

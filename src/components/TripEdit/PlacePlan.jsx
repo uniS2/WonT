@@ -16,7 +16,10 @@ export default function PlacePlan({ hotelList, index }) {
           </div>
           <div className="flex flex-col">
             <p className="font-bold text-contentsPrimary">{item.place_name}</p>
-            <p className="text-sm text-contentsSecondary">
+            <p className="text-sm font-light text-contentsSecondary">
+              <span className="font-medium text-primary">
+                {item.category_group_name}
+              </span>{' '}
               {item.address_name}
             </p>
           </div>
