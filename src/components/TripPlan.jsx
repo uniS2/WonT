@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import TripPlanEditButton from '@/components/TripPlanEditButton';
-import { getTripDate } from '@/utils';
+import { getTripDate, getTripDateUTC } from '@/utils';
+import { useDateStore } from '@/store/dateStore';
 
 export default function TripPlan({ data, background = 'bg-secondary/50' }) {
+  const selectDate = useDateStore((set) => set.tripDate);
+  console.log(selectDate);
   return (
     <div className={`${background} px-6 py-[1.125rem] md:px-10 lg:px-8`}>
       <div className="mx-auto max-w-7xl">
@@ -19,7 +22,8 @@ export default function TripPlan({ data, background = 'bg-secondary/50' }) {
           <dl>
             <dt className="sr-only">여행 기간</dt>
             <dd className="text-base font-light text-contentsSecondary">
-              {getTripDate(data.start_date)} -{getTripDate(data.end_date)}
+              {getTripDate(getTripDateUTC(selectDate[0]))} -
+              {getTripDate(getTripDateUTC(selectDate[1]))}
             </dd>
           </dl>
           <Link to="/tripcalendar">

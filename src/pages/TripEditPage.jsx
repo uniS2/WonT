@@ -13,6 +13,8 @@ import PlanDate from '@/components/TripEdit/PlanDate';
 import { getRangeDay } from '@/utils/getRangeDay';
 import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
 import { useMapStore } from '@/store/mapStore';
+import { useDateStore } from '@/store/dateStore';
+import PlacePlan from '@/components/TripEdit/PlacePlan';
 
 /* -------------------------------------------------------------------------- */
 const fetchMySchedule = async (userId) => {
@@ -39,12 +41,14 @@ export default function TripEditPage() {
     setToggleSchedule(!toggleSchedule);
   };
 
-  const startDate = new Date(data?.start_date);
-  const endDate = new Date(data?.end_date);
+  // const startDate = new Date(data?.start_date);
+  // const endDate = new Date(data?.end_date);
 
-  const selectRangeDate = getRangeDay(startDate, endDate);
+  const selectDate = useDateStore((set) => set.tripDate);
+  const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
   const { hotelList, setHotelList } = useMapStore();
+  console.log(hotelList);
 
   const id = useId();
 
@@ -75,7 +79,12 @@ export default function TripEditPage() {
               />
 
               <div className={`${toggleSchedule ? 'hidden' : ''}`}>
-                <AddPlan text="장소" />
+                {hotelList.length === 0 ? (
+                  <AddPlan text="장소" />
+                ) : (
+                  <PlacePlan text="안녕" />
+                )}
+
                 <Link to={`/tripplace/${data?.id}/${index + 1}`}>
                   <ButtonMedium fill={false} text="일정 추가" />
                 </Link>
