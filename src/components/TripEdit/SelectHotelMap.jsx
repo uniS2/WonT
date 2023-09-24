@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useMapStore } from '@/store/mapStore';
 
 import debounce from '@/utils/debounce';
+import { useMarkerStore } from '@/store/markerStore';
 
 const { kakao } = window;
 
@@ -25,7 +25,7 @@ export default function SelectHotelMap({
       level: level, // 지도의 확대 레벨. 3
     };
 
-    window.kakao.maps.load(() => {
+    kakao.maps.load(() => {
       const container = document.getElementById('map');
       const options = {
         center: new kakao.maps.LatLng(37.5662952, 126.9779451), // 기본 중심 좌표 (서울)
@@ -38,13 +38,27 @@ export default function SelectHotelMap({
       const zoomControl = new kakao.maps.ZoomControl();
       map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-      // hotelList를 반복하여 각 위치에 마커 표시
+      // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+      const infowindow = new kakao.maps.InfoWindow({ zIndex: 1, content: '' });
+
+      // // *hotelList를 반복하여 각 위치에 마커 표시
       hotelList.forEach((hotel) => {
         const markerPosition = new kakao.maps.LatLng(hotel.y, hotel.x);
         const marker = new kakao.maps.Marker({
           position: markerPosition,
         });
         marker.setMap(map);
+        useMarkerStore.getState().addMarker(marker);
+
+        // 마커에 클릭 이벤트 등록
+        kakao.maps.event.addListener(marker, 'click', function () {
+          // 인포윈도우
+          infowindow.setContent(
+            `<div style="padding:5px;font-size:12px;">${hotel.place_name}</div>`
+          );
+          // 인포윈도우 열기
+          infowindow.open(map, marker);
+        });
       });
     });
   }, [hotelList]);
