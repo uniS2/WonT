@@ -167,8 +167,8 @@ pnpm dev
 <br>
 
 ## 📝기술스택
+![readme-stack](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/f5424f3a-9727-4e74-8336-b621c44004df)
 
-![readme-teckstack](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/7b054d1b-6bb9-4890-b36b-60acb402ab43)
 
 <br>
 <br>
