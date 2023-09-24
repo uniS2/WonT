@@ -13,7 +13,7 @@ export function getTripDateKo(dates) {
 
 export function getTripDateUTC(dates) {
   let dateUTC = new Date(`${String(dates).slice(0, 15)} 12:00:00`).toISOString();
-  return `${dateUTC.slice(0, 10)} 12:00:00`
+  return `${dateUTC.slice(0, 10)} 12:00:00.123Z`
 }
 
 export function getTripDateDot(dates) {
