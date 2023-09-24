@@ -3,6 +3,7 @@ import TripPlaceInfo from '@/components/TripSelect/TripPlaceInfo';
 import AddButton from '@/components/TripSelect/AddButton';
 import { useMapStore } from '@/store/mapStore';
 import { useScheduleStore } from '@/store/scheduleStore';
+import { useEffect } from 'react';
 
 export default function TripPlaceItem({ placeName, address, count }) {
   const { hotelList } = useMapStore(); // 호텔 목록
@@ -18,6 +19,10 @@ export default function TripPlaceItem({ placeName, address, count }) {
     // if(isSelect)
     addHotelPositions(hotelList[count]);
   };
+
+  useEffect(() => {
+    console.log(hotelPositions);
+  }, [hotelPositions]);
 
   return (
     <li className="h-[5.375rem] bg-background py-[0.8125rem] pl-[0.8125rem] pr-[1.625rem]">
