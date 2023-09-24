@@ -61,6 +61,7 @@ export default function TripHotelPage() {
               placeName={hotel.place_name}
               address={hotel.road_address_name}
               count={index}
+              index={currentIndex}
             />
           ))}
         </ul>
@@ -71,11 +72,13 @@ export default function TripHotelPage() {
               <h2 className="mb-[0.625rem] text-base font-light text-contentsPrimary">
                 숙소
               </h2>
-              {Array.isArray(hotelPositions[currentIndex]) ? (
+              {Array.isArray(hotelPositions[currentIndex]) &&
+              hotelPositions[currentIndex].length > 0 ? (
                 <ul className="mb-[0.625rem] flex max-h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
-                  {hotelPositions[currentIndex]?.map((item, index) => (
+                  {hotelPositions[currentIndex]?.map((hotel, index) => (
                     <AddPlaceItem
-                      placeName={item.place_name}
+                      key={hotel.id + index}
+                      placeName={hotel.place_name}
                       count={index + 1}
                     />
                   ))}

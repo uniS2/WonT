@@ -29,6 +29,21 @@ export const useScheduleStore = create(
         false,
         'placesPositions/add'
       ),
+    // 장소 삭제하기
+    deletePlacePositions: (index, placeName) =>
+      set(
+        (state) => {
+          const updatedPlacePositions = { ...state.placePositions };
+          if (updatedPlacePositions[index]) {
+            updatedPlacePositions[index] = updatedPlacePositions[index].filter(
+              (place) => place.place_name !== placeName
+            );
+          }
+          return { placePositions: updatedPlacePositions };
+        },
+        false,
+        'placesPositions/delete'
+      ),
     // 숙소 추가하기
     addHotelPositions: (hotelPosition, index) =>
       set(
@@ -49,6 +64,21 @@ export const useScheduleStore = create(
         },
         false,
         'hotelsPositions/add'
+      ),
+    // 숙소 삭제하기
+    deleteHotelPositions: (index, hotelName) =>
+      set(
+        (state) => {
+          const updatedHotelPositions = { ...state.hotelPositions };
+          if (updatedHotelPositions[index]) {
+            updatedHotelPositions[index] = updatedHotelPositions[index].filter(
+              (hotel) => hotel.place_name !== hotelName
+            );
+          }
+          return { hotelPositions: updatedHotelPositions };
+        },
+        false,
+        'hotelsPositions/delete'
       ),
 
     // MySchedule/detail 페이지

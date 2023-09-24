@@ -1,24 +1,31 @@
-import { useParams } from 'react-router-dom';
-
 import TripPlaceImage from '@/components/TripSelect/TripPlaceImage';
 import TripPlaceInfo from '@/components/TripSelect/TripPlaceInfo';
 import AddButton from '@/components/TripSelect/AddButton';
 import { useMapStore } from '@/store/mapStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
-export default function TripPlaceItem({ placeName, address, count }) {
+export default function TripPlaceItem({ placeName, address, count, index }) {
   const { placeList } = useMapStore(); // 장소 목록
-  const { placePositions, addPlacePositions } = useScheduleStore(); // 추가한 장소
-  const currentPath = useParams(); // 현재 경로
+  const { placePositions, addPlacePositions, deletePlacePositions } =
+    useScheduleStore(); // 추가한 장소
 
   // 버튼 선택 여부
-  const isPlace = placePositions[currentPath.indexId]?.filter(
-    (item) => item.place_name == placeName
+  const isPlace = placePositions[index]?.filter(
+    (place) => place.place_name == placeName
+  );
+
+  // 버튼 삭제 여부
+  const isSelected = placePositions[index]?.some(
+    (place) => place.place_name === placeName
   );
 
   // 버튼 클릭시
   const handleClick = () => {
-    addPlacePositions(placeList[count], currentPath.indexId);
+    if (!isSelected) {
+      addPlacePositions(placeList[count], index);
+    } else {
+      deletePlacePositions(index, placeName);
+    }
   };
 
   return (

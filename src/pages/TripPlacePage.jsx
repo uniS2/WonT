@@ -52,27 +52,6 @@ export default function TripPlacePage() {
         />
         <div className="map_wrap relative">
           <MapPlace placeName={data?.title} />
-          {/*  <ul
-            id="category"
-            className="modal absolute left-3 top-3 z-10 flex gap-1 overflow-hidden rounded-md border border-solid border-primary bg-background"
-          >
-            <li id="CT1" data-order="0">
-              <span className="cultural"></span>
-              문화시설
-            </li>
-            <li id="AT4" data-order="1">
-              <span className="attractions"></span>
-              관광명소
-            </li>
-            <li id="FD6" data-order="2">
-              <span className="restaurant"></span>
-              음식점
-            </li>
-            <li id="CE7" data-order="3">
-              <span className="cafe"></span>
-              카페
-            </li>
-          </ul> */}
         </div>
 
         <ul
@@ -85,6 +64,7 @@ export default function TripPlacePage() {
               placeName={place.place_name}
               address={place.address_name}
               count={index}
+              index={currentIndex}
             />
           ))}
         </ul>
@@ -95,10 +75,12 @@ export default function TripPlacePage() {
               <h2 className="mb-[0.625rem] text-base font-light text-contentsPrimary">
                 장소
               </h2>
-              {Array.isArray(placePositions[currentIndex]) ? (
+              {Array.isArray(placePositions[currentIndex]) &&
+              placePositions[currentIndex].length > 0 ? (
                 <ul className="mb-[0.625rem] flex max-h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
                   {placePositions[currentIndex]?.map((item, index) => (
                     <AddPlaceItem
+                      key={item.id + index}
                       placeName={item.place_name}
                       count={index + 1}
                     />
