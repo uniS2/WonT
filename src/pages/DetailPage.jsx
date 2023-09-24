@@ -53,7 +53,6 @@ export default function DetailPage({ loginUser }) {
 
   // 쿼리 키
   const queryKey = ['recommends', recommendId];
-  console.log(queryKey);
 
   // 데이터 쿼리
   const { isLoading, error, data } = useQuery({
@@ -62,7 +61,6 @@ export default function DetailPage({ loginUser }) {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
-  console.log(data);
 
   // 데이터 뮤테이션 (추가)
   const addMutation = useMutation({

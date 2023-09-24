@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import debounce from '@/utils/debounce';
 import { useMapStore } from '@/store/mapStore';
-import { useLocalStore } from '@/store/localStore';
+import debounce from '@/utils/debounce';
 
 const { kakao } = window;
 
 export default function MapHotel({
+  localName,
   width = 'w-full',
   height = 'min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]',
   latitude = 37.4812845080678, // 위도
@@ -14,16 +14,13 @@ export default function MapHotel({
   level = 6, // 지도 확대 레벨
   restProps,
 }) {
-  const [center, setCenter] = useState(
-    new kakao.maps.LatLng(latitude, longitude)
-  );
+  const [center] = useState(new kakao.maps.LatLng(latitude, longitude));
 
   // const selectName = useLocalStore((state) => state.selectName);
-  const selectName = '서울';
   const hotelCategory = 'AD5'; // 숙소 카테고리
 
   let markers = []; // 마커
-  const { hotelList, setHotelList } = useMapStore(); // 호텔 목록
+  const { setHotelList } = useMapStore(); // 호텔 목록
 
   useEffect(() => {
     const container = document.getElementById('mapHotel');
@@ -120,7 +117,7 @@ export default function MapHotel({
     }
 
     //# 1. 현재 선택한 지역으로 좌표를 검색합니다
-    geocoder.addressSearch(selectName, function (result, status) {
+    geocoder.addressSearch(localName, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 

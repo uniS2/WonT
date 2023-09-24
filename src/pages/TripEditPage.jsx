@@ -1,7 +1,7 @@
 import { useState, useId } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import pocketbase from '@/api/pocketbase';
 import Header from '@/components/Header/Header';
@@ -15,6 +15,7 @@ import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
 import { useMapStore } from '@/store/mapStore';
 import { useDateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
+import { useScheduleStore } from '@/store/scheduleStore';
 
 /* -------------------------------------------------------------------------- */
 const fetchMySchedule = async (userId) => {
@@ -26,8 +27,22 @@ const fetchMySchedule = async (userId) => {
   return response[0];
 };
 
+const saveSchedule = async ({ places, hotels, userId }) => {
+  return await pocketbase.collection('mySchedule').update(places, hotels, {
+    'places+': userId,
+    'hotels+': userId,
+  });
+};
+/* -------------------------------------------------------------------------- */
+
 export default function TripEditPage() {
   const user = pocketbase.authStore.model; // 로그인 유저 정보
+
+  const currentPath = useParams();
+  const [toggleSchedule, setToggleSchedule] = useState(false);
+  const handleToggle = () => {
+    setToggleSchedule(!toggleSchedule);
+  };
 
   // Tanstack Query
   const { data, error, isLoading } = useQuery(
@@ -35,20 +50,43 @@ export default function TripEditPage() {
     () => fetchMySchedule(user.id),
     { refetchOnWindowFocus: false }
   );
-  const currentPath = useParams();
-  const [toggleSchedule, setToggleSchedule] = useState(false);
-  const handleToggle = () => {
-    setToggleSchedule(!toggleSchedule);
-  };
 
-  // const startDate = new Date(data?.start_date);
-  // const endDate = new Date(data?.end_date);
+  // 데이터 뮤테이션 (추가)
+  const addMutation = useMutation({
+    mutationFn: saveSchedule,
+    onMutate: async ({ places, hotels, userId }) => {
+      await queryClient.cancelQueries({ queryKey: queryKey });
+
+      const previousData = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, (tripData) => ({
+        ...tripData,
+        username: [...recommendData.username, userId],
+      }));
+
+      return { previousData };
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: (context) => {
+      queryClient.setQueryData(queryKey, context.previousData);
+    },
+  });
+
+  const handleRemoveBookmark = (places, hotels, userId) => async () => {
+    mutation.mutate({
+      places,
+      hotels,
+      userId,
+    });
+  };
 
   const selectDate = useDateStore((set) => set.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
-  const { hotelList, setHotelList } = useMapStore();
-  console.log(hotelList);
+  const { hotelPositions } = useScheduleStore();
+  const hotelList = Object.values(hotelPositions);
 
   const id = useId();
 
@@ -67,36 +105,64 @@ export default function TripEditPage() {
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           {/* <Map height={'h-[31.25rem]'} /> */}
           <SelectHotelMap height={'h-[31.25rem]'} hotelList={hotelList} />
-          {selectRangeDate?.map((item, index) => (
-            <>
-              <PlanDate
-                key={id}
-                toggleButton={handleToggle}
-                toggleSchedule={toggleSchedule}
-                setToggleSchedule={setToggleSchedule}
-                item={item}
-                index={index}
-              />
 
-              <div className={`${toggleSchedule ? 'hidden' : ''}`}>
-                {hotelList.length === 0 ? (
-                  <AddPlan text="장소" />
-                ) : (
-                  <PlacePlan text="안녕" />
-                )}
+          {hotelList.length >= 0
+            ? selectRangeDate?.map((item, index) => (
+                <div key={index}>
+                  <PlanDate
+                    toggleButton={handleToggle}
+                    toggleSchedule={toggleSchedule}
+                    setToggleSchedule={setToggleSchedule}
+                    item={item}
+                    index={index}
+                  />
 
-                <Link to={`/tripplace/${data?.id}/${index + 1}`}>
-                  <ButtonMedium fill={false} text="일정 추가" />
-                </Link>
-                <AddPlan text="숙소" />
-                <Link to={`/triphotel/${data?.id}/${index + 1}`}>
-                  <ButtonMedium fill={false} text="숙소 추가" />
-                </Link>
-              </div>
-            </>
-          ))}
+                  <div className={`${toggleSchedule ? 'hidden' : ''}`}>
+                    <PlacePlan placeName={hotelList[index]} count={index + 1} />
+                    <Link to={`/tripplace/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="일정 추가" />
+                    </Link>
+
+                    <PlacePlan hotelList={hotelList[index]} index={index} />
+
+                    <Link to={`/triphotel/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="숙소 추가" />
+                    </Link>
+                  </div>
+                </div>
+              ))
+            : selectRangeDate?.map((item, index) => (
+                <div key={index}>
+                  <PlanDate
+                    toggleButton={handleToggle}
+                    toggleSchedule={toggleSchedule}
+                    setToggleSchedule={setToggleSchedule}
+                    item={item}
+                    index={index}
+                  />
+
+                  <div className={`${toggleSchedule ? 'hidden' : ''}`}>
+                    <AddPlan text="장소" />
+
+                    <Link to={`/tripplace/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="일정 추가" />
+                    </Link>
+
+                    <AddPlan text="숙소" />
+
+                    <Link to={`/triphotel/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="숙소 추가" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+
           <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
-            <ButtonMedium fill={true} text="저장" />
+            <ButtonMedium
+              fill={true}
+              text="저장"
+              onClick={handleRemoveBookmark(hotelList, user.id)}
+            />
           </div>
         </div>
       </div>
