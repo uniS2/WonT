@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 import debounce from '@/utils/debounce';
 import { useMapStore } from '@/store/mapStore';
-import { useLocalStore } from '@/store/localStore';
 
 const { kakao } = window;
 
 export default function MapPlace({
+  placeName,
   width = 'w-full',
   height = 'min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]',
   latitude = 37.4812845080678, // 위도
@@ -14,16 +14,12 @@ export default function MapPlace({
   level = 6, // 지도 확대 레벨
   restProps,
 }) {
-  const [center, setCenter] = useState(
-    new kakao.maps.LatLng(latitude, longitude)
-  );
+  const [center] = useState(new kakao.maps.LatLng(latitude, longitude));
 
-  // const selectName = useLocalStore((state) => state.selectName);
-  const selectName = '서울';
-  const category = 'SW8';
+  const category = 'AT4'; // 장소 - 관광명소 카테고리
 
   let markers = []; // 마커
-  const { placeList, setPlaceList } = useMapStore();
+  const { setPlaceList } = useMapStore(); // 장소 목록
 
   useEffect(() => {
     const container = document.getElementById('mapPlace');
@@ -69,7 +65,7 @@ export default function MapPlace({
           displayMarker(data[i]);
         }
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        alert('해당 지역에는 원하는 카테고리가 없습니다.');
+        alert('해당 지역에는 원하는 관광명소가 없습니다.');
         return;
       } else if (status === kakao.maps.services.Status.ERROR) {
         alert('검색 중 오류가 발생했습니다.');
@@ -89,7 +85,7 @@ export default function MapPlace({
 
       // 마커에 이벤트를 등록합니다.
       //- click
-      kakao.maps.event.addListener(marker, 'click', function () {
+      kakao.maps.event.addListener(marker, 'mouseover', function () {
         infowindow.setContent(
           '<div style="padding:5px;font-size:12px;">' +
             place.place_name +
@@ -97,18 +93,36 @@ export default function MapPlace({
         );
         infowindow.open(map, marker);
       });
+
+      //- click
+      kakao.maps.event.addListener(marker, 'click', function () {
+        infowindow.setContent(
+          '<div style="padding:0.3125rem;font-size:0.75rem;">' +
+            place.place_name +
+            '</div>'
+        );
+        infowindow.open(map, marker);
+      });
+
+      //- mouseout
+      kakao.maps.event.addListener(
+        marker,
+        'mouseout',
+        debounce(function () {
+          infowindow.close();
+        }, 3000)
+      );
     }
 
     //# 1. 현재 선택한 지역으로 좌표를 검색합니다
-    geocoder.addressSearch(selectName, function (result, status) {
-      // 정상적으로 검색이 완료됐으면
+    geocoder.addressSearch(placeName, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
 
-        //^ 카테고리 검색
+        // 카테고리 - 장소 검색
         const categoryOptions = {
           location: coords,
           radius: 10000,

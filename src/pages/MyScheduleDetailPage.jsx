@@ -15,7 +15,6 @@ import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
 import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import { useScheduleStore } from '@/store/scheduleStore';
 
 // 데이터 요청 함수 (query function)
 const fetchScheduleDetail = async (userId) => {

@@ -16,11 +16,10 @@ export default function MapHotel({
 }) {
   const [center] = useState(new kakao.maps.LatLng(latitude, longitude));
 
-  // const selectName = useLocalStore((state) => state.selectName);
   const hotelCategory = 'AD5'; // 숙소 카테고리
 
   let markers = []; // 마커
-  const { setHotelList } = useMapStore(); // 호텔 목록
+  const { setHotelList } = useMapStore(); // 숙소 목록
 
   useEffect(() => {
     const container = document.getElementById('mapHotel');
@@ -62,7 +61,7 @@ export default function MapHotel({
       setHotelList(data);
 
       if (status === kakao.maps.services.Status.OK) {
-        for (let i = data.length - 15; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
         }
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {

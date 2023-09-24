@@ -6,19 +6,19 @@ import AddButton from '@/components/TripSelect/AddButton';
 import { useMapStore } from '@/store/mapStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
-export default function TripPlaceItem({ placeName, address, count }) {
-  const { placeList } = useMapStore(); // 장소 목록
-  const { placePositions, addPlacePositions } = useScheduleStore(); // 추가한 장소
+export default function TripHotelItem({ placeName, address, count }) {
+  const { hotelList } = useMapStore(); // 숙소 목록
+  const { hotelPositions, addHotelPositions } = useScheduleStore(); // 추가한 숙소
   const currentPath = useParams(); // 현재 경로
 
   // 버튼 선택 여부
-  const isPlace = placePositions[currentPath.indexId]?.filter(
+  const isHotel = hotelPositions[currentPath.indexId]?.filter(
     (item) => item.place_name == placeName
   );
 
   // 버튼 클릭시
   const handleClick = () => {
-    addPlacePositions(placeList[count], currentPath.indexId);
+    addHotelPositions(hotelList[count], currentPath.indexId);
   };
 
   return (
@@ -28,7 +28,7 @@ export default function TripPlaceItem({ placeName, address, count }) {
           <TripPlaceImage />
           <TripPlaceInfo placeName={placeName} address={address} />
         </div>
-        <AddButton onClick={handleClick} isSelect={isPlace} />
+        <AddButton onClick={handleClick} isSelect={isHotel} />
       </div>
     </li>
   );
