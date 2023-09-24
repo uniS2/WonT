@@ -4,6 +4,7 @@ const { kakao } = window;
 
 export default function SelectHotelMap({
   hotelList,
+  placeList,
   width = 'w-full',
   height = 'h-[25rem]',
   latitude = 37.4812845080678,
@@ -31,8 +32,10 @@ export default function SelectHotelMap({
     // 주소 - 좌표 변환 객체
     const geocoder = new kakao.maps.services.Geocoder();
 
+    const tripList = [...placeList, ...hotelList];
+
     // hotelData를 반복하여 각 위치에 마커 표시
-    hotelList.forEach((locations, index) => {
+    tripList.forEach((locations, index) => {
       locations.forEach((item) => {
         // 마커의 위치를 설정합니다.
         const markerPosition = new kakao.maps.LatLng(item.y, item.x);

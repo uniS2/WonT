@@ -73,7 +73,11 @@ export default function TripEditPage() {
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           {/* <Map height={'h-[31.25rem]'} /> */}
-          <SelectHotelMap height={'h-[31.25rem]'} hotelList={hotelList} />
+          <SelectHotelMap
+            height={'h-[31.25rem]'}
+            hotelList={hotelList}
+            placeList={placeList}
+          />
 
           {hotelList.length >= 0
             ? selectRangeDate?.map((item, index) => (
