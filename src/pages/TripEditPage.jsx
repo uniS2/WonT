@@ -1,7 +1,7 @@
 import { useState, useId } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import pocketbase from '@/api/pocketbase';
 import Header from '@/components/Header/Header';
@@ -16,6 +16,7 @@ import { useMapStore } from '@/store/mapStore';
 import { useDateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
 import { useScheduleStore } from '@/store/scheduleStore';
+import { useTripScheduleStore } from '@/store/tripScheduleStore';
 
 /* -------------------------------------------------------------------------- */
 const fetchMySchedule = async (userId) => {
@@ -51,48 +52,16 @@ export default function TripEditPage() {
     { refetchOnWindowFocus: false }
   );
 
-  // 데이터 뮤테이션 (추가)
-  const addMutation = useMutation({
-    mutationFn: saveSchedule,
-    onMutate: async ({ places, hotels, userId }) => {
-      await queryClient.cancelQueries({ queryKey: queryKey });
-
-      const previousData = queryClient.getQueryData(queryKey);
-
-      queryClient.setQueryData(queryKey, (tripData) => ({
-        ...tripData,
-        username: [...recommendData.username, userId],
-      }));
-
-      return { previousData };
-    },
-    onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: queryKey });
-    },
-    onError: (context) => {
-      queryClient.setQueryData(queryKey, context.previousData);
-    },
-  });
-
-  const handleRemoveBookmark = (places, hotels, userId) => async () => {
-    mutation.mutate({
-      places,
-      hotels,
-      userId,
-    });
-  };
-
   const selectDate = useDateStore((set) => set.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
-  const { hotelPositions } = useScheduleStore();
+  const { hotelPositions, placePositions } = useScheduleStore();
   const hotelList = Object.values(hotelPositions);
-
+  const placeList = Object.values(placePositions);
+  console.log(placeList);
   const id = useId();
 
-  if (isLoading) {
-    return <div className=" flex justify-center ">로딩 중...</div>;
-  }
+  const queryClient = useQueryClient();
 
   return (
     <div className="bg-background">
@@ -118,12 +87,20 @@ export default function TripEditPage() {
                   />
 
                   <div className={`${toggleSchedule ? 'hidden' : ''}`}>
-                    <PlacePlan placeName={hotelList[index]} count={index + 1} />
+                    <PlacePlan
+                      select="장소"
+                      placeList={placeList[index]}
+                      count={index}
+                    />
                     <Link to={`/tripplace/${data?.id}/${index + 1}`}>
                       <ButtonMedium fill={false} text="일정 추가" />
                     </Link>
 
-                    <PlacePlan hotelList={hotelList[index]} index={index} />
+                    <PlacePlan
+                      select="숙소"
+                      hotelList={hotelList[index]}
+                      index={index}
+                    />
 
                     <Link to={`/triphotel/${data?.id}/${index + 1}`}>
                       <ButtonMedium fill={false} text="숙소 추가" />
@@ -159,9 +136,16 @@ export default function TripEditPage() {
 
           <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
             <ButtonMedium
+              menu="저장"
               fill={true}
               text="저장"
-              onClick={handleRemoveBookmark(hotelList, user.id)}
+              // onClick={handleSave}
+            />
+            <ButtonMedium
+              menu="저장"
+              color="bg-[#F97660]"
+              text="취소"
+              // onClick={handleRemove(hotelList)}
             />
           </div>
         </div>

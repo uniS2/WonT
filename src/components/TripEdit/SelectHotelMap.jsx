@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import debounce from '@/utils/debounce';
-import { useMarkerStore } from '@/store/markerStore';
-
 const { kakao } = window;
 
 export default function SelectHotelMap({
@@ -47,8 +44,8 @@ export default function SelectHotelMap({
 
         // 마커를 지도에 추가합니다.
         marker.setMap(map);
-        var center = map.getCenter();
-        console.log(center);
+        let center = map.getCenter();
+        // console.log(center);
 
         // 마커에 클릭 이벤트를 등록합니다.
         kakao.maps.event.addListener(marker, 'click', function () {
