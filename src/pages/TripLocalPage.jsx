@@ -1,25 +1,39 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
+
+import pocketbase from '@/api/pocketbase';
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import LocalItem from '@/components/TripLocal/LocalItem';
 import TripTitle from '@/components/TripTitle';
-import { useLocalStore } from '@/store/localStore';
-import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
-import { Helmet } from 'react-helmet-async';
 import Spinner from '@/components/Spinner/Spinner';
+import { useLocalStore } from '@/store/localStore';
+import {
+  createRecord,
+  getPocketHostImageURL,
+  getPocketHostURL,
+} from '@/utils/index.js';
 
 async function fetchLocals() {
   const response = await fetch(`${getPocketHostURL('locals')}`);
   return await response.json();
 }
 
+async function createLocalRecord(title, userId) {
+  createRecord('mySchedule', {
+    title: title,
+    username: userId,
+  });
+}
+
 export default function TripLocalPage() {
+  const user = pocketbase.authStore.model; // 로그인 유저 정보
   const { data, isLoading, error } = useQuery(['locals'], fetchLocals, {
     retry: 2,
   });
 
-  const selectIndex = useLocalStore((state) => state.selectIndex);
+  const { selectName, selectIndex } = useLocalStore();
   const isSelect = selectIndex !== null;
 
   if (error) {
@@ -59,7 +73,11 @@ export default function TripLocalPage() {
             </ul>
             {isSelect ? (
               <Link to="/tripcalendar">
-                <ButtonLarge>선택 완료</ButtonLarge>
+                <ButtonLarge
+                  onClick={() => createLocalRecord(selectName, user.id)}
+                >
+                  선택 완료
+                </ButtonLarge>
               </Link>
             ) : (
               <ButtonLarge>선택 완료</ButtonLarge>

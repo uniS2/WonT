@@ -1,6 +1,6 @@
 export default function Modal({ handleYes, handleNo, children }) {
   return (
-    <div className="modal absolute left-1/2 top-1/3 z-10  flex h-[9.375rem] w-80 -translate-x-40 -translate-y-[4.6875rem] flex-col justify-center rounded-md bg-white text-lg">
+    <div className="modal absolute left-1/2 top-1/4 z-10  flex h-[9.375rem] w-80 -translate-x-1/2 -translate-y-1/2 flex-col justify-center rounded-md bg-white text-lg">
       <span className="my-[2.3125rem] self-center font-medium text-contentsPrimary">
         {children}
       </span>
