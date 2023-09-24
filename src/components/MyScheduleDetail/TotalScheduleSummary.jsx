@@ -21,16 +21,18 @@ export default function TotalScheduleSummary({
           <DefaultImage />
         </div>
       )}
-      <div className="absolute right-0 top-0 flex h-full w-[56.23%] flex-col justify-center gap-3 pl-[1.25rem]">
-        <span className="font-semibold text-contentsPrimary">
+      <div className="absolute right-0 top-0 flex h-full w-[56.23%] flex-col justify-center gap-3 pl-[1.25rem] lg:justify-evenly">
+        <span className="font-semibold text-contentsPrimary md:text-2xl">
           {getLocalName(localName)}
         </span>
         <div className="flex flex-col md:flex-row md:items-center">
           <div className="flex items-center">
             <img src={CalendarIcon} />
-            <span className="text-sm text-contentsPrimary">여행기간</span>
+            <span className="text-sm text-contentsPrimary md:text-base">
+              여행기간
+            </span>
           </div>
-          <span className="pl-1 text-xs font-light text-contentsSecondary">
+          <span className="pl-1 text-xs font-light text-contentsSecondary md:text-base">
             {getTripDates(startDay, endDay)}
           </span>
         </div>
