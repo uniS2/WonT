@@ -7,11 +7,13 @@ import AddPlan from '@/components/TripEdit/AddPlan';
 import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import PlanDate from '@/components/TripEdit/PlanDate';
 import useScheduleList from '@/hooks/useScheduleList';
-// import ScheduleMap from '@/components/TripEdit/ScheduleMap';
 import { Helmet } from 'react-helmet-async';
 import { useDateStore } from '@/store/dateStore';
 import { useParams } from 'react-router-dom';
 import { getRangeDay } from '@/utils/getRangeDay';
+import { useId } from 'react';
+import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
+import { useMapStore } from '@/store/mapStore';
 
 /* -------------------------------------------------------------------------- */
 
@@ -25,6 +27,10 @@ export default function TripEditPage() {
   const selectDate = useDateStore((set) => set.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
+  const { hotelList, setHotelList } = useMapStore();
+  console.log(hotelList);
+
+  const id = useId();
   return (
     <div className="bg-background">
       <Helmet>
@@ -36,11 +42,12 @@ export default function TripEditPage() {
       </div>
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
-          <Map height={'h-[31.25rem]'} />
-          {/* <ScheduleMap height={'h-[31.25rem]'} /> */}
+          {/* <Map height={'h-[31.25rem]'} /> */}
+          <SelectHotelMap height={'h-[31.25rem]'} hotelList={hotelList} />
           {selectRangeDate?.map((item, index) => (
             <>
               <PlanDate
+                key={id}
                 toggleButton={handleToggle}
                 toggleSchedule={toggleSchedule}
                 item={item}
