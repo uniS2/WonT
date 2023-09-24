@@ -65,6 +65,7 @@ export default function TripEditPage() {
                 key={id}
                 toggleButton={handleToggle}
                 toggleSchedule={toggleSchedule}
+                setToggleSchedule={setToggleSchedule}
                 item={item}
                 index={index}
               />
@@ -79,11 +80,11 @@ export default function TripEditPage() {
                   <ButtonMedium fill={false} text="숙소 추가" />
                 </Link>
               </div>
-              <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
-                <ButtonMedium fill={true} text="저장" />
-              </div>
             </>
           ))}
+          <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
+            <ButtonMedium fill={true} text="저장" />
+          </div>
         </div>
       </div>
     </div>
