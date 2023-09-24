@@ -69,11 +69,11 @@ export default function TripEditPage() {
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           {/* <Map height={'h-[31.25rem]'} /> */}
           <SelectHotelMap height={'h-[31.25rem]'} hotelList={hotelList} />
-          {hotelList != null
+
+          {hotelList.length >= 0
             ? selectRangeDate?.map((item, index) => (
-                <>
+                <div key={index}>
                   <PlanDate
-                    key={id}
                     toggleButton={handleToggle}
                     toggleSchedule={toggleSchedule}
                     setToggleSchedule={setToggleSchedule}
@@ -82,26 +82,44 @@ export default function TripEditPage() {
                   />
 
                   <div className={`${toggleSchedule ? 'hidden' : ''}`}>
-                    {hotelList.length === 0 ? (
-                      <AddPlan text="장소" />
-                    ) : (
-                      <PlacePlan
-                        placeName={item.place_name}
-                        count={index + 1}
-                      />
-                    )}
-
+                    <PlacePlan placeName={hotelList[index]} count={index + 1} />
                     <Link to={`/tripplace/${data?.id}/${index + 1}`}>
                       <ButtonMedium fill={false} text="일정 추가" />
                     </Link>
-                    <AddPlan text="숙소" />
+
+                    <PlacePlan hotelList={hotelList[index]} index={index} />
+
                     <Link to={`/triphotel/${data?.id}/${index + 1}`}>
                       <ButtonMedium fill={false} text="숙소 추가" />
                     </Link>
                   </div>
-                </>
+                </div>
               ))
-            : ''}
+            : selectRangeDate?.map((item, index) => (
+                <div key={index}>
+                  <PlanDate
+                    toggleButton={handleToggle}
+                    toggleSchedule={toggleSchedule}
+                    setToggleSchedule={setToggleSchedule}
+                    item={item}
+                    index={index}
+                  />
+
+                  <div className={`${toggleSchedule ? 'hidden' : ''}`}>
+                    <AddPlan text="장소" />
+
+                    <Link to={`/tripplace/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="일정 추가" />
+                    </Link>
+
+                    <AddPlan text="숙소" />
+
+                    <Link to={`/triphotel/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="숙소 추가" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
 
           <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
             <ButtonMedium fill={true} text="저장" />
