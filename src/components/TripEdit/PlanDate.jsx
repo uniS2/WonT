@@ -1,6 +1,7 @@
 import toggleDown from '@/assets/common-toogle-down.webp';
 import toggleUp from '@/assets/common-toogle-up.webp';
 import { getTripDate, getTripDateUTC } from '@/utils';
+import { useId } from 'react';
 import { useState } from 'react';
 
 export default function PlanDate({
@@ -10,14 +11,14 @@ export default function PlanDate({
   index,
   setToggleSchedule,
 }) {
-  const handleToggleButton = (index) => {
-    toggleButton(index);
+  const handleToggleButton = (id) => {
     setToggleSchedule(!toggleSchedule);
+    toggleButton(id);
   };
-
+  const id = useId();
   return (
     <>
-      <div className="mx-5 my-4 flex items-center gap-[10px] py-3 ">
+      <div key={id} className="mx-5 my-4 flex items-center gap-[10px] py-3 ">
         <span key={index} className="font-bold">
           Day {index + 1}
         </span>

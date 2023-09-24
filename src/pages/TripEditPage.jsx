@@ -28,12 +28,11 @@ export default function TripEditPage() {
   const user = pocketbase.authStore.model; // 로그인 유저 정보
 
   // Tanstack Query
-  const { data, error } = useQuery(
+  const { data, error, isLoading } = useQuery(
     ['mySchedule', user.id],
     () => fetchMySchedule(user.id),
     { refetchOnWindowFocus: false }
   );
-
   const currentPath = useParams();
   const [toggleSchedule, setToggleSchedule] = useState(false);
   const handleToggle = () => {
@@ -48,13 +47,18 @@ export default function TripEditPage() {
   const { hotelList, setHotelList } = useMapStore();
 
   const id = useId();
+
+  if (isLoading) {
+    return <div className=" flex justify-center ">로딩 중...</div>;
+  }
+
   return (
     <div className="bg-background">
       <Helmet>
         <title className="sr-only">TripEdit - Wont</title>
       </Helmet>
       <Header />
-      <div className="w-auto ">{data && <TripPlan data={data} />}</div>
+      <div className="w-auto ">{<TripPlan data={data} />}</div>
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           {/* <Map height={'h-[31.25rem]'} /> */}
