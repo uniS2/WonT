@@ -50,16 +50,11 @@ export default function SelectHotelMap({
         let center = map.getCenter();
         // console.log(center);
 
-        // 마커에 클릭 이벤트를 등록합니다.
         kakao.maps.event.addListener(marker, 'click', function () {
-          // 인포윈도우 내용 설정
           infowindow.setContent(
-            `<div style="padding:5px;font-size:12px;">${item.address_name}</div>`
+            `<div style="padding:5px;font-size:12px;">${item.place_name}</div>`
           );
-
-          // 인포윈도우를 지도 위에 표시합니다.
           infowindow.open(map, marker);
-          map.setCenter(new kakao.maps.LatLng(item.latitude, item.longitude));
         });
         // 마커가 찍힌 위치로 지도 중심 이동
         map.setCenter(markerPosition);
