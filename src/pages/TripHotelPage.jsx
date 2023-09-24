@@ -1,11 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+
 import TripHeader from '@/components/Header/TripHeader';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
 import MapHotel from '@/components/TripSelect/MapHotel';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
+import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
 import { useMapStore } from '@/store/mapStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { useScheduleStore } from '@/store/scheduleStore';
 
 export default function TripHotelPage() {
   const {
@@ -13,15 +16,16 @@ export default function TripHotelPage() {
     displayHotelList,
     toggleHotelTripPlan,
     toggleHotelList,
-  } = useToggleTripMenuStore();
-  const { hotelList } = useMapStore();
+  } = useToggleTripMenuStore(); // 토글 메뉴
+  const { hotelList } = useMapStore(); // 지도에 표시되는 숙소 목록
+  const { hotelPositions } = useScheduleStore(); // 추가한 장소
 
   return (
     <>
       <Helmet>
         <title>TripHotel - WonT</title>
       </Helmet>
-      <section className="container relative mx-auto min-h-[50rem]">
+      <section className="container relative mx-auto min-h-[50rem] ">
         <h1 className="sr-only">TripHotelPage</h1>
         <TripHeader />
         <TripPlanMenu
@@ -31,13 +35,14 @@ export default function TripHotelPage() {
         <MapHotel />
         <ul
           id="hotelsList"
-          className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll sm:h-[28.5625rem] xl:h-[34.5rem]"
+          className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll sm:h-[28.5625rem] md:grid md:grid-cols-2 lg:grid-cols-3 xl:h-[34.5rem]"
         >
-          {hotelList?.map((hotel) => (
+          {hotelList?.map((hotel, index) => (
             <TripPlaceItem
               key={hotel.id}
               placeName={hotel.place_name}
-              address={hotel.address_name}
+              address={hotel.road_address_name}
+              count={index}
             />
           ))}
         </ul>
@@ -48,14 +53,20 @@ export default function TripHotelPage() {
               <h2 className="mb-[0.625rem] text-base font-light text-contentsPrimary">
                 숙소
               </h2>
-              <span className="absolute left-1/2 top-1/2 -translate-x-[4.5rem] text-lg font-medium text-[#5A80A9]/50">
-                숙소를 추가해주세요.
-              </span>
-              {/* <ul className="mb-[0.625rem] flex flex-col gap-[0.625rem]">
-              <AddPlaceItem />
-              <AddPlaceItem />
-              <AddPlaceItem />
-            </ul> */}
+              {hotelPositions.length > 0 ? (
+                <ul className="mb-[0.625rem] flex h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
+                  {hotelPositions?.map((item, index) => (
+                    <AddPlaceItem
+                      placeName={item.place_name}
+                      count={index + 1}
+                    />
+                  ))}
+                </ul>
+              ) : (
+                <span className="absolute left-1/2 top-1/2 -translate-x-[4.5rem] text-lg font-medium text-[#5A80A9]/50">
+                  숙소를 추가해주세요.
+                </span>
+              )}
             </div>
           )}
         </div>

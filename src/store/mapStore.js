@@ -3,11 +3,13 @@ import { devtools } from "zustand/middleware";
 
 export const useMapStore = create(
   devtools((set) => ({
-    // state - 장소 선택
+    // state
+    // 지도에 표시되는 장소 목록
     placeList: [],
-    // state - 숙소 선택
+    // 지도에 표시되는 숙소 목록
     hotelList: [],
-    // action - 장소 선택
+    // action
+    // 지도에 표시할 장소 목록 지정
     setPlaceList: (data) =>
       set((state) => ({
         placeList: data
@@ -15,7 +17,7 @@ export const useMapStore = create(
         false,
         'place/list'
       ),
-    // action - 숙소 선택
+    // 지도에 표시할 숙소 목록 지정
     setHotelList: (data) =>
       set((state) => ({
         hotelList: data
