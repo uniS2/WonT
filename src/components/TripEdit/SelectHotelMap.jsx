@@ -47,6 +47,8 @@ export default function SelectHotelMap({
 
         // 마커를 지도에 추가합니다.
         marker.setMap(map);
+        var center = map.getCenter();
+        console.log(center);
 
         // 마커에 클릭 이벤트를 등록합니다.
         kakao.maps.event.addListener(marker, 'click', function () {
@@ -59,6 +61,8 @@ export default function SelectHotelMap({
           infowindow.open(map, marker);
           map.setCenter(new kakao.maps.LatLng(item.latitude, item.longitude));
         });
+        // 마커가 찍힌 위치로 지도 중심 이동
+        map.setCenter(markerPosition);
       });
     });
   }, []);
