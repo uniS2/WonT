@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-
 import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
-import { useDateStore } from '@/store/dateStore';
 import { createRecord, getLocalName, getTripDateUTC } from '@/utils/index.js';
+import { useDateStore } from '@/store/dateStore';
+import { useLocalStore } from '@/store/localStore';
 
 async function createMyScheduleTitle(title, date) {
   createRecord('mySchedule', {
@@ -17,6 +17,7 @@ async function createMyScheduleTitle(title, date) {
 }
 
 export default function TripCalendarPage() {
+  const { selectName } = useLocalStore();
   const { tripDate } = useDateStore();
 
   return (
@@ -32,6 +33,7 @@ export default function TripCalendarPage() {
           guide={'여행 일자를 선택하세요.'}
         />
         <TripCalendar />
+        {/* 수정시 : selectName, calendar 날짜 비교 => 틀리면 선택완료시 수정 */}
         {Array.isArray(tripDate) ? (
           <Link to="/tripedit">
             <ButtonLarge
