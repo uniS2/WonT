@@ -8,10 +8,10 @@ export default function AddButton({ onClick, isSelect }) {
       aria-label="장소 선택"
       onClick={onClick}
       className={`flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-md ${
-        isSelect.length > 0 ? 'bg-point' : 'bg-secondary'
+        Array.isArray(isSelect) ? 'bg-point' : 'bg-secondary'
       }`}
     >
-      {isSelect.length > 0 ? <CheckIcon /> : <PlusIcon />}
+      {Array.isArray(isSelect) ? <CheckIcon /> : <PlusIcon />}
     </button>
   );
 }

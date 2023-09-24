@@ -122,11 +122,11 @@ export default function MyScheduleDetailPage() {
                 정말 삭제하시겠습니까?
               </Modal>
             )}
-            <TotalScheduleView
+            {/* <TotalScheduleView
               selectBookmark={selectBookmark}
               place={selectBookmark[0].place}
               hotel={selectBookmark[0].hotel}
-            />
+            /> */}
           </section>
         )}
         <hr className="aria-hidden mx-5" />
@@ -161,8 +161,7 @@ export default function MyScheduleDetailPage() {
             </>
           )}
         </section>
-        {/* /tripedit/${params.detailId} */}
-        <Link to={`/tripedit`}>
+        <Link to={`/tripedit/${params.detailId}`}>
           <ButtonLarge
             onMouseOver={editMouseOver}
             onMouseOut={editMouseOut}
