@@ -7,18 +7,9 @@ import ButtonLarge from '@/components/ButtonLarge';
 import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
+import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { useDateStore } from '@/store/dateStore';
-import { useLocalStore } from '@/store/localStore';
 import { updateRecord, getTripDateUTC } from '@/utils/index.js';
-
-const fetchMySchedule = async (userId) => {
-  const response = await pocketbase.collection('mySchedule').getFullList({
-    filter: `(username?~'${userId}')`,
-    expand: 'users',
-    sort: '-updated',
-  });
-  return response[0];
-};
 
 async function updateMyScheduleTitle(recordId, date) {
   updateRecord('mySchedule', recordId, {
@@ -34,7 +25,7 @@ export default function TripCalendarPage() {
   // Tanstack Query
   const { data, error } = useQuery(
     ['mySchedule', user.id],
-    () => fetchMySchedule(user.id),
+    () => useFetchMySchedule(user.id),
     { refetchOnWindowFocus: false }
   );
 

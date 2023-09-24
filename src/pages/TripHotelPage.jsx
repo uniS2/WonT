@@ -1,15 +1,18 @@
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useQuery } from '@tanstack/react-query';
 
+import pocketbase from '@/api/pocketbase';
 import TripHeader from '@/components/Header/TripHeader';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
 import MapHotel from '@/components/TripSelect/MapHotel';
 import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
+import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { useMapStore } from '@/store/mapStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { useScheduleStore } from '@/store/scheduleStore';
-import { useParams } from 'react-router-dom';
 
 export default function TripHotelPage() {
   const {
@@ -18,9 +21,21 @@ export default function TripHotelPage() {
     toggleHotelTripPlan,
     toggleHotelList,
   } = useToggleTripMenuStore(); // 토글 메뉴
+
   const { hotelList } = useMapStore(); // 지도에 표시되는 숙소 목록
-  const { hotelPositions } = useScheduleStore(); // 추가한 장소
+
+  const { hotelPositions } = useScheduleStore(); // 추가한 장소 목록
+
   const currentIndex = useParams().indexId; // 현재 경로
+
+  const user = pocketbase.authStore.model; // 로그인 유저 정보
+
+  // 현재 선택한 schedule 데이터
+  const { data } = useQuery(
+    ['mySchedule', user.id],
+    () => useFetchMySchedule(user.id),
+    { refetchOnWindowFocus: false }
+  );
 
   return (
     <>
@@ -28,13 +43,14 @@ export default function TripHotelPage() {
         <title>TripHotel - WonT</title>
       </Helmet>
       <section className="container relative mx-auto min-h-[50rem] ">
-        <h1 className="sr-only">TripHotelPage</h1>
+        <h1 className="sr-only">여행 숙소 선택 페이지</h1>
         <TripHeader />
         <TripPlanMenu
           state={displayHotelTripPlan}
           action={toggleHotelTripPlan}
+          data={data}
         />
-        <MapHotel />
+        <MapHotel localName={data?.title} />
         <ul
           id="hotelsList"
           className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll sm:h-[28.5625rem] md:grid md:grid-cols-2 lg:grid-cols-3 xl:h-[34.5rem]"
