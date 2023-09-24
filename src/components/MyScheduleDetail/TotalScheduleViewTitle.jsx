@@ -8,11 +8,11 @@ export default function TotalScheduleTitle({
   return (
     <dl>
       <dt className="sr-only">장소</dt>
-      <dd className="text-sm font-bold text-contentsPrimary">
+      <dd className="text-sm font-bold text-contentsPrimary md:text-base">
         {getLocalName(localName)}
       </dd>
       <dt className="sr-only">여행기간</dt>
-      <dd className="text-xs font-medium text-contentsSecondary">
+      <dd className="text-xs font-medium text-contentsSecondary md:text-sm">
         {getTripDates(startDay, endDay)}
       </dd>
     </dl>

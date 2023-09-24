@@ -103,7 +103,7 @@ export default function MyScheduleDetailPage() {
         {displayTotalschedule && (
           <section className="flex flex-col gap-[1.875rem]">
             <h2 className="sr-only">전체 일정 한눈에 보기</h2>
-            <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white">
+            <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white sm:h-44 md:h-64 lg:h-80">
               {selectBookmark?.map((item) => (
                 <TotalScheduleSummary
                   key={ID}
@@ -122,13 +122,11 @@ export default function MyScheduleDetailPage() {
                 정말 삭제하시겠습니까?
               </Modal>
             )}
-            {selectBookmark?.map((item) => (
-              <TotalScheduleView
-                localName={setLocalName(item.title)}
-                startDay={getTripDate(item.start_date)}
-                endDay={getTripDate(item.end_date)}
-              />
-            ))}
+            <TotalScheduleView
+              selectBookmark={selectBookmark}
+              place={selectBookmark[0].place}
+              hotel={selectBookmark[0].hotel}
+            />
           </section>
         )}
         <hr className="aria-hidden mx-5" />
@@ -140,73 +138,41 @@ export default function MyScheduleDetailPage() {
         <section className="mb-28">
           <h2 className="sr-only">날짜별 일정 보기</h2>
           <ToggleTotalSchedule
-            state={displayTotalschedule}
-            action={toggleTotalschedule}
+            state={displayDaySchedule}
+            action={toggleDaySchedule}
           >
-            나의 일정
+            Day 1
           </ToggleTotalSchedule>
-          {displayTotalschedule && (
-            <section className="flex flex-col gap-[1.875rem]">
-              <h2 className="sr-only">전체 일정 한눈에 보기</h2>
-              <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white">
-                <TotalScheduleSummary
-                // imageURL={getPocketHostImageURL(selectBookmark, 'main')}
-                // localName={selectBookmark.title}
+          {displayDaySchedule && (
+            <>
+              <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+                <DayScheduleItem />
+                <DayScheduleItem />
+                <DayScheduleItem />
+              </ul>
+              <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+                <DayScheduleItem
+                  placeName="숙소명"
+                  placeType="숙소 분류"
+                  backgroundColor="bg-point"
+                  textColor="text-point"
                 />
-                <DeleteButton onClick={toggleDeleteModal} />
-              </div>
-              {displayDeleteModal && (
-                <Modal handleYes={handleYes} handleNo={toggleDeleteModal}>
-                  정말 삭제하시겠습니까?
-                </Modal>
-              )}
-              <TotalScheduleView />
-            </section>
+              </ul>
+            </>
           )}
-          <hr className="aria-hidden mx-5" />
-          <Map
-            width="w-[85%]"
-            height="h-[18rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]"
-            restProps={'mx-auto modal'}
-          />
-          <section className="mb-28">
-            <h2 className="sr-only">날짜별 일정 보기</h2>
-            <ToggleTotalSchedule
-              state={displayDaySchedule}
-              action={toggleDaySchedule}
-            >
-              Day 1
-            </ToggleTotalSchedule>
-            {displayDaySchedule && (
-              <>
-                <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                  <DayScheduleItem />
-                  <DayScheduleItem />
-                  <DayScheduleItem />
-                </ul>
-                <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                  <DayScheduleItem
-                    placeName="숙소명"
-                    placeType="숙소 분류"
-                    backgroundColor="bg-point"
-                    textColor="text-point"
-                  />
-                </ul>
-              </>
-            )}
-          </section>
-          <Link to="/tripedit">
-            <ButtonLarge
-              onMouseOver={editMouseOver}
-              onMouseOut={editMouseOut}
-              textColor={editTextColor}
-              color={editBackgroundColor}
-              restProps="border border-contentsSecondary absolute left-1/2 -translate-x-[11.25rem] bottom-10"
-            >
-              일정편집
-            </ButtonLarge>
-          </Link>
         </section>
+        {/* /tripedit/${params.detailId} */}
+        <Link to={`/tripedit`}>
+          <ButtonLarge
+            onMouseOver={editMouseOver}
+            onMouseOut={editMouseOut}
+            textColor={editTextColor}
+            color={editBackgroundColor}
+            restProps="border border-contentsSecondary absolute left-1/2 -translate-x-[11.25rem] bottom-10"
+          >
+            일정편집
+          </ButtonLarge>
+        </Link>
       </section>
     </>
   );

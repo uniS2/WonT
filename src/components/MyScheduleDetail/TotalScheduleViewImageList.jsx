@@ -1,21 +1,25 @@
 import DefaultImage from '@/components/DefaultImage';
 
 export default function TotalScheduleImageList({
-  className,
   imageURL,
   localName,
+  className,
 }) {
   return (
     <>
       {imageURL ? (
-        <img
-          src={imageURL}
-          alt={localName}
-          className="h-full w-[43.75%] bg-background"
-        />
+        <div
+          className={`flex h-[4.375rem] w-[4.375rem] items-center justify-center overflow-hidden rounded-md bg-[#EFF2F6]`}
+        >
+          <img
+            src={imageURL}
+            alt={localName}
+            className="h-full w-full object-cover"
+          />
+        </div>
       ) : (
         <div
-          className={`object-fit ${className} flex h-[3.75rem] w-[3.75rem] items-center justify-center overflow-hidden rounded-md bg-[#EFF2F6]`}
+          className={`object-fit ${className} flex h-[4.375rem] w-[4.375rem] items-center justify-center overflow-hidden rounded-md bg-[#EFF2F6]`}
         >
           <DefaultImage />
         </div>
