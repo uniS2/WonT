@@ -5,7 +5,6 @@ import { useDateStore } from '@/store/dateStore';
 
 export default function TripPlan({ data, background = 'bg-secondary/50' }) {
   const selectDate = useDateStore((set) => set.tripDate);
-  console.log(selectDate);
   return (
     <div className={`${background} px-6 py-[1.125rem] md:px-10 lg:px-8`}>
       <div className="mx-auto max-w-7xl">

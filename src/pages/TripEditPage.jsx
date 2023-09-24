@@ -15,6 +15,7 @@ import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
 import { useMapStore } from '@/store/mapStore';
 import { useDateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
+import { useScheduleStore } from '@/store/scheduleStore';
 
 /* -------------------------------------------------------------------------- */
 const fetchMySchedule = async (userId) => {
@@ -47,7 +48,8 @@ export default function TripEditPage() {
   const selectDate = useDateStore((set) => set.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
-  const { hotelList, setHotelList } = useMapStore();
+  const { hotelPositions } = useScheduleStore();
+  const hotelList = Object.values(hotelPositions);
   console.log(hotelList);
 
   const id = useId();
@@ -67,34 +69,40 @@ export default function TripEditPage() {
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
           {/* <Map height={'h-[31.25rem]'} /> */}
           <SelectHotelMap height={'h-[31.25rem]'} hotelList={hotelList} />
-          {selectRangeDate?.map((item, index) => (
-            <>
-              <PlanDate
-                key={id}
-                toggleButton={handleToggle}
-                toggleSchedule={toggleSchedule}
-                setToggleSchedule={setToggleSchedule}
-                item={item}
-                index={index}
-              />
+          {hotelList != null
+            ? selectRangeDate?.map((item, index) => (
+                <>
+                  <PlanDate
+                    key={id}
+                    toggleButton={handleToggle}
+                    toggleSchedule={toggleSchedule}
+                    setToggleSchedule={setToggleSchedule}
+                    item={item}
+                    index={index}
+                  />
 
-              <div className={`${toggleSchedule ? 'hidden' : ''}`}>
-                {hotelList.length === 0 ? (
-                  <AddPlan text="장소" />
-                ) : (
-                  <PlacePlan text="안녕" />
-                )}
+                  <div className={`${toggleSchedule ? 'hidden' : ''}`}>
+                    {hotelList.length === 0 ? (
+                      <AddPlan text="장소" />
+                    ) : (
+                      <PlacePlan
+                        placeName={item.place_name}
+                        count={index + 1}
+                      />
+                    )}
 
-                <Link to={`/tripplace/${data?.id}/${index + 1}`}>
-                  <ButtonMedium fill={false} text="일정 추가" />
-                </Link>
-                <AddPlan text="숙소" />
-                <Link to={`/triphotel/${data?.id}/${index + 1}`}>
-                  <ButtonMedium fill={false} text="숙소 추가" />
-                </Link>
-              </div>
-            </>
-          ))}
+                    <Link to={`/tripplace/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="일정 추가" />
+                    </Link>
+                    <AddPlan text="숙소" />
+                    <Link to={`/triphotel/${data?.id}/${index + 1}`}>
+                      <ButtonMedium fill={false} text="숙소 추가" />
+                    </Link>
+                  </div>
+                </>
+              ))
+            : ''}
+
           <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
             <ButtonMedium fill={true} text="저장" />
           </div>
