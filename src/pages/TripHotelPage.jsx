@@ -25,6 +25,7 @@ export default function TripHotelPage() {
   const { hotelList } = useMapStore(); // 지도에 표시되는 숙소 목록
 
   const { hotelPositions } = useScheduleStore(); // 추가한 장소 목록
+  console.log(hotelPositions);
 
   const currentIndex = useParams().indexId; // 현재 경로
 
