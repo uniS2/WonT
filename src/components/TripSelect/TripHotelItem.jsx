@@ -4,27 +4,27 @@ import AddButton from '@/components/TripSelect/AddButton';
 import { useMapStore } from '@/store/mapStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
-export default function TripPlaceItem({ placeName, address, count, index }) {
-  const { placeList } = useMapStore(); // 장소 목록
-  const { placePositions, addPlacePositions, deletePlacePositions } =
-    useScheduleStore(); // 추가한 장소
+export default function TripHotelItem({ placeName, address, count, index }) {
+  const { hotelList } = useMapStore(); // 숙소 목록
+  const { hotelPositions, addHotelPositions, deleteHotelPositions } =
+    useScheduleStore(); // 추가한 숙소
 
   // 버튼 선택 여부
-  const isPlace = placePositions[index]?.filter(
-    (place) => place.place_name == placeName
+  const isHotel = hotelPositions[index]?.filter(
+    (hotel) => hotel.place_name == placeName
   );
 
   // 버튼 삭제 여부
-  const isSelected = placePositions[index]?.some(
-    (place) => place.place_name === placeName
+  const isSelected = hotelPositions[index]?.some(
+    (hotel) => hotel.place_name === placeName
   );
 
   // 버튼 클릭시
   const handleClick = () => {
     if (!isSelected) {
-      addPlacePositions(placeList[count], index);
+      addHotelPositions(hotelList[count], index);
     } else {
-      deletePlacePositions(index, placeName);
+      deleteHotelPositions(index, placeName);
     }
   };
 
@@ -35,7 +35,7 @@ export default function TripPlaceItem({ placeName, address, count, index }) {
           <TripPlaceImage />
           <TripPlaceInfo placeName={placeName} address={address} />
         </div>
-        <AddButton onClick={handleClick} isSelect={isPlace} />
+        <AddButton onClick={handleClick} isSelect={isHotel} />
       </div>
     </li>
   );

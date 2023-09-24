@@ -6,7 +6,7 @@ import pocketbase from '@/api/pocketbase';
 import TripHeader from '@/components/Header/TripHeader';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
 import MapHotel from '@/components/TripSelect/MapHotel';
-import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
+import TripHotelItem from '@/components/TripSelect/TripHotelItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
@@ -56,11 +56,12 @@ export default function TripHotelPage() {
           className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll sm:h-[28.5625rem] md:grid md:grid-cols-2 lg:grid-cols-3 xl:h-[34.5rem]"
         >
           {hotelList?.map((hotel, index) => (
-            <TripPlaceItem
+            <TripHotelItem
               key={hotel.id}
               placeName={hotel.place_name}
               address={hotel.road_address_name}
               count={index}
+              index={currentIndex}
             />
           ))}
         </ul>
@@ -71,11 +72,13 @@ export default function TripHotelPage() {
               <h2 className="mb-[0.625rem] text-base font-light text-contentsPrimary">
                 숙소
               </h2>
-              {Array.isArray(hotelPositions[currentIndex]) ? (
-                <ul className="mb-[0.625rem] flex h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
-                  {hotelPositions[currentIndex]?.map((item, index) => (
+              {Array.isArray(hotelPositions[currentIndex]) &&
+              hotelPositions[currentIndex].length > 0 ? (
+                <ul className="mb-[0.625rem] flex max-h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
+                  {hotelPositions[currentIndex]?.map((hotel, index) => (
                     <AddPlaceItem
-                      placeName={item.place_name}
+                      key={hotel.id + index}
+                      placeName={hotel.place_name}
                       count={index + 1}
                     />
                   ))}
