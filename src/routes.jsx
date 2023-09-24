@@ -32,9 +32,15 @@ const router = createBrowserRouter(
       <Route path="main" element={<MainPage />} />
       <Route path="triplocal" element={<TripLocalPage />} />
       <Route path="tripcalendar" element={<TripCalendarPage />}></Route>
-      <Route path="tripedit" element={<TripEditPage />} />
-      <Route path="tripplace" element={<TripPlacePage />} />
-      <Route path="triphotel" element={<TripHotelPage />} />
+      <Route path="tripedit/:MyScheduleId" element={<TripEditPage />} />
+      <Route
+        path="tripplace/:MyScheduleId/:indexId"
+        element={<TripPlacePage />}
+      />
+      <Route
+        path="triphotel/:MyScheduleId/:indexId"
+        element={<TripHotelPage />}
+      />
       <Route path="myschedule" element={<MySchedule />} />
       <Route path="bookmark" element={<BookmarkPage />} />
       <Route path="bookmark/:recommendId" element={<DetailPage />} />

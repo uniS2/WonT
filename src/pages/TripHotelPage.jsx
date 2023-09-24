@@ -9,6 +9,7 @@ import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
 import { useMapStore } from '@/store/mapStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { useScheduleStore } from '@/store/scheduleStore';
+import { useParams } from 'react-router-dom';
 
 export default function TripHotelPage() {
   const {
@@ -19,6 +20,7 @@ export default function TripHotelPage() {
   } = useToggleTripMenuStore(); // 토글 메뉴
   const { hotelList } = useMapStore(); // 지도에 표시되는 숙소 목록
   const { hotelPositions } = useScheduleStore(); // 추가한 장소
+  const currentIndex = useParams().indexId; // 현재 경로
 
   return (
     <>
@@ -53,9 +55,9 @@ export default function TripHotelPage() {
               <h2 className="mb-[0.625rem] text-base font-light text-contentsPrimary">
                 숙소
               </h2>
-              {hotelPositions.length > 0 ? (
+              {Array.isArray(hotelPositions[currentIndex]) ? (
                 <ul className="mb-[0.625rem] flex h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
-                  {hotelPositions?.map((item, index) => (
+                  {hotelPositions[currentIndex]?.map((item, index) => (
                     <AddPlaceItem
                       placeName={item.place_name}
                       count={index + 1}

@@ -15,7 +15,7 @@ export default function PlanDate({
   return (
     <div className="mx-5 my-4 flex items-center gap-[10px] py-3 ">
       <span key={index} className="font-bold">
-        Day {index + 1}{' '}
+        Day {index + 1}
       </span>
       <span className="aria-hidden:">|</span>
       <span className="text-[14px] text-contentsSecondary">
