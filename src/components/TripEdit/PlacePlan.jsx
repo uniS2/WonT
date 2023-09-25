@@ -1,5 +1,4 @@
 export default function PlacePlan({ select, placeList, hotelList, index }) {
-  console.log(placeList);
   return (
     <div className="mx-5 mt-4 flex flex-col gap-[10px]">
       {select === '숙소'
