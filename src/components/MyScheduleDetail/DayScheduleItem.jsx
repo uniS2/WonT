@@ -1,6 +1,7 @@
 import AddPlaceItemContent from '@/components/TripSelect/AddPlaceItemContent';
 
 export default function DayScheduleItem({
+  count,
   placeName = '장소명',
   placeType = '장소 분류',
   address = '상세 주소',
@@ -11,6 +12,7 @@ export default function DayScheduleItem({
     <li className="flex flex-col gap-[0.125rem] bg-white py-[0.625rem] pl-1">
       <div className="flex items-center gap-[0.3125rem] rounded-md bg-white pl-[0.5625rem]">
         <AddPlaceItemContent
+          count={count}
           placeName={placeName}
           divSize={'h-[1.1875rem] w-[1.1875rem]'}
           divColor={backgroundColor}

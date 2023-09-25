@@ -2,6 +2,7 @@ import { useEffect, useId, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
+
 import pocketbase from '@/api/pocketbase';
 import TripHeader from '@/components/Header/TripHeader';
 import Modal from '@/components/Modal';
@@ -12,11 +13,10 @@ import DeleteButton from '@/components/DeleteButton';
 import TotalScheduleSummary from '@/components/MyScheduleDetail/TotalScheduleSummary';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import TotalScheduleView from '@/components/MyScheduleDetail/TotalScheduleView';
-import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
+import Spinner from '@/components/Spinner/Spinner';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import Spinner from '@/components/Spinner/Spinner';
-import { getRangeDay } from '@/utils/getRangeDay';
+import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
 
 // 데이터 요청 함수 (query function)
 const fetchScheduleDetail = async (userId) => {
@@ -104,7 +104,7 @@ export default function MyScheduleDetailPage() {
         {displayTotalschedule && (
           <section className="flex flex-col gap-[1.875rem]">
             <h2 className="sr-only">전체 일정 한눈에 보기</h2>
-            <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white sm:h-44 md:h-64 lg:h-80">
+            <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white sm:h-44 md:h-64 md:max-w-[46.875rem]">
               {isLoading ? (
                 <Spinner />
               ) : (
@@ -140,26 +140,49 @@ export default function MyScheduleDetailPage() {
         />
         <section className="mb-28">
           <h2 className="sr-only">날짜별 일정 보기</h2>
-          {selectBookmark && selectBookmark.start_date && (
-            <ToggleTotalSchedule
-              state={displayDaySchedule}
-              action={toggleDaySchedule}
-            >
-              Day {selectBookmark.start_date.slice(-2)}
-            </ToggleTotalSchedule>
-          )}
+
+          <ToggleTotalSchedule
+            state={displayDaySchedule}
+            action={toggleDaySchedule}
+          >
+            Day 1
+          </ToggleTotalSchedule>
           {displayDaySchedule && (
             <>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                <DayScheduleItem />
+                {selectBookmark && selectBookmark[0] ? (
+                  selectBookmark[0].places[1]?.map((item, index) => (
+                    <DayScheduleItem
+                      key={item.id}
+                      placeName={item.place_name}
+                      placeType={item.category_name.slice(13)}
+                      address={item.address_name}
+                      count={index + 1}
+                    />
+                  ))
+                ) : (
+                  <DayScheduleItem />
+                )}
               </ul>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                <DayScheduleItem
-                  placeName="숙소명"
-                  placeType="숙소 분류"
-                  backgroundColor="bg-point"
-                  textColor="text-point"
-                />
+                {selectBookmark && selectBookmark[0] ? (
+                  selectBookmark[0].hotels[1]?.map((item, index) => (
+                    <DayScheduleItem
+                      key={item.id}
+                      placeName={item.place_name}
+                      placeType={item.category_name}
+                      address={item.address_name}
+                      count={index + 1}
+                    />
+                  ))
+                ) : (
+                  <DayScheduleItem
+                    placeName="숙소명"
+                    placeType="숙소 분류"
+                    backgroundColor="bg-point"
+                    textColor="text-point"
+                  />
+                )}
               </ul>
             </>
           )}
