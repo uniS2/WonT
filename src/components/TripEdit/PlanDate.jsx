@@ -26,7 +26,7 @@ export default function PlanDate({
         <span className="text-[14px] text-contentsSecondary">
           {getTripDate(getTripDateUTC(item))}
         </span>
-        <button type="button" onClick={handleToggleButton}>
+        <button key={index + 1} type="button" onClick={handleToggleButton}>
           <img src={toggleSchedule ? toggleDown : toggleUp} alt="일정 펼치기" />
         </button>
       </div>
