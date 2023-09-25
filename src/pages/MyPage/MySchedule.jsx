@@ -32,7 +32,7 @@ export default function MySchedule() {
         <Helmet>
           <title className="sr-only">MySchedule - WonT</title>
         </Helmet>
-        <div className="flex  min-h-screen flex-col items-center bg-background pb-14">
+        <div className="  flex min-h-screen flex-col items-center bg-background pb-14">
           <MyPageHeader page="mypage" />
           <div className="flex flex-col items-center pb-11 pt-7">
             <span className="mb-[1.375rem] text-[1.5rem] font-extrabold leading-normal text-contentsPrimary ">
@@ -54,7 +54,7 @@ export default function MySchedule() {
 
           <div className="container mx-auto flex flex-col justify-center">
             <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
-            <div className=" max-w-[1280px] self-center  px-3 md:px-4">
+            <div className="container max-w-[1280px] self-center  px-3 md:px-4">
               <MyPageTabInfo tab="나의 일정" />
               <PlanPreview userSchedule={userSchedule} />
             </div>
