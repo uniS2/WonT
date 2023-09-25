@@ -8,6 +8,13 @@ export const useScheduleStore = create(
     placePositions: [],
     // 추가한 숙소 목록
     hotelPositions: [],
+    // 추가 장소 초기화
+    resetHotelPositions: () => {
+      set({ hotelPositions: [] });
+    },
+    resetPlacePositions: () => {
+      set({ placePositions: [] });
+    },
     // 장소 추가하기
     addPlacePositions: (placePosition, index) =>
       set(
@@ -19,10 +26,12 @@ export const useScheduleStore = create(
               ...placePosition,
             });
           } else {
-            updatedPlacePositions[index] = [{
-              id: placePosition.id,
-              ...placePosition,
-            }];
+            updatedPlacePositions[index] = [
+              {
+                id: placePosition.id,
+                ...placePosition,
+              },
+            ];
           }
           return { placePositions: updatedPlacePositions };
         },
@@ -55,10 +64,12 @@ export const useScheduleStore = create(
               ...hotelPosition,
             });
           } else {
-            updatedHotelPositions[index] = [{
-              id: hotelPosition.id,
-              ...hotelPosition,
-            }];
+            updatedHotelPositions[index] = [
+              {
+                id: hotelPosition.id,
+                ...hotelPosition,
+              },
+            ];
           }
           return { hotelPositions: updatedHotelPositions };
         },

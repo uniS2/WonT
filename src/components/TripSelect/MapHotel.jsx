@@ -84,24 +84,23 @@ export default function MapHotel({
 
       markers.push(marker);
 
+      const info = `<div style="margin:0.3125rem;font-size:0.75rem;background:#C9ECFF;color:#152644;">
+      <dl>
+      <div style="display:flex;gap:0.25rem;"><dt>숙소명</dt><dd>${place.place_name}</dd></div>
+      <div style="display:flex;gap:0.25rem;"><dt>주소</dt><dd}>${place.road_address_name}</dd></div>
+        </dl>
+        <div style="display:flex;gap:0.25rem;"><span>URL: </span><a target="_blank" rel="noopener noreferrer" href=${place.place_url} style="color:#F97660">${place.place_url}</a></div></div>`;
+
       // 마커에 이벤트를 등록합니다.
       //- mouseover
       kakao.maps.event.addListener(marker, 'mouseover', function () {
-        infowindow.setContent(
-          '<div style="padding:0.3125rem;font-size:0.75rem;">' +
-            place.place_name +
-            '</div>'
-        );
+        infowindow.setContent(info);
         infowindow.open(map, marker);
       });
 
       //- click
       kakao.maps.event.addListener(marker, 'click', function () {
-        infowindow.setContent(
-          '<div style="padding:0.3125rem;font-size:0.75rem;">' +
-            place.place_name +
-            '</div>'
-        );
+        infowindow.setContent(info);
         infowindow.open(map, marker);
       });
 
@@ -111,7 +110,7 @@ export default function MapHotel({
         'mouseout',
         debounce(function () {
           infowindow.close();
-        }, 3000)
+        }, 4000)
       );
     }
 

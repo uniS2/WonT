@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import debounce from '@/utils/debounce';
-import { useMarkerStore } from '@/store/markerStore';
-
 const { kakao } = window;
 
 export default function SelectHotelMap({
   hotelList,
+  placeList,
   width = 'w-full',
   height = 'h-[25rem]',
   latitude = 37.4812845080678,
@@ -34,8 +32,10 @@ export default function SelectHotelMap({
     // 주소 - 좌표 변환 객체
     const geocoder = new kakao.maps.services.Geocoder();
 
+    const tripList = [...placeList, ...hotelList];
+
     // hotelData를 반복하여 각 위치에 마커 표시
-    hotelList.forEach((locations, index) => {
+    tripList.forEach((locations, index) => {
       locations.forEach((item) => {
         // 마커의 위치를 설정합니다.
         const markerPosition = new kakao.maps.LatLng(item.y, item.x);
@@ -47,19 +47,14 @@ export default function SelectHotelMap({
 
         // 마커를 지도에 추가합니다.
         marker.setMap(map);
-        var center = map.getCenter();
-        console.log(center);
+        let center = map.getCenter();
+        // console.log(center);
 
-        // 마커에 클릭 이벤트를 등록합니다.
         kakao.maps.event.addListener(marker, 'click', function () {
-          // 인포윈도우 내용 설정
           infowindow.setContent(
-            `<div style="padding:5px;font-size:12px;">${item.address_name}</div>`
+            `<div style="padding:5px;font-size:12px;">${item.place_name}</div>`
           );
-
-          // 인포윈도우를 지도 위에 표시합니다.
           infowindow.open(map, marker);
-          map.setCenter(new kakao.maps.LatLng(item.latitude, item.longitude));
         });
         // 마커가 찍힌 위치로 지도 중심 이동
         map.setCenter(markerPosition);

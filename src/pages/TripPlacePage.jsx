@@ -25,6 +25,7 @@ export default function TripPlacePage() {
   const { placeList } = useMapStore(); // 지도에 표시되는 숙소 목록
 
   const { placePositions } = useScheduleStore(); // 추가한 장소 목록
+  console.log(placePositions);
 
   const currentIndex = useParams().indexId; // 현재 경로
 
