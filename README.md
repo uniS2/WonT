@@ -4,17 +4,17 @@
 
 ## 📋목차
 
-0. [🎮 프로젝트 사용법](#🎮-프로젝트-사용법)
-1. [✈️프로젝트 소개](#✈️프로젝트-소개)
-2. [🏠팀 소개](#🏠팀소개)
-3. [📖담당페이지](#📖담당페이지)
-4. [📅프로젝트 일정](#📅프로젝트-일정)
-5. [📝기술스택](#기술스택⚡)
-6. [🔪컨벤션](#🔪컨벤션)
-7. [📂폴더구성](#📂폴더구성)
-8. [🌈유저 플로우](#🌈-유저플로우)
-9. [🎥화면구성](#🎥-화면구성)
-10. [😋프로젝트소감](#😋프로젝트-소감)
+0. [🎮 프로젝트 사용법](#-프로젝트-사용법)
+1. [✈️ 프로젝트 소개](#-프로젝트-소개)
+2. [🏠 팀 소개](#-팀-소개)
+3. [📖 담당페이지](#-담당페이지)
+4. [📅 프로젝트 일정](#-프로젝트-일정)
+5. [📝 기술스택](#-기술스택)
+6. [🔪 컨벤션](#-컨벤션)
+7. [📂 폴더구성](#-폴더구성)
+8. [🌈 유저 플로우](#-유저플로우)
+9. [🎥 화면구성](#-화면구성)
+10. [😋 프로젝트 소감](#-프로젝트-소감)
 
 <br>
 <br>
@@ -38,7 +38,7 @@ pnpm dev
 <br>
 <br>
 
-## ✈️프로젝트 소개
+## ✈️ 프로젝트 소개
 
 - 프로젝트 이름 : WonT ( We on Trip )
 - 프로젝트 목적 : 여행 일정 관리 구현
@@ -51,7 +51,7 @@ pnpm dev
 <br>
 <br>
 
-## 🏠팀 소개
+## 🏠 팀 소개
 
 | ![image](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/c97eeb1a-7293-4c13-97d0-dccd22a88dd5) | ![image](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/562e595f-b12f-49f2-bfb3-87ba2201ab4b) | ![image](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/33d929a1-9386-4935-8dd6-4bef0bb185fb) |
 | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
@@ -62,17 +62,17 @@ pnpm dev
 <br>
 <br>
 
-## 📖담당페이지
+## 📖 담당페이지
 
 #### 📌전선용
 
-- 랜딩페이지
+- **랜딩페이지 (LandingPage)**
 
   - Carousel 라이브러리 활용한 랜딩 화면 구현
   - Framer Motion 라이브러리 활용한 전환 효과 구현
   - 반응형 페이지 구현
 
-- 메인페이지
+- **메인페이지 (MainPage)**
 
   - 데이터 Read, Update (GET, PUT)
   - useBookmarkStore() 이용한 상태 관리
@@ -81,7 +81,7 @@ pnpm dev
   - 여행기 리스트 렌더링
   - 반응형 페이지 구현
 
-- 회원가입 / 로그인
+- **회원가입 / 로그인 (SignUp / SignInPage)**
   
   - 회원가입 데이터 Create (POST)
   - Auth() context 생성 및 <AuthProvider> 제공 통한 로그인, 회원가입 관련 인증 관리 기능 구현
@@ -90,7 +90,7 @@ pnpm dev
 
 #### 📌장현주
 
-- 마이페이지 (나의 일정, 북마크)
+- **마이페이지 (나의 일정, 북마크. MyPage: Bookmark, MySchedule)**
   
   - user 데이터 렌더링
   - 북마크 기능 구현
@@ -98,20 +98,20 @@ pnpm dev
   - 일정 / 북마크 데이터 렌더링
   - D-day 날짜 계산
  
-- 국내 추천 여행지 상세페이지
+- **국내 추천 여행지 상세페이지 (DetailPage)**
   
   - 북마크 기능 구현(React-Query : useMutation)
   - fade-in 애니메이션 기능 구현
   - 여행지 데이터 렌더링
   - 링크 페이지로 이동(\_blank, noopener, norefferer)
     
-- 여행기 상세페이지
+- **여행기 상세페이지 (TravelsPage)**
   
   - 여행 데이터 렌더링
   - 이미지 캐러셀 기능
   - 지도뷰 (구현 미완료)
     
-- 일정편집
+- **일정편집 (TripEditPage)**
   
   - 일정 데이터 렌더링
   - 추가된 데이터 지도에 마커로 표기
@@ -122,34 +122,35 @@ pnpm dev
 
 #### 📌정소이
 
-- 전체 페이지
+- **전체 페이지**
 
   - Zustand 및 TanStack Query 라이브러리 사용
   - `usdNavigate()` 또는 `<Link />` 를 이용한 경로 이동
 
-- 지역 선택 페이지
+- **지역 선택 페이지 (TripLocalPage)**
 
   - 데이터 Read, Create (GET, POST)
   - localStore() 이용한 상태 관리
 
-- 날짜 선택 페이지
+- **날짜 선택 페이지 (TripCalendarPage)**
 
   - 데이터 Update (PUT)
   - useDateStore() 이용한 상태 관리
   - 로그인 유저 정보를 이용한 TanStack Query 활용
   - react-calendar 활용한 달력 커스텀 및 접근성 개선
 
-- 장소 및 숙소 선택 페이지
+- **장소 및 숙소 선택 페이지 (TripPlacePage, MyHotelPage)**
 
   - 로그인 유저 정보 활용한 TanStack Query 활용
   - useToggleTripMenuStore(), useMapStore(), useScheduleStore() 이용한 상태관리
-  - kakao Map API 활용한 선택 지역 실시간 정보 렌더링 기능 구현 (이하)
-  - 현재 선택한 지역으로 중심 좌표 검색 및 설정 (지도 기본값)
-  - 장소/숙소 카테고리 검색결과 마커로 표시 (최대 15개)
-  - 마커로 표시된 장소목록 렌더링 및 선택 버튼 구현
-  - 지도 이동시 중심 좌표 업데이트 및 리렌더링
+    
+  - kakao Map API 활용한 선택 지역 실시간 정보 렌더링 기능 구현
+    - 현재 선택한 지역으로 중심 좌표 검색 및 설정 (지도 기본값)
+    - 장소/숙소 카테고리 검색결과 마커로 표시 (최대 15개)
+    - 마커로 표시된 장소목록 렌더링 및 선택 버튼 구현
+    - 지도 이동시 중심 좌표 업데이트 및 리렌더링
 
-- 나의 일정 상세 페이지
+- **나의 일정 상세 페이지 (MyScheduleDetailPage)**
   
   - 데이터 Read, Delete (GET, DELETE)
   - useButtonStore(), useToggleTripMenuStore() 이용한 상태관리
@@ -158,7 +159,7 @@ pnpm dev
 <br>
 <br>
 
-## [📅프로젝트 일정](https://www.notion.so/10-abb34133d4cd4826b9533369f20ce9e7)
+## [📅 프로젝트 일정](https://www.notion.so/10-abb34133d4cd4826b9533369f20ce9e7)
 
 ![readme-calender](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/7d7ccc5f-0af9-4762-8d1d-d2dfde6c64af)
 
@@ -166,15 +167,15 @@ pnpm dev
 <br>
 <br>
 
-## 📝기술스택
+## 📝 기술스택
+![readme-stack](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/f5424f3a-9727-4e74-8336-b621c44004df)
 
-![readme-teckstack](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/7b054d1b-6bb9-4890-b36b-60acb402ab43)
 
 <br>
 <br>
 <br>
 
-## 🔪컨벤션
+## 🔪 컨벤션
 
 ### [Commit Convention ⚡](https://github.com/FRONTENDSCHOOL6/react-project-10/wiki/Commit-Convention-%E2%9A%A1)
 
@@ -186,7 +187,7 @@ pnpm dev
 <br>
 <br>
 
-## 📂폴더구성
+## 📂 폴더구성
 
 <details>
 <summary>폴더구성</summary>
@@ -393,7 +394,7 @@ pnpm dev
 <br>
 <br>
 
-## 😋프로젝트 소감
+## 😋 프로젝트 소감
 
 #### 😝전선용
 
