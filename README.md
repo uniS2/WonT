@@ -1,4 +1,4 @@
-# [멋사 6기🦁 | 멋쟁이 🔟조 | React 프로젝트]
+# [멋사 6기🦁 | 멋쟁이 🔟조 | React 프로젝트 리팩토링]
 
 ![readme-logo](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/dcc77ab4-96b6-4329-92bb-fcc80a3e079d)
 
@@ -41,8 +41,8 @@ pnpm dev
 ## ✈️ 프로젝트 소개
 
 - 프로젝트 이름 : WonT ( We on Trip )
-- 프로젝트 목적 : 여행 일정 관리 구현
-- 프로젝트 기간 : 230831 ~ 230924
+- 프로젝트 목적 : 여행 일정 관리 구현 및 리팩토링
+- 리팩토링 기간 : 240103 ~ 240131
 - 배포주소 : [WonT](https://weontrip.vercel.app/)
 
 ![readme-main](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/907787e3-e95f-4794-b278-e18bb3be214e)
@@ -82,7 +82,7 @@ pnpm dev
   - 반응형 페이지 구현
 
 - **회원가입 / 로그인 (SignUp / SignInPage)**
-  
+
   - 회원가입 데이터 Create (POST)
   - Auth() context 생성 및 <AuthProvider> 제공 통한 로그인, 회원가입 관련 인증 관리 기능 구현
   - useRef() 훅 활용한 로그인 정보 관리
@@ -91,28 +91,28 @@ pnpm dev
 #### 📌장현주
 
 - **마이페이지 (나의 일정, 북마크. MyPage: Bookmark, MySchedule)**
-  
+
   - user 데이터 렌더링
   - 북마크 기능 구현
   - 마우스 hover 효과
   - 일정 / 북마크 데이터 렌더링
   - D-day 날짜 계산
- 
+
 - **국내 추천 여행지 상세페이지 (DetailPage)**
-  
+
   - 북마크 기능 구현(React-Query : useMutation)
   - fade-in 애니메이션 기능 구현
   - 여행지 데이터 렌더링
   - 링크 페이지로 이동(\_blank, noopener, norefferer)
-    
+
 - **여행기 상세페이지 (TravelsPage)**
-  
+
   - 여행 데이터 렌더링
   - 이미지 캐러셀 기능
   - 지도뷰 (구현 미완료)
-    
+
 - **일정편집 (TripEditPage)**
-  
+
   - 일정 데이터 렌더링
   - 추가된 데이터 지도에 마커로 표기
   - 추가된 데이터 일정 칸에 렌더링
@@ -143,7 +143,6 @@ pnpm dev
 
   - 로그인 유저 정보 활용한 TanStack Query 활용
   - useToggleTripMenuStore(), useMapStore(), useScheduleStore() 이용한 상태관리
-    
   - kakao Map API 활용한 선택 지역 실시간 정보 렌더링 기능 구현
     - 현재 선택한 지역으로 중심 좌표 검색 및 설정 (지도 기본값)
     - 장소/숙소 카테고리 검색결과 마커로 표시 (최대 15개)
@@ -151,7 +150,7 @@ pnpm dev
     - 지도 이동시 중심 좌표 업데이트 및 리렌더링
 
 - **나의 일정 상세 페이지 (MyScheduleDetailPage)**
-  
+
   - 데이터 Read, Delete (GET, DELETE)
   - useButtonStore(), useToggleTripMenuStore() 이용한 상태관리
 
@@ -168,8 +167,8 @@ pnpm dev
 <br>
 
 ## 📝 기술스택
-![readme-stack](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/f5424f3a-9727-4e74-8336-b621c44004df)
 
+![readme-stack](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/f5424f3a-9727-4e74-8336-b621c44004df)
 
 <br>
 <br>
