@@ -1,10 +1,10 @@
 ---
-name: 질문
+name: WonT Question report
 about: 질문 사항에 대한 이슈 템플릿입니다.
-title: '[Question] 제목'
+title: "[Question] 제목"
 labels: "\U0001F63F Question"
-assignees: 'sy0725, uniS2, 
-hyeonjuuu'
+assignees: hyeonjuuu, sy0725, uniS2
+
 ---
 
 # 😿 질문

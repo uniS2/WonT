@@ -1,10 +1,10 @@
 ---
-name: 오류
+name: WonT Bug report
 about: 오류 사항에 대한 이슈 템플릿입니다.
-title: '[Bug] 제목'
+title: "[Bug] 제목"
 labels: "\U0001F6A8 SOS"
-assignees: 'sy0725, uniS2, 
-hyeonjuuu'
+assignees: hyeonjuuu, sy0725, uniS2
+
 ---
 
 # 🚨 오류

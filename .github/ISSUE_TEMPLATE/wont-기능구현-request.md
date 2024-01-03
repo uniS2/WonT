@@ -1,9 +1,10 @@
 ---
 name: WonT feature request
 about: 새로운 기능 구현을 위한 이슈 템플릿입니다.
-title: '[WonT - part] issue'
+title: "[WonT - part] issue"
 labels: "\U0001F4BB Feature"
 assignees: ''
+
 ---
 
 # 😎 이슈 내용
