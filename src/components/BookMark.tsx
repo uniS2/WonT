@@ -1,4 +1,4 @@
-export default function BookMark({ color = 'none' }) {
+function BookMark({ color = 'none' }) {
   return (
     <svg
       width="16"
@@ -17,3 +17,5 @@ export default function BookMark({ color = 'none' }) {
     </svg>
   );
 }
+
+export default BookMark;
