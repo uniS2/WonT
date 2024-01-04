@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-
 import Logo from '@/components/Logo';
 
-export default function Header() {
+const Header: React.FC = () => {
   return (
     <div className="flex justify-center px-[1.0625rem] py-[1.125rem]">
       <Link to="/main">
@@ -10,4 +9,6 @@ export default function Header() {
       </Link>
     </div>
   );
-}
+};
+
+export default Header;

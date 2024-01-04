@@ -1,10 +1,15 @@
-import { oneOf } from 'prop-types';
+import React from 'react';
 
-export default function SignInButton({
+interface SignInButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  type?: 'button' | 'submit' | 'reset' | undefined;
+}
+
+const SignInButton: React.FC<SignInButtonProps> = ({
   type = 'button',
   children,
   ...restProps
-}) {
+}) => {
   return (
     <div>
       <button
@@ -16,8 +21,6 @@ export default function SignInButton({
       </button>
     </div>
   );
-}
-
-SignInButton.propTypes = {
-  type: oneOf(['button', 'submit', 'reset']),
 };
+
+export default SignInButton;

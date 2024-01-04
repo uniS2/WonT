@@ -1,25 +1,29 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import airplain from '@/assets/common-favicon.svg';
 import { useState } from 'react';
 
-export default function MainMakePlan() {
-  const [hover, setHover] = useState(false);
+function MainMakePlan() {
+  const [hover, setHover] = useState<boolean>(false);
+
+  const handleMouseEnter = () => {
+    setHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHover(false);
+  };
 
   return (
     <div
       className={`mx-5 mb-[40px] mt-[1.063rem] flex h-[140px] w-[20rem] items-center justify-center rounded-[0.625rem] bg-white shadow-md shadow-secondary/50 md:w-[568px] lg:w-[824px] ${
         hover ? 'hovered-style' : ''
       }`}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <Link to="/triplocal">
         <button type="button" className="flex flex-col items-center ">
-          <div
-            type="button"
-            className="border-secondary/0.8 relative flex overflow-hidden rounded-full border-[1px]"
-          >
+          <div className="border-secondary/0.8 relative flex overflow-hidden rounded-full border-[1px]">
             <img
               src={airplain}
               alt="비행기 아이콘"
@@ -33,13 +37,12 @@ export default function MainMakePlan() {
           <div className="relative flex flex-col items-center pt-[0.625rem]">
             <p>새로운 일정을 추가해보세요!</p>
             <p className="font-bold">여행 일정 만들기</p>
-            <div
-              className="absolute bottom-1
- h-2 w-[7rem] bg-custom-color/40"
-            ></div>
+            <div className="absolute bottom-1 h-2 w-[7rem] bg-custom-color/40"></div>
           </div>
         </button>
       </Link>
     </div>
   );
 }
+
+export default MainMakePlan;
