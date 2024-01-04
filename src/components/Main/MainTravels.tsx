@@ -1,16 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import pocketbase from '@/api/pocketbase';
-import { getPocketHostImageURL } from '@/utils/index.js';
+import { getPocketHostImageURL } from '@/utils/index';
 
-export default function MainTravels() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+interface Travel {
+  id: string;
+  info: string;
+  title: string;
+  text: string;
+}
+
+function MainTravels() {
+  const [data, setData] = useState<Travel[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await pocketbase.collection('travels').getFullList();
+        const response: Travel[] = await pocketbase
+          .collection('travels')
+          .getFullList();
         setData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -25,14 +34,14 @@ export default function MainTravels() {
   return (
     <div className="flex flex-col items-center">
       <ul className="grid grid-cols-1 gap-5 px-[1.688rem] pb-[1.25rem] pt-[0.625rem] md:grid md:grid-cols-2 md:gap-10">
-        {data?.map((item) => (
+        {data?.map((item: Travel) => (
           <Link to={`/travels/${item.id}`} key={item.id}>
             <li
               key={item.id}
               className="overflow-hidden rounded-md transition hover:scale-110 hover:rounded-lg"
             >
               <img
-                src={getPocketHostImageURL(item).split(',')[0]}
+                src={(getPocketHostImageURL(item) as string).split(',')[0]}
                 alt={item.info}
               />
               <div className="pb-[1.25rem] pt-[0.625rem]">
@@ -46,3 +55,5 @@ export default function MainTravels() {
     </div>
   );
 }
+
+export default MainTravels;
