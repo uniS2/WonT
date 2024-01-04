@@ -1,3 +1,4 @@
+import { useRef, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,18 +8,19 @@ import BackButton from '@/components/Sign/BackButton';
 import Logo from '@/components/Logo';
 import SignPart from '@/components/Sign/SignPart';
 import { useAuth } from '@/contexts/Auth';
-import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 export default function SignInPage() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSignIn = async (e) => {
+  const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!emailRef.current || !passwordRef.current) return;
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
