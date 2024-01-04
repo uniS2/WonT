@@ -1,28 +1,34 @@
-// PocketBase SDK 활용편
 import { useState } from 'react';
 
 import pocketbase from '@/api/pocketbase';
 
 // SDK 처리 함수를 포함하는 사용자 정의 훅 작성
-export function useSDKData(collection) {
-  const [data, setData] = useState(null);
+function useSDKData(collection: string): {
+  data: any;
+  status: string;
+  SDK: () => Promise<void>;
+} {
+  const [data, setData] = useState<any>(null);
   const [status, setStatus] = useState('pending');
 
   async function SDK() {
     try {
       setStatus('loading');
-      // opction 변경하기 - PocketHost List/Search 참고
-      const records = await pocketbase.collection(collection).getFullList();
-      setData(JSON.stringify(records));
+      const records = (await pocketbase
+        .collection(collection)
+        .getFullList()) as any[];
+      setData(records);
       setStatus('success');
     } catch (error) {
       setStatus('error');
     }
   }
 
-  return ({
+  return {
     data,
     status,
-    SDK
-  })
+    SDK,
+  };
 }
+
+export default useSDKData;
