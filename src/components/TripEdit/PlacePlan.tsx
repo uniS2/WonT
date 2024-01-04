@@ -1,11 +1,20 @@
-export default function PlacePlan({
+interface PlacePlanProps {
+  select: string;
+  placeList: string[];
+  hotelList: string[];
+  index: number;
+  resetHotelPositions: string[];
+  resetPlacePositions: string[];
+}
+
+function PlacePlan({
   select,
   placeList,
   hotelList,
   index,
   resetHotelPositions,
   resetPlacePositions,
-}) {
+}: PlacePlanProps) {
   return (
     <div className="mx-5 mt-4 flex flex-col gap-[10px]">
       {select === '숙소'
@@ -58,3 +67,5 @@ export default function PlacePlan({
     </div>
   );
 }
+
+export default PlacePlan;

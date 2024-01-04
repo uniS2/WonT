@@ -1,4 +1,11 @@
-export default function ButtonMedium({ menu, fill, text, color }) {
+interface ButtonMediumProps {
+  fill: boolean;
+  text: string;
+  color: string;
+  menu?: string;
+}
+
+function ButtonMedium({ menu, fill, text, color }: ButtonMediumProps) {
   return (
     <div
       className={`mx-5 mt-4 flex flex-col gap-[10px] font-bold text-primary ${
@@ -17,3 +24,5 @@ export default function ButtonMedium({ menu, fill, text, color }) {
     </div>
   );
 }
+
+export default ButtonMedium;
