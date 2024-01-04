@@ -1,7 +1,12 @@
+import React from 'react';
 import Logo from '@/components/Logo';
 import Sns from '@/components/Landing/Sns';
 
-export default function Footer({ color }) {
+interface FooterProps {
+  color?: string;
+}
+
+const Footer: React.FC<FooterProps> = () => {
   return (
     <footer className="flex w-full flex-col items-center gap-3 bg-gray-100/50">
       <Logo
@@ -16,4 +21,6 @@ export default function Footer({ color }) {
       </span>
     </footer>
   );
-}
+};
+
+export default Footer;
