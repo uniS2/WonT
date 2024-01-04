@@ -20,7 +20,6 @@ const CarouselDiv: React.FC<CarouselDivProps> = ({ images, children }) => {
         infiniteLoop={true}
         showIndicators={false}
         transitionTime={500}
-        transitionEasing="ease-in-out"
       >
         {images.map((image, index) => (
           <div
