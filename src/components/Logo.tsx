@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 interface LogoProps {
-  width?: string;
-  height?: string;
+  width?: string | number;
+  height?: string | number;
   colors?: string[];
   id?: string;
   isLogo?: boolean;
