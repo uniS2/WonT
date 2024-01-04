@@ -1,30 +1,34 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Test1 from '@/assets/LandingPage-carousel-one.webp';
-import Test2 from '@/assets/LandingPage-carousel-two.webp';
-import Test3 from '@/assets/LandingPage-carousel-three.webp';
-import Test4 from '@/assets/LandingPage-carousel-four.webp';
-import Test5 from '@/assets/LandingPage-carousel-five.webp';
-import Test6 from '@/assets/LandingPage-carousel-six.webp';
+import CarouselOne from '@/assets/landing/landing-carousel-one.webp';
+import CarouselTwo from '@/assets/landing/landing-carousel-two.webp';
+import CarouselThree from '@/assets/landing/landing-carousel-three.webp';
+import CarouselFour from '@/assets/landing/landing-carousel-four.webp';
+import CarouselFive from '@/assets/landing/landing-carousel-five.webp';
+import CarouselSix from '@/assets/landing/landing-carousel-six.webp';
 import Logo from '@/components/Logo';
 import SignInButton from '@/components/Sign/SignInButton';
 import SignUpButton from '@/components/Sign/SignUpButton';
-import LandingPagePartOne from '@/components/Landing/LandingPagePartOne';
-import LandingPagePartTwo from '@/components/Landing/LandingPagePartTwo';
-import LandingPagePartThree from '@/components/Landing/LandingPagePartThree';
-import LandingPagePartFour from '@/components/Landing/LandingPagePartFour';
+import LandingSectionOne from '@/components/Landing/LandingSectionOne';
+import LandingSectionTwo from '@/components/Landing/LandingSectionTwo';
+import LandingSectionThree from '@/components/Landing/LandingSectionThree';
+import LandingSectionFour from '@/components/Landing/LandingSectionFour';
 import Footer from '@/components/Footer';
 import CarouselDiv from '@/components/Landing/CarouselDiv';
 import { Helmet } from 'react-helmet-async';
+import { ReactNode } from 'react';
 
-// framer-motion 함수
-export default function LandingPage() {
-  const MotionDiv = ({ children, delay }) => {
+interface MotionDivProps {
+  children: ReactNode;
+  delay: number;
+}
+function LandingPage() {
+  const MotionDiv: React.FC<MotionDivProps> = ({ children, delay }) => {
     return (
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 2 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1, delay }}
       >
         {children}
@@ -32,7 +36,14 @@ export default function LandingPage() {
     );
   };
 
-  const images = [Test1, Test2, Test3, Test4, Test5, Test6];
+  const images = [
+    CarouselOne,
+    CarouselTwo,
+    CarouselThree,
+    CarouselFour,
+    CarouselFive,
+    CarouselSix,
+  ];
 
   return (
     <div className="container mx-auto flex min-h-[50rem] flex-col">
@@ -68,18 +79,18 @@ export default function LandingPage() {
       <div className="flex flex-col gap-5 px-5 pt-[3.125rem]">
         <div className="lg:flex lg:gap-5">
           <MotionDiv delay={2.5}>
-            <LandingPagePartOne />
+            <LandingSectionOne />
           </MotionDiv>
           <MotionDiv delay={2.5}>
-            <LandingPagePartTwo />
+            <LandingSectionTwo />
           </MotionDiv>
         </div>
         <div className="lg:flex lg:gap-5">
           <MotionDiv delay={2.5}>
-            <LandingPagePartThree />
+            <LandingSectionThree />
           </MotionDiv>
           <MotionDiv delay={2.5}>
-            <LandingPagePartFour />
+            <LandingSectionFour />
           </MotionDiv>
         </div>
         <div className="lg:w-[80rem] 2xl:w-[96rem]">
@@ -89,3 +100,5 @@ export default function LandingPage() {
     </div>
   );
 }
+
+export default LandingPage;

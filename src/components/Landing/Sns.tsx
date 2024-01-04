@@ -3,8 +3,7 @@ import Facebook from '@/assets/common-facebook.webp';
 import Instagram from '@/assets/common-instagram.webp';
 import { Link } from 'react-router-dom';
 
-// 이미지 bakground-image
-export default function Sns() {
+function Sns() {
   return (
     <div className="flex gap-3">
       <Link to="/" aria-label="트위터사진">
@@ -32,3 +31,5 @@ export default function Sns() {
     </div>
   );
 }
+
+export default Sns;

@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom';
 
-export default function Logo({
+interface LogoProps {
+  width?: string;
+  height?: string;
+  colors?: string[];
+  id?: string;
+  isLogo?: boolean;
+}
+
+const Logo: React.FC<LogoProps> = ({
   width = '8.5rem',
   height = '3.125rem',
   colors = ['#4EC3F9', '#50D4E5'],
   id,
   isLogo = true,
   ...restProps
-}) {
+}) => {
   return (
     <>
       {isLogo ? (
@@ -225,4 +233,6 @@ export default function Logo({
       )}
     </>
   );
-}
+};
+
+export default Logo;
