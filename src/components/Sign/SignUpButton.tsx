@@ -1,4 +1,4 @@
-export default function SignUpButton({ text = '' }) {
+function SignUpButton({ text = '' }) {
   return (
     <div>
       <button
@@ -10,3 +10,5 @@ export default function SignUpButton({ text = '' }) {
     </div>
   );
 }
+
+export default SignUpButton;

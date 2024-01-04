@@ -1,6 +1,6 @@
-import Back from '@/assets/common-toogle-left.webp';
+import Back from '@/assets/common/common-toogle-left.webp';
 
-export default function BackButton() {
+function BackButton() {
   return (
     <div>
       <button type="button">
@@ -9,3 +9,5 @@ export default function BackButton() {
     </div>
   );
 }
+
+export default BackButton;

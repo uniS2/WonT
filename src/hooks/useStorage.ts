@@ -1,6 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 
-function useStorage(key, defaultValue) {
+interface StorageReturn {
+  storageData: any;
+  update: (nextData: any) => void;
+  remove: () => void;
+}
+
+function useStorage(key: string, defaultValue: any): StorageReturn {
   const [storageData, setStorageData] = useState(() => {
     try {
       return getData(key);
@@ -10,7 +16,7 @@ function useStorage(key, defaultValue) {
   });
 
   const update = useCallback(
-    (nextData) => {
+    (nextData: any) => {
       setData(key, nextData);
       setStorageData(nextData);
     },
@@ -19,8 +25,8 @@ function useStorage(key, defaultValue) {
 
   const remove = useCallback(() => {
     deleteData(key);
-    setStorageData();
-  }, [key]);
+    setStorageData(defaultValue);
+  }, [key, defaultValue]);
 
   return useMemo(
     () => ({
@@ -32,21 +38,22 @@ function useStorage(key, defaultValue) {
   );
 }
 
-export default useStorage;
-
 const {
   localStorage: storage,
   JSON: { stringify: serialize, parse: deserialize },
-} = globalThis;
+} = globalThis as any;
 
-const setData = (key, nextData) => {
+const setData = (key: string, nextData: any) => {
   storage.setItem(key, serialize(nextData));
 };
 
-const getData = (key) => {
-  return deserialize(storage.getItem(key));
+const getData = (key: string) => {
+  const data = storage.getItem(key);
+  return data ? deserialize(data) : null;
 };
 
-const deleteData = (key) => {
+const deleteData = (key: string) => {
   storage.removeItem(key);
 };
+
+export default useStorage;

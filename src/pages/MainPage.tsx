@@ -5,8 +5,7 @@ import MainPlace from '@/components/Main/MainPlace';
 import MainTravels from '@/components/Main/MainTravels';
 import { Helmet } from 'react-helmet-async';
 
-// 메인 페이지
-export default function MainPage() {
+function MainPage() {
   return (
     <div className="container mx-auto">
       <Helmet>
@@ -28,3 +27,5 @@ export default function MainPage() {
     </div>
   );
 }
+
+export default MainPage;

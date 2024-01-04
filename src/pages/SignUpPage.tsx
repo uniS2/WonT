@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,12 +12,18 @@ import { Helmet } from 'react-helmet-async';
 export default function SignUpPage() {
   const navigate = useNavigate();
 
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const passwordConfirmRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
 
-  const handleRegister = async (e) => {
+  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      !emailRef.current ||
+      !passwordRef.current ||
+      !passwordConfirmRef.current
+    )
+      return; // null 체크
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;

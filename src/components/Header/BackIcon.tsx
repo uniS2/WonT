@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-export default function BackIcon({
+function BackIcon({
   width = '0.9375rem',
   height = '0.625rem',
   color = '#0D0D0D',
@@ -20,3 +20,5 @@ export default function BackIcon({
     </button>
   );
 }
+
+export default BackIcon;
