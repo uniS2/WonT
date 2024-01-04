@@ -1,7 +1,15 @@
 interface PlacePlanProps {
   select: string;
-  placeList: string[];
-  hotelList: string[];
+  placeList: {
+    place_name: string;
+    category_group_name: string;
+    address_name: string;
+  }[];
+  hotelList: {
+    place_name: string;
+    category_group_name: string;
+    address_name: string;
+  }[];
   index: number;
   resetHotelPositions: string[];
   resetPlacePositions: string[];
