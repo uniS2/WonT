@@ -1,21 +1,37 @@
-import { createContext, useEffect, useState, useContext } from 'react';
-import { string, node } from 'prop-types';
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useEffect,
+  useState,
+  useContext,
+} from 'react';
 
 import pocketbase from '@/api/pocketbase';
 import useStorage from '@/hooks/useStorage';
 
-// context 생성
-const AuthContext = createContext();
+interface AuthState {
+  isAuth: boolean;
+  user: any | null;
+  token: string;
+}
 
-// 초기 인증 상태
-const initialAuthState = {
+interface AuthContextProps extends AuthState {
+  signUp: (registerUser: any) => Promise<any>;
+  signIn: (email: string, password: string) => Promise<any>;
+  signOut: () => Promise<any>;
+  cancelMembership: (recordId: string) => Promise<any>;
+}
+
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+
+const initialAuthState: AuthState = {
   isAuth: false,
   user: null,
   token: '',
 };
 
-// provider 작성
-function AuthProvider({ displayName = 'AuthProvider', children }) {
+const AuthProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { storageData } = useStorage('pocketbase_auth');
 
   useEffect(() => {
@@ -29,10 +45,8 @@ function AuthProvider({ displayName = 'AuthProvider', children }) {
     }
   }, [storageData]);
 
-  // 인증상태
-  const [authState, setAuthState] = useState(initialAuthState);
+  const [authState, setAuthState] = useState<AuthState>(initialAuthState);
 
-  // 업데이트 될 때만 상태 변경
   useEffect(() => {
     const unsub = pocketbase.authStore.onChange((token, model) => {
       setAuthState((state) => ({
@@ -47,11 +61,11 @@ function AuthProvider({ displayName = 'AuthProvider', children }) {
     };
   }, []);
 
-  const signUp = async (registerUser) => {
+  const signUp = async (registerUser: any) => {
     return await pocketbase.collection('users').create(registerUser);
   };
 
-  const signIn = async (email, password) => {
+  const signIn = async (email: string, password: string) => {
     return await pocketbase
       .collection('users')
       .authWithPassword(email, password);
@@ -61,11 +75,11 @@ function AuthProvider({ displayName = 'AuthProvider', children }) {
     return await pocketbase.authStore.clear();
   };
 
-  const cancelMembership = async (recordId) => {
+  const cancelMembership = async (recordId: string) => {
     return await pocketbase.collection('users').delete(recordId);
   };
 
-  const authValue = {
+  const authValue: AuthContextProps = {
     ...authState,
     signUp,
     signIn,
@@ -74,20 +88,11 @@ function AuthProvider({ displayName = 'AuthProvider', children }) {
   };
 
   return (
-    <AuthContext.Provider value={authValue} displayName={displayName}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );
-}
-
-AuthProvider.propTypes = {
-  displayName: string,
-  children: node.isRequired, // React.ReactNode
 };
 
-export default AuthProvider;
-
-export const useAuth = () => {
+export const useAuth = (): AuthContextProps => {
   const authValue = useContext(AuthContext);
   if (!authValue) {
     throw new Error('useAuth 훅은 AuthProvider 내부에서만 사용할 수 있습니다.');
@@ -95,3 +100,5 @@ export const useAuth = () => {
 
   return authValue;
 };
+
+export default AuthProvider;
