@@ -3,16 +3,24 @@ import toggleUp from '@/assets/common-toogle-up.webp';
 import { useScheduleStore } from '@/store/scheduleStore';
 import { getTripDate, getTripDateUTC } from '@/utils';
 import { useId } from 'react';
-import { useState } from 'react';
 
-export default function PlanDate({
+interface PlanDateProps {
+  toggleButton: () => void;
+  toggleSchedule: boolean;
+  setToggleSchedule: React.Dispatch<React.SetStateAction<boolean>>;
+  index: number;
+  item: {};
+  handleResetButtonClick: () => void;
+}
+
+function PlanDate({
   toggleButton,
   toggleSchedule,
   item,
   index,
   setToggleSchedule,
   handleResetButtonClick,
-}) {
+}: PlanDateProps) {
   const { resetHotelPositions, resetPlacePositions } = useScheduleStore();
 
   const id = useId();
@@ -26,7 +34,7 @@ export default function PlanDate({
         <span className="text-[14px] text-contentsSecondary">
           {getTripDate(getTripDateUTC(item))}
         </span>
-        <button key={index + 1} type="button " onClick={handleResetButtonClick}>
+        <button key={index + 1} type="button" onClick={handleResetButtonClick}>
           <img src={toggleSchedule ? toggleDown : toggleUp} alt="일정 펼치기" />
         </button>
       </div>
@@ -34,3 +42,5 @@ export default function PlanDate({
     </>
   );
 }
+
+export default PlanDate;
