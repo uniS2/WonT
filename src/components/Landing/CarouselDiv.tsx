@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const CarouselDiv = ({ images, children }) => {
+interface CarouselDivProps {
+  images: string[];
+  children: ReactNode;
+}
+
+const CarouselDiv: React.FC<CarouselDivProps> = ({ images, children }) => {
   return (
     <div className="relative">
       {children}
@@ -15,7 +20,6 @@ const CarouselDiv = ({ images, children }) => {
         infiniteLoop={true}
         showIndicators={false}
         transitionTime={500}
-        transitionEasing="ease-in-out"
       >
         {images.map((image, index) => (
           <div
