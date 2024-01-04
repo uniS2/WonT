@@ -1,6 +1,10 @@
 import TripPlaneIcon from '@/components/TripEdit/TripPlaneIcon';
 
-export default function AddPlan({ text }) {
+interface AddPlanProps {
+  text: string;
+}
+
+function AddPlan({ text }: AddPlanProps) {
   return (
     <div className="mx-5 mt-4 flex flex-col gap-[10px]">
       <div className="flex h-[52px] items-center gap-2 bg-white px-[10px]">
@@ -10,3 +14,5 @@ export default function AddPlan({ text }) {
     </div>
   );
 }
+
+export default AddPlan;
