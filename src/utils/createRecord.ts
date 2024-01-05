@@ -5,7 +5,10 @@ interface RecordData {
   username: string;
 }
 
-const createRecord = async (collectionName: string, data: RecordData) => {
+export const createRecord = async (
+  collectionName: string,
+  data: RecordData
+) => {
   try {
     return await pocketbase.collection(collectionName).create(data);
   } catch (error: unknown) {
@@ -16,5 +19,3 @@ const createRecord = async (collectionName: string, data: RecordData) => {
     }
   }
 };
-
-export default createRecord;

@@ -1,4 +1,4 @@
-function getRangeDay(startDate: Date, endDate: Date) {
+export function getRangeDay(startDate: Date, endDate: Date) {
   const dates = [];
   let currentDate = new Date(startDate);
 
@@ -9,5 +9,3 @@ function getRangeDay(startDate: Date, endDate: Date) {
 
   return dates;
 }
-
-export default getRangeDay;

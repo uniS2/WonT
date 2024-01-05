@@ -1,4 +1,4 @@
-const getDDay = (day: Date) => {
+export const getDDay = (day: Date) => {
   let today = new Date().getTime(); //* 수정사항
   let dday = new Date(day).getTime();
   let gap = dday - today;
@@ -13,5 +13,3 @@ const getDDay = (day: Date) => {
   const tripday = `D-${result}`;
   return tripday;
 };
-
-export default getDDay;
