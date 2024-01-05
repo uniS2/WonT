@@ -1,5 +1,5 @@
 import CalendarIcon from '@/assets/common-calendar.webp';
-import { getLocalName, getTripDates } from '@/utils/index.js';
+import { getLocalName, getTripDates } from '@/utils';
 import DefaultImage from '@/components/DefaultImage';
 
 export default function TotalScheduleSummary({

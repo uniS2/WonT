@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import defaultImage from '@/assets/common-trip-default.webp';
 
 import useScheduleList from '@/hooks/useScheduleList';
-import { getDDay, getPocketHostImageURL } from '@/utils/index.js';
+import { getDDay, getPocketHostImageURL } from '@/utils';
 
 export default function PlanPreview({ userSchedule }) {
   const { data, isLoading } = useScheduleList();

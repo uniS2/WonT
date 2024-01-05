@@ -7,7 +7,7 @@ import MyPageHeader from '@/components/PageHeader';
 import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
-import { getPocketHostImageURL, getPocketHostURL } from '@/utils/index.js';
+import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 const getTravels = () =>
