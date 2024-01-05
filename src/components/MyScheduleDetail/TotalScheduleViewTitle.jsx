@@ -1,4 +1,4 @@
-import { getLocalName, getTripDates } from '@/utils/index.js';
+import { getLocalName, getTripDates } from '@/utils';
 
 export default function TotalScheduleTitle({
   localName = '지역명',

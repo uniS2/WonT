@@ -2,7 +2,7 @@ import MyPageTab from '@/components/MyPage/MyPageTab';
 import BookmarkList from '@/components/MyPage/BookmarkList';
 import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
-import { getPocketHostImageURL } from '@/utils/index.js';
+import { getPocketHostImageURL } from '@/utils';
 import pocketbase from '@/api/pocketbase';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';

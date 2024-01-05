@@ -1,5 +1,5 @@
-export const getDDay = (day) => {
-  let today = new Date();
+export const getDDay = (day: Date) => {
+  let today = new Date().getTime(); //* 수정사항
   let dday = new Date(day).getTime();
   let gap = dday - today;
   let result = Math.floor(gap / (1000 * 60 * 60 * 24));

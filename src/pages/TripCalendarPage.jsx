@@ -9,7 +9,7 @@ import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { useDateStore } from '@/store/dateStore';
-import { updateRecord, getTripDateUTC } from '@/utils/index.js';
+import { updateRecord, getTripDateUTC } from '@/utils';
 
 async function updateMyScheduleTitle(recordId, date) {
   updateRecord('mySchedule', recordId, {

@@ -9,11 +9,7 @@ import LocalItem from '@/components/TripLocal/LocalItem';
 import TripTitle from '@/components/TripTitle';
 import Spinner from '@/components/Spinner/Spinner';
 import { useLocalStore } from '@/store/localStore';
-import {
-  createRecord,
-  getPocketHostImageURL,
-  getPocketHostURL,
-} from '@/utils/index.js';
+import { createRecord, getPocketHostImageURL, getPocketHostURL } from '@/utils';
 
 async function fetchLocals() {
   const response = await fetch(`${getPocketHostURL('locals')}`);
