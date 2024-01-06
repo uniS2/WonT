@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useMapStore } from '@/store/mapStore';
 
-import debounce from '@/utils/debounce';
+import { debounce } from '@/utils/debounce';
 
-const { kakao } = window;
+const kakao = window;
 
 export default function Map({
   width = 'w-full',
