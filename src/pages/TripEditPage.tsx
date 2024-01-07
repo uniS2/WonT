@@ -33,14 +33,19 @@ const getRecommends = async (userId) => {
 
 /* -------------------------------------------------------------------------- */
 
-export default function TripEditPage() {
+function TripEditPage() {
   const user = pocketbase.authStore.model; // 로그인 유저 정보
 
   const currentPath = useParams();
-  const [toggleSchedule, setToggleSchedule] = useState(false);
-  const handleToggle = () => {
+  const [toggleSchedule, setToggleSchedule]: [
+    boolean,
+    (value: boolean) => void,
+  ] = useState(false);
+
+  const handleToggle: () => void = () => {
     setToggleSchedule(!toggleSchedule);
   };
+
   // Tanstack Query
   const { data, error, isLoading } = useQuery(
     ['mySchedule', user.id],
@@ -62,7 +67,7 @@ export default function TripEditPage() {
   const removeSchedule = useTripScheduleStore((state) => state.reset);
   const id = useId();
 
-  const handleResetButtonClick = () => {
+  const handleResetButtonClick: () => void = () => {
     resetHotelPositions();
     resetPlacePositions();
   };
@@ -76,7 +81,6 @@ export default function TripEditPage() {
       <div className="w-auto ">{<TripPlan data={data} />}</div>
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
-          {/* <Map height={'h-[31.25rem]'} /> */}
           <SelectHotelMap
             height={'h-[31.25rem]'}
             hotelList={hotelList}
@@ -156,3 +160,5 @@ export default function TripEditPage() {
     </div>
   );
 }
+
+export default TripEditPage;

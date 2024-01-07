@@ -1,4 +1,4 @@
-interface PlacePlanProps {
+export interface PlacePlanProps {
   select: string;
   placeList: {
     place_name: string;

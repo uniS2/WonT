@@ -1,3 +1,4 @@
+import { SelectHotelMapProps } from '@/types/TripEdit';
 import { useEffect, useState } from 'react';
 
 const { kakao } = window;
@@ -12,7 +13,7 @@ export default function SelectHotelMap({
   level = 3,
   index,
   restProps,
-}) {
+}: SelectHotelMapProps) {
   useEffect(() => {
     // 지도를 표시할 div 요소를 가져옵니다.
     const container = document.getElementById('map');
@@ -36,29 +37,31 @@ export default function SelectHotelMap({
 
     // hotelData를 반복하여 각 위치에 마커 표시
     tripList.forEach((locations, index) => {
-      locations.forEach((item) => {
-        // 마커의 위치를 설정합니다.
-        const markerPosition = new kakao.maps.LatLng(item.y, item.x);
+      locations.forEach(
+        (item: { y: number; x: number; place_name: string }) => {
+          // 마커의 위치를 설정합니다.
+          const markerPosition = new kakao.maps.LatLng(item.y, item.x);
 
-        // 마커를 생성합니다.
-        const marker = new kakao.maps.Marker({
-          position: markerPosition,
-        });
+          // 마커를 생성합니다.
+          const marker = new kakao.maps.Marker({
+            position: markerPosition,
+          });
 
-        // 마커를 지도에 추가합니다.
-        marker.setMap(map);
-        let center = map.getCenter();
-        // console.log(center);
+          // 마커를 지도에 추가합니다.
+          marker.setMap(map);
+          let center = map.getCenter();
+          // console.log(center);
 
-        kakao.maps.event.addListener(marker, 'click', function () {
-          infowindow.setContent(
-            `<div style="padding:5px;font-size:12px;">${item.place_name}</div>`
-          );
-          infowindow.open(map, marker);
-        });
-        // 마커가 찍힌 위치로 지도 중심 이동
-        map.setCenter(markerPosition);
-      });
+          kakao.maps.event.addListener(marker, 'click', function () {
+            infowindow.setContent(
+              `<div style="padding:5px;font-size:12px;">${item.place_name}</div>`
+            );
+            infowindow.open(map, marker);
+          });
+          // 마커가 찍힌 위치로 지도 중심 이동
+          map.setCenter(markerPosition);
+        }
+      );
     });
   }, []);
 

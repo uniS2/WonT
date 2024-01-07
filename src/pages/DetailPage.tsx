@@ -13,19 +13,19 @@ import { useBookmarkStore } from '@/store/bookmarkStore';
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
 
-const getRecommend = async (recommendId) => {
+const getRecommend = async (recommendId: string) => {
   return await pocketbase.collection('recommends').getOne(recommendId, {
     // fields: 'collectionId,id,image,userEmail',
   });
 };
 
 // 데이터의 userEmail 필드에서 삭제 요청 함수 (mutation function)
-const addBookmark = async ({ recommendId, userId }) => {
+const addBookmark = async (recommendId: string, userId: number) => {
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail+': userId,
   });
 };
-const removeBookmark = async ({ recommendId, userId }) => {
+const removeBookmark = async (recommendId: string, userId: number) => {
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail-': userId,
   });
@@ -34,7 +34,7 @@ const removeBookmark = async ({ recommendId, userId }) => {
 /* -------------------------------------------------------------------------- */
 // *상세페이지
 
-export default function DetailPage({ loginUser }) {
+function DetailPage({}) {
   // 전선용이 피드백받고 추가한 함수
   const { setBookmarkList, deleteBookmarkList } = useBookmarkStore((state) => ({
     setBookmarkList: state.setBookmarkList,
@@ -57,7 +57,7 @@ export default function DetailPage({ loginUser }) {
   // 데이터 쿼리
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey,
-    queryFn: () => getRecommend(recommendId),
+    queryFn: () => (recommendId ? getRecommend(recommendId) : undefined),
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
@@ -108,39 +108,24 @@ export default function DetailPage({ loginUser }) {
     },
   });
 
-  // 로딩 상태 표시
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex h-screen items-center justify-center">
-  //       로딩 중...
-  //     </div>
-  //   );
-  // }
-
-  // 오류 상태 표시
-  // if (isLoading) {
-  //   return <div>{error.toString()}</div>;
-  // }
-
   if (data) {
     // 추천 장소 (질문 코드에서 detailPlace를 사용하므로 할당한 것)
     const detailPlace = data;
 
     // 로그인 사용자 북마크 여부
     const isBookmark = detailPlace.userEmail.includes(user.id);
-    // console.log(detailPlace);
-    // console.log(isBookmark);
 
     // 북마크 토글 함수
-    const handleToggleBookmark = (recommendId, userId) => async () => {
-      if (isBookmark) {
-        await removeMutation.mutate({ recommendId, userId });
-        deleteBookmarkList(recommendId);
-      } else {
-        await addMutation.mutate({ recommendId, userId });
-        setBookmarkList(recommendId);
-      }
-    };
+    const handleToggleBookmark =
+      (recommendId: string, userId: number) => async () => {
+        if (isBookmark) {
+          await removeMutation.mutate({ recommendId, userId });
+          deleteBookmarkList(recommendId);
+        } else {
+          await addMutation.mutate({ recommendId, userId });
+          setBookmarkList(recommendId);
+        }
+      };
 
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">
@@ -185,3 +170,5 @@ export default function DetailPage({ loginUser }) {
     );
   }
 }
+
+export default DetailPage;

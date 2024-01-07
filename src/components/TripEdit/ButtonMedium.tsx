@@ -1,8 +1,9 @@
 interface ButtonMediumProps {
-  fill: boolean;
+  fill?: boolean;
   text: string;
-  color: string;
+  color?: string;
   menu?: string;
+  onClick?: () => void;
 }
 
 function ButtonMedium({ menu, fill, text, color }: ButtonMediumProps) {
