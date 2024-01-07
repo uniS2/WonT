@@ -4,13 +4,22 @@ import detailTicket from '@/assets/detail-ticket.webp';
 import detailClock from '@/assets/detail-clock.webp';
 import detailHomepage from '@/assets/detail-homepage.webp';
 
+interface FilterDetailPlaceProps {
+  info: string;
+  rest: string;
+  active: string;
+  time: string;
+  url: string;
+}
+
 export default function DetailInfo({ detailPlace }) {
-  const filterDetailPlace = Object.fromEntries(
-    Object.entries(detailPlace).map(([key, value]) => [
-      key,
-      value ? value : '-',
-    ])
-  );
+  const filterDetailPlace: FilterDetailPlaceProps = {
+    info: detailPlace.info ? detailPlace.info : '-',
+    rest: detailPlace.rest ? detailPlace.rest : '-',
+    active: detailPlace.active ? detailPlace.active : '-',
+    time: detailPlace.time ? detailPlace.time : '-',
+    url: detailPlace.url ? detailPlace.url : '-',
+  };
 
   return (
     <>
