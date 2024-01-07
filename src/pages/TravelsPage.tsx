@@ -9,6 +9,7 @@ import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedu
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { TravelsData } from '@/types/Travels';
 
 const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());
@@ -22,15 +23,20 @@ function TravelsPage() {
   // console.log(userData);
 
   const currentPath = window.location.pathname.replace('/travels/', '');
-  const detailTravels = travelsData?.items?.find(
-    (item) => item.id === currentPath
+  const detailTravels: TravelsData | undefined = travelsData?.items?.find(
+    (item: { id: string }) => item.id === currentPath
   );
+
+  // const user = userData?.items?.find(
+  //   (item: { id: string }) => item.id === detailTravels?.userEmail
+  // );
+
   const user = userData?.items?.find(
-    (item) => item.id === detailTravels?.userEmail
+    (item: { id: string }) => item.id === String(detailTravels)
   );
 
   const id = useId();
-  if ((detailTravels, user)) {
+  if (detailTravels && user) {
     return (
       <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
         <Helmet>

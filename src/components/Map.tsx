@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useMapStore } from '@/store/mapStore';
-
 import { debounce } from '@/utils/debounce';
+import { MapProps } from '@/types/TripEdit';
+import { Position } from '@/types/Travels';
 
-const kakao = window;
+const kakao = window.kakao;
 
-export default function Map({
+function Map({
   width = 'w-full',
   height = 'h-[25rem]',
   latitude = 37.4812845080678,
   longitude = 126.952713197762,
   level = 3,
   restProps,
-}) {
+}: MapProps) {
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longitude)
   );
@@ -30,10 +31,11 @@ export default function Map({
     const map = new kakao.maps.Map(container, options);
 
     // 마커를 표시할 위치와 title 객체 배열입니다
-    let positions = [];
+    //* TODO: position 타입 재정의 필요
+    let positions: any[] = [];
 
     // hotelList 배열을 순회하면서 positions 배열에 데이터를 추가
-    hotelList?.forEach((item) => {
+    hotelList?.forEach((item: { place_name: string; x: number; y: number }) => {
       positions.push({
         title: item.place_name,
         latlng: new kakao.maps.LatLng(item.x, item.y),
@@ -52,9 +54,9 @@ export default function Map({
     // console.log(marker);
     console.log(positions[0]);
 
-    const updateCenter = debounce((lat, lon) => {
-      map.panTo(new kakao.maps.LatLng(lat, lon)); // setCenter -> panTo: 지도 중심좌표 부드럽게 이동시키기
-    });
+    const updateCenter = debounce((latitude, longitude) => {
+      map.panTo(new kakao.maps.LatLng(latitude, longitude));
+    }, 300);
 
     // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성하기
     const zoomControl = new kakao.maps.ZoomControl();
@@ -80,3 +82,5 @@ export default function Map({
 
   return <div id="map" className={`${height} ${width} ${restProps}`}></div>;
 }
+
+export default Map;
