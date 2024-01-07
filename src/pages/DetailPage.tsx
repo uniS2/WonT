@@ -20,12 +20,20 @@ const getRecommend = async (recommendId: string) => {
 };
 
 // 데이터의 userEmail 필드에서 삭제 요청 함수 (mutation function)
-const addBookmark = async (recommendId: string, userId: number) => {
+const addBookmark = async (variables: {
+  recommendId: string;
+  userId: number;
+}) => {
+  const { recommendId, userId } = variables;
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail+': userId,
   });
 };
-const removeBookmark = async (recommendId: string, userId: number) => {
+const removeBookmark = async (variables: {
+  recommendId: string;
+  userId: number;
+}) => {
+  const { recommendId, userId } = variables;
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail-': userId,
   });
@@ -68,12 +76,19 @@ function DetailPage({}) {
     onMutate: async ({ recommendId, userId }) => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
-      const previousData = queryClient.getQueryData(queryKey);
+      // const previousData = queryClient.getQueryData(queryKey);
+      const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
+        queryKey
+      );
 
-      queryClient.setQueryData(queryKey, (recommendData) => ({
-        ...recommendData,
-        userEmail: [...recommendData.userEmail, userId],
-      }));
+      queryClient.setQueryData(queryKey, (recommendData) => {
+        const typedRecommendData = recommendData as { userEmail: string[] };
+
+        return {
+          ...typedRecommendData,
+          userEmail: [...typedRecommendData.userEmail, userId],
+        };
+      });
 
       return { previousData };
     },
