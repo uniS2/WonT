@@ -22,29 +22,31 @@ export interface AddressSearchResult {
 export interface PlanDateProps {
   toggleButton: () => void;
   toggleSchedule: boolean;
-  setToggleSchedule: React.Dispatch<React.SetStateAction<boolean>>;
+  // setToggleSchedule: React.Dispatch<React.SetStateAction<boolean>>;
+  // TODO:: 타입 재지정 필요
+  setToggleSchedule: any;
   index: number;
-  // !타입 재지정 필요
+  // TODO: 타입 재지정 필요
   item: any;
   handleResetButtonClick?: () => void;
 }
 
 export interface SelectHotelMapProps {
-  placeList: {
-    place_name: string;
-    category_group_name: string;
-    address_name: string;
-  }[];
-  hotelList: {
-    place_name: string;
-    category_group_name: string;
-    address_name: string;
-  }[];
-  width: string;
-  height: string;
-  latitude: number;
-  longitude: number;
-  level: number;
-  index: number;
+  // placeList: {
+  //   place_name: string;
+  //   category_group_name: string;
+  //   address_name: string;
+  // }[];
+  // hotelList: {
+  //   place_name: string;
+  //   category_group_name: string;
+  //   address_name: string;
+  // }[];
+  width?: string;
+  height?: string;
+  latitude?: number;
+  longitude?: number;
+  level?: number;
+  index?: number;
   [key: string]: any;
 }

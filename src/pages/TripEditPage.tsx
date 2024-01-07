@@ -33,14 +33,19 @@ const getRecommends = async (userId) => {
 
 /* -------------------------------------------------------------------------- */
 
-export default function TripEditPage() {
+function TripEditPage() {
   const user = pocketbase.authStore.model; // 로그인 유저 정보
 
   const currentPath = useParams();
-  const [toggleSchedule, setToggleSchedule] = useState(false);
-  const handleToggle = () => {
+  const [toggleSchedule, setToggleSchedule]: [
+    boolean,
+    (value: boolean) => void,
+  ] = useState(false);
+
+  const handleToggle: () => void = () => {
     setToggleSchedule(!toggleSchedule);
   };
+
   // Tanstack Query
   const { data, error, isLoading } = useQuery(
     ['mySchedule', user.id],
@@ -155,3 +160,5 @@ export default function TripEditPage() {
     </div>
   );
 }
+
+export default TripEditPage;
