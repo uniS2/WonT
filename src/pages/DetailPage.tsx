@@ -10,6 +10,11 @@ import { Helmet } from 'react-helmet-async';
 // 전선용이 피드백받고 추가한 함수
 import { useBookmarkStore } from '@/store/bookmarkStore';
 
+// TODO: previousData 타입 재지정 필요
+interface MutationContext {
+  previousData: any;
+}
+
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
 
@@ -22,7 +27,7 @@ const getRecommend = async (recommendId: string) => {
 // 데이터의 userEmail 필드에서 삭제 요청 함수 (mutation function)
 const addBookmark = async (variables: {
   recommendId: string;
-  userId: number;
+  userId: string;
 }) => {
   const { recommendId, userId } = variables;
   return await pocketbase.collection('recommends').update(recommendId, {
@@ -31,7 +36,7 @@ const addBookmark = async (variables: {
 };
 const removeBookmark = async (variables: {
   recommendId: string;
-  userId: number;
+  userId: string;
 }) => {
   const { recommendId, userId } = variables;
   return await pocketbase.collection('recommends').update(recommendId, {
@@ -73,7 +78,7 @@ function DetailPage({}) {
   // 데이터 뮤테이션 (추가)
   const addMutation = useMutation({
     mutationFn: addBookmark,
-    onMutate: async ({ recommendId, userId }) => {
+    onMutate: async ({ recommendId, userId }): Promise<MutationContext> => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
       // const previousData = queryClient.getQueryData(queryKey);
@@ -95,7 +100,7 @@ function DetailPage({}) {
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
     },
-    onError: (context) => {
+    onError: (context: MutationContext) => {
       queryClient.setQueryData(queryKey, context.previousData);
     },
   });
@@ -103,22 +108,39 @@ function DetailPage({}) {
   // 데이터 뮤테이션 (삭제)
   const removeMutation = useMutation({
     mutationFn: removeBookmark,
-    onMutate: async ({ recommendId, userId }) => {
+    onMutate: async ({ recommendId, userId }): Promise<MutationContext> => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
-      const previousData = queryClient.getQueryData(queryKey);
+      const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
+        queryKey
+      );
 
-      queryClient.setQueryData(queryKey, (recommendData) => ({
-        ...recommendData,
-        userEmail: recommendData.userEmail.filter((email) => email !== userId),
-      }));
+      if (!previousData) {
+        throw new Error('Previous data is undefined');
+      }
+
+      queryClient.setQueryData<{ userEmail: string[] }>(
+        queryKey,
+        (recommendData) => {
+          if (!recommendData) {
+            return;
+          }
+
+          return {
+            ...recommendData,
+            userEmail: recommendData.userEmail.filter(
+              (email) => email !== userId.toString()
+            ),
+          };
+        }
+      );
 
       return { previousData };
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
     },
-    onError: (context) => {
+    onError: (context: MutationContext) => {
       queryClient.setQueryData(queryKey, context.previousData);
     },
   });
@@ -133,11 +155,13 @@ function DetailPage({}) {
     // 북마크 토글 함수
     const handleToggleBookmark =
       (recommendId: string, userId: number) => async () => {
+        const userIdAsString = userId.toString();
+
         if (isBookmark) {
-          await removeMutation.mutate({ recommendId, userId });
+          await removeMutation.mutate({ recommendId, userId: userIdAsString });
           deleteBookmarkList(recommendId);
         } else {
-          await addMutation.mutate({ recommendId, userId });
+          await addMutation.mutate({ recommendId, userId: userIdAsString });
           setBookmarkList(recommendId);
         }
       };
