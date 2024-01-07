@@ -1,17 +1,9 @@
 import toggleDown from '@/assets/common-toogle-down.webp';
 import toggleUp from '@/assets/common-toogle-up.webp';
 import { useScheduleStore } from '@/store/scheduleStore';
+import { PlanDateProps } from '@/types/TripEdit';
 import { getTripDate, getTripDateUTC } from '@/utils';
 import { useId } from 'react';
-
-interface PlanDateProps {
-  toggleButton: () => void;
-  toggleSchedule: boolean;
-  setToggleSchedule: React.Dispatch<React.SetStateAction<boolean>>;
-  index: number;
-  item: {};
-  handleResetButtonClick: () => void;
-}
 
 function PlanDate({
   toggleButton,

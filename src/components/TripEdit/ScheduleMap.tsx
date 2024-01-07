@@ -7,14 +7,6 @@ import {
   MapProps,
 } from '@/types/TripEdit';
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
-// ! 카카오 맵 타입 정의 필요... 방법 서치중..
-// declare const kakao: any;
 const kakao = window.kakao;
 
 function Map({
@@ -45,6 +37,19 @@ function Map({
       level: level, // 지도의 확대 레벨. 3
       center: center,
     };
+
+    // !data, status, pagination 타입 재지정 필요
+    function categorySearchCB(data: any, status: any, pagination: any) {
+      if (status === kakao.maps.services.Status.OK) {
+        for (let i = 0; i < data.length; i++) {
+          // data[i]를 활용하는 코드를 작성합니다.
+        }
+      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        // 검색 결과가 없는 경우, 필요한 처리를 합니다.
+      } else if (status === kakao.maps.services.Status.ERROR) {
+        // 검색 중 에러가 발생한 경우, 에러를 처리하는 코드를 작성합니다.
+      }
+    }
 
     kakao.maps.load(() => {
       const container = document.getElementById('map');
@@ -86,6 +91,7 @@ function Map({
               location: coords,
               radius: 10000,
             };
+            const hotelCategory = '';
             places.categorySearch(
               hotelCategory,
               categorySearchCB,
@@ -94,6 +100,7 @@ function Map({
           }
         }
       );
+
       // 장소 검색 객체를 생성합니다
       var ps = new kakao.maps.services.Places(map);
 
@@ -103,7 +110,8 @@ function Map({
       var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
       // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-      function placesSearchCB(data, status, pagination) {
+      // !data, status, pagination 타입 재지정 필요
+      function placesSearchCB(data: any, status: any, pagination: any) {
         if (status === kakao.maps.services.Status.OK) {
           for (var i = 0; i < data.length; i++) {
             displayMarker(data[i]);

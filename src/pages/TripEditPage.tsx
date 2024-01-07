@@ -62,7 +62,7 @@ export default function TripEditPage() {
   const removeSchedule = useTripScheduleStore((state) => state.reset);
   const id = useId();
 
-  const handleResetButtonClick = () => {
+  const handleResetButtonClick: () => void = () => {
     resetHotelPositions();
     resetPlacePositions();
   };
@@ -76,7 +76,6 @@ export default function TripEditPage() {
       <div className="w-auto ">{<TripPlan data={data} />}</div>
       <div className="container mx-auto min-w-[22.5rem] bg-background pb-14">
         <div className={`mx-auto mt-[10px] max-w-7xl`}>
-          {/* <Map height={'h-[31.25rem]'} /> */}
           <SelectHotelMap
             height={'h-[31.25rem]'}
             hotelList={hotelList}

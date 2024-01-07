@@ -1,4 +1,10 @@
-export default function TripSchedule() {
+import { Link } from 'react-router-dom';
+import { ButtonMedium } from '@/components/TripEdit/ButtonMedium';
+import { AddPlan } from '@/components/TripEdit/AddPlan';
+import { PlanDate } from '@/components/TripEdit/PlanDate';
+import { PlanDateProps } from '@/types/TripEdit';
+
+function TripSchedule() {
   return (
     <>
       <PlanDate toggleButton={handleToggle} toggleSchedule={toggleSchedule} />
@@ -18,3 +24,5 @@ export default function TripSchedule() {
     </>
   );
 }
+
+export default TripSchedule;

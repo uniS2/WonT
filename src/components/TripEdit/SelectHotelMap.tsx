@@ -1,3 +1,4 @@
+import { SelectHotelMapProps } from '@/types/TripEdit';
 import { useEffect, useState } from 'react';
 
 const { kakao } = window;
@@ -12,7 +13,7 @@ export default function SelectHotelMap({
   level = 3,
   index,
   restProps,
-}) {
+}: SelectHotelMapProps) {
   useEffect(() => {
     // 지도를 표시할 div 요소를 가져옵니다.
     const container = document.getElementById('map');
