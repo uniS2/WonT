@@ -59,7 +59,10 @@ function DetailPage({}) {
   console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
-  const user = pocketbase.authStore.model;
+  // const user = pocketbase.authStore.model;
+  const user: { id: string | null } = pocketbase.authStore.model as {
+    id: string | null;
+  };
 
   // 쿼리 클라이언트 인스턴스 가져오기
   const queryClient = useQueryClient();
@@ -154,8 +157,13 @@ function DetailPage({}) {
 
     // 북마크 토글 함수
     const handleToggleBookmark =
-      (recommendId: string, userId: number) => async () => {
-        const userIdAsString = userId.toString();
+      (recommendId: string, userId: string | null) => async () => {
+        if (userId === null) {
+          alert('북마크 요청에 실패했습니다.');
+          return;
+        }
+
+        const userIdAsString = userId?.toString();
 
         if (isBookmark) {
           await removeMutation.mutate({ recommendId, userId: userIdAsString });
