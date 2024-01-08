@@ -7,6 +7,8 @@ import Profile from '@/components/MyPage/Profile';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
+import { MySchedule, MyScheduleItem } from '@/types/MySchedule';
+import { RecordModel } from 'pocketbase';
 
 const getUser = () =>
   fetch(`${getPocketHostURL('users')}`).then((response) => response.json());
@@ -20,13 +22,19 @@ export default function MySchedule() {
   const { data: myschedule } = useQuery(['mySchedule'], getMyschedule);
   // console.log(myschedule);
 
-  let userId = pocketbase.authStore.model;
+  // let userId = pocketbase.authStore.model;
+  let userId = pocketbase.authStore.model as RecordModel;
 
-  const userSchedule = myschedule?.items?.filter(
-    (item) => item.username === userId.id
-  );
+  // const userSchedule: MySchedule = myschedule?.items?.filter(
+  //   (item: { username: string }) => item.username === userId?.id
+  // );
+  const userSchedule: MySchedule = {
+    items: myschedule?.items?.filter(
+      (item: MyScheduleItem) => item.username === userId?.id
+    ),
+  };
 
-  if ((userId, userSchedule)) {
+  if (userId && userSchedule) {
     return (
       <div className="mx-auto w-screen min-w-[22.5rem]  ">
         <Helmet>
@@ -38,9 +46,9 @@ export default function MySchedule() {
             <span className="mb-[1.375rem] text-[1.5rem] font-extrabold leading-normal text-contentsPrimary ">
               마이 페이지
             </span>
-            {userId.profile ? (
+            {userId?.profile ? (
               <img
-                src={getPocketHostImageURL(userId, 'profile')}
+                src={getPocketHostImageURL(userId)}
                 alt={`${userId.username}의 프로필`}
                 className=" h-[70px] w-[70px] rounded-full border-[0.0938rem] border-contentsSecondary "
               />
@@ -48,12 +56,12 @@ export default function MySchedule() {
               <Profile />
             )}
             <span className="text-[1.125rem] text-contentsSecondary">
-              {userId.username}
+              {userId?.username}
             </span>
           </div>
 
           <div className="container mx-auto flex flex-col justify-center">
-            <MyPageTab position="left" tab="myschedule" menu="나의 일정" />
+            <MyPageTab positionText="left" tab="myschedule" menu="나의 일정" />
             <div className="container max-w-[1280px] self-center  px-3 md:px-4">
               <MyPageTabInfo tab="나의 일정" />
               <PlanPreview userSchedule={userSchedule} />

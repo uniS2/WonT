@@ -10,4 +10,6 @@ export interface MyPageTabInfoProps {
 
 export interface MyPageTabProps {
   positionText: string;
+  tab?: string;
+  menu?: string;
 }

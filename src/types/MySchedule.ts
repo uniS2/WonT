@@ -31,9 +31,10 @@ export interface MyScheduleItem {
 }
 
 export interface MySchedule {
-  page: number;
-  perPage: number;
-  totalPages: number;
-  totalItems: number;
+  id?: string;
+  page?: number;
+  perPage?: number;
+  totalPages?: number;
+  totalItems?: number;
   items: MyScheduleItem[];
 }
