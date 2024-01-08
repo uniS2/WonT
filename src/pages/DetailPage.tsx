@@ -10,6 +10,11 @@ import { Helmet } from 'react-helmet-async';
 // 전선용이 피드백받고 추가한 함수
 import { useBookmarkStore } from '@/store/bookmarkStore';
 
+//* TODO: previousData 타입 재지정 필요
+interface MutationContext {
+  previousData: any;
+}
+
 /* -------------------------------------------------------------------------- */
 // 데이터 요청 함수 (query function)
 
@@ -20,12 +25,20 @@ const getRecommend = async (recommendId: string) => {
 };
 
 // 데이터의 userEmail 필드에서 삭제 요청 함수 (mutation function)
-const addBookmark = async (recommendId: string, userId: number) => {
+const addBookmark = async (variables: {
+  recommendId: string;
+  userId: string;
+}) => {
+  const { recommendId, userId } = variables;
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail+': userId,
   });
 };
-const removeBookmark = async (recommendId: string, userId: number) => {
+const removeBookmark = async (variables: {
+  recommendId: string;
+  userId: string;
+}) => {
+  const { recommendId, userId } = variables;
   return await pocketbase.collection('recommends').update(recommendId, {
     'userEmail-': userId,
   });
@@ -46,7 +59,10 @@ function DetailPage({}) {
   console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
-  const user = pocketbase.authStore.model;
+  // const user = pocketbase.authStore.model;
+  const user: { id: string | null } = pocketbase.authStore.model as {
+    id: string | null;
+  };
 
   // 쿼리 클라이언트 인스턴스 가져오기
   const queryClient = useQueryClient();
@@ -65,22 +81,29 @@ function DetailPage({}) {
   // 데이터 뮤테이션 (추가)
   const addMutation = useMutation({
     mutationFn: addBookmark,
-    onMutate: async ({ recommendId, userId }) => {
+    onMutate: async ({ recommendId, userId }): Promise<MutationContext> => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
-      const previousData = queryClient.getQueryData(queryKey);
+      // const previousData = queryClient.getQueryData(queryKey);
+      const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
+        queryKey
+      );
 
-      queryClient.setQueryData(queryKey, (recommendData) => ({
-        ...recommendData,
-        userEmail: [...recommendData.userEmail, userId],
-      }));
+      queryClient.setQueryData(queryKey, (recommendData) => {
+        const typedRecommendData = recommendData as { userEmail: string[] };
+
+        return {
+          ...typedRecommendData,
+          userEmail: [...typedRecommendData.userEmail, userId],
+        };
+      });
 
       return { previousData };
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
     },
-    onError: (context) => {
+    onError: (context: MutationContext) => {
       queryClient.setQueryData(queryKey, context.previousData);
     },
   });
@@ -88,22 +111,39 @@ function DetailPage({}) {
   // 데이터 뮤테이션 (삭제)
   const removeMutation = useMutation({
     mutationFn: removeBookmark,
-    onMutate: async ({ recommendId, userId }) => {
+    onMutate: async ({ recommendId, userId }): Promise<MutationContext> => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
-      const previousData = queryClient.getQueryData(queryKey);
+      const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
+        queryKey
+      );
 
-      queryClient.setQueryData(queryKey, (recommendData) => ({
-        ...recommendData,
-        userEmail: recommendData.userEmail.filter((email) => email !== userId),
-      }));
+      if (!previousData) {
+        throw new Error('Previous data is undefined');
+      }
+
+      queryClient.setQueryData<{ userEmail: string[] }>(
+        queryKey,
+        (recommendData) => {
+          if (!recommendData) {
+            return;
+          }
+
+          return {
+            ...recommendData,
+            userEmail: recommendData.userEmail.filter(
+              (email) => email !== userId.toString()
+            ),
+          };
+        }
+      );
 
       return { previousData };
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: queryKey });
     },
-    onError: (context) => {
+    onError: (context: MutationContext) => {
       queryClient.setQueryData(queryKey, context.previousData);
     },
   });
@@ -117,12 +157,19 @@ function DetailPage({}) {
 
     // 북마크 토글 함수
     const handleToggleBookmark =
-      (recommendId: string, userId: number) => async () => {
+      (recommendId: string, userId: string | null) => async () => {
+        if (userId === null) {
+          alert('북마크 요청에 실패했습니다.');
+          return;
+        }
+
+        const userIdAsString = userId?.toString();
+
         if (isBookmark) {
-          await removeMutation.mutate({ recommendId, userId });
+          await removeMutation.mutate({ recommendId, userId: userIdAsString });
           deleteBookmarkList(recommendId);
         } else {
-          await addMutation.mutate({ recommendId, userId });
+          await addMutation.mutate({ recommendId, userId: userIdAsString });
           setBookmarkList(recommendId);
         }
       };

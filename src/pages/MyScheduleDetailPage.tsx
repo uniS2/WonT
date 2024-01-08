@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { Key, SetStateAction, useEffect, useId, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
@@ -17,9 +17,14 @@ import Spinner from '@/components/Spinner/Spinner';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
+import { ErrorType, RecordModel, SelectBookmarkItem } from '@/types/Travels';
 
 // 데이터 요청 함수 (query function)
+<<<<<<< HEAD
 const fetchScheduleDetail = async (userId: number) => {
+=======
+const fetchScheduleDetail = async (userId: string) => {
+>>>>>>> 90a9b9b0ae7eb4f968939f984867f7c437d54652
   const response = await pocketbase.collection('mySchedule').getFullList({
     filter: `(username?~'${userId}')`,
     expand: 'users',
@@ -27,7 +32,7 @@ const fetchScheduleDetail = async (userId: number) => {
   return response;
 };
 
-export default function MyScheduleDetailPage() {
+function MyScheduleDetailPage() {
   // 경로 지정
   const navigate = useNavigate();
 
@@ -35,7 +40,10 @@ export default function MyScheduleDetailPage() {
   const ID = useId();
 
   // 아이디 일치여부
-  let userId = pocketbase.authStore.model;
+  // let userId = pocketbase.authStore.model;
+  const userId: { id: string } = pocketbase.authStore.model as {
+    id: string;
+  };
 
   // Tanstack Query
   const { data, isLoading, error } = useQuery(
@@ -45,14 +53,33 @@ export default function MyScheduleDetailPage() {
   );
 
   // 선택한 북마크 아이디 및 store 저장
-  const [bookmarkId, setBookmarkId] = useState([]);
+  // const [bookmarkId, setBookmarkId] = useState([]);
+  const [bookmarkId, setBookmarkId] = useState<string | undefined>(undefined);
+
   const params = useParams();
 
   useEffect(() => {
-    setBookmarkId(params.detailId);
+    if (params.detailId !== undefined) {
+      setBookmarkId(params.detailId);
+    }
   }, [params.detailId]);
 
-  const selectBookmark = data?.filter((item) => item.id === bookmarkId);
+  // const selectBookmark = data?.filter((item) => item.id === bookmarkId);
+  const selectBookmark: SelectBookmarkItem | undefined = data?.find(
+    (item) => item.id === bookmarkId
+  ) as SelectBookmarkItem | undefined;
+  // const selectBookmark: SelectBookmarkItem | undefined = data
+  //   ?.filter(
+  //     (item) =>
+  //       item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
+  //   )
+  //   .map((item) => item.item)[0];
+  // const selectBookmark: SelectBookmarkItem | undefined = data
+  //   ?.filter(
+  //     (item) =>
+  //       item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
+  //   )
+  //   .map((item) => item.item)[0];
 
   // Store: 전체일정, 모달, 날짜별 일정
   const {
@@ -75,11 +102,20 @@ export default function MyScheduleDetailPage() {
   };
 
   // 오류가 발생한 경우 화면
+<<<<<<< HEAD
   if (error instanceof Error) {
     return (
       <div role="alert">
         <h2>{error.name}</h2>
         <p>{error.message}</p>
+=======
+  if (error) {
+    const { type, message } = error as ErrorType;
+    return (
+      <div role="alert">
+        <h2>{type}</h2>
+        <p>{message}</p>
+>>>>>>> 90a9b9b0ae7eb4f968939f984867f7c437d54652
       </div>
     );
   }
@@ -108,12 +144,10 @@ export default function MyScheduleDetailPage() {
               {isLoading ? (
                 <Spinner />
               ) : (
-                selectBookmark?.map((item) => (
+                selectBookmark?.items?.map((item) => (
                   <TotalScheduleSummary
-                    key={ID}
-                    imageURL={
-                      item.main ? getPocketHostImageURL(item, 'main') : null
-                    }
+                    key={item.id}
+                    imageURL={item.main ? getPocketHostImageURL(item) : null}
                     localName={setLocalName(item.title)}
                     startDay={getTripDate(item.start_date)}
                     endDay={getTripDate(item.end_date)}
@@ -127,8 +161,8 @@ export default function MyScheduleDetailPage() {
                 정말 삭제하시겠습니까?
               </Modal>
             )}
-            {selectBookmark && selectBookmark[0] && (
-              <TotalScheduleView selectBookmark={selectBookmark} />
+            {selectBookmark && (
+              <TotalScheduleView selectBookmark={[selectBookmark]} />
             )}
           </section>
         )}
@@ -150,8 +184,8 @@ export default function MyScheduleDetailPage() {
           {displayDaySchedule && (
             <>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                {selectBookmark && selectBookmark[0] ? (
-                  selectBookmark[0].places[1]?.map((item, index) => (
+                {selectBookmark ? (
+                  selectBookmark.places[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
                       placeName={item.place_name}
@@ -165,8 +199,8 @@ export default function MyScheduleDetailPage() {
                 )}
               </ul>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                {selectBookmark && selectBookmark[0] ? (
-                  selectBookmark[0].hotels[1]?.map((item, index) => (
+                {selectBookmark ? (
+                  selectBookmark.hotels[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
                       placeName={item.place_name}
@@ -202,3 +236,4 @@ export default function MyScheduleDetailPage() {
     </>
   );
 }
+export default MyScheduleDetailPage;
