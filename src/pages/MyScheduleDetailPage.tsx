@@ -28,7 +28,7 @@ const fetchScheduleDetail = async (userId: string) => {
   return response;
 };
 
-export default function MyScheduleDetailPage() {
+function MyScheduleDetailPage() {
   // 경로 지정
   const navigate = useNavigate();
 
@@ -132,9 +132,7 @@ export default function MyScheduleDetailPage() {
                 selectBookmark?.items?.map((item) => (
                   <TotalScheduleSummary
                     key={item.id}
-                    imageURL={
-                      item.main ? getPocketHostImageURL(item, 'main') : null
-                    }
+                    imageURL={item.main ? getPocketHostImageURL(item) : null}
                     localName={setLocalName(item.title)}
                     startDay={getTripDate(item.start_date)}
                     endDay={getTripDate(item.end_date)}
@@ -223,3 +221,4 @@ export default function MyScheduleDetailPage() {
     </>
   );
 }
+export default MyScheduleDetailPage;
