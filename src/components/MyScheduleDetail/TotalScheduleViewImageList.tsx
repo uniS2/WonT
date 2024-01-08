@@ -28,4 +28,5 @@ function TotalScheduleImageList({
     </>
   );
 }
+
 export default TotalScheduleImageList;

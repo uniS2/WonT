@@ -10,8 +10,10 @@ import TripTitle from '@/components/TripTitle';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { useDateStore } from '@/store/dateStore';
 import { updateRecord, getTripDateUTC } from '@/utils';
+import { MyScheduleItem } from '@/types/MySchedule';
+import { UserItem } from '@/types/Users';
 
-async function updateMyScheduleTitle(recordId, date) {
+async function updateMyScheduleTitle(recordId: number, date) {
   updateRecord('mySchedule', recordId, {
     start_date: getTripDateUTC(date[0]),
     end_date: getTripDateUTC(date[1]),
@@ -29,10 +31,10 @@ export default function TripCalendarPage() {
     { refetchOnWindowFocus: false }
   );
 
-  if (error) {
+  if (error instanceof Error) {
     return (
       <div role="alert">
-        <h2>{error.type}</h2>
+        <h2>{error.name}</h2>
         <p>{error.message}</p>
       </div>
     );

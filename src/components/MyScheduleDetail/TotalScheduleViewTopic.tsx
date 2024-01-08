@@ -1,6 +1,14 @@
 import LocationIcon from '@/components/LocationIcon';
 
-export default function TotalScheduleTopic({ count = '0', children }) {
+interface TotalScheduleTopicProps {
+  count?: string;
+  children: string;
+}
+
+function TotalScheduleTopic({
+  count = '0',
+  children,
+}: TotalScheduleTopicProps) {
   return (
     <div className="flex">
       <LocationIcon size={'1rem'} />
@@ -13,3 +21,5 @@ export default function TotalScheduleTopic({ count = '0', children }) {
     </div>
   );
 }
+
+export default TotalScheduleTopic;
