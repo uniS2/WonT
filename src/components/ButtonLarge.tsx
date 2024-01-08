@@ -1,4 +1,6 @@
-export default function ButtonLarge({
+import { ButtonLarge } from '@/types/Travels';
+
+function ButtonLarge({
   onClick,
   onMouseOver,
   onMouseOut,
@@ -7,7 +9,7 @@ export default function ButtonLarge({
   textColor = 'text-white',
   children,
   restProps,
-}) {
+}: ButtonLarge) {
   return (
     <button
       type="button"
@@ -20,3 +22,5 @@ export default function ButtonLarge({
     </button>
   );
 }
+
+export default ButtonLarge;

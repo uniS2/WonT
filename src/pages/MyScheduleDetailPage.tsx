@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { SetStateAction, useEffect, useId, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
@@ -17,9 +17,10 @@ import Spinner from '@/components/Spinner/Spinner';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
+import { ErrorType, SelectBookmarkItem } from '@/types/Travels';
 
 // 데이터 요청 함수 (query function)
-const fetchScheduleDetail = async (userId) => {
+const fetchScheduleDetail = async (userId: string) => {
   const response = await pocketbase.collection('mySchedule').getFullList({
     filter: `(username?~'${userId}')`,
     expand: 'users',
@@ -35,7 +36,10 @@ export default function MyScheduleDetailPage() {
   const ID = useId();
 
   // 아이디 일치여부
-  let userId = pocketbase.authStore.model;
+  // let userId = pocketbase.authStore.model;
+  const userId: { id: string } = pocketbase.authStore.model as {
+    id: string;
+  };
 
   // Tanstack Query
   const { data, isLoading, error } = useQuery(
@@ -45,15 +49,21 @@ export default function MyScheduleDetailPage() {
   );
 
   // 선택한 북마크 아이디 및 store 저장
-  const [bookmarkId, setBookmarkId] = useState([]);
+  // const [bookmarkId, setBookmarkId] = useState([]);
+  const [bookmarkId, setBookmarkId] = useState<string | undefined>(undefined);
+
   const params = useParams();
 
   useEffect(() => {
-    setBookmarkId(params.detailId);
+    if (params.detailId !== undefined) {
+      setBookmarkId(params.detailId);
+    }
   }, [params.detailId]);
 
-  const selectBookmark = data?.filter((item) => item.id === bookmarkId);
-
+  // const selectBookmark = data?.filter((item) => item.id === bookmarkId);
+  const selectBookmark: SelectBookmarkItem[] | undefined = data
+    ?.filter((item): item is SelectBookmarkItem => item.item.id === bookmarkId)
+    .map((item) => item.item);
   // Store: 전체일정, 모달, 날짜별 일정
   const {
     displayTotalschedule,
@@ -76,10 +86,11 @@ export default function MyScheduleDetailPage() {
 
   // 오류가 발생한 경우 화면
   if (error) {
+    const { type, message } = error as ErrorType;
     return (
       <div role="alert">
-        <h2>{error.type}</h2>
-        <p>{error.message}</p>
+        <h2>{type}</h2>
+        <p>{message}</p>
       </div>
     );
   }

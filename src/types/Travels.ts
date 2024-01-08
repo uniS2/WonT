@@ -1,3 +1,5 @@
+import { Key } from 'react';
+
 export interface TravelItem {
   id: string;
   collectionId: string;
@@ -64,7 +66,7 @@ export interface DayScheduleItemProps {
 }
 
 export interface TotalScheduleSummaryProps {
-  imageURL: string;
+  imageURL: string | null;
   localName: string;
   startDay: string;
   endDay: string;
@@ -72,4 +74,48 @@ export interface TotalScheduleSummaryProps {
 
 export interface ToggleTotalScheduleProps {
   [key: string]: any;
+}
+
+export interface ButtonLarge {
+  onClick?: () => void;
+  onMouseOver: () => void;
+  onMouseOut: () => void;
+  color: string;
+  height?: string;
+  textColor: string;
+  children: string;
+  [key: string]: any;
+}
+
+export type ErrorType = {
+  type: string;
+  message: string;
+};
+
+export interface SelectBookmarkItem {
+  main: any;
+  item: {
+    id: Key | null | undefined;
+    place_name: string;
+    category_name: string;
+    address_name: string;
+    index: number;
+    collectionId?: string;
+    collectionName?: string;
+    updated?: string;
+    created?: string;
+  };
+}
+export interface RecordModel {
+  item: {
+    id: Key | null | undefined;
+    place_name: string;
+    category_name: string;
+    address_name: string;
+    index: number;
+    collectionId?: string;
+    collectionName?: string;
+    updated?: string;
+    created?: string;
+  };
 }
