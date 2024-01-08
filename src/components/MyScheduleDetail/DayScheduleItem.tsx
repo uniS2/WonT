@@ -1,13 +1,5 @@
 import AddPlaceItemContent from '@/components/TripSelect/AddPlaceItemContent';
-
-interface DayScheduleItemProps {
-  count: number;
-  placeName?: string;
-  placeType?: string;
-  address?: string;
-  backgroundColor?: string;
-  textColor?: string;
-}
+import { DayScheduleItemProps } from '@/types/Travels';
 
 function DayScheduleItem({
   count,

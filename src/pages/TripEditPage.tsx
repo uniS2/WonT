@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 
 /* -------------------------------------------------------------------------- */
 
-const fetchMySchedule = async (userId) => {
+const fetchMySchedule = async (userId: string) => {
   const response = await pocketbase.collection('mySchedule').getFullList({
     filter: `(username?~'${userId}')`,
     expand: 'users',
@@ -27,7 +27,7 @@ const fetchMySchedule = async (userId) => {
   });
   return response[0];
 };
-const getRecommends = async (userId) => {
+const getRecommends = async (userId: string) => {
   return await pocketbase.collection('recommends').getFullList();
 };
 

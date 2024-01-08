@@ -1,16 +1,11 @@
 import DefaultImage from '@/components/DefaultImage';
-
-interface TotalScheduleImageListProps {
-  imageURL: string;
-  localName: string;
-  className: string;
-}
+import { TotalScheduleImageList } from '@/types/MyScheduleDetailPage';
 
 function TotalScheduleImageList({
   imageURL,
   localName,
   className,
-}: TotalScheduleImageListProps) {
+}: TotalScheduleImageList) {
   return (
     <>
       {imageURL ? (

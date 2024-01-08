@@ -1,15 +1,9 @@
 import CalendarIcon from '@/assets/common-calendar.webp';
 import { getLocalName, getTripDates } from '@/utils';
 import DefaultImage from '@/components/DefaultImage';
+import { TotalScheduleSummaryProps } from '@/types/Travels';
 
-interface TotalScheduleSummaryProps {
-  imageURL: string;
-  localName?: string;
-  startDay: string;
-  endDay: string;
-}
-
-export default function TotalScheduleSummary({
+function TotalScheduleSummary({
   imageURL,
   localName = '지역명',
   startDay,
@@ -47,3 +41,4 @@ export default function TotalScheduleSummary({
     </>
   );
 }
+export default TotalScheduleSummary;

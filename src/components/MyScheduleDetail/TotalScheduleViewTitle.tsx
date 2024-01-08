@@ -1,3 +1,4 @@
+import { TotalScheduleTitleProps } from '@/types/MyScheduleDetailPage';
 import { getLocalName, getTripDates } from '@/utils';
 
 interface TotalScheduleTitleProps {
