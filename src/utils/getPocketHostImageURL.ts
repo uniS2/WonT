@@ -12,10 +12,7 @@ import { MyScheduleItem } from '@/types/MySchedule';
 import { RecommenItem } from '@/types/Recommens';
 import { TravelItem } from '@/types/Travels';
 
-//$ 현재 해결 방안: any
-//$ 에러 원인: LocalItem | MyScheduleItem | RecommenItem | TravelItem
-
-const getPocketHostImageURL = (item: string[index], image: string = 'image') =>
+const getPocketHostImageURL = (item: any, image: string = 'image') =>
   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
     item[image]
   }`;

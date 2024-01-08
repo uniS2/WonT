@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useId, useState } from 'react';
+import { Key, SetStateAction, useEffect, useId, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
@@ -17,7 +17,7 @@ import Spinner from '@/components/Spinner/Spinner';
 import { useButtonStore } from '@/store/buttonStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
-import { ErrorType, SelectBookmarkItem } from '@/types/Travels';
+import { ErrorType, RecordModel, SelectBookmarkItem } from '@/types/Travels';
 
 // 데이터 요청 함수 (query function)
 const fetchScheduleDetail = async (userId: string) => {
@@ -61,9 +61,13 @@ export default function MyScheduleDetailPage() {
   }, [params.detailId]);
 
   // const selectBookmark = data?.filter((item) => item.id === bookmarkId);
-  const selectBookmark: SelectBookmarkItem[] | undefined = data
-    ?.filter((item): item is SelectBookmarkItem => item.item.id === bookmarkId)
-    .map((item) => item.item);
+  const selectBookmark: SelectBookmarkItem | undefined = data
+    ?.filter(
+      (item) =>
+        item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
+    )
+    .map((item) => item.item)[0];
+
   // Store: 전체일정, 모달, 날짜별 일정
   const {
     displayTotalschedule,
@@ -119,9 +123,9 @@ export default function MyScheduleDetailPage() {
               {isLoading ? (
                 <Spinner />
               ) : (
-                selectBookmark?.map((item) => (
+                selectBookmark?.items?.map((item) => (
                   <TotalScheduleSummary
-                    key={ID}
+                    key={item.id} // 여기서 ID 대신 item.id를 사용
                     imageURL={
                       item.main ? getPocketHostImageURL(item, 'main') : null
                     }
@@ -138,8 +142,8 @@ export default function MyScheduleDetailPage() {
                 정말 삭제하시겠습니까?
               </Modal>
             )}
-            {selectBookmark && selectBookmark[0] && (
-              <TotalScheduleView selectBookmark={selectBookmark} />
+            {selectBookmark && (
+              <TotalScheduleView selectBookmark={[selectBookmark]} />
             )}
           </section>
         )}
@@ -161,8 +165,8 @@ export default function MyScheduleDetailPage() {
           {displayDaySchedule && (
             <>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                {selectBookmark && selectBookmark[0] ? (
-                  selectBookmark[0].places[1]?.map((item, index) => (
+                {selectBookmark ? (
+                  selectBookmark.places[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
                       placeName={item.place_name}
@@ -176,8 +180,8 @@ export default function MyScheduleDetailPage() {
                 )}
               </ul>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                {selectBookmark && selectBookmark[0] ? (
-                  selectBookmark[0].hotels[1]?.map((item, index) => (
+                {selectBookmark ? (
+                  selectBookmark.hotels[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
                       placeName={item.place_name}

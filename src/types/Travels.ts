@@ -57,7 +57,7 @@ export interface Position {
 }
 
 export interface DayScheduleItemProps {
-  count?: string;
+  count?: number;
   placeName?: string;
   placeType?: string;
   address?: string;
@@ -93,29 +93,77 @@ export type ErrorType = {
 };
 
 export interface SelectBookmarkItem {
-  main: any;
-  item: {
-    id: Key | null | undefined;
-    place_name: string;
-    category_name: string;
-    address_name: string;
-    index: number;
-    collectionId?: string;
-    collectionName?: string;
-    updated?: string;
-    created?: string;
+  main: string;
+  title: string;
+  start_date: string;
+  end_date: string;
+  // items: [
+  //   {
+  //     id: string;
+  //     collectionId: string;
+  //     collectionName: string;
+  //     created: string;
+  //     updated: string;
+  //     title: string;
+  //     username: string;
+  //     main: string;
+  //     place: string[];
+  //     hotel: string[];
+  //     start_date: string;
+  //     end_date: string;
+  //     places: JSON;
+  //     hotels: JSON;
+  //   },
+  // ];
+  items: RecordModel[];
+  places: {
+    1: [
+      {
+        address_name: string;
+        category_group_code: string;
+        category_group_name: string;
+        category_name: string;
+        distance: string;
+        id: string;
+        phone: string;
+        place_name: string;
+        place_url: string;
+        road_address_name: '';
+        x: string;
+        y: string;
+      },
+    ];
   };
+  hotels: {
+    1: [
+      {
+        address_name: string;
+        category_group_code: string;
+        category_group_name: string;
+        category_name: string;
+        distance: string;
+        id: string;
+        phone: string;
+        place_name: string;
+        place_url: string;
+        road_address_name: '';
+        x: string;
+        y: string;
+      },
+    ];
+  };
+  collectionId?: string;
+  collectionName?: string;
+  updated?: string;
+  created?: string;
+  id: Key | null | undefined;
 }
+
 export interface RecordModel {
-  item: {
-    id: Key | null | undefined;
-    place_name: string;
-    category_name: string;
-    address_name: string;
-    index: number;
-    collectionId?: string;
-    collectionName?: string;
-    updated?: string;
-    created?: string;
-  };
+  item: SelectBookmarkItem;
+  id: Key | null | undefined;
+  main: string;
+  title: string;
+  start_date: string;
+  end_date: string;
 }
