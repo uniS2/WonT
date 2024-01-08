@@ -1,4 +1,15 @@
-export default function ButtonLarge({
+interface ButtonLargeProps {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseOver?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseOut?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  color?: string;
+  height?: string;
+  textColor?: string;
+  children?: string;
+  restProps?: string;
+}
+
+function ButtonLarge({
   onClick,
   onMouseOver,
   onMouseOut,
@@ -7,7 +18,7 @@ export default function ButtonLarge({
   textColor = 'text-white',
   children,
   restProps,
-}) {
+}: ButtonLargeProps) {
   return (
     <button
       type="button"
@@ -20,3 +31,5 @@ export default function ButtonLarge({
     </button>
   );
 }
+
+export default ButtonLarge;
