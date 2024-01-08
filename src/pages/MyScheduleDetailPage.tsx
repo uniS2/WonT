@@ -173,7 +173,7 @@ function MyScheduleDetailPage() {
             <>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
                 {selectBookmark ? (
-                  selectBookmark.places[1]?.map((item, index) => (
+                  selectBookmark.place[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
                       placeName={item.place_name}
@@ -188,7 +188,7 @@ function MyScheduleDetailPage() {
               </ul>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
                 {selectBookmark ? (
-                  selectBookmark.hotels[1]?.map((item, index) => (
+                  selectBookmark.hotel[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
                       placeName={item.place_name}

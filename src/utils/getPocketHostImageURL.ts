@@ -28,3 +28,11 @@ export const getPocketHostImageURL = <key extends keyof ItemType>(
   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
     item[image]
   }`;
+export const getImageArrayURL = <key extends keyof ItemType>(
+  item: ItemType,
+  image: string
+) =>
+  `${getPocketHostImageURL(item, 'image' as key).replace(
+    'undefined',
+    ''
+  )}/${image}`;

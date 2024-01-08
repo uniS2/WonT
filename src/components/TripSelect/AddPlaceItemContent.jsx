@@ -1,5 +1,5 @@
 export default function AddPlaceItemContent({
-  count = '1',
+  count = 1,
   placeName = '장소명',
   divSize = 'h-[1.0625rem] w-[1.0625rem]',
   divColor = 'bg-primary',

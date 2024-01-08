@@ -14,7 +14,7 @@ import { useMapStore } from '@/store/mapStore';
 import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
-export default function TripPlacePage() {
+function TripPlacePage() {
   const {
     displayPlaceTripPlan,
     displayPlaceList,
@@ -99,3 +99,4 @@ export default function TripPlacePage() {
     </>
   );
 }
+export default TripPlacePage;

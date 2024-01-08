@@ -2,9 +2,10 @@ import TotalScheduleViewHotelDay from '@/components/MyScheduleDetail/TotalSchedu
 import TotalScheduleViewImageList from '@/components/MyScheduleDetail/TotalScheduleViewImageList';
 import TotalScheduleViewTitle from '@/components/MyScheduleDetail/TotalScheduleViewTitle';
 import TotalScheduleViewTopic from '@/components/MyScheduleDetail/TotalScheduleViewTopic';
+import { TotalScheduleViewProps } from '@/types/MyScheduleDetailPage';
 import { getImageArrayURL, getTripDate, setLocalName } from '@/utils';
 
-function TotalScheduleView({ selectBookmark }) {
+function TotalScheduleView({ selectBookmark }: TotalScheduleViewProps) {
   return (
     <div className="modal relative mx-[1.25rem] flex min-h-[20.4375rem] flex-col justify-center gap-[1.25rem] overflow-hidden rounded-md bg-white pl-[1.25rem] pr-[0.625rem] md:min-h-[22.9375rem]">
       {selectBookmark?.map((item) => (

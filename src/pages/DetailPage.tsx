@@ -185,7 +185,7 @@ function DetailPage({}) {
         <div className="container">
           <section className="animate-fade-animate px-6">
             <img
-              src={getPocketHostImageURL(detailPlace, 'image')}
+              src={getPocketHostImageURL(detailPlace)}
               alt={`${detailPlace.place} 이미지`}
               className="  mx-auto my-10 h-[31.25rem] min-h-[22.5rem] w-[77.25rem] min-w-[20rem] rounded-xl object-cover "
             />
