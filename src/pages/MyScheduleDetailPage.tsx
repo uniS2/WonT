@@ -61,18 +61,21 @@ function MyScheduleDetailPage() {
   }, [params.detailId]);
 
   // const selectBookmark = data?.filter((item) => item.id === bookmarkId);
+  const selectBookmark: SelectBookmarkItem | undefined = data?.find(
+    (item) => item.id === bookmarkId
+  ) as SelectBookmarkItem | undefined;
   // const selectBookmark: SelectBookmarkItem | undefined = data
   //   ?.filter(
   //     (item) =>
   //       item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
   //   )
   //   .map((item) => item.item)[0];
-  const selectBookmark: SelectBookmarkItem | undefined = data
-    ?.filter(
-      (item) =>
-        item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
-    )
-    .map((item) => item.item)[0];
+  // const selectBookmark: SelectBookmarkItem | undefined = data
+  //   ?.filter(
+  //     (item) =>
+  //       item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
+  //   )
+  //   .map((item) => item.item)[0];
 
   // Store: 전체일정, 모달, 날짜별 일정
   const {

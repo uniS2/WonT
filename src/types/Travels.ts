@@ -163,11 +163,25 @@ export interface SelectBookmarkItem {
 export interface RecordModel {
   item: SelectBookmarkItem;
   // id: Key | null | undefined;
-  main: string;
-  title: string;
-  start_date: string;
-  end_date: string;
+  // main: string;
+  // title: string;
+  // start_date: string;
+  // end_date: string;
+  // id: string;
+  // collectionId: string;
+  // image: string;
   id: string;
   collectionId: string;
-  image: string;
+  collectionName: string;
+  created: string;
+  updated: string;
+  title: string;
+  username: string;
+  main: string;
+  place: string[];
+  hotel: string[];
+  start_date: string;
+  end_date: string;
+  places: JSON;
+  hotels: JSON;
 }
