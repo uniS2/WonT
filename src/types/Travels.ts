@@ -57,7 +57,7 @@ export interface Position {
 }
 
 export interface DayScheduleItemProps {
-  count: number;
+  count?: number;
   placeName?: string;
   placeType?: string;
   address?: string;
