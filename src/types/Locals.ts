@@ -1,5 +1,5 @@
 export interface LocalItem {
-  id: string;
+  id: number;
   collectionId: string;
   collectionName: string;
   created: string;

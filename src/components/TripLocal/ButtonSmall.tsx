@@ -1,8 +1,14 @@
-export default function ButtonSmall({
+interface ButtonSmallProps {
+  color?: string;
+  children: string;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+function ButtonSmall({
   color = 'bg-primary',
   children,
   onClick,
-}) {
+}: ButtonSmallProps) {
   return (
     <>
       <button
@@ -15,3 +21,5 @@ export default function ButtonSmall({
     </>
   );
 }
+
+export default ButtonSmall;

@@ -3,7 +3,13 @@ import LocalImage from '@/components/TripLocal/LocalImage';
 import LocalName from '@/components/TripLocal/LocalName';
 import { useLocalStore } from '@/store/localStore';
 
-export default function LocalItem({ image, name = '지역명', index }) {
+interface LocalItemProps {
+  image: string;
+  name?: string;
+  index: number;
+}
+
+function LocalItem({ image, name = '지역명', index }: LocalItemProps) {
   const { selectIndex, setSelectIndex, setSelectName } = useLocalStore();
   const isSelect = selectIndex === index;
 
@@ -32,3 +38,5 @@ export default function LocalItem({ image, name = '지역명', index }) {
     </li>
   );
 }
+
+export default LocalItem;

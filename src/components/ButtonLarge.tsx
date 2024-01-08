@@ -1,4 +1,13 @@
-import { ButtonLarge } from '@/types/Travels';
+interface ButtonLargeProps {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseOver?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseOut?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  color?: string;
+  height?: string;
+  textColor?: string;
+  children?: string;
+  restProps?: string;
+}
 
 function ButtonLarge({
   onClick,
@@ -9,7 +18,7 @@ function ButtonLarge({
   textColor = 'text-white',
   children,
   restProps,
-}: ButtonLarge) {
+}: ButtonLargeProps) {
   return (
     <button
       type="button"
