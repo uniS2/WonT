@@ -1,4 +1,4 @@
-export default function Logout() {
+function Logout() {
   return (
     <a href="/signin">
       <svg
@@ -22,3 +22,4 @@ export default function Logout() {
     </a>
   );
 }
+export default Logout;

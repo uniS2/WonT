@@ -80,7 +80,7 @@ type ToggleTripMenuStore = {
   toggleDaySchedule: () => void;
 };
 
-export const useToggleTripMenuStore = create<State<ToggleTripMenuStore>>(
+export const ToggleTripMenuStore = create<State<ToggleTripMenuStore>>(
   devtools((set) => ({
     displayPlaceTripPlan: true,
     displayPlaceList: true,

@@ -5,13 +5,17 @@ import defaultImage from '@/assets/common-trip-default.webp';
 import useScheduleList from '@/hooks/useScheduleList';
 import { getDDay, getPocketHostImageURL } from '@/utils';
 
-export default function PlanPreview({ userSchedule }) {
+function PlanPreview({ userSchedule }) {
   const { data, isLoading } = useScheduleList();
   const [trip, setTrip] = useState();
 
   useEffect(() => {
     if (data) {
-      setTrip(data?.items?.filter((item) => item.username === userSchedule.id));
+      setTrip(
+        data?.items?.filter(
+          (item: { username: any }) => item.username === userSchedule.id
+        )
+      );
     }
   }, []);
 
@@ -37,7 +41,7 @@ export default function PlanPreview({ userSchedule }) {
                 <img
                   src={
                     item.place[0]
-                      ? getPocketHostImageURL(item, 'main').split(',')[0]
+                      ? getPocketHostImageURL(item).split(',')[0]
                       : defaultImage
                   }
                   alt={`${item.title} 이미지`}
@@ -67,3 +71,5 @@ export default function PlanPreview({ userSchedule }) {
     );
   }
 }
+
+export default PlanPreview;

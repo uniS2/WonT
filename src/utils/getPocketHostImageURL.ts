@@ -14,7 +14,7 @@ import { TravelItem } from '@/types/Travels';
 import { RecordModel } from 'pocketbase';
 
 // #타입 정의
-type ItemType =
+export type ItemType =
   | LocalItem
   | MyScheduleItem
   | RecommenItem

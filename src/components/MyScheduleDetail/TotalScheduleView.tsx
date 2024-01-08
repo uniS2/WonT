@@ -26,6 +26,7 @@ function TotalScheduleView({ selectBookmark }: TotalScheduleViewProps) {
               key={image}
               imageURL={getImageArrayURL(selectBookmark[0], image)}
               className={'ml-1'}
+              localName={''}
             />
           ))}
         </div>
