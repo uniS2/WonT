@@ -61,6 +61,12 @@ export default function MyScheduleDetailPage() {
   }, [params.detailId]);
 
   // const selectBookmark = data?.filter((item) => item.id === bookmarkId);
+  // const selectBookmark: SelectBookmarkItem | undefined = data
+  //   ?.filter(
+  //     (item) =>
+  //       item.item && item.item.id === (bookmarkId ? bookmarkId[0] : undefined)
+  //   )
+  //   .map((item) => item.item)[0];
   const selectBookmark: SelectBookmarkItem | undefined = data
     ?.filter(
       (item) =>
@@ -125,7 +131,7 @@ export default function MyScheduleDetailPage() {
               ) : (
                 selectBookmark?.items?.map((item) => (
                   <TotalScheduleSummary
-                    key={item.id} // 여기서 ID 대신 item.id를 사용
+                    key={item.id}
                     imageURL={
                       item.main ? getPocketHostImageURL(item, 'main') : null
                     }

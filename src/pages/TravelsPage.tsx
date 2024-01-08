@@ -56,7 +56,7 @@ function TravelsPage() {
                 <hr className="aria-hidden" />
                 <div className="my-5 flex items-center gap-3">
                   <img
-                    src={getPocketHostImageURL(user, 'profile')}
+                    src={getPocketHostImageURL(user)}
                     alt={`${user.username}님의 프로필`}
                     className=" h-16 w-16 rounded-full object-cover"
                   />
@@ -79,7 +79,7 @@ function TravelsPage() {
                   {detailTravels.image.map((image) => (
                     <img
                       key={id}
-                      src={`${getPocketHostImageURL(detailTravels, '').replace(
+                      src={`${getPocketHostImageURL(detailTravels).replace(
                         'undefined',
                         ''
                       )}/${image}`}

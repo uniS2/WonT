@@ -156,14 +156,18 @@ export interface SelectBookmarkItem {
   collectionName?: string;
   updated?: string;
   created?: string;
-  id: Key | null | undefined;
+  // id: Key | null | undefined;
+  id: string;
 }
 
 export interface RecordModel {
   item: SelectBookmarkItem;
-  id: Key | null | undefined;
+  // id: Key | null | undefined;
   main: string;
   title: string;
   start_date: string;
   end_date: string;
+  id: string;
+  collectionId: string;
+  image: string;
 }
