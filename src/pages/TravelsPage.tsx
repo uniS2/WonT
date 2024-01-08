@@ -8,7 +8,11 @@ import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import {
+  useToggleTripMenu,
+  useToggleTripMenuStore,
+} from '@/store/toggleTripMenuStore';
+import { TravelsData } from '@/types/Travels';
 
 const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());
@@ -16,21 +20,26 @@ const getUser = () =>
   fetch(`${getPocketHostURL('users')}`).then((res) => res.json());
 // 여행기 페이지
 function TravelsPage() {
-  const { displayDaySchedule, toggleDaySchedule } = useToggleTripMenuStore();
+  const { displayDaySchedule, toggleDaySchedule } = useToggleTripMenu();
   const { data: travelsData } = useQuery(['travels'], getTravels);
   const { data: userData } = useQuery(['users'], getUser);
   // console.log(userData);
 
   const currentPath = window.location.pathname.replace('/travels/', '');
-  const detailTravels = travelsData?.items?.find(
-    (item) => item.id === currentPath
+  const detailTravels: TravelsData | undefined = travelsData?.items?.find(
+    (item: { id: string }) => item.id === currentPath
   );
+
+  // const user = userData?.items?.find(
+  //   (item: { id: string }) => item.id === detailTravels?.userEmail
+  // );
+
   const user = userData?.items?.find(
-    (item) => item.id === detailTravels?.userEmail
+    (item: { id: string }) => item.id === String(detailTravels)
   );
 
   const id = useId();
-  if ((detailTravels, user)) {
+  if (detailTravels && user) {
     return (
       <div className="mx-auto min-h-screen w-screen min-w-[22.5rem] bg-background pb-10">
         <Helmet>
@@ -47,7 +56,7 @@ function TravelsPage() {
                 <hr className="aria-hidden" />
                 <div className="my-5 flex items-center gap-3">
                   <img
-                    src={getPocketHostImageURL(user, 'profile')}
+                    src={getPocketHostImageURL(user)}
                     alt={`${user.username}님의 프로필`}
                     className=" h-16 w-16 rounded-full object-cover"
                   />
@@ -70,7 +79,7 @@ function TravelsPage() {
                   {detailTravels.image.map((image) => (
                     <img
                       key={id}
-                      src={`${getPocketHostImageURL(detailTravels, '').replace(
+                      src={`${getPocketHostImageURL(detailTravels).replace(
                         'undefined',
                         ''
                       )}/${image}`}

@@ -6,6 +6,7 @@ export interface LocalItem {
   updated: string;
   name: string;
   image: string;
+  [key: string]: string;
 }
 
 export interface Locals {

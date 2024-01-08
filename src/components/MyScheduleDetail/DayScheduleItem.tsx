@@ -1,13 +1,14 @@
 import AddPlaceItemContent from '@/components/TripSelect/AddPlaceItemContent';
+import { DayScheduleItemProps } from '@/types/Travels';
 
-export default function DayScheduleItem({
+function DayScheduleItem({
   count,
   placeName = '장소명',
   placeType = '장소 분류',
   address = '상세 주소',
   backgroundColor = 'bg-primary',
   textColor = 'text-primary',
-}) {
+}: DayScheduleItemProps) {
   return (
     <li className="flex flex-col gap-[0.125rem] bg-white py-[0.625rem] pl-1">
       <div className="flex items-center gap-[0.3125rem] rounded-md bg-white pl-[0.5625rem]">
@@ -27,3 +28,5 @@ export default function DayScheduleItem({
     </li>
   );
 }
+
+export default DayScheduleItem;
