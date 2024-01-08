@@ -19,7 +19,7 @@ import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
 
 // 데이터 요청 함수 (query function)
-const fetchScheduleDetail = async (userId) => {
+const fetchScheduleDetail = async (userId: number) => {
   const response = await pocketbase.collection('mySchedule').getFullList({
     filter: `(username?~'${userId}')`,
     expand: 'users',
@@ -75,10 +75,10 @@ export default function MyScheduleDetailPage() {
   };
 
   // 오류가 발생한 경우 화면
-  if (error) {
+  if (error instanceof Error) {
     return (
       <div role="alert">
-        <h2>{error.type}</h2>
+        <h2>{error.name}</h2>
         <p>{error.message}</p>
       </div>
     );
