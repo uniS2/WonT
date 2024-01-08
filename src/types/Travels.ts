@@ -55,10 +55,21 @@ export interface Position {
 }
 
 export interface DayScheduleItemProps {
-  count: string;
-  placeName: string;
-  placeType: string;
-  address: string;
-  backgroundColor: string;
-  textColor: string;
+  count?: string;
+  placeName?: string;
+  placeType?: string;
+  address?: string;
+  backgroundColor?: string;
+  textColor?: string;
+}
+
+export interface TotalScheduleSummaryProps {
+  imageURL: string;
+  localName: string;
+  startDay: string;
+  endDay: string;
+}
+
+export interface ToggleTotalScheduleProps {
+  [key: string]: any;
 }

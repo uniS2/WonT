@@ -4,7 +4,7 @@ import TotalScheduleViewTitle from '@/components/MyScheduleDetail/TotalScheduleV
 import TotalScheduleViewTopic from '@/components/MyScheduleDetail/TotalScheduleViewTopic';
 import { getImageArrayURL, getTripDate, setLocalName } from '@/utils';
 
-export default function TotalScheduleView({ selectBookmark }) {
+function TotalScheduleView({ selectBookmark }) {
   return (
     <div className="modal relative mx-[1.25rem] flex min-h-[20.4375rem] flex-col justify-center gap-[1.25rem] overflow-hidden rounded-md bg-white pl-[1.25rem] pr-[0.625rem] md:min-h-[22.9375rem]">
       {selectBookmark?.map((item) => (
@@ -49,3 +49,5 @@ export default function TotalScheduleView({ selectBookmark }) {
     </div>
   );
 }
+
+export default TotalScheduleView;

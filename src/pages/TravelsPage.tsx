@@ -8,7 +8,10 @@ import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import {
+  useToggleTripMenu,
+  useToggleTripMenuStore,
+} from '@/store/toggleTripMenuStore';
 import { TravelsData } from '@/types/Travels';
 
 const getTravels = () =>
@@ -17,7 +20,7 @@ const getUser = () =>
   fetch(`${getPocketHostURL('users')}`).then((res) => res.json());
 // 여행기 페이지
 function TravelsPage() {
-  const { displayDaySchedule, toggleDaySchedule } = useToggleTripMenuStore();
+  const { displayDaySchedule, toggleDaySchedule } = useToggleTripMenu();
   const { data: travelsData } = useQuery(['travels'], getTravels);
   const { data: userData } = useQuery(['users'], getUser);
   // console.log(userData);

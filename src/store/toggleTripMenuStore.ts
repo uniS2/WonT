@@ -1,79 +1,124 @@
-import { create } from 'zustand';
+// import create from 'zustand';
+// import { devtools } from 'zustand/middleware';
+
+// export type ToggleTripMenuStore = {
+//   displayPlaceTripPlan: boolean;
+//   displayPlaceList: boolean;
+//   displayHotelTripPlan: boolean;
+//   displayHotelList: boolean;
+//   displayTotalschedule: boolean;
+//   displayDeleteModal: boolean;
+//   displayDaySchedule: boolean;
+//   togglePlaceTripPlan: () => void;
+//   togglePlaceList: () => void;
+//   toggleHotelTripPlan: () => void;
+//   toggleHotelList: () => void;
+//   toggleTotalschedule: () => void;
+//   toggleDeleteModal: () => void;
+//   toggleDaySchedule: () => void;
+// };
+
+// export const useToggleTripMenuStore = create(
+//   devtools((set) => ({
+//     displayPlaceTripPlan: true,
+//     displayPlaceList: true,
+//     displayHotelTripPlan: true,
+//     displayHotelList: true,
+//     displayTotalschedule: true,
+//     displayDeleteModal: false,
+//     displayDaySchedule: true,
+
+//     togglePlaceTripPlan: () =>
+//       set((state: { displayPlaceTripPlan: boolean }) => ({
+//         displayPlaceTripPlan: !state.displayPlaceTripPlan,
+//       })),
+//     togglePlaceList: () =>
+//       set((state: { displayPlaceList: boolean }) => ({
+//         displayPlaceList: !state.displayPlaceList,
+//       })),
+//     toggleHotelTripPlan: () =>
+//       set((state: { displayHotelTripPlan: boolean }) => ({
+//         displayHotelTripPlan: !state.displayHotelTripPlan,
+//       })),
+//     toggleHotelList: () =>
+//       set((state: { displayHotelList: boolean }) => ({
+//         displayHotelList: !state.displayHotelList,
+//       })),
+//     toggleTotalschedule: () =>
+//       set((state: { displayTotalschedule: boolean }) => ({
+//         displayTotalschedule: !state.displayTotalschedule,
+//       })),
+//     toggleDeleteModal: () =>
+//       set((state: { displayDeleteModal: boolean }) => ({
+//         displayDeleteModal: !state.displayDeleteModal,
+//       })),
+//     toggleDaySchedule: () =>
+//       set((state: { displayDaySchedule: boolean }) => ({
+//         displayDaySchedule: !state.displayDaySchedule,
+//       })),
+//   }))
+// );
+
+/* -------------------------------------------------------------------------- */
+import create, { State } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-export const useToggleTripMenuStore = create(
+type ToggleTripMenuStore = {
+  displayPlaceTripPlan: boolean;
+  displayPlaceList: boolean;
+  displayHotelTripPlan: boolean;
+  displayHotelList: boolean;
+  displayTotalschedule: boolean;
+  displayDeleteModal: boolean;
+  displayDaySchedule: boolean;
+  togglePlaceTripPlan: () => void;
+  togglePlaceList: () => void;
+  toggleHotelTripPlan: () => void;
+  toggleHotelList: () => void;
+  toggleTotalschedule: () => void;
+  toggleDeleteModal: () => void;
+  toggleDaySchedule: () => void;
+};
+
+export const useToggleTripMenuStore = create<State<ToggleTripMenuStore>>(
   devtools((set) => ({
-    // state
-    // 여행 장소선택 페이지
     displayPlaceTripPlan: true,
     displayPlaceList: true,
-    // 여행 숙소선택 페이지
     displayHotelTripPlan: true,
     displayHotelList: true,
-    // 나의 일정상세 페이지
     displayTotalschedule: true,
     displayDeleteModal: false,
     displayDaySchedule: true,
 
-    // action
-    // 여행 장소선택 페이지
     togglePlaceTripPlan: () =>
-      set(
-        (state: { displayPlaceTripPlan: boolean }) => ({
-          displayPlaceTripPlan: !state.displayPlaceTripPlan,
-        }),
-        false,
-        'placeTripPlan/toggler'
-      ),
+      set((state: { displayPlaceTripPlan: boolean }) => ({
+        displayPlaceTripPlan: !state.displayPlaceTripPlan,
+      })),
     togglePlaceList: () =>
-      set(
-        (state: { displayPlaceList: boolean }) => ({
-          displayPlaceList: !state.displayPlaceList,
-        }),
-        false,
-        'placeList/toggler'
-      ),
-    // 여행 숙소선택 페이지
+      set((state: { displayPlaceList: boolean }) => ({
+        displayPlaceList: !state.displayPlaceList,
+      })),
     toggleHotelTripPlan: () =>
-      set(
-        (state: { displayHotelTripPlan: boolean }) => ({
-          displayHotelTripPlan: !state.displayHotelTripPlan,
-        }),
-        false,
-        'hotelTripPlan/toggler'
-      ),
+      set((state: { displayHotelTripPlan: boolean }) => ({
+        displayHotelTripPlan: !state.displayHotelTripPlan,
+      })),
     toggleHotelList: () =>
-      set(
-        (state: { displayHotelList: boolean }) => ({
-          displayHotelList: !state.displayHotelList,
-        }),
-        false,
-        'hotelList/toggler'
-      ),
-    // 나의 일정상세 페이지
+      set((state: { displayHotelList: boolean }) => ({
+        displayHotelList: !state.displayHotelList,
+      })),
     toggleTotalschedule: () =>
-      set(
-        (state: { displayTotalschedule: boolean }) => ({
-          displayTotalschedule: !state.displayTotalschedule,
-        }),
-        false,
-        'totalSchedule/toggler'
-      ),
+      set((state: { displayTotalschedule: boolean }) => ({
+        displayTotalschedule: !state.displayTotalschedule,
+      })),
     toggleDeleteModal: () =>
-      set(
-        (state: { displayDeleteModal: boolean }) => ({
-          displayDeleteModal: !state.displayDeleteModal,
-        }),
-        false,
-        'deleteModal/toggler'
-      ),
+      set((state: { displayDeleteModal: boolean }) => ({
+        displayDeleteModal: !state.displayDeleteModal,
+      })),
     toggleDaySchedule: () =>
-      set(
-        (state: { displayDaySchedule: boolean }) => ({
-          displayDaySchedule: !state.displayDaySchedule,
-        }),
-        false,
-        'daySchedule/toggler'
-      ),
+      set((state: { displayDaySchedule: boolean }) => ({
+        displayDaySchedule: !state.displayDaySchedule,
+      })),
   }))
 );
+
+export const useToggleTripMenu = useToggleTripMenuStore;
