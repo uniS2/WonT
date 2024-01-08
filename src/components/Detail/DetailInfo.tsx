@@ -12,7 +12,8 @@ interface FilterDetailPlaceProps {
   url: string;
 }
 
-export default function DetailInfo({ detailPlace }) {
+// * TODO: detailplace 타입 재정의 필요
+export default function DetailInfo(detailPlace: any) {
   const filterDetailPlace: FilterDetailPlaceProps = {
     info: detailPlace.info ? detailPlace.info : '-',
     rest: detailPlace.rest ? detailPlace.rest : '-',

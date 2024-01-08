@@ -38,7 +38,7 @@ function Map({
       center: center,
     };
 
-    // TODO: data, status, pagination 타입 재지정 필요
+    //* TODO: data, status, pagination 타입 재지정 필요
     function categorySearchCB(data: any, status: any, pagination: any) {
       if (status === kakao.maps.services.Status.OK) {
         for (let i = 0; i < data.length; i++) {
@@ -76,7 +76,7 @@ function Map({
       const geocoder = new kakao.maps.services.Geocoder();
 
       //# 1. 현재 선택한 지역으로 좌표를 검색합니다
-      // TODO: status 타입 재지정 필요
+      //* TODO: status 타입 재지정 필요
       geocoder.addressSearch(
         '부산',
         function (result: AddressSearchResult[], status: any) {
@@ -110,7 +110,7 @@ function Map({
       var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
       // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-      // TODO: data, status, pagination 타입 재지정 필요
+      //* TODO: data, status, pagination 타입 재지정 필요
       function placesSearchCB(data: any, status: any, pagination: any) {
         if (status === kakao.maps.services.Status.OK) {
           for (var i = 0; i < data.length; i++) {

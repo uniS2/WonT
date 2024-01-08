@@ -23,10 +23,10 @@ export interface PlanDateProps {
   toggleButton: () => void;
   toggleSchedule: boolean;
   // setToggleSchedule: React.Dispatch<React.SetStateAction<boolean>>;
-  // TODO:: 타입 재지정 필요
+  //* TODO:: 타입 재지정 필요
   setToggleSchedule: any;
   index: number;
-  // TODO: 타입 재지정 필요
+  //* TODO: 타입 재지정 필요
   item: any;
   handleResetButtonClick?: () => void;
 }
