@@ -1,10 +1,16 @@
 import DefaultImage from '@/components/DefaultImage';
 
-export default function TotalScheduleImageList({
+interface TotalScheduleImageListProps {
+  imageURL: string;
+  localName: string;
+  className: string;
+}
+
+function TotalScheduleImageList({
   imageURL,
   localName,
   className,
-}) {
+}: TotalScheduleImageListProps) {
   return (
     <>
       {imageURL ? (
@@ -27,3 +33,5 @@ export default function TotalScheduleImageList({
     </>
   );
 }
+
+export default TotalScheduleImageList;

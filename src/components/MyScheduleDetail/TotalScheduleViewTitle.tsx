@@ -1,10 +1,16 @@
 import { getLocalName, getTripDates } from '@/utils';
 
-export default function TotalScheduleTitle({
+interface TotalScheduleTitleProps {
+  localName?: string;
+  startDay: string;
+  endDay: string;
+}
+
+function TotalScheduleTitle({
   localName = '지역명',
   startDay,
   endDay,
-}) {
+}: TotalScheduleTitleProps) {
   return (
     <dl>
       <dt className="sr-only">장소</dt>
@@ -18,3 +24,5 @@ export default function TotalScheduleTitle({
     </dl>
   );
 }
+
+export default TotalScheduleTitle;

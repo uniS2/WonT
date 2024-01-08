@@ -1,7 +1,17 @@
 import ToggleDownIcon from '@/components/ToggleDownIcon';
 import ToggleUpIcon from '@/components/ToggleUpIcon';
 
-export default function ToggleTotalSchedule({ children, state, action }) {
+interface ToggleTotalScheduleProps {
+  children: string;
+  state: boolean;
+  action: () => void;
+}
+
+function ToggleTotalSchedule({
+  children,
+  state,
+  action,
+}: ToggleTotalScheduleProps) {
   return (
     <div className="mx-5 flex items-center gap-[0.3125rem] pt-2">
       <dl>
@@ -20,3 +30,5 @@ export default function ToggleTotalSchedule({ children, state, action }) {
     </div>
   );
 }
+
+export default ToggleTotalSchedule;

@@ -1,18 +1,27 @@
 import AddPlaceItemContent from '@/components/TripSelect/AddPlaceItemContent';
 
-export default function DayScheduleItem({
+interface DayScheduleItemProps {
+  count: number;
+  placeName?: string;
+  placeType?: string;
+  address?: string;
+  backgroundColor?: string;
+  textColor?: string;
+}
+
+function DayScheduleItem({
   count,
   placeName = '장소명',
   placeType = '장소 분류',
   address = '상세 주소',
   backgroundColor = 'bg-primary',
   textColor = 'text-primary',
-}) {
+}: DayScheduleItemProps) {
   return (
     <li className="flex flex-col gap-[0.125rem] bg-white py-[0.625rem] pl-1">
       <div className="flex items-center gap-[0.3125rem] rounded-md bg-white pl-[0.5625rem]">
         <AddPlaceItemContent
-          count={count}
+          count={count.toString()} //* 숫자 -> 문자
           placeName={placeName}
           divSize={'h-[1.1875rem] w-[1.1875rem]'}
           divColor={backgroundColor}
@@ -27,3 +36,5 @@ export default function DayScheduleItem({
     </li>
   );
 }
+
+export default DayScheduleItem;
