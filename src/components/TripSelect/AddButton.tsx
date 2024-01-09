@@ -1,7 +1,12 @@
 import CheckIcon from '@/components/TripSelect/CheckIcon';
 import PlusIcon from '@/components/TripSelect/PlusIcon';
 
-export default function AddButton({ onClick, isSelect }) {
+interface AddButtonProps {
+  onClick?: () => void;
+  isSelect: [];
+}
+
+function AddButton({ onClick, isSelect }: AddButtonProps) {
   return (
     <button
       type="button"
@@ -15,3 +20,5 @@ export default function AddButton({ onClick, isSelect }) {
     </button>
   );
 }
+
+export default AddButton;

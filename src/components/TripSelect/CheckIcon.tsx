@@ -1,4 +1,4 @@
-export default function CheckIcon() {
+function CheckIcon() {
   return (
     <svg width="14" height="11" viewBox="0 0 14 11" fill="none">
       <path
@@ -9,3 +9,5 @@ export default function CheckIcon() {
     </svg>
   );
 }
+
+export default CheckIcon();

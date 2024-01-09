@@ -1,7 +1,12 @@
-export default function TripPlaceInfo({
+interface TripPlaceInfoProps {
+  placeName?: string;
+  address?: string;
+}
+
+function TripPlaceInfo({
   placeName = '장소명',
   address = '상세주소',
-}) {
+}: TripPlaceInfoProps) {
   return (
     <dl className="flex flex-col">
       <dt className="sr-only">장소명</dt>
@@ -11,3 +16,5 @@ export default function TripPlaceInfo({
     </dl>
   );
 }
+
+export default TripPlaceInfo;

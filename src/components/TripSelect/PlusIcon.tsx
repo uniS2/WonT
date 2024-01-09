@@ -1,4 +1,4 @@
-export default function PlusIcon() {
+function PlusIcon() {
   return (
     <svg width="0.875rem" height="0.875rem" viewBox="0 0 14 14" fill="none">
       <rect
@@ -19,3 +19,5 @@ export default function PlusIcon() {
     </svg>
   );
 }
+
+export default PlusIcon();
