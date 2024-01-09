@@ -1,6 +1,6 @@
 export function debounce<Params extends any[]>(
   func: (...args: Params) => any,
-  timeout: number
+  timeout: number = 3000
 ): (...args: Params) => void {
   let timer: ReturnType<typeof setTimeout>;
   return (...args: Params) => {
