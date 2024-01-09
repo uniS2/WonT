@@ -9,17 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import { AdminModel, RecordModel } from 'pocketbase';
 
 function BookmarkPage() {
-  // const user = pocketbase.authStore.model;
   const user = pocketbase.authStore.model as RecordModel;
-  // const user: {
-  //   id: string | null;
-  //   profile: string;
-  //   username: string;
-  // } = pocketbase.authStore.model as unknown as {
-  //   id: string | null;
-  //   profile: string;
-  //   username: string;
-  // };
 
   if (user) {
     return (

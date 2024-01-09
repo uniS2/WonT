@@ -1,5 +1,4 @@
 import create, { State } from 'zustand';
-import { devtools } from 'zustand/middleware';
 
 type ToggleTripMenuStore = {
   displayPlaceTripPlan: boolean;
@@ -18,44 +17,35 @@ type ToggleTripMenuStore = {
   toggleDaySchedule: () => void;
 };
 
-export const ToggleTripMenuStore = create<State<ToggleTripMenuStore>>(
-  devtools((set) => ({
-    displayPlaceTripPlan: true,
-    displayHotelTripPlan: true,
-    displayHotelList: true,
-    displayTotalschedule: true,
-    displayDeleteModal: false,
-    displayDaySchedule: true,
+export const ToggleTripMenuStore = create<ToggleTripMenuStore>((set) => ({
+  // state
+  // 여행 장소선택 페이지
+  displayPlaceTripPlan: true,
+  displayPlaceList: true,
+  // 여행 숙소선택 페이지
+  displayHotelTripPlan: true,
+  displayHotelList: true,
+  // 나의 일정상세 페이지
+  displayTotalschedule: true,
+  displayDeleteModal: false,
+  displayDaySchedule: true,
 
-    togglePlaceTripPlan: () =>
-      set((state: { displayPlaceTripPlan: boolean }) => ({
-        displayPlaceTripPlan: !state.displayPlaceTripPlan,
-      })),
-    togglePlaceList: () =>
-      set((state: { displayPlaceList: boolean }) => ({
-        displayPlaceList: !state.displayPlaceList,
-      })),
-    toggleHotelTripPlan: () =>
-      set((state: { displayHotelTripPlan: boolean }) => ({
-        displayHotelTripPlan: !state.displayHotelTripPlan,
-      })),
-    toggleHotelList: () =>
-      set((state: { displayHotelList: boolean }) => ({
-        displayHotelList: !state.displayHotelList,
-      })),
-    toggleTotalschedule: () =>
-      set((state: { displayTotalschedule: boolean }) => ({
-        displayTotalschedule: !state.displayTotalschedule,
-      })),
-    toggleDeleteModal: () =>
-      set((state: { displayDeleteModal: boolean }) => ({
-        displayDeleteModal: !state.displayDeleteModal,
-      })),
-    toggleDaySchedule: () =>
-      set((state: { displayDaySchedule: boolean }) => ({
-        displayDaySchedule: !state.displayDaySchedule,
-      })),
-  }))
-);
-
-export const useToggleTripMenu = ToggleTripMenuStore;
+  // action
+  // 여행 장소선택 페이지
+  togglePlaceTripPlan: () =>
+    set((state) => ({ displayPlaceTripPlan: !state.displayPlaceTripPlan })),
+  togglePlaceList: () =>
+    set((state) => ({ displayPlaceList: !state.displayPlaceList })),
+  // 여행 숙소선택 페이지
+  toggleHotelTripPlan: () =>
+    set((state) => ({ displayHotelTripPlan: !state.displayHotelTripPlan })),
+  toggleHotelList: () =>
+    set((state) => ({ displayHotelList: !state.displayHotelList })),
+  // 나의 일정상세 페이지
+  toggleTotalschedule: () =>
+    set((state) => ({ displayTotalschedule: !state.displayTotalschedule })),
+  toggleDeleteModal: () =>
+    set((state) => ({ displayDeleteModal: !state.displayDeleteModal })),
+  toggleDaySchedule: () =>
+    set((state) => ({ displayDaySchedule: !state.displayDaySchedule })),
+}));

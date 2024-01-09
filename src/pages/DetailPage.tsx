@@ -59,7 +59,6 @@ function DetailPage({}) {
   console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
-  // const user = pocketbase.authStore.model;
   const user: { id: string | null } = pocketbase.authStore.model as {
     id: string | null;
   };
@@ -84,7 +83,6 @@ function DetailPage({}) {
     onMutate: async ({ recommendId, userId }): Promise<MutationContext> => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
-      // const previousData = queryClient.getQueryData(queryKey);
       const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
         queryKey
       );

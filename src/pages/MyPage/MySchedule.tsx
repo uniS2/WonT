@@ -20,14 +20,9 @@ const getMyschedule = () =>
 export default function MySchedule() {
   const { data: userData } = useQuery(['users'], getUser);
   const { data: myschedule } = useQuery(['mySchedule'], getMyschedule);
-  // console.log(myschedule);
 
-  // let userId = pocketbase.authStore.model;
   let userId = pocketbase.authStore.model as RecordModel;
 
-  // const userSchedule: MySchedule = myschedule?.items?.filter(
-  //   (item: { username: string }) => item.username === userId?.id
-  // );
   const userSchedule: MySchedule = {
     items: myschedule?.items?.filter(
       (item: MyScheduleItem) => item.username === userId?.id

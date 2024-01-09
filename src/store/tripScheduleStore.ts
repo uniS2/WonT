@@ -31,8 +31,7 @@ export const TripScheduleStore = create((set) => ({
   reset: () => {
     set((state: any) => ({
       ...state,
-      hotelList: [], // 초기화할 상태에 대한 설정
-      // 다른 상태들도 초기화 가능
+      hotelList: [],
     }));
   },
 }));
