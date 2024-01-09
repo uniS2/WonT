@@ -1,14 +1,14 @@
 import TripPlaceImage from '@/components/TripSelect/TripPlaceImage';
 import TripPlaceInfo from '@/components/TripSelect/TripPlaceInfo';
 import AddButton from '@/components/TripSelect/AddButton';
-import { useMapStore } from '@/store/mapStore';
-import { useScheduleStore } from '@/store/scheduleStore';
+import { MapStore } from '@/store/mapStore';
+import { ScheduleStore } from '@/store/scheduleStore';
 
 interface TripHotelItemProps {
   placeName: string;
   address: string;
   count: number;
-  index: number;
+  index: string;
 }
 
 function TripHotelItem({
@@ -17,9 +17,9 @@ function TripHotelItem({
   count,
   index,
 }: TripHotelItemProps) {
-  const { hotelList } = useMapStore(); // 숙소 목록
+  const { hotelList } = MapStore(); // 숙소 목록
   const { hotelPositions, addHotelPositions, deleteHotelPositions } =
-    useScheduleStore(); // 추가한 숙소
+    ScheduleStore(); // 추가한 숙소
 
   // 버튼 선택 여부
   const isHotel = hotelPositions[index]?.filter(

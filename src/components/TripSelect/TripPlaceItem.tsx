@@ -2,13 +2,13 @@ import TripPlaceImage from '@/components/TripSelect/TripPlaceImage';
 import TripPlaceInfo from '@/components/TripSelect/TripPlaceInfo';
 import AddButton from '@/components/TripSelect/AddButton';
 import { MapStore } from '@/store/mapStore';
-import { useScheduleStore } from '@/store/scheduleStore';
+import { ScheduleStore } from '@/store/scheduleStore';
 
 interface TripPlaceItemProps {
   placeName: string;
   address: string;
   count: number;
-  index: number;
+  index?: string;
 }
 
 function TripPlaceItem({
@@ -19,7 +19,7 @@ function TripPlaceItem({
 }: TripPlaceItemProps) {
   const { placeList } = MapStore(); // 장소 목록
   const { placePositions, addPlacePositions, deletePlacePositions } =
-    useScheduleStore(); // 추가한 장소
+    ScheduleStore(); // 추가한 장소
 
   // 버튼 선택 여부
   const isPlace = placePositions[index]?.filter(
