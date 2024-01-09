@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 // * TODO: 사용하지 않는 store로 예상되나, 우선적으로 type:any로 지정해두었음. 사용 시, 타입 재지정 필요
 
-export const useTripScheduleStore = create((set) => ({
+export const TripScheduleStore = create((set) => ({
   data: null,
   past: [],
   future: [],

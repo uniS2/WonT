@@ -3,7 +3,7 @@ import { getPocketHostImageURL } from '@/utils';
 import BookMark from '@/components/BookMark';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import useMemosStore from '@/store/memoStore';
+import MemosStore from '@/store/memoStore';
 
 // 전선용이 피드백 받고 추가한 코드
 import { BookmarkStore } from '@/store/bookmarkStore';

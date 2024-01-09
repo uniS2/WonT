@@ -10,7 +10,7 @@ import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import {
   useToggleTripMenu,
-  useToggleTripMenuStore,
+  ToggleTripMenuStore,
 } from '@/store/toggleTripMenuStore';
 import { TravelsData } from '@/types/Travels';
 

@@ -8,7 +8,7 @@ import TripHeader from '@/components/Header/TripHeader';
 import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
-import { useDateStore } from '@/store/dateStore';
+import { DateStore } from '@/store/dateStore';
 import { updateRecord, getTripDateUTC } from '@/utils';
 
 async function updateMyScheduleTitle(recordId, date) {
@@ -20,7 +20,7 @@ async function updateMyScheduleTitle(recordId, date) {
 
 export default function TripCalendarPage() {
   const user = pocketbase.authStore.model; // 로그인 유저 정보
-  const { tripDate } = useDateStore(); // 선택한 날짜
+  const { tripDate } = DateStore(); // 선택한 날짜
 
   // Tanstack Query
   const { data, error } = useQuery(

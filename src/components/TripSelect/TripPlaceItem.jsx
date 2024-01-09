@@ -1,11 +1,11 @@
 import TripPlaceImage from '@/components/TripSelect/TripPlaceImage';
 import TripPlaceInfo from '@/components/TripSelect/TripPlaceInfo';
 import AddButton from '@/components/TripSelect/AddButton';
-import { useMapStore } from '@/store/mapStore';
+import { MapStore } from '@/store/mapStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
 export default function TripPlaceItem({ placeName, address, count, index }) {
-  const { placeList } = useMapStore(); // 장소 목록
+  const { placeList } = MapStore(); // 장소 목록
   const { placePositions, addPlacePositions, deletePlacePositions } =
     useScheduleStore(); // 추가한 장소
 

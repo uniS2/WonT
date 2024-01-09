@@ -1,11 +1,11 @@
 import Calendar from 'react-calendar';
 
 import '@/styles/calendar.css';
-import { useDateStore } from '@/store/dateStore';
+import { DateStore } from '@/store/dateStore';
 import { getTripDateKo } from '@/utils';
 
 export default function TripCalendar() {
-  const { tripDate, setDate } = useDateStore();
+  const { tripDate, setDate } = DateStore();
 
   return (
     <>

@@ -14,7 +14,7 @@ import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
 import { DateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
 import { useScheduleStore } from '@/store/scheduleStore';
-import { useTripScheduleStore } from '@/store/tripScheduleStore';
+import { TripScheduleStore } from '@/store/tripScheduleStore';
 import { useEffect } from 'react';
 import { RecordModel } from 'pocketbase';
 import { PlaceListData, hotelListData } from '@/types/TripEdit';
@@ -36,7 +36,6 @@ const getRecommends = async (userId: string) => {
 /* -------------------------------------------------------------------------- */
 
 function TripEditPage() {
-  // const user = pocketbase.authStore.model; // 로그인 유저 정보
   const user = pocketbase.authStore.model as RecordModel;
 
   const currentPath = useParams();
@@ -56,10 +55,6 @@ function TripEditPage() {
     { refetchOnWindowFocus: false }
   );
 
-  // const selectDate = DateStore((set) => set.tripDate);
-  // const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
-
-  // const selectDate = DateStore((set) => set.tripDate);
   const selectDate = DateStore((state) => state.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
@@ -71,7 +66,7 @@ function TripEditPage() {
   } = useScheduleStore();
   const hotelList: hotelListData[] = Object.values(hotelPositions);
   const placeList: PlaceListData[] = Object.values(placePositions);
-  // const removeSchedule = useTripScheduleStore((state) => state.reset);
+  // const removeSchedule = TripScheduleStore((state) => state.reset);
   const id = useId();
 
   const handleResetButtonClick: () => void = () => {

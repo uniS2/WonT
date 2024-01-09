@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useMapStore } from '@/store/mapStore';
+import { MapStore, MapStoreState } from '@/store/mapStore';
 import { debounce } from '@/utils/debounce';
 import { MapProps } from '@/types/TripEdit';
-import { Position } from '@/types/Travels';
 
 const kakao = window.kakao;
 
@@ -17,7 +16,8 @@ function Map({
   const [center, setCenter] = useState(
     new kakao.maps.LatLng(latitude, longitude)
   );
-  const { hotelList, setHotelList } = useMapStore();
+  // const { hotelList, setHotelList } = MapStore();
+  const { hotelList, setHotelList }: MapStoreState = MapStore.getState();
   console.log(hotelList);
 
   useEffect(() => {
