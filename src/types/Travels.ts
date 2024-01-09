@@ -57,7 +57,7 @@ export interface Position {
 }
 
 export interface DayScheduleItemProps {
-  count: number;
+  count?: number;
   placeName?: string;
   placeType?: string;
   address?: string;
@@ -92,72 +92,126 @@ export type ErrorType = {
   message: string;
 };
 
+// export interface SelectBookmarkItem {
+//   main: string;
+//   title: string;
+//   start_date: string;
+//   end_date: string;
+
+//   items: RecordModel[];
+//   places: {
+//     1: [
+//       {
+//         address_name: string;
+//         category_group_code: string;
+//         category_group_name: string;
+//         category_name: string;
+//         distance: string;
+//         id: string;
+//         phone: string;
+//         place_name: string;
+//         place_url: string;
+//         road_address_name: '';
+//         x: string;
+//         y: string;
+//       },
+//     ];
+//   };
+//   hotels: {
+//     1: [
+//       {
+//         address_name: string;
+//         category_group_code: string;
+//         category_group_name: string;
+//         category_name: string;
+//         distance: string;
+//         id: string;
+//         phone: string;
+//         place_name: string;
+//         place_url: string;
+//         road_address_name: '';
+//         x: string;
+//         y: string;
+//       },
+//     ];
+//   };
+//   collectionId?: string;
+//   collectionName?: string;
+//   updated?: string;
+//   created?: string;
+//   // id: Key | null | undefined;
+//   id: string;
+// }
+
 export interface SelectBookmarkItem {
-  main: string;
+  place: {
+    1: [
+      {
+        address_name: string;
+        category_group_code: string;
+        category_group_name: string;
+        category_name: string;
+        distance: string;
+        id: string;
+        phone: string;
+        place_name: string;
+        place_url: string;
+        road_address_name: '';
+        x: string;
+        y: string;
+      },
+    ];
+  };
+  hotel: {
+    1: [
+      {
+        address_name: string;
+        category_group_code: string;
+        category_group_name: string;
+        category_name: string;
+        distance: string;
+        id: string;
+        phone: string;
+        place_name: string;
+        place_url: string;
+        road_address_name: '';
+        x: string;
+        y: string;
+      },
+    ];
+  };
+  items: [
+    {
+      id: string;
+      collectionId: string;
+      collectionName: string;
+      created: string;
+      updated: string;
+      title: string;
+      username: string;
+      main: string;
+      place: [string];
+      hotel: [string];
+      start_date: string;
+      end_date: string;
+      places: JSON;
+      hotels: JSON;
+    },
+  ];
+  id: string;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  updated: string;
   title: string;
+  username: string;
+  main: string;
+  // place: [string];
+  // hotel: [string];
   start_date: string;
   end_date: string;
-  // items: [
-  //   {
-  //     id: string;
-  //     collectionId: string;
-  //     collectionName: string;
-  //     created: string;
-  //     updated: string;
-  //     title: string;
-  //     username: string;
-  //     main: string;
-  //     place: string[];
-  //     hotel: string[];
-  //     start_date: string;
-  //     end_date: string;
-  //     places: JSON;
-  //     hotels: JSON;
-  //   },
-  // ];
-  items: RecordModel[];
-  places: {
-    1: [
-      {
-        address_name: string;
-        category_group_code: string;
-        category_group_name: string;
-        category_name: string;
-        distance: string;
-        id: string;
-        phone: string;
-        place_name: string;
-        place_url: string;
-        road_address_name: '';
-        x: string;
-        y: string;
-      },
-    ];
-  };
-  hotels: {
-    1: [
-      {
-        address_name: string;
-        category_group_code: string;
-        category_group_name: string;
-        category_name: string;
-        distance: string;
-        id: string;
-        phone: string;
-        place_name: string;
-        place_url: string;
-        road_address_name: '';
-        x: string;
-        y: string;
-      },
-    ];
-  };
-  collectionId?: string;
-  collectionName?: string;
-  updated?: string;
-  created?: string;
-  // id: Key | null | undefined;
-  id: string;
+  places: JSON;
+  hotels: JSON;
 }
 
 export interface RecordModel {

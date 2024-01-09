@@ -1,4 +1,4 @@
-export default function CloseIcon({ size = '1.5rem', color = '#152644' }) {
+function CloseIcon({ size = '1.5rem', color = '#152644' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <path
@@ -8,3 +8,5 @@ export default function CloseIcon({ size = '1.5rem', color = '#152644' }) {
     </svg>
   );
 }
+
+export default CloseIcon;

@@ -2,16 +2,18 @@ import useRecommendsList from '@/hooks/useRecommendsList';
 import useScheduleList from '@/hooks/useScheduleList';
 import { useQuery } from '@tanstack/react-query';
 import pocketbase from '@/api/pocketbase';
+import { RecordModel } from 'pocketbase';
+import { MyPageTabInfoProps } from '@/types/BookmarkPage';
 
-const getRecommends = async (userId) => {
+const getRecommends = async (userId: string) => {
   return await pocketbase.collection('recommends').getFullList({
     filter: `(userEmail?~'${userId}')`,
     fields: 'collectionId,id,image',
   });
 };
 
-export default function MyPageTabInfo({ tab }) {
-  const user = pocketbase.authStore.model;
+function MyPageTabInfo({ tab }: MyPageTabInfoProps) {
+  const user = pocketbase.authStore.model as RecordModel;
 
   const { data } =
     tab === '나의 일정' ? useScheduleList() : useRecommendsList();
@@ -23,7 +25,7 @@ export default function MyPageTabInfo({ tab }) {
     refetchOnWindowFocus: false,
   });
   const scheduleList = data?.items?.filter(
-    (item) => item.username === user.id
+    (item: { username: string }) => item.username === user.id
   )?.length;
 
   if (data) {
@@ -54,3 +56,4 @@ export default function MyPageTabInfo({ tab }) {
     );
   }
 }
+export default MyPageTabInfo;

@@ -11,11 +11,13 @@ import ButtonMedium from '@/components/TripEdit/ButtonMedium';
 import PlanDate from '@/components/TripEdit/PlanDate';
 import { getRangeDay } from '@/utils/getRangeDay';
 import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
-import { useDateStore } from '@/store/dateStore';
+import { DateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
 import { useScheduleStore } from '@/store/scheduleStore';
-import { useTripScheduleStore } from '@/store/tripScheduleStore';
+import { TripScheduleStore } from '@/store/tripScheduleStore';
 import { useEffect } from 'react';
+import { RecordModel } from 'pocketbase';
+import { PlaceListData, hotelListData } from '@/types/TripEdit';
 
 /* -------------------------------------------------------------------------- */
 
@@ -34,7 +36,7 @@ const getRecommends = async (userId: string) => {
 /* -------------------------------------------------------------------------- */
 
 function TripEditPage() {
-  const user = pocketbase.authStore.model; // 로그인 유저 정보
+  const user = pocketbase.authStore.model as RecordModel;
 
   const currentPath = useParams();
   const [toggleSchedule, setToggleSchedule]: [
@@ -53,7 +55,7 @@ function TripEditPage() {
     { refetchOnWindowFocus: false }
   );
 
-  const selectDate = useDateStore((set) => set.tripDate);
+  const selectDate = DateStore((state) => state.tripDate);
   const selectRangeDate = getRangeDay(selectDate[0], selectDate[1]);
 
   const {
@@ -62,9 +64,9 @@ function TripEditPage() {
     resetHotelPositions,
     resetPlacePositions,
   } = useScheduleStore();
-  const hotelList = Object.values(hotelPositions);
-  const placeList = Object.values(placePositions);
-  const removeSchedule = useTripScheduleStore((state) => state.reset);
+  const hotelList: hotelListData[] = Object.values(hotelPositions);
+  const placeList: PlaceListData[] = Object.values(placePositions);
+  // const removeSchedule = TripScheduleStore((state) => state.reset);
   const id = useId();
 
   const handleResetButtonClick: () => void = () => {

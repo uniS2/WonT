@@ -1,4 +1,4 @@
-export default function DefaultImage({ color = '#9CB0C9', ...restProps }) {
+function DefaultImage({ color = '#9CB0C9', ...restProps }) {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...restProps}>
       <path
@@ -8,3 +8,5 @@ export default function DefaultImage({ color = '#9CB0C9', ...restProps }) {
     </svg>
   );
 }
+
+export default DefaultImage;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import pocketbase from '@/api/pocketbase';
 import BookMark from '@/components/BookMark';
 import { getPocketHostImageURL } from '@/utils';
-import { useBookmarkStore } from '@/store/bookmarkStore';
+import { BookmarkStore } from '@/store/bookmarkStore';
 
 interface Place {
   id: string;
@@ -13,8 +13,7 @@ interface Place {
 
 function MainPlace() {
   const [data, setData] = useState<Place[]>([]);
-  const { bookmarkList, setBookmarkList, deleteBookmarkList } =
-    useBookmarkStore();
+  const { bookmarkList, setBookmarkList, deleteBookmarkList } = BookmarkStore();
 
   const user = pocketbase.authStore.model;
   const userId = user?.id;

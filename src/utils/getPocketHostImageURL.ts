@@ -14,7 +14,7 @@ import { TravelItem } from '@/types/Travels';
 import { RecordModel } from 'pocketbase';
 
 // #타입 정의
-type ItemType =
+export type ItemType =
   | LocalItem
   | MyScheduleItem
   | RecommenItem
@@ -28,3 +28,11 @@ export const getPocketHostImageURL = <key extends keyof ItemType>(
   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
     item[image]
   }`;
+export const getImageArrayURL = <key extends keyof ItemType>(
+  item: ItemType,
+  image: string
+) =>
+  `${getPocketHostImageURL(item, 'image' as key).replace(
+    'undefined',
+    ''
+  )}/${image}`;

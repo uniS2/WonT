@@ -10,19 +10,19 @@ import TripPlaceItem from '@/components/TripSelect/TripPlaceItem';
 import TripPlanMenu from '@/components/TripSelect/TripPlanMenu';
 import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
-import { useMapStore } from '@/store/mapStore';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { MapStore } from '@/store/mapStore';
+import { ToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
-export default function TripPlacePage() {
+function TripPlacePage() {
   const {
     displayPlaceTripPlan,
     displayPlaceList,
     togglePlaceTripPlan,
     togglePlaceList,
-  } = useToggleTripMenuStore(); // 토글 메뉴
+  } = ToggleTripMenuStore(); // 토글 메뉴
 
-  const { placeList } = useMapStore(); // 지도에 표시되는 숙소 목록
+  const { placeList } = MapStore(); // 지도에 표시되는 숙소 목록
 
   const { placePositions } = useScheduleStore(); // 추가한 장소 목록
   console.log(placePositions);
@@ -99,3 +99,4 @@ export default function TripPlacePage() {
     </>
   );
 }
+export default TripPlacePage;

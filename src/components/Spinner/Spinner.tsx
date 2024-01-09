@@ -1,6 +1,6 @@
 import '@/components/Spinner/spinner.css';
 
-export default function Spinner({ children = '로딩 중 입니다' }) {
+function Spinner({ children = '로딩 중 입니다' }) {
   return (
     <div className="absolute left-1/2 top-1/2 -translate-x-[3.1875rem] -translate-y-[4.625rem]">
       <div className="spinner" />
@@ -8,3 +8,5 @@ export default function Spinner({ children = '로딩 중 입니다' }) {
     </div>
   );
 }
+
+export default Spinner;
