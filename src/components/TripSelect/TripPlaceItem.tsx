@@ -4,7 +4,19 @@ import AddButton from '@/components/TripSelect/AddButton';
 import { MapStore } from '@/store/mapStore';
 import { useScheduleStore } from '@/store/scheduleStore';
 
-export default function TripPlaceItem({ placeName, address, count, index }) {
+interface TripPlaceItemProps {
+  placeName: string;
+  address: string;
+  count: number;
+  index: number;
+}
+
+function TripPlaceItem({
+  placeName,
+  address,
+  count,
+  index,
+}: TripPlaceItemProps) {
   const { placeList } = MapStore(); // 장소 목록
   const { placePositions, addPlacePositions, deletePlacePositions } =
     useScheduleStore(); // 추가한 장소
@@ -40,3 +52,5 @@ export default function TripPlaceItem({ placeName, address, count, index }) {
     </li>
   );
 }
+
+export default TripPlaceItem;

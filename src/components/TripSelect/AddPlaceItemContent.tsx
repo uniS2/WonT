@@ -1,4 +1,12 @@
-export default function AddPlaceItemContent({
+interface AddPlaceItemContentItem {
+  count?: number;
+  placeName?: string;
+  divSize?: string;
+  countBold?: string;
+  placeNameFont?: string;
+}
+
+function AddPlaceItemContent({
   count = 1,
   placeName = '장소명',
   divSize = 'h-[1.0625rem] w-[1.0625rem]',
@@ -22,3 +30,5 @@ export default function AddPlaceItemContent({
     </>
   );
 }
+
+export default AddPlaceItemContent;

@@ -1,4 +1,4 @@
-export default function HambugerIcon({
+function HambugerIcon({
   width = '1.5rem',
   heigth = '1.5rem',
   color = 'black',
@@ -16,3 +16,5 @@ export default function HambugerIcon({
     </svg>
   );
 }
+
+export default HambugerIcon;

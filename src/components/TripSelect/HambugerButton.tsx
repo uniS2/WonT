@@ -1,7 +1,11 @@
 import HambugerIcon from '@/components/TripSelect/HambugerIcon';
 import { ToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
-export default function HambugerButton({ onClick }) {
+interface HambugerButtonProps {
+  onClick: () => boolean;
+}
+
+function HambugerButton({ onClick }: HambugerButtonProps) {
   const {
     displayPlaceTripPlan,
     displayPlaceList,
@@ -33,3 +37,5 @@ export default function HambugerButton({ onClick }) {
     </div>
   );
 }
+
+export default HambugerButton;
