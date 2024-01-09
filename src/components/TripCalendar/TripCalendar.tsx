@@ -33,7 +33,8 @@ export default function TripCalendar() {
         }
       />
       <p className="mb-10 mt-2 text-center text-contentsPrimary">
-        {Array.isArray(tripDate) > 0 ? (
+        {Array.isArray(tripDate) ? (
+          //* Array.isArray(tripDate) > 0
           <>
             <span className="font-bold">
               선택한 여행 기간

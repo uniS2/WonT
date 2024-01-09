@@ -1,7 +1,4 @@
-export default function TripTitle({
-  question = '여행을 떠나시나요?',
-  guide = '선택하세요.',
-}) {
+function TripTitle({ question = '여행을 떠나시나요?', guide = '선택하세요.' }) {
   return (
     <div className="flex w-full flex-col items-center bg-background py-[1.875rem]">
       <h2 className="text-2xl font-bold text-contentsPrimary">{question}</h2>
@@ -9,3 +6,5 @@ export default function TripTitle({
     </div>
   );
 }
+
+export default TripTitle;

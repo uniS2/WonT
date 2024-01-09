@@ -4,13 +4,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/Auth';
 import Spinner from '@/components/Spinner/Spinner';
 
-export default function ProtectRoute({ children }) {
+function ProtectRoute({ children }: any) {
+  // 임시로 타입지정
   const { isAuth } = useAuth();
   const navigate = useNavigate();
 
   const { pathname, search, hash } = useLocation();
 
   const [isLoading, setIsLoading] = useState(true);
+  const wishLocationPath = `${pathname}${search}${hash}`;
 
   useEffect(() => {
     if (!isLoading && !isAuth) {
@@ -33,3 +35,5 @@ export default function ProtectRoute({ children }) {
 
   return children;
 }
+
+export default ProtectRoute;

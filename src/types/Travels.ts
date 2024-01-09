@@ -77,14 +77,14 @@ export interface ToggleTotalScheduleProps {
 }
 
 export interface ButtonLarge {
-  onClick?: () => void;
-  onMouseOver: () => void;
-  onMouseOut: () => void;
-  color: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseOver?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseOut?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  color?: string;
   height?: string;
-  textColor: string;
-  children: string;
-  [key: string]: any;
+  textColor?: string;
+  children?: string;
+  restProps?: string;
 }
 
 export type ErrorType = {

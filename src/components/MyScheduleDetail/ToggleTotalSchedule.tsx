@@ -1,12 +1,11 @@
 import ToggleDownIcon from '@/components/ToggleDownIcon';
 import ToggleUpIcon from '@/components/ToggleUpIcon';
 
-// * TODO: children 타입 확인 필요
-type ToggleTotalScheduleProps = {
-  children: React.ReactNode;
+interface ToggleTotalScheduleProps {
+  children: string;
   state: boolean;
   action: () => void;
-};
+}
 
 function ToggleTotalSchedule({
   children,

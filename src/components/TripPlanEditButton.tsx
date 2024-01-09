@@ -1,4 +1,4 @@
-export default function TripPlanEditButton() {
+function TripPlanEditButton() {
   return (
     <button
       type="button"
@@ -8,3 +8,5 @@ export default function TripPlanEditButton() {
     </button>
   );
 }
+
+export default TripPlanEditButton;

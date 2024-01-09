@@ -20,7 +20,7 @@ import { getPocketHostImageURL, setLocalName, getTripDate } from '@/utils';
 import { ErrorType, RecordModel, SelectBookmarkItem } from '@/types/Travels';
 
 // 데이터 요청 함수 (query function)
-const fetchScheduleDetail = async (userId: string) => {
+const fetchScheduleDetail = async (userId: number | string) => {
   const response = await pocketbase.collection('mySchedule').getFullList({
     filter: `(username?~'${userId}')`,
     expand: 'users',
@@ -98,12 +98,11 @@ function MyScheduleDetailPage() {
   };
 
   // 오류가 발생한 경우 화면
-  if (error) {
-    const { type, message } = error as ErrorType;
+  if (error instanceof Error) {
     return (
       <div role="alert">
-        <h2>{type}</h2>
-        <p>{message}</p>
+        <h2>{error.name}</h2>
+        <p>{error.message}</p>
       </div>
     );
   }

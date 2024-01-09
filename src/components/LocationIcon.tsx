@@ -1,4 +1,4 @@
-export default function LocationIcon({ size = '1.5rem' }) {
+function LocationIcon({ size = '1.5rem' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <path
@@ -18,3 +18,5 @@ export default function LocationIcon({ size = '1.5rem' }) {
     </svg>
   );
 }
+
+export default LocationIcon;

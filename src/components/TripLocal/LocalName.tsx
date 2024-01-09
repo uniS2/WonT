@@ -1,4 +1,8 @@
-export default function LocalName({ children }) {
+interface LocalNameProps {
+  children: string;
+}
+
+function LocalName({ children }: LocalNameProps) {
   return (
     <dl>
       <dt className="sr-only">지역명</dt>
@@ -6,3 +10,5 @@ export default function LocalName({ children }) {
     </dl>
   );
 }
+
+export default LocalName;

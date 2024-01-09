@@ -4,7 +4,8 @@ import Logout from '@/components/MyPage/Logout';
 import Logo from '@/components/Logo';
 import BackIcon from '@/components/Header/BackIcon';
 
-export default function MyPageHeader({ page }) {
+// 임시로 any 설정
+function MyPageHeader({ page }: any) {
   return (
     <div className="h-[64px] w-full bg-white px-2 md:px-10">
       <div className=" mx-auto flex h-[64px] max-w-7xl items-center  justify-between px-[1.0625rem] py-[1.125rem]">
@@ -24,3 +25,5 @@ export default function MyPageHeader({ page }) {
     </div>
   );
 }
+
+export default MyPageHeader;
