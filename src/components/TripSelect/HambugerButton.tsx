@@ -2,7 +2,7 @@ import HambugerIcon from '@/components/TripSelect/HambugerIcon';
 import { ToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 interface HambugerButtonProps {
-  onClick: () => boolean;
+  onClick: () => void;
 }
 
 function HambugerButton({ onClick }: HambugerButtonProps) {
