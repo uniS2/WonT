@@ -12,7 +12,7 @@ import AddPlaceItem from '@/components/TripSelect/AddPlaceItem';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { MapStore } from '@/store/mapStore';
 import { ToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import { useScheduleStore } from '@/store/scheduleStore';
+import { ScheduleStore } from '@/store/scheduleStore';
 
 function TripPlacePage() {
   const {
@@ -24,7 +24,7 @@ function TripPlacePage() {
 
   const { placeList } = MapStore(); // 지도에 표시되는 숙소 목록
 
-  const { placePositions } = useScheduleStore(); // 추가한 장소 목록
+  const { placePositions } = ScheduleStore(); // 추가한 장소 목록
   console.log(placePositions);
 
   const currentIndex = useParams().indexId; // 현재 경로
