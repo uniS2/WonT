@@ -1,4 +1,4 @@
-export default function Profile() {
+function Profile() {
   return (
     <div className="relative mx-auto box-content inline-block">
       <svg
@@ -62,3 +62,4 @@ export default function Profile() {
     </div>
   );
 }
+export default Profile;

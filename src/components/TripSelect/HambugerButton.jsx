@@ -1,5 +1,5 @@
 import HambugerIcon from '@/components/TripSelect/HambugerIcon';
-import { useToggleTripMenuStore } from '@/store/toggleTripMenuStore';
+import { ToggleTripMenuStore } from '@/store/toggleTripMenuStore';
 
 export default function HambugerButton({ onClick }) {
   const {
@@ -7,7 +7,7 @@ export default function HambugerButton({ onClick }) {
     displayPlaceList,
     displayHotelTripPlan,
     displayHotelList,
-  } = useToggleTripMenuStore();
+  } = ToggleTripMenuStore();
 
   return (
     <div className="flex justify-center">

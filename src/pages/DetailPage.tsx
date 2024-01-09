@@ -8,7 +8,7 @@ import DetailInfo from '@/components/Detail/DetailInfo';
 import { Helmet } from 'react-helmet-async';
 
 // 전선용이 피드백받고 추가한 함수
-import { useBookmarkStore } from '@/store/bookmarkStore';
+import { BookmarkStore } from '@/store/bookmarkStore';
 
 //* TODO: previousData 타입 재지정 필요
 interface MutationContext {
@@ -49,7 +49,7 @@ const removeBookmark = async (variables: {
 
 function DetailPage({}) {
   // 전선용이 피드백받고 추가한 함수
-  const { setBookmarkList, deleteBookmarkList } = useBookmarkStore((state) => ({
+  const { setBookmarkList, deleteBookmarkList } = BookmarkStore((state) => ({
     setBookmarkList: state.setBookmarkList,
     deleteBookmarkList: state.deleteBookmarkList,
   }));
@@ -59,7 +59,6 @@ function DetailPage({}) {
   console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
-  // const user = pocketbase.authStore.model;
   const user: { id: string | null } = pocketbase.authStore.model as {
     id: string | null;
   };
@@ -84,7 +83,6 @@ function DetailPage({}) {
     onMutate: async ({ recommendId, userId }): Promise<MutationContext> => {
       await queryClient.cancelQueries({ queryKey: queryKey });
 
-      // const previousData = queryClient.getQueryData(queryKey);
       const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
         queryKey
       );
@@ -185,7 +183,7 @@ function DetailPage({}) {
         <div className="container">
           <section className="animate-fade-animate px-6">
             <img
-              src={getPocketHostImageURL(detailPlace, 'image')}
+              src={getPocketHostImageURL(detailPlace)}
               alt={`${detailPlace.place} 이미지`}
               className="  mx-auto my-10 h-[31.25rem] min-h-[22.5rem] w-[77.25rem] min-w-[20rem] rounded-xl object-cover "
             />

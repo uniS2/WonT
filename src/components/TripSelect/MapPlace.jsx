@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import debounce from '@/utils/debounce';
-import { useMapStore } from '@/store/mapStore';
+import { MapStore } from '@/store/mapStore';
 
 const { kakao } = window;
 
@@ -19,7 +19,7 @@ export default function MapPlace({
   const category = 'AT4'; // 장소 - 관광명소 카테고리
 
   let markers = []; // 마커
-  const { setPlaceList } = useMapStore(); // 장소 목록
+  const { setPlaceList } = MapStore(); // 장소 목록
 
   useEffect(() => {
     const container = document.getElementById('mapPlace');

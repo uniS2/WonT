@@ -1,4 +1,5 @@
 import LocationIcon from '@/components/LocationIcon';
+import { TotalScheduleTopicProps } from '@/types/MyScheduleDetailPage';
 
 interface TotalScheduleTopicProps {
   count?: string;

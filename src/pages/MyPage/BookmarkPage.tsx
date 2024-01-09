@@ -2,14 +2,14 @@ import MyPageTab from '@/components/MyPage/MyPageTab';
 import BookmarkList from '@/components/MyPage/BookmarkList';
 import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
-import { getPocketHostImageURL } from '@/utils';
+import { ItemType, getPocketHostImageURL } from '@/utils';
 import pocketbase from '@/api/pocketbase';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
+import { AdminModel, RecordModel } from 'pocketbase';
 
-export default function BookmarkPage() {
-  const user = pocketbase.authStore.model;
-  // console.log(user);
+function BookmarkPage() {
+  const user = pocketbase.authStore.model as RecordModel;
 
   if (user) {
     return (
@@ -25,7 +25,7 @@ export default function BookmarkPage() {
             </span>
             {user.profile ? (
               <img
-                src={getPocketHostImageURL(user, 'profile')}
+                src={getPocketHostImageURL(user)}
                 alt={`${user.username}의 프로필`}
                 className="h-[4.375rem] w-[4.375rem] rounded-full border-[0.0938rem] border-contentsSecondary"
               />
@@ -37,10 +37,10 @@ export default function BookmarkPage() {
             </span>
           </div>
           <div className="mx-auto ">
-            <MyPageTab position="right" />
+            <MyPageTab positionText="right" />
             <div className="flex max-w-[1268px]   flex-col justify-center px-3 md:px-4">
               <MyPageTabInfo tab="북마크" />
-              <BookmarkList user={user} />
+              <BookmarkList />
             </div>
           </div>
         </div>
@@ -48,3 +48,4 @@ export default function BookmarkPage() {
     );
   }
 }
+export default BookmarkPage;
