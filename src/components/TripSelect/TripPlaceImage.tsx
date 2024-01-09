@@ -1,7 +1,7 @@
 import DefaultImage from '@/components/DefaultImage';
 
 interface TripPlaceImageProps {
-  image: string;
+  image?: string;
 }
 
 function TripPlaceImage({ image }: TripPlaceImageProps) {
