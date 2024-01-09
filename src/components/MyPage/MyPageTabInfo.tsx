@@ -13,7 +13,6 @@ const getRecommends = async (userId: string) => {
 };
 
 function MyPageTabInfo({ tab }: MyPageTabInfoProps) {
-  // const user = pocketbase.authStore.model;
   const user = pocketbase.authStore.model as RecordModel;
 
   const { data } =

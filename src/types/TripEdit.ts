@@ -32,16 +32,6 @@ export interface PlanDateProps {
 }
 
 export interface SelectHotelMapProps {
-  // placeList: {
-  //   place_name: string;
-  //   category_group_name: string;
-  //   address_name: string;
-  // }[];
-  // hotelList: {
-  //   place_name: string;
-  //   category_group_name: string;
-  //   address_name: string;
-  // }[];
   width?: string;
   height?: string;
   latitude?: number;
