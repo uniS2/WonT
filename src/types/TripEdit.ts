@@ -50,3 +50,15 @@ export interface SelectHotelMapProps {
   index?: number;
   [key: string]: any;
 }
+
+export type PlaceListData = {
+  place_name: string;
+  category_group_name: string;
+  address_name: string;
+}[];
+
+export type hotelListData = {
+  place_name: string;
+  category_group_name: string;
+  address_name: string;
+}[];

@@ -6,7 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useMemosStore from '@/store/memoStore';
 
 // 전선용이 피드백 받고 추가한 코드
-import { useBookmarkStore } from '@/store/bookmarkStore';
+import { BookmarkStore } from '@/store/bookmarkStore';
 import { RecordModel } from 'pocketbase';
 
 // 데이터 요청 함수 (query function)
@@ -32,9 +32,7 @@ const removeRecommend = async (variables: {
 /* -------------------------------------------------------------------------- */
 function BookmarkList() {
   // 전선용이 피드백 받고 추가한 코드
-  const deleteBookmarkList = useBookmarkStore(
-    (state) => state.deleteBookmarkList
-  );
+  const deleteBookmarkList = BookmarkStore((state) => state.deleteBookmarkList);
 
   const user = pocketbase.authStore.model as RecordModel;
 

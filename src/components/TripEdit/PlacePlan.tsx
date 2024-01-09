@@ -1,18 +1,19 @@
 export interface PlacePlanProps {
   select: string;
-  placeList: {
+  count?: number;
+  placeList?: {
     place_name: string;
     category_group_name: string;
     address_name: string;
   }[];
-  hotelList: {
+  hotelList?: {
     place_name: string;
     category_group_name: string;
     address_name: string;
   }[];
-  index: number;
-  resetHotelPositions: string[];
-  resetPlacePositions: string[];
+  index?: number;
+  resetHotelPositions?: string[];
+  resetPlacePositions?: string[];
 }
 
 function PlacePlan({

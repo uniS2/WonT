@@ -8,7 +8,7 @@ import DetailInfo from '@/components/Detail/DetailInfo';
 import { Helmet } from 'react-helmet-async';
 
 // 전선용이 피드백받고 추가한 함수
-import { useBookmarkStore } from '@/store/bookmarkStore';
+import { BookmarkStore } from '@/store/bookmarkStore';
 
 //* TODO: previousData 타입 재지정 필요
 interface MutationContext {
@@ -49,7 +49,7 @@ const removeBookmark = async (variables: {
 
 function DetailPage({}) {
   // 전선용이 피드백받고 추가한 함수
-  const { setBookmarkList, deleteBookmarkList } = useBookmarkStore((state) => ({
+  const { setBookmarkList, deleteBookmarkList } = BookmarkStore((state) => ({
     setBookmarkList: state.setBookmarkList,
     deleteBookmarkList: state.deleteBookmarkList,
   }));
