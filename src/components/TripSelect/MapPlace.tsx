@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
-
-import debounce from '@/utils/debounce';
+import { debounce } from '@/utils/debounce';
 import { MapStore } from '@/store/mapStore';
+
+interface MapPlaceProps {
+  placeName?: string;
+  width?: string;
+  height?: string;
+  latitude?: number;
+  longitude?: number;
+  level?: number;
+  restProps?: string;
+}
 
 const { kakao } = window;
 
-export default function MapPlace({
+function MapPlace({
   placeName,
   width = 'w-full',
   height = 'min-h-[18.75rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem]',
@@ -13,12 +22,12 @@ export default function MapPlace({
   longitude = 126.952713197762, // 경도
   level = 6, // 지도 확대 레벨
   restProps,
-}) {
+}: MapPlaceProps) {
   const [center] = useState(new kakao.maps.LatLng(latitude, longitude));
 
   const category = 'AT4'; // 장소 - 관광명소 카테고리
 
-  let markers = []; // 마커
+  let markers: any = []; //$ 마커, Type 수정 예정
   const { setPlaceList } = MapStore(); // 장소 목록
 
   useEffect(() => {
@@ -56,7 +65,9 @@ export default function MapPlace({
     }
 
     //# 카테고리 검색 완료 시 호출되는 콜백함수
-    function categorySearchCB(data, status, pagination) {
+    function categorySearchCB(data: any, status: any) {
+      //$ any Type 수정 예정
+      //* pagination
       removeMarker();
       setPlaceList(data);
 
@@ -74,7 +85,8 @@ export default function MapPlace({
     }
 
     //# 지도에 마커를 표시하는 함수
-    function displayMarker(place) {
+    function displayMarker(place: any) {
+      //$ any Type 수정 예정
       // 마커를 생성하고 지도에 표시합니다
       const marker = new kakao.maps.Marker({
         map: map,
@@ -114,7 +126,8 @@ export default function MapPlace({
     }
 
     //# 1. 현재 선택한 지역으로 좌표를 검색합니다
-    geocoder.addressSearch(placeName, function (result, status) {
+    geocoder.addressSearch(placeName, function (result: any, status: any) {
+      //$ any Type 수정 예정
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -151,3 +164,5 @@ export default function MapPlace({
     ></div>
   );
 }
+
+export default MapPlace;

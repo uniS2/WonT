@@ -1,4 +1,4 @@
-export interface RecommenItem {
+export interface RecommendItem {
   id?: string;
   collectionId?: string;
   collectionName?: string;
@@ -17,10 +17,10 @@ export interface RecommenItem {
   localMain?: string;
 }
 
-export interface Recommens {
+export interface Recommends {
   page: number;
   perPage: number;
   totalPages: number;
   totalItems: number;
-  items: RecommenItem[];
+  items: RecommendItem[];
 }

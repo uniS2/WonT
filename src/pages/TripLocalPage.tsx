@@ -62,7 +62,7 @@ function TripLocalPage() {
               {data?.items?.map((item: LocalData) => (
                 <LocalItem
                   key={item.id}
-                  image={item.image ? getPocketHostImageURL(item) : null}
+                  image={getPocketHostImageURL(item)}
                   name={item.name}
                   index={item.id}
                 />

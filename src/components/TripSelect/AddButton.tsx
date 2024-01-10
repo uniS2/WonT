@@ -1,5 +1,5 @@
-import CheckIcon from '@/components/TripSelect/CheckIcon';
-import PlusIcon from '@/components/TripSelect/PlusIcon';
+import checkImg from '@/assets/trip/check.svg';
+import plusImg from '@/assets/trip/check.svg';
 
 interface AddButtonProps {
   onClick?: () => void;
@@ -16,7 +16,11 @@ function AddButton({ onClick, isSelect }: AddButtonProps) {
         isSelect?.length > 0 ? 'bg-point' : 'bg-secondary'
       }`}
     >
-      {isSelect?.length > 0 ? <CheckIcon /> : <PlusIcon />}
+      {isSelect?.length > 0 ? (
+        <img src={checkImg} alt="CheckIcon" />
+      ) : (
+        <img src={plusImg} alt="PlusIcon" />
+      )}
     </button>
   );
 }

@@ -9,7 +9,7 @@
 // getPocketHostImageURL.ts
 import { LocalItem } from '@/types/Locals';
 import { MyScheduleItem } from '@/types/MySchedule';
-import { RecommenItem } from '@/types/Recommens';
+import { RecommendItem } from '@/types/Recommends';
 import { TravelItem } from '@/types/Travels';
 import { RecordModel } from 'pocketbase';
 
@@ -17,7 +17,7 @@ import { RecordModel } from 'pocketbase';
 export type ItemType =
   | LocalItem
   | MyScheduleItem
-  | RecommenItem
+  | RecommendItem
   | TravelItem
   | RecordModel;
 

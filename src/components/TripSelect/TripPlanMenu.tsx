@@ -1,10 +1,11 @@
 import TripPlan from '@/components/TripPlan';
 import HambugerButton from '@/components/TripSelect/HambugerButton';
+//$ import MySchedule from '@/pages/MyPage/MySchedule';
 
 interface TripPlanMenuProps {
   state: boolean;
-  action: boolean;
-  data: import('@/types/MySchedule').MySchedule;
+  action: () => void;
+  data: any;
 }
 
 function TripPlanMenu({ state, action, data }: TripPlanMenuProps) {
