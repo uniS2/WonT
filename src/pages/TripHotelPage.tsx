@@ -26,7 +26,7 @@ export default function TripHotelPage() {
 
   const { hotelPositions } = ScheduleStore(); // 추가한 장소 목록
 
-  const currentIndex = useParams().indexId; // 현재 경로
+  const currentIndex = Number(useParams().indexId); // 현재 경로
 
   const user = pocketbase.authStore.model; // 로그인 유저 정보
 

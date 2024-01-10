@@ -8,7 +8,7 @@ interface TripHotelItemProps {
   placeName: string;
   address: string;
   count: number;
-  index?: string;
+  index?: number;
 }
 
 function TripHotelItem({
@@ -22,20 +22,22 @@ function TripHotelItem({
     ScheduleStore(); // 추가한 숙소
 
   // 버튼 선택 여부
-  const isHotel = hotelPositions[index]?.filter(
-    (hotel: any) => hotel.place_name == placeName
-  );
+  const isHotel =
+    index &&
+    hotelPositions[index]?.filter(
+      (hotel: any) => hotel.place_name == placeName
+    );
 
   // 버튼 삭제 여부
   //$ any 사용
-  const isSelected = hotelPositions[index]?.some(
-    (hotel: any) => hotel.place_name === placeName
-  );
+  const isSelected =
+    index &&
+    hotelPositions[index]?.some((hotel: any) => hotel.place_name === placeName);
 
   // 버튼 클릭시
   const handleClick = () => {
     if (!isSelected) {
-      addHotelPositions(hotelList[count], index);
+      index && addHotelPositions(hotelList[count], index);
     } else {
       deleteHotelPositions(index, placeName);
     }

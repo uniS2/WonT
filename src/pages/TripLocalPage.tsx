@@ -8,7 +8,7 @@ import TripHeader from '@/components/Header/TripHeader';
 import LocalItem from '@/components/TripLocal/LocalItem';
 import TripTitle from '@/components/TripTitle';
 import Spinner from '@/components/Spinner/Spinner';
-import { useLocalStore } from '@/store/localStore';
+import { LocalStore } from '@/store/localStore';
 import { createRecord, getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import { LocalItem as LocalData } from '@/types/Locals';
 
@@ -30,7 +30,7 @@ function TripLocalPage() {
     retry: 2,
   });
 
-  const { selectName, selectIndex } = useLocalStore();
+  const { selectName, selectIndex } = LocalStore();
   const isSelect = selectIndex !== null;
 
   if (error instanceof Error) {
@@ -70,11 +70,15 @@ function TripLocalPage() {
             </ul>
             {isSelect ? (
               <Link to="/tripcalendar">
-                <ButtonLarge
-                  onClick={() => user && createLocalRecord(selectName, user.id)}
-                >
-                  선택 완료
-                </ButtonLarge>
+                {selectName && (
+                  <ButtonLarge
+                    onClick={() =>
+                      user && createLocalRecord(selectName, user.id)
+                    }
+                  >
+                    선택 완료
+                  </ButtonLarge>
+                )}
               </Link>
             ) : (
               <ButtonLarge>선택 완료</ButtonLarge>
