@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import airplain from '@/assets/common/common/common-favicon.svg';
+import airplain from '@/assets/common/common-favicon.svg';
 import { useState } from 'react';
 
 function MainMakePlan() {
