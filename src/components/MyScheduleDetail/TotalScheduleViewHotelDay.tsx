@@ -1,5 +1,5 @@
 interface TotalScheduleHotelDayProps {
-  day: number;
+  day?: number;
 }
 
 function TotalScheduleHotelDay({ day }: TotalScheduleHotelDayProps) {
