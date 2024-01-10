@@ -32,8 +32,8 @@ export default function TripHotelPage() {
 
   // 현재 선택한 schedule 데이터
   const { data } = useQuery(
-    ['mySchedule', user.id],
-    () => useFetchMySchedule(user.id),
+    ['mySchedule', user?.id],
+    () => (user ? useFetchMySchedule(user.id) : null),
     { refetchOnWindowFocus: false }
   );
 
@@ -45,17 +45,19 @@ export default function TripHotelPage() {
       <section className="container relative mx-auto min-h-[50rem] ">
         <h1 className="sr-only">여행 숙소 선택 페이지</h1>
         <TripHeader />
-        <TripPlanMenu
-          state={displayHotelTripPlan}
-          action={toggleHotelTripPlan}
-          data={data}
-        />
+        {data && (
+          <TripPlanMenu
+            state={displayHotelTripPlan}
+            action={toggleHotelTripPlan}
+            data={data}
+          />
+        )}
         <MapHotel localName={data?.title} />
         <ul
           id="hotelsList"
           className="mx-7 my-7 flex h-[23.1875rem] flex-col gap-[0.5625rem] overflow-y-scroll sm:h-[28.5625rem] md:grid md:grid-cols-2 lg:grid-cols-3 xl:h-[34.5rem]"
         >
-          {hotelList?.map((hotel, index) => (
+          {hotelList?.map((hotel: any, index: number) => (
             <TripHotelItem
               key={hotel.id}
               placeName={hotel.place_name}
@@ -75,13 +77,15 @@ export default function TripHotelPage() {
               {Array.isArray(hotelPositions[currentIndex]) &&
               hotelPositions[currentIndex].length > 0 ? (
                 <ul className="mb-[0.625rem] flex max-h-[9.5rem] flex-col gap-[0.625rem] overflow-y-scroll md:grid md:grid-cols-2 lg:grid-cols-4">
-                  {hotelPositions[currentIndex]?.map((hotel, index) => (
-                    <AddPlaceItem
-                      key={hotel.id + index}
-                      placeName={hotel.place_name}
-                      count={index + 1}
-                    />
-                  ))}
+                  {hotelPositions[currentIndex]?.map(
+                    (hotel: any, index: number) => (
+                      <AddPlaceItem
+                        key={hotel.id + index}
+                        placeName={hotel.place_name}
+                        count={index + 1}
+                      />
+                    )
+                  )}
                 </ul>
               ) : (
                 <span className="absolute left-1/2 top-1/2 -translate-x-[4.5rem] text-lg font-medium text-[#5A80A9]/50">

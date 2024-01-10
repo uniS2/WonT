@@ -1,6 +1,6 @@
 import toggleDown from '@/assets/common-toogle-down.webp';
 import toggleUp from '@/assets/common-toogle-up.webp';
-import { useScheduleStore } from '@/store/scheduleStore';
+import { ScheduleStore } from '@/store/scheduleStore';
 import { PlanDateProps } from '@/types/TripEdit';
 import { getTripDate, getTripDateUTC } from '@/utils';
 import { useId } from 'react';
@@ -13,7 +13,7 @@ function PlanDate({
   setToggleSchedule,
   handleResetButtonClick,
 }: PlanDateProps) {
-  const { resetHotelPositions, resetPlacePositions } = useScheduleStore();
+  const { resetHotelPositions, resetPlacePositions } = ScheduleStore();
 
   const id = useId();
   return (
