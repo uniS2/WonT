@@ -4,9 +4,9 @@ import LocalName from '@/components/TripLocal/LocalName';
 import { useLocalStore } from '@/store/localStore';
 
 interface LocalItemProps {
-  image: string;
+  image?: string;
   name?: string;
-  index: number;
+  index: string;
 }
 
 function LocalItem({ image, name = '지역명', index }: LocalItemProps) {
