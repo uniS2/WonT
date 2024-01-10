@@ -7,7 +7,7 @@ import Profile from '@/components/MyPage/Profile';
 import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
-import { MySchedule, MyScheduleItem } from '@/types/MySchedule';
+import { UserMySchedule, MyScheduleItem } from '@/types/MySchedule';
 import { RecordModel } from 'pocketbase';
 
 const getUser = () =>
@@ -17,13 +17,13 @@ const getMyschedule = () =>
     response.json()
   );
 
-export default function MySchedule() {
+function MySchedule() {
   const { data: userData } = useQuery(['users'], getUser);
   const { data: myschedule } = useQuery(['mySchedule'], getMyschedule);
 
   let userId = pocketbase.authStore.model as RecordModel;
 
-  const userSchedule: MySchedule = {
+  const userSchedule: UserMySchedule = {
     items: myschedule?.items?.filter(
       (item: MyScheduleItem) => item.username === userId?.id
     ),
@@ -67,3 +67,4 @@ export default function MySchedule() {
     );
   }
 }
+export default MySchedule;

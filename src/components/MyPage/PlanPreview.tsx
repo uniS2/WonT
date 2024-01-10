@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import defaultImage from '@/assets/common/common-trip-default.webp';
-
 import useScheduleList from '@/hooks/useScheduleList';
 import { getDDay, getPocketHostImageURL } from '@/utils';
-import { MySchedule } from '@/types/MySchedule';
+import { UserMySchedule, MyScheduleItem } from '@/types/MySchedule';
 
-function PlanPreview({ userSchedule }: { userSchedule: MySchedule }) {
+function PlanPreview({ userSchedule }: { userSchedule: UserMySchedule }) {
   const { data, isLoading } = useScheduleList();
   const [trip, setTrip] = useState();
 
@@ -31,7 +30,7 @@ function PlanPreview({ userSchedule }: { userSchedule: MySchedule }) {
   if (userSchedule) {
     return (
       <div className="container mx-auto flex w-auto flex-col  gap-4 xl:w-[1236px]">
-        {userSchedule?.items.map((item) => (
+        {userSchedule?.items?.map((item) => (
           <Link to={`/myschedule/${item.id}`} key={item.id}>
             <div
               className="  container relative mx-auto  flex cursor-pointer 
