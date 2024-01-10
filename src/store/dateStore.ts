@@ -1,14 +1,12 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+//$ import { devtools } from 'zustand/middleware';
 
-interface DateStore {
+interface DateStoreState {
   tripDate: Date[];
-  setDate: (e: Date[]) => void;
+  setDate: (e: any) => void;
 }
 
-export const useDateStore = create<DateStore>(
-  devtools((set) => ({
-    tripDate: [new Date()],
-    setDate: (e: Date[]) => set(() => ({ tripDate: e }), false, 'tripDate'),
-  }))
-);
+export const DateStore = create<DateStoreState>((set) => ({
+  tripDate: [new Date()],
+  setDate: (e: any) => set(() => ({ tripDate: e })),
+}));
