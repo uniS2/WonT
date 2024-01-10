@@ -8,5 +8,5 @@ interface DateStoreState {
 
 export const DateStore = create<DateStoreState>((set) => ({
   tripDate: [new Date()],
-  setDate: (e: any) => set(() => ({ tripDate: e })),
+  setDate: (e: Date[]) => set({ tripDate: e }),
 }));
