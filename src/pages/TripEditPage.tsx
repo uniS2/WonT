@@ -15,7 +15,7 @@ import { DateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
 import { ScheduleStore } from '@/store/scheduleStore';
 import { RecordModel } from 'pocketbase';
-import { PlaceListData, hotelListData } from '@/types/TripEdit';
+// import { PlaceListData, hotelListData } from '@/types/TripEdit';
 
 /* -------------------------------------------------------------------------- */
 
@@ -62,8 +62,8 @@ function TripEditPage() {
     resetHotelPositions,
     resetPlacePositions,
   } = ScheduleStore();
-  const hotelList: hotelListData[] = Object.values(hotelPositions);
-  const placeList: PlaceListData[] = Object.values(placePositions);
+  const hotelList: any = Object.values(hotelPositions); //$ ListData 추후 지정
+  const placeList: any = Object.values(placePositions); //$ ListData 추후 지정
   // const removeSchedule = TripScheduleStore((state) => state.reset);
   const id = useId();
 
