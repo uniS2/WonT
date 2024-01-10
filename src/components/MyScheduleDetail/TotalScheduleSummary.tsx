@@ -1,4 +1,4 @@
-import CalendarIcon from '@/assets/common-calendar.webp';
+import CalendarIcon from '@/assets/common/common-calendar.webp';
 import { getLocalName, getTripDates } from '@/utils';
 import DefaultImage from '@/components/DefaultImage';
 import { TotalScheduleSummaryProps } from '@/types/Travels';

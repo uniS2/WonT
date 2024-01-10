@@ -1,6 +1,6 @@
-import Twitter from '@/assets/common-twitter.webp';
-import Facebook from '@/assets/common-facebook.webp';
-import Instagram from '@/assets/common-instagram.webp';
+import Twitter from '@/assets/common/common-twitter.webp';
+import Facebook from '@/assets/common/common-facebook.webp';
+import Instagram from '@/assets/common/common-instagram.webp';
 import { Link } from 'react-router-dom';
 
 function Sns() {
