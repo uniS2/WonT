@@ -22,17 +22,19 @@ export interface Travels {
 }
 
 export interface TravelsData {
-  id: string;
   collectionId: string;
   collectionName: string;
   created: string;
-  updated: string;
-  title: string;
+  id: string;
   image: string[];
-  text: string;
-  userEmail: string;
   info: string;
+  text: string;
+  title: string;
+  updated: string;
+  userEmail: string;
 }
+
+export type TravelsDataArray = TravelsData[];
 
 export interface TravelsDataItems {
   items: {

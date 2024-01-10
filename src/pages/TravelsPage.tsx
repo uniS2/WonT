@@ -20,20 +20,26 @@ function TravelsPage() {
   const { displayDaySchedule, toggleDaySchedule } = ToggleTripMenuStore();
   const { data: travelsData } = useQuery(['travels'], getTravels);
   const { data: userData } = useQuery(['users'], getUser);
-  // console.log(userData);
+  console.log(travelsData);
 
   const currentPath = window.location.pathname.replace('/travels/', '');
-  const detailTravels: TravelsData | undefined = travelsData?.items?.find(
-    (item: { id: string }) => item.id === currentPath
-  );
-
-  // const user = userData?.items?.find(
-  //   (item: { id: string }) => item.id === detailTravels?.userEmail
+  // const detailTravels: TravelsData | undefined = travelsData?.items?.filter(
+  //   (item: { id: string }) => item.id === currentPath
   // );
 
-  const user = userData?.items?.find(
-    (item: { id: string }) => item.id === String(detailTravels)
+  const detailTravels = travelsData?.items?.find(
+    (item: TravelsData) => item.id === currentPath
   );
+
+  const user = userData?.items?.find(
+    (item: { id: string }) => item.id === detailTravels?.userEmail
+  );
+
+  console.log(user);
+
+  // const user = userData?.items?.find(
+  //   (item: { id: string }) => item.id === String(detailTravels)
+  // );
 
   const id = useId();
   if (detailTravels && user) {
@@ -73,7 +79,7 @@ function TravelsPage() {
                   showIndicators={false}
                   className="mx-auto flex min-w-[90%] items-center justify-center overflow-hidden rounded-xl sm:w-[40rem] md:h-[25rem] md:w-[48rem] lg:h-[31.25rem] lg:w-[64rem] xl:w-[77.25rem]"
                 >
-                  {detailTravels.image.map((image) => (
+                  {detailTravels.image.map((image: string) => (
                     <img
                       key={id}
                       src={`${getPocketHostImageURL(detailTravels).replace(
