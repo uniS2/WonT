@@ -22,13 +22,15 @@ function TripPlaceItem({
     ScheduleStore(); // 추가한 장소
 
   // 버튼 선택 여부
+  //$ any 사용
   const isPlace = placePositions[index]?.filter(
-    (place) => place.place_name == placeName
+    (place: any) => place.place_name == placeName
   );
 
   // 버튼 삭제 여부
+  //$ any 사용
   const isSelected = placePositions[index]?.some(
-    (place) => place.place_name === placeName
+    (place: any) => place.place_name === placeName
   );
 
   // 버튼 클릭시

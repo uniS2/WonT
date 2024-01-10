@@ -3,7 +3,7 @@ import { debounce } from '@/utils/debounce';
 import { MapStore } from '@/store/mapStore';
 
 interface MapPlaceProps {
-  placeName: string;
+  placeName?: string;
   width?: string;
   height?: string;
   latitude?: number;
