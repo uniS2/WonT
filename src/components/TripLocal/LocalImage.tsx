@@ -1,7 +1,7 @@
 import DefaultImage from '@/components/DefaultImage';
 
 interface LocalImageProps {
-  image: string;
+  image?: string;
   alt: string;
 }
 
