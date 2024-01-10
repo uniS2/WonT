@@ -1,4 +1,4 @@
-import Back from '@/assets/common/common-toogle-left.webp';
+import Back from '@/assets/common/common/common-toogle-left.webp';
 
 function BackButton() {
   return (

@@ -1,5 +1,5 @@
-import toggleDown from '@/assets/common-toogle-down.webp';
-import toggleUp from '@/assets/common-toogle-up.webp';
+import toggleDown from '@/assets/common/common-toogle-down.webp';
+import toggleUp from '@/assets/common/common-toogle-up.webp';
 import { ScheduleStore } from '@/store/scheduleStore';
 import { PlanDateProps } from '@/types/TripEdit';
 import { getTripDate, getTripDateUTC } from '@/utils';
