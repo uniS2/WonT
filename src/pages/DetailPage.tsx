@@ -56,7 +56,6 @@ function DetailPage({}) {
 
   // 루트에서 추천 장소 ID 읽기
   const { recommendId } = useParams();
-  console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
   const user: { id: string | null } = pocketbase.authStore.model as {
@@ -171,6 +170,9 @@ function DetailPage({}) {
           setBookmarkList(recommendId);
         }
       };
+
+    console.log('recomid', recommendId);
+    console.log(getPocketHostImageURL(detailPlace));
 
     return (
       <div className="   mx-auto min-h-screen min-w-[22.5rem] bg-background pb-10">

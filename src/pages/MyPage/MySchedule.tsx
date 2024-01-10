@@ -4,7 +4,11 @@ import MyPageHeader from '@/components/PageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
-import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
+import {
+  getPocketHostImageURL,
+  getPocketHostProfileURL,
+  getPocketHostURL,
+} from '@/utils';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
 import { UserMySchedule, MyScheduleItem } from '@/types/MySchedule';
@@ -29,6 +33,8 @@ function MySchedule() {
     ),
   };
 
+  console.log(userId);
+
   if (userId && userSchedule) {
     return (
       <div className="mx-auto w-screen min-w-[22.5rem]  ">
@@ -43,7 +49,7 @@ function MySchedule() {
             </span>
             {userId?.profile ? (
               <img
-                src={getPocketHostImageURL(userId)}
+                src={getPocketHostProfileURL(userId)}
                 alt={`${userId.username}의 프로필`}
                 className=" h-[70px] w-[70px] rounded-full border-[0.0938rem] border-contentsSecondary "
               />
