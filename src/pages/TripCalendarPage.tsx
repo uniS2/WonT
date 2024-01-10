@@ -10,10 +10,8 @@ import TripTitle from '@/components/TripTitle';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { DateStore } from '@/store/dateStore';
 import { updateRecord, getTripDateUTC } from '@/utils';
-import { MyScheduleItem } from '@/types/MySchedule';
-import { UserItem } from '@/types/Users';
 
-async function updateMyScheduleTitle(recordId: number, date) {
+async function updateMyScheduleTitle(recordId: string, date: Date[]) {
   updateRecord('mySchedule', recordId, {
     start_date: getTripDateUTC(date[0]),
     end_date: getTripDateUTC(date[1]),
@@ -26,8 +24,8 @@ export default function TripCalendarPage() {
 
   // Tanstack Query
   const { data, error } = useQuery(
-    ['mySchedule', user.id],
-    () => useFetchMySchedule(user.id),
+    ['mySchedule', user?.id],
+    () => user && useFetchMySchedule(user.id),
     { refetchOnWindowFocus: false }
   );
 
