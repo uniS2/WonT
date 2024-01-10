@@ -1,7 +1,7 @@
 import ButtonSmall from '@/components/TripLocal/ButtonSmall';
 import LocalImage from '@/components/TripLocal/LocalImage';
 import LocalName from '@/components/TripLocal/LocalName';
-import { useLocalStore } from '@/store/localStore';
+import { LocalStore } from '@/store/localStore';
 
 interface LocalItemProps {
   image?: string;
@@ -10,7 +10,7 @@ interface LocalItemProps {
 }
 
 function LocalItem({ image, name = '지역명', index }: LocalItemProps) {
-  const { selectIndex, setSelectIndex, setSelectName } = useLocalStore();
+  const { selectIndex, setSelectIndex, setSelectName } = LocalStore();
   const isSelect = selectIndex === index;
 
   return (

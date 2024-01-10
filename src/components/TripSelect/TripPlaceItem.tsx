@@ -8,7 +8,7 @@ interface TripPlaceItemProps {
   placeName: string;
   address: string;
   count: number;
-  index?: string;
+  index?: number;
 }
 
 function TripPlaceItem({
@@ -23,20 +23,22 @@ function TripPlaceItem({
 
   // 버튼 선택 여부
   //$ any 사용
-  const isPlace = placePositions[index]?.filter(
-    (place: any) => place.place_name == placeName
-  );
+  const isPlace =
+    index &&
+    placePositions[index]?.filter(
+      (place: any) => place.place_name == placeName
+    );
 
   // 버튼 삭제 여부
   //$ any 사용
-  const isSelected = placePositions[index]?.some(
-    (place: any) => place.place_name === placeName
-  );
+  const isSelected =
+    index &&
+    placePositions[index]?.some((place: any) => place.place_name === placeName);
 
   // 버튼 클릭시
   const handleClick = () => {
     if (!isSelected) {
-      addPlacePositions(placeList[count], index);
+      index && addPlacePositions(placeList[count], index);
     } else {
       deletePlacePositions(index, placeName);
     }

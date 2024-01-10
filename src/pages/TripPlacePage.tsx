@@ -25,9 +25,9 @@ function TripPlacePage() {
   const { placeList } = MapStore(); // 지도에 표시되는 숙소 목록
 
   const { placePositions } = ScheduleStore(); // 추가한 장소 목록
-  console.log(placePositions);
+  // console.log(placePositions);
 
-  const currentIndex = useParams().indexId; // 현재 경로
+  const currentIndex = Number(useParams().indexId); // 현재 경로
 
   const user = pocketbase.authStore.model; // 로그인 유저 정보
 

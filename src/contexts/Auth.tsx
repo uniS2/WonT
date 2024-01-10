@@ -32,7 +32,7 @@ const initialAuthState: AuthState = {
 };
 
 const AuthProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-  const { storageData } = useStorage('pocketbase_auth');
+  const { storageData } = useStorage('pocketbase_auth'); //$ key: string, defaultValue?: any
 
   useEffect(() => {
     if (storageData) {

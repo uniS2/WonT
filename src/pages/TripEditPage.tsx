@@ -1,7 +1,7 @@
 import { useState, useId } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useMutation, useQuery, QueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import pocketbase from '@/api/pocketbase';
 import Header from '@/components/Header/Header';
@@ -13,11 +13,9 @@ import { getRangeDay } from '@/utils/getRangeDay';
 import SelectHotelMap from '@/components/TripEdit/SelectHotelMap';
 import { DateStore } from '@/store/dateStore';
 import PlacePlan from '@/components/TripEdit/PlacePlan';
-import { useScheduleStore } from '@/store/scheduleStore';
-import { TripScheduleStore } from '@/store/tripScheduleStore';
-import { useEffect } from 'react';
+import { ScheduleStore } from '@/store/scheduleStore';
 import { RecordModel } from 'pocketbase';
-import { PlaceListData, hotelListData } from '@/types/TripEdit';
+// import { PlaceListData, hotelListData } from '@/types/TripEdit';
 
 /* -------------------------------------------------------------------------- */
 
@@ -29,9 +27,9 @@ const fetchMySchedule = async (userId: string) => {
   });
   return response[0];
 };
-const getRecommends = async (userId: string) => {
+/* const getRecommends = async (userId: string) => {
   return await pocketbase.collection('recommends').getFullList();
-};
+}; */
 
 /* -------------------------------------------------------------------------- */
 
@@ -63,9 +61,9 @@ function TripEditPage() {
     placePositions,
     resetHotelPositions,
     resetPlacePositions,
-  } = useScheduleStore();
-  const hotelList: hotelListData[] = Object.values(hotelPositions);
-  const placeList: PlaceListData[] = Object.values(placePositions);
+  } = ScheduleStore();
+  const hotelList: any = Object.values(hotelPositions); //$ ListData 추후 지정
+  const placeList: any = Object.values(placePositions); //$ ListData 추후 지정
   // const removeSchedule = TripScheduleStore((state) => state.reset);
   const id = useId();
 

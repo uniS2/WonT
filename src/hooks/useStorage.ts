@@ -6,7 +6,7 @@ interface StorageReturn {
   remove: () => void;
 }
 
-function useStorage(key: string, defaultValue: any): StorageReturn {
+function useStorage(key: string, defaultValue?: any): StorageReturn {
   const [storageData, setStorageData] = useState(() => {
     try {
       return getData(key);

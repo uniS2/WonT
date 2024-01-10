@@ -3,8 +3,8 @@ import create from 'zustand';
 export const useMarkerStore = create((set) => ({
   markers: [],
 
-  addMarker: (marker) => {
-    set((state) => ({
+  addMarker: (marker: any) => {
+    set((state: any) => ({
       markers: [...state.markers, marker],
     }));
   },
