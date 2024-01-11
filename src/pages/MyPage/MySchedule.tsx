@@ -4,18 +4,10 @@ import MyPageHeader from '@/components/PageHeader';
 import MyPageTab from '@/components/MyPage/MyPageTab';
 import PlanPreview from '@/components/MyPage/PlanPreview';
 import Profile from '@/components/MyPage/Profile';
-import {
-  getPocketHostImageURL,
-  getPocketHostProfileURL,
-  getPocketHostURL,
-} from '@/utils';
+import { getPocketHostProfileURL, getPocketHostURL } from '@/utils';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
-import {
-  UserMySchedule,
-  MyScheduleItem,
-  UserMyScheduleArray,
-} from '@/types/MySchedule';
+import { MyScheduleItem, UserMyScheduleArray } from '@/types/MySchedule';
 import { RecordModel } from 'pocketbase';
 
 const getUser = () =>

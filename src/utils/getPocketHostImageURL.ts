@@ -1,12 +1,3 @@
-// export const getPocketHostImageURL = (item, fileName = 'image') =>
-//   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
-//     item[fileName]
-//   }`;
-
-// export const getImageArrayURL = (item: string, image: string) =>
-//   `${getPocketHostImageURL(item, '').replace('undefined', '')}/${image}`;
-
-// getPocketHostImageURL.ts
 import { LocalItem } from '@/types/Locals';
 import { MyScheduleItem } from '@/types/MySchedule';
 import { RecommendItem } from '@/types/Recommends';
@@ -23,14 +14,6 @@ export type ItemType =
   | UserItems
   | TravelsData
   | MyScheduleItem;
-
-// export const getPocketHostImageURL = <key extends keyof ItemType>(
-//   item: ItemType,
-//   image: key = 'image' as key
-// ) =>
-//   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
-//     item[image]
-//   }`;
 
 export const getPocketHostImageURL = <key extends keyof ItemType>(
   item: ItemType,

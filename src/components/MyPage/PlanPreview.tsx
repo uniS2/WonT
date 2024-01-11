@@ -2,18 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import defaultImage from '@/assets/common/common-trip-default.webp';
 import useScheduleList from '@/hooks/useScheduleList';
-import {
-  getDDay,
-  getImageArrayURL,
-  getPocketHostImageURL,
-  getPocketHostProfileURL,
-} from '@/utils';
-import {
-  UserMySchedule,
-  MyScheduleItem,
-  MyScheduleItemArray,
-  UserMyScheduleArray,
-} from '@/types/MySchedule';
+import { getDDay, getPocketHostImageURL } from '@/utils';
+import { MyScheduleItem, UserMyScheduleArray } from '@/types/MySchedule';
 
 function PlanPreview({ userSchedule }: { userSchedule: UserMyScheduleArray }) {
   const { data, isLoading } = useScheduleList();
@@ -57,8 +47,7 @@ function PlanPreview({ userSchedule }: { userSchedule: UserMyScheduleArray }) {
                   src={
                     item.place && item.place[0]
                       ? getPocketHostImageURL(item).split(',')[0]
-                      : // getPocketHostProfileURL(item)
-                        defaultImage
+                      : defaultImage
                   }
                   alt={`${item.title} 이미지`}
                   className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply "

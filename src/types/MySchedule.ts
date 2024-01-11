@@ -13,37 +13,7 @@ interface Place {
   y: string;
 }
 
-// export interface MyScheduleItem {
-//   id: string;
-//   collectionId: string;
-//   collectionName: string;
-//   created: string;
-//   updated: string;
-//   title: string;
-//   username: string;
-//   main: string | null;
-//   place: string[] | null;
-//   hotel: string[] | null;
-//   start_date: string | null;
-//   end_date: string | null;
-//   places: Place[] | null;
-//   hotels: Place[] | null;
-// }
 export interface MyScheduleItem {
-  // id: string;
-  // collectionId?: string;
-  // collectionName?: string;
-  // created?: string;
-  // updated?: string;
-  // title?: string;
-  // username: string;
-  // main?: string | null;
-  // place?: string[] | null;
-  // hotel?: string[] | null;
-  // start_date?: string | null;
-  // end_date?: string | null;
-  // places?: Place[] | null;
-  // hotels?: Place[] | null;
   collectionId: string;
   collectionName: string;
   created: string;
