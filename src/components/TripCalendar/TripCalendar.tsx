@@ -11,7 +11,7 @@ export default function TripCalendar() {
     <>
       <Calendar
         locale="ko"
-        onChange={setDate} // 포커스 변경 시 현재 날짜로 설정
+        // onChange={setDate} // 포커스 변경 시 현재 날짜로 설정
         selectRange={true} // 기간 설정
         formatMonthYear={(locale, date) =>
           `${date.getFullYear()}.${date.getMonth() + 1}`
