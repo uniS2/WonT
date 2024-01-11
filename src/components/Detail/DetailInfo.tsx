@@ -1,8 +1,8 @@
-import detailInfo from '@/assets/detail-info.webp';
-import detailCalendar from '@/assets/detail-calendar.webp';
-import detailTicket from '@/assets/detail-ticket.webp';
-import detailClock from '@/assets/detail-clock.webp';
-import detailHomepage from '@/assets/detail-homepage.webp';
+import detailInfo from '@/assets/detail/detail-info.webp';
+import detailCalendar from '@/assets/detail/detail-calendar.webp';
+import detailTicket from '@/assets/detail/detail-ticket.webp';
+import detailClock from '@/assets/detail/detail-clock.webp';
+import detailHomepage from '@/assets/detail/detail-homepage.webp';
 import { detailPlaceItems } from '@/types/DetailPage';
 import { RecordModel } from 'pocketbase';
 

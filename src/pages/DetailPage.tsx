@@ -12,26 +12,10 @@ import { BookmarkStore } from '@/store/bookmarkStore';
 import { detailPlaceItems } from '@/types/DetailPage';
 import { RecordModel } from 'pocketbase';
 
-//* TODO: previousData 타입 재지정 필요 -> 해결
 interface MutationContext {
   // previousData: any;
   previousData:
     | {
-        // active: string;
-        // address: string;
-        // collectionId: string;
-        // collectionName: string;
-        // created: string;
-        // id: string;
-        // image: string[];
-        // info: string;
-        // localMain: string;
-        // localName: string;
-        // place: string;
-        // rest: string;
-        // time: string;
-        // updated: string;
-        // url: string;
         userEmail: string[];
       }
     | undefined;
