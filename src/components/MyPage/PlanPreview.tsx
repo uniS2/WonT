@@ -2,18 +2,33 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import defaultImage from '@/assets/common/common-trip-default.webp';
 import useScheduleList from '@/hooks/useScheduleList';
-import { getDDay, getPocketHostImageURL } from '@/utils';
-import { UserMySchedule, MyScheduleItem } from '@/types/MySchedule';
+import {
+  getDDay,
+  getImageArrayURL,
+  getPocketHostImageURL,
+  getPocketHostProfileURL,
+} from '@/utils';
+import {
+  UserMySchedule,
+  MyScheduleItem,
+  MyScheduleItemArray,
+  UserMyScheduleArray,
+} from '@/types/MySchedule';
 
-function PlanPreview({ userSchedule }: { userSchedule: UserMySchedule }) {
+function PlanPreview({ userSchedule }: { userSchedule: UserMyScheduleArray }) {
   const { data, isLoading } = useScheduleList();
   const [trip, setTrip] = useState();
 
   useEffect(() => {
+    const userScheduleIds = userSchedule?.items?.map((item) => item.id);
     if (data) {
       setTrip(
-        data?.items?.filter(
-          (item: { username: any }) => item.username === userSchedule.id
+        // data?.items?.filter(
+        //   (item: { username: string }) => item.username === userSchedule.id
+        // )
+
+        data?.items?.filter((item: { username: string }) =>
+          userScheduleIds.includes(item.username)
         )
       );
     }
@@ -27,10 +42,12 @@ function PlanPreview({ userSchedule }: { userSchedule: UserMySchedule }) {
     return <div className="flex justify-center">나의 일정이 비어있습니다.</div>;
   }
 
+  console.log(userSchedule.items.map((item: MyScheduleItem) => item.place));
+
   if (userSchedule) {
     return (
       <div className="container mx-auto flex w-auto flex-col  gap-4 xl:w-[1236px]">
-        {userSchedule?.items?.map((item) => (
+        {userSchedule?.items?.map((item: MyScheduleItem) => (
           <Link to={`/myschedule/${item.id}`} key={item.id}>
             <div
               className="  container relative mx-auto  flex cursor-pointer 
@@ -42,7 +59,8 @@ function PlanPreview({ userSchedule }: { userSchedule: UserMySchedule }) {
                   src={
                     item.place && item.place[0]
                       ? getPocketHostImageURL(item).split(',')[0]
-                      : defaultImage
+                      : // getPocketHostProfileURL(item)
+                        defaultImage
                   }
                   alt={`${item.title} 이미지`}
                   className="h-[360px] min-h-[360px]  w-[1236px] min-w-[320px]  rounded-xl object-cover mix-blend-multiply "

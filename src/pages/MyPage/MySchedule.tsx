@@ -11,7 +11,11 @@ import {
 } from '@/utils';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
-import { UserMySchedule, MyScheduleItem } from '@/types/MySchedule';
+import {
+  UserMySchedule,
+  MyScheduleItem,
+  UserMyScheduleArray,
+} from '@/types/MySchedule';
 import { RecordModel } from 'pocketbase';
 
 const getUser = () =>
@@ -27,13 +31,13 @@ function MySchedule() {
 
   let userId = pocketbase.authStore.model as RecordModel;
 
-  const userSchedule: UserMySchedule = {
+  const userSchedule: UserMyScheduleArray = {
     items: myschedule?.items?.filter(
       (item: MyScheduleItem) => item.username === userId?.id
     ),
   };
 
-  console.log(userId);
+  console.log(userSchedule);
 
   if (userId && userSchedule) {
     return (

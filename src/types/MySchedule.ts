@@ -30,23 +30,37 @@ interface Place {
 //   hotels: Place[] | null;
 // }
 export interface MyScheduleItem {
+  // id: string;
+  // collectionId?: string;
+  // collectionName?: string;
+  // created?: string;
+  // updated?: string;
+  // title?: string;
+  // username: string;
+  // main?: string | null;
+  // place?: string[] | null;
+  // hotel?: string[] | null;
+  // start_date?: string | null;
+  // end_date?: string | null;
+  // places?: Place[] | null;
+  // hotels?: Place[] | null;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  end_date: string;
+  hotel: string[];
+  hotels: Place[] | null;
   id: string;
-  collectionId?: string;
-  collectionName?: string;
-  created?: string;
-  updated?: string;
-  title?: string;
+  main: string;
+  place: string[];
+  places: Place[] | null;
+  start_date: string;
+  title: string;
+  updated: string;
   username: string;
-  main?: string | null;
-  place?: string[] | null;
-  hotel?: string[] | null;
-  start_date?: string | null;
-  end_date?: string | null;
-  places?: Place[] | null;
-  hotels?: Place[] | null;
 }
 
-export type MyScheduleItemArray = MyScheduleItem[];
+export type MyScheduleItemArray = UserMySchedule;
 
 export interface UserMySchedule {
   id?: string;
@@ -55,4 +69,23 @@ export interface UserMySchedule {
   totalPages?: number;
   totalItems?: number;
   items: MyScheduleItemArray;
+}
+
+export interface UserMyScheduleArray {
+  items: {
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    end_date: string;
+    hotel: string[];
+    hotels: Place[] | null;
+    id: string;
+    main: string;
+    place: string[];
+    places: Place[] | null;
+    start_date: string;
+    title: string;
+    updated: string;
+    username: string;
+  }[];
 }

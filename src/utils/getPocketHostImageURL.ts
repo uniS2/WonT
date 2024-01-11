@@ -21,15 +21,18 @@ export type ItemType =
   | TravelItem
   | RecordModel
   | UserItems
-  | TravelsData;
+  | TravelsData
+  | MyScheduleItem;
 
 export const getPocketHostImageURL = <key extends keyof ItemType>(
   item: ItemType,
   image: key = 'image' as key
+  // place: key = 'place' as key
 ) =>
   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
     item[image]
   }`;
+
 export const getPocketHostProfileURL = <key extends keyof ItemType>(
   item: ItemType,
   profile: key = 'profile' as key
@@ -40,9 +43,9 @@ export const getPocketHostProfileURL = <key extends keyof ItemType>(
 
 export const getImageArrayURL = <key extends keyof ItemType>(
   item: ItemType,
-  image: string
+  image?: string
 ) =>
-  `${getPocketHostImageURL(item, 'image' as key).replace(
+  `${getPocketHostImageURL(item, 'place' as key).replace(
     'undefined',
     ''
   )}/${image}`;
