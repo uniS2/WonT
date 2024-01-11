@@ -42,8 +42,6 @@ function PlanPreview({ userSchedule }: { userSchedule: UserMyScheduleArray }) {
     return <div className="flex justify-center">나의 일정이 비어있습니다.</div>;
   }
 
-  console.log(userSchedule.items.map((item: MyScheduleItem) => item.place));
-
   if (userSchedule) {
     return (
       <div className="container mx-auto flex w-auto flex-col  gap-4 xl:w-[1236px]">

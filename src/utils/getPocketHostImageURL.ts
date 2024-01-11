@@ -24,15 +24,24 @@ export type ItemType =
   | TravelsData
   | MyScheduleItem;
 
+// export const getPocketHostImageURL = <key extends keyof ItemType>(
+//   item: ItemType,
+//   image: key = 'image' as key
+// ) =>
+//   `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
+//     item[image]
+//   }`;
+
 export const getPocketHostImageURL = <key extends keyof ItemType>(
   item: ItemType,
-  image: key = 'image' as key
-  // place: key = 'place' as key
-) =>
-  `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${item.id}/${
-    item[image]
-  }`;
-
+  image: key = 'image' as key,
+  place: key = 'place' as key
+) => {
+  let target = item[image] ? item[image] : item[place];
+  return `${import.meta.env.VITE_PB_API}/files/${item.collectionId}/${
+    item.id
+  }/${target}`;
+};
 export const getPocketHostProfileURL = <key extends keyof ItemType>(
   item: ItemType,
   profile: key = 'profile' as key
@@ -43,9 +52,9 @@ export const getPocketHostProfileURL = <key extends keyof ItemType>(
 
 export const getImageArrayURL = <key extends keyof ItemType>(
   item: ItemType,
-  image?: string
+  image: string
 ) =>
-  `${getPocketHostImageURL(item, 'place' as key).replace(
+  `${getPocketHostImageURL(item, 'image' as key).replace(
     'undefined',
     ''
   )}/${image}`;
