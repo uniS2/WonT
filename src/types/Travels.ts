@@ -22,17 +22,19 @@ export interface Travels {
 }
 
 export interface TravelsData {
-  id: string;
   collectionId: string;
   collectionName: string;
   created: string;
-  updated: string;
-  title: string;
+  id: string;
   image: string[];
-  text: string;
-  userEmail: string;
   info: string;
+  text: string;
+  title: string;
+  updated: string;
+  userEmail: string;
 }
+
+export type TravelsDataArray = TravelsData[];
 
 export interface TravelsDataItems {
   items: {
@@ -91,57 +93,6 @@ export type ErrorType = {
   type: string;
   message: string;
 };
-
-// export interface SelectBookmarkItem {
-//   main: string;
-//   title: string;
-//   start_date: string;
-//   end_date: string;
-
-//   items: RecordModel[];
-//   places: {
-//     1: [
-//       {
-//         address_name: string;
-//         category_group_code: string;
-//         category_group_name: string;
-//         category_name: string;
-//         distance: string;
-//         id: string;
-//         phone: string;
-//         place_name: string;
-//         place_url: string;
-//         road_address_name: '';
-//         x: string;
-//         y: string;
-//       },
-//     ];
-//   };
-//   hotels: {
-//     1: [
-//       {
-//         address_name: string;
-//         category_group_code: string;
-//         category_group_name: string;
-//         category_name: string;
-//         distance: string;
-//         id: string;
-//         phone: string;
-//         place_name: string;
-//         place_url: string;
-//         road_address_name: '';
-//         x: string;
-//         y: string;
-//       },
-//     ];
-//   };
-//   collectionId?: string;
-//   collectionName?: string;
-//   updated?: string;
-//   created?: string;
-//   // id: Key | null | undefined;
-//   id: string;
-// }
 
 export interface SelectBookmarkItem {
   place: {
@@ -238,4 +189,17 @@ export interface RecordModel {
   end_date: string;
   places: JSON;
   hotels: JSON;
+}
+
+export interface UserItems {
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  email: string;
+  emailVisibility: boolean;
+  id: string;
+  profile: string;
+  updated: string;
+  username: string;
+  verified: boolean;
 }

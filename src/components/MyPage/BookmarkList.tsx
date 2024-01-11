@@ -110,6 +110,11 @@ function BookmarkList() {
             type="button"
             className="absolute right-4 top-4 cursor-pointer"
             onClick={handleRemoveBookmark(item.id, user.id)}
+            // onClick={() => {
+            //   if (item.id !== undefined && user.id !== undefined) {
+            //     handleRemoveBookmark(item.id, user.id);
+            //   }
+            // }}
           >
             <BookMark color="#C9ECFF" />
           </button>

@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import defaultImage from '@/assets/common/common-trip-default.webp';
-
 import useScheduleList from '@/hooks/useScheduleList';
 import { getDDay, getPocketHostImageURL } from '@/utils';
-import { MySchedule } from '@/types/MySchedule';
+import { MyScheduleItem, UserMyScheduleArray } from '@/types/MySchedule';
 
-function PlanPreview({ userSchedule }: { userSchedule: MySchedule }) {
+function PlanPreview({ userSchedule }: { userSchedule: UserMyScheduleArray }) {
   const { data, isLoading } = useScheduleList();
   const [trip, setTrip] = useState();
 
   useEffect(() => {
+    const userScheduleIds = userSchedule?.items?.map((item) => item.id);
     if (data) {
       setTrip(
-        data?.items?.filter(
-          (item: { username: any }) => item.username === userSchedule.id
+        // data?.items?.filter(
+        //   (item: { username: string }) => item.username === userSchedule.id
+        // )
+
+        data?.items?.filter((item: { username: string }) =>
+          userScheduleIds.includes(item.username)
         )
       );
     }
@@ -31,7 +35,7 @@ function PlanPreview({ userSchedule }: { userSchedule: MySchedule }) {
   if (userSchedule) {
     return (
       <div className="container mx-auto flex w-auto flex-col  gap-4 xl:w-[1236px]">
-        {userSchedule?.items.map((item) => (
+        {userSchedule?.items?.map((item: MyScheduleItem) => (
           <Link to={`/myschedule/${item.id}`} key={item.id}>
             <div
               className="  container relative mx-auto  flex cursor-pointer 

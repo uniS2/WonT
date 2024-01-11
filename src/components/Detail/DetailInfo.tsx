@@ -1,8 +1,10 @@
-import detailInfo from '@/assets/detail-info.webp';
-import detailCalendar from '@/assets/detail-calendar.webp';
-import detailTicket from '@/assets/detail-ticket.webp';
-import detailClock from '@/assets/detail-clock.webp';
-import detailHomepage from '@/assets/detail-homepage.webp';
+import detailInfo from '@/assets/detail/detail-info.webp';
+import detailCalendar from '@/assets/detail/detail-calendar.webp';
+import detailTicket from '@/assets/detail/detail-ticket.webp';
+import detailClock from '@/assets/detail/detail-clock.webp';
+import detailHomepage from '@/assets/detail/detail-homepage.webp';
+import { detailPlaceItems } from '@/types/DetailPage';
+import { RecordModel } from 'pocketbase';
 
 interface FilterDetailPlaceProps {
   info: string;
@@ -13,7 +15,11 @@ interface FilterDetailPlaceProps {
 }
 
 // * TODO: detailplace 타입 재정의 필요
-export default function DetailInfo(detailPlace: any) {
+export default function DetailInfo({
+  detailPlace,
+}: {
+  detailPlace: detailPlaceItems;
+}) {
   const filterDetailPlace: FilterDetailPlaceProps = {
     info: detailPlace.info ? detailPlace.info : '-',
     rest: detailPlace.rest ? detailPlace.rest : '-',
@@ -21,6 +27,8 @@ export default function DetailInfo(detailPlace: any) {
     time: detailPlace.time ? detailPlace.time : '-',
     url: detailPlace.url ? detailPlace.url : '-',
   };
+
+  console.log(detailPlace);
 
   return (
     <>

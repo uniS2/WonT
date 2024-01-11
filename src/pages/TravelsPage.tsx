@@ -7,9 +7,14 @@ import MyPageHeader from '@/components/PageHeader';
 import Map from '@/components/Map';
 import ToggleTotalSchedule from '@/components/MyScheduleDetail/ToggleTotalSchedule';
 import DayScheduleItem from '@/components/MyScheduleDetail/DayScheduleItem';
-import { getPocketHostImageURL, getPocketHostURL } from '@/utils';
+import {
+  getPocketHostImageURL,
+  getPocketHostProfileURL,
+  getPocketHostURL,
+} from '@/utils';
 import { ToggleTripMenuStore } from '@/store/toggleTripMenuStore';
-import { TravelsData } from '@/types/Travels';
+import { TravelsData, UserItems } from '@/types/Travels';
+import { useParams } from 'react-router-dom';
 
 const getTravels = () =>
   fetch(`${getPocketHostURL('travels')}`).then((res) => res.json());
@@ -20,20 +25,21 @@ function TravelsPage() {
   const { displayDaySchedule, toggleDaySchedule } = ToggleTripMenuStore();
   const { data: travelsData } = useQuery(['travels'], getTravels);
   const { data: userData } = useQuery(['users'], getUser);
-  // console.log(userData);
 
   const currentPath = window.location.pathname.replace('/travels/', '');
-  const detailTravels: TravelsData | undefined = travelsData?.items?.find(
-    (item: { id: string }) => item.id === currentPath
+
+  const detailTravels: TravelsData = travelsData?.items?.find(
+    (item: TravelsData) => item.id === currentPath
   );
 
-  // const user = userData?.items?.find(
-  //   (item: { id: string }) => item.id === detailTravels?.userEmail
-  // );
-
-  const user = userData?.items?.find(
-    (item: { id: string }) => item.id === String(detailTravels)
+  const user: UserItems = userData?.items?.find(
+    (item: { id: string }) => item.id === detailTravels?.userEmail
   );
+  // console.log(detailTravels.image.map((item) => item));
+  // console.log(getPocketHostImageURL(user));
+
+  // console.log(detailTravels);
+  // console.log(user);
 
   const id = useId();
   if (detailTravels && user) {
@@ -53,7 +59,7 @@ function TravelsPage() {
                 <hr className="aria-hidden" />
                 <div className="my-5 flex items-center gap-3">
                   <img
-                    src={getPocketHostImageURL(user)}
+                    src={getPocketHostProfileURL(user)}
                     alt={`${user.username}님의 프로필`}
                     className=" h-16 w-16 rounded-full object-cover"
                   />
@@ -73,16 +79,16 @@ function TravelsPage() {
                   showIndicators={false}
                   className="mx-auto flex min-w-[90%] items-center justify-center overflow-hidden rounded-xl sm:w-[40rem] md:h-[25rem] md:w-[48rem] lg:h-[31.25rem] lg:w-[64rem] xl:w-[77.25rem]"
                 >
-                  {detailTravels.image.map((image) => (
-                    <img
-                      key={id}
-                      src={`${getPocketHostImageURL(detailTravels).replace(
-                        'undefined',
-                        ''
-                      )}/${image}`}
-                      alt="이미지"
-                      className="my-1 h-full items-center object-fill"
-                    />
+                  {detailTravels.image.map((image: string, index: number) => (
+                    <div key={index}>
+                      <img
+                        src={`${import.meta.env.VITE_PB_API}/files/${
+                          detailTravels.collectionId
+                        }/${detailTravels.id}/${image}`}
+                        alt={`이미지 ${index + 1}`}
+                        className="my-1 h-full items-center object-fill"
+                      />
+                    </div>
                   ))}
                 </Carousel>
                 <p className="my-5 leading-normal text-contentsPrimary">

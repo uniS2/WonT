@@ -14,27 +14,48 @@ interface Place {
 }
 
 export interface MyScheduleItem {
-  id: string;
   collectionId: string;
   collectionName: string;
   created: string;
-  updated: string;
-  title: string;
-  username: string;
-  main: string | null;
-  place: string[] | null;
-  hotel: string[] | null;
-  start_date: string | null;
-  end_date: string | null;
-  places: Place[] | null;
+  end_date: string;
+  hotel: string[];
   hotels: Place[] | null;
+  id: string;
+  main: string;
+  place: string[];
+  places: Place[] | null;
+  start_date: string;
+  title: string;
+  updated: string;
+  username: string;
 }
 
-export interface MySchedule {
+export type MyScheduleItemArray = UserMySchedule;
+
+export interface UserMySchedule {
   id?: string;
   page?: number;
   perPage?: number;
   totalPages?: number;
   totalItems?: number;
-  items: MyScheduleItem[];
+  items: MyScheduleItemArray;
+}
+
+export interface UserMyScheduleArray {
+  items: {
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    end_date: string;
+    hotel: string[];
+    hotels: Place[] | null;
+    id: string;
+    main: string;
+    place: string[];
+    places: Place[] | null;
+    start_date: string;
+    title: string;
+    updated: string;
+    username: string;
+  }[];
 }

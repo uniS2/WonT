@@ -9,10 +9,16 @@ import { Helmet } from 'react-helmet-async';
 
 // 전선용이 피드백받고 추가한 함수
 import { BookmarkStore } from '@/store/bookmarkStore';
+import { detailPlaceItems } from '@/types/DetailPage';
+import { RecordModel } from 'pocketbase';
 
-//* TODO: previousData 타입 재지정 필요
 interface MutationContext {
-  previousData: any;
+  // previousData: any;
+  previousData:
+    | {
+        userEmail: string[];
+      }
+    | undefined;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -56,7 +62,6 @@ function DetailPage({}) {
 
   // 루트에서 추천 장소 ID 읽기
   const { recommendId } = useParams();
-  console.log(recommendId);
 
   // 로그인 사용자 정보 가져오기
   const user: { id: string | null } = pocketbase.authStore.model as {
@@ -86,6 +91,7 @@ function DetailPage({}) {
       const previousData = queryClient.getQueryData<{ userEmail: string[] }>(
         queryKey
       );
+      console.log(previousData);
 
       queryClient.setQueryData(queryKey, (recommendData) => {
         const typedRecommendData = recommendData as { userEmail: string[] };
@@ -148,10 +154,10 @@ function DetailPage({}) {
 
   if (data) {
     // 추천 장소 (질문 코드에서 detailPlace를 사용하므로 할당한 것)
-    const detailPlace = data;
+    const detailPlace: detailPlaceItems = data;
 
     // 로그인 사용자 북마크 여부
-    const isBookmark = detailPlace.userEmail.includes(user.id);
+    const isBookmark = detailPlace?.userEmail?.includes(user.id || '');
 
     // 북마크 토글 함수
     const handleToggleBookmark =
@@ -197,7 +203,12 @@ function DetailPage({}) {
                 </h2>
                 <button
                   type="button"
-                  onClick={handleToggleBookmark(detailPlace.id, user.id)}
+                  // onClick={handleToggleBookmark(detailPlace.id, user.id)}
+                  onClick={() => {
+                    if (detailPlace.id !== undefined && user.id !== undefined) {
+                      handleToggleBookmark(detailPlace.id, user.id)();
+                    }
+                  }}
                   className="m-2"
                 >
                   <BookMark color={isBookmark ? '#C9ECFF' : ''} />
