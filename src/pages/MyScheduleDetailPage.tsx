@@ -77,7 +77,6 @@ function MyScheduleDetailPage() {
   //   )
   //   .map((item) => item.item)[0];
 
-  // Store: 전체일정, 모달, 날짜별 일정
   const {
     displayTotalschedule,
     displayDeleteModal,
@@ -93,7 +92,7 @@ function MyScheduleDetailPage() {
 
   // 모달창 '예' 클릭시
   const handleYes = () => {
-    // toggleDeleteModal;
+    toggleDeleteModal;
     navigate('/myschedule');
   };
 
@@ -128,7 +127,7 @@ function MyScheduleDetailPage() {
           <section className="flex flex-col gap-[1.875rem]">
             <h2 className="sr-only">전체 일정 한눈에 보기</h2>
             <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white sm:h-44 md:h-64 md:max-w-[46.875rem]">
-              {isLoading ? (
+              {/*  {isLoading ? (
                 <Spinner />
               ) : (
                 selectBookmark?.items?.map((item) => (
@@ -140,7 +139,7 @@ function MyScheduleDetailPage() {
                     endDay={getTripDate(item.end_date)}
                   />
                 ))
-              )}
+              )} */}
               <DeleteButton onClick={toggleDeleteModal} />
             </div>
             {displayDeleteModal && (
@@ -171,7 +170,7 @@ function MyScheduleDetailPage() {
           {displayDaySchedule && (
             <>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                {selectBookmark ? (
+                {/* {selectBookmark ? (
                   selectBookmark.place[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
@@ -181,9 +180,9 @@ function MyScheduleDetailPage() {
                       count={index + 1}
                     />
                   ))
-                ) : (
-                  <DayScheduleItem />
-                )}
+                ) : ( */}
+                <DayScheduleItem />
+                {/* )} */}
               </ul>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
                 {selectBookmark ? (

@@ -1,11 +1,7 @@
 import DefaultImage from '@/components/DefaultImage';
-import { TotalScheduleImageList } from '@/types/MyScheduleDetailPage';
+import { TotalScheduleImageList as ListType } from '@/types/MyScheduleDetailPage';
 
-function TotalScheduleImageList({
-  imageURL,
-  localName,
-  className,
-}: TotalScheduleImageList) {
+function TotalScheduleImageList({ imageURL, localName, className }: ListType) {
   return (
     <>
       {imageURL ? (
