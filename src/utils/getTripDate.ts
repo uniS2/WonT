@@ -13,17 +13,29 @@ export function getTripDate(date: string) {
 }
 
 export function getTripDateKo(dates: Date) {
-  const month = dates.getMonth() + 1;
-  const date = dates.getDate();
-  const day = dayText[dates.getDay()];
+  const month = dates?.getMonth() + 1;
+  const date = dates?.getDate();
+  const day = dayText[dates?.getDay()];
   return `${month}월 ${date}일 ${day}`;
 }
 
-export function getTripDateUTC(dates: Date) {
-  let dateUTC = new Date(
-    `${String(dates).slice(0, 15)} 12:00:00`
-  ).toISOString();
-  return `${dateUTC.slice(0, 10)} 12:00:00.123Z`;
+// export function getTripDateUTC(dates: Date) {
+//   let dateUTC = new Date(
+//     `${String(dates).slice(0, 15)} 12:00:00`
+//   ).toISOString();
+//   return `${dateUTC.slice(0, 10)} 12:00:00.123Z`;
+// }
+
+export function getTripDateUTC(dates: Date | undefined) {
+  // 1. 날짜가 유효한지 확인
+  if (!dates || isNaN(dates.getTime())) {
+    // 유효하지 않은 경우 에러 처리 또는 기본 값 반환
+    return '1970-01-01T00:00:00.123Z';
+  }
+
+  // 2. 표준 포맷 사용
+  const dateUTC = new Date(dates).toISOString();
+  return dateUTC;
 }
 
 export function getTripDateDot(dates: Date) {

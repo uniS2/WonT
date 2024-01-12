@@ -7,6 +7,8 @@ import { getTripDateKo } from '@/utils';
 function TripCalendar() {
   const { tripDate, setDate } = DateStore();
 
+  console.log(tripDate);
+
   return (
     <>
       <Calendar
