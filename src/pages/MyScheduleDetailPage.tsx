@@ -77,7 +77,6 @@ function MyScheduleDetailPage() {
   //   )
   //   .map((item) => item.item)[0];
 
-  // Store: 전체일정, 모달, 날짜별 일정
   const {
     displayTotalschedule,
     displayDeleteModal,
@@ -93,7 +92,7 @@ function MyScheduleDetailPage() {
 
   // 모달창 '예' 클릭시
   const handleYes = () => {
-    // toggleDeleteModal;
+    toggleDeleteModal;
     navigate('/myschedule');
   };
 
@@ -171,7 +170,7 @@ function MyScheduleDetailPage() {
           {displayDaySchedule && (
             <>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-                {selectBookmark ? (
+                {/* {selectBookmark ? (
                   selectBookmark.place[1]?.map((item, index) => (
                     <DayScheduleItem
                       key={item.id}
@@ -181,9 +180,9 @@ function MyScheduleDetailPage() {
                       count={index + 1}
                     />
                   ))
-                ) : (
-                  <DayScheduleItem />
-                )}
+                ) : ( */}
+                <DayScheduleItem />
+                {/* )} */}
               </ul>
               <ul className="mx-7 mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
                 {selectBookmark ? (
