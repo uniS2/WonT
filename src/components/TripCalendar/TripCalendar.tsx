@@ -4,8 +4,10 @@ import '@/styles/calendar.css';
 import { DateStore } from '@/store/dateStore';
 import { getTripDateKo } from '@/utils';
 
-export default function TripCalendar() {
+function TripCalendar() {
   const { tripDate, setDate } = DateStore();
+
+  console.log(tripDate);
 
   return (
     <>
@@ -57,3 +59,4 @@ export default function TripCalendar() {
     </>
   );
 }
+export default TripCalendar;

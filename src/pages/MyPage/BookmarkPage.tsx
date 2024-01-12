@@ -2,7 +2,11 @@ import MyPageTab from '@/components/MyPage/MyPageTab';
 import BookmarkList from '@/components/MyPage/BookmarkList';
 import Profile from '@/components/MyPage/Profile';
 import MyPageHeader from '@/components/PageHeader';
-import { ItemType, getPocketHostImageURL } from '@/utils';
+import {
+  ItemType,
+  getPocketHostImageURL,
+  getPocketHostProfileURL,
+} from '@/utils';
 import pocketbase from '@/api/pocketbase';
 import MyPageTabInfo from '@/components/MyPage/MyPageTabInfo';
 import { Helmet } from 'react-helmet-async';
@@ -25,7 +29,7 @@ function BookmarkPage() {
             </span>
             {user.profile ? (
               <img
-                src={getPocketHostImageURL(user)}
+                src={getPocketHostProfileURL(user)}
                 alt={`${user.username}의 프로필`}
                 className="h-[4.375rem] w-[4.375rem] rounded-full border-[0.0938rem] border-contentsSecondary"
               />

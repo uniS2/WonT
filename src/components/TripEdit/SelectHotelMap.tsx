@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const { kakao } = window;
 
-export default function SelectHotelMap({
+function SelectHotelMap({
   hotelList,
   placeList,
   width = 'w-full',
@@ -67,3 +67,4 @@ export default function SelectHotelMap({
 
   return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
 }
+export default SelectHotelMap;

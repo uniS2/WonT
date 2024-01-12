@@ -51,14 +51,14 @@ export default function TripCalendarPage() {
             question={'언제 떠나시나요?'}
             guide={'여행 일자를 선택하세요.'}
           />
-          {/* <TripCalendar /> */}
+          <TripCalendar />
           {Array.isArray(tripDate) ? (
             <Link to={`/tripedit/${data.id}`}>
-              {/* <ButtonLarge
+              <ButtonLarge
                 onClick={() => updateMyScheduleTitle(data.id, tripDate)}
               >
                 선택 완료
-              </ButtonLarge> */}
+              </ButtonLarge>
             </Link>
           ) : (
             <ButtonLarge>선택 완료</ButtonLarge>
