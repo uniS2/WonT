@@ -9,8 +9,9 @@ type Position = {
 };
 
 type ScheduleState = {
-  placePositions: Position[][];
-  hotelPositions: Position[][];
+  // placePositions: Position[][];
+  placePositions: any;
+  hotelPositions: any;
   resetHotelPositions: () => void;
   resetPlacePositions: () => void;
   addPlacePositions: (placePosition: Position, index: number) => void;

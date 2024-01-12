@@ -27,9 +27,9 @@ const fetchMySchedule = async (userId: string) => {
   });
   return response[0];
 };
-/* const getRecommends = async (userId: string) => {
+const getRecommends = async (userId: string) => {
   return await pocketbase.collection('recommends').getFullList();
-}; */
+};
 
 /* -------------------------------------------------------------------------- */
 
@@ -64,6 +64,8 @@ function TripEditPage() {
   } = ScheduleStore();
   const hotelList: any = Object.values(hotelPositions); //$ ListData 추후 지정
   const placeList: any = Object.values(placePositions); //$ ListData 추후 지정
+  console.log(placeList);
+
   // const removeSchedule = TripScheduleStore((state) => state.reset);
   const id = useId();
 
@@ -146,7 +148,8 @@ function TripEditPage() {
                 </div>
               ))}
 
-          <div className={toggleSchedule ? 'pt-0' : 'py-10'}>
+          {/* <div className={toggleSchedule ? 'pt-0' : 'py-10'}> */}
+          <div>
             <ButtonMedium menu="저장" fill={true} text="저장" />
             <ButtonMedium
               menu="저장"
