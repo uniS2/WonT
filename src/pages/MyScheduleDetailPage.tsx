@@ -127,7 +127,7 @@ function MyScheduleDetailPage() {
           <section className="flex flex-col gap-[1.875rem]">
             <h2 className="sr-only">전체 일정 한눈에 보기</h2>
             <div className="modal relative mx-[1.25rem] h-[8.125rem] overflow-hidden rounded-md bg-white sm:h-44 md:h-64 md:max-w-[46.875rem]">
-              {isLoading ? (
+              {/*  {isLoading ? (
                 <Spinner />
               ) : (
                 selectBookmark?.items?.map((item) => (
@@ -139,7 +139,7 @@ function MyScheduleDetailPage() {
                     endDay={getTripDate(item.end_date)}
                   />
                 ))
-              )}
+              )} */}
               <DeleteButton onClick={toggleDeleteModal} />
             </div>
             {displayDeleteModal && (
