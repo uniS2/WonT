@@ -13,7 +13,7 @@ function TripCalendar() {
     <>
       <Calendar
         locale="ko"
-        // onChange={setDate} // 포커스 변경 시 현재 날짜로 설정
+        onChange={(value) => setDate(value)} // 포커스 변경 시 현재 날짜로 설정
         selectRange={true} // 기간 설정
         formatMonthYear={(locale, date) =>
           `${date.getFullYear()}.${date.getMonth() + 1}`
@@ -35,8 +35,7 @@ function TripCalendar() {
         }
       />
       <p className="mb-10 mt-2 text-center text-contentsPrimary">
-        {Array.isArray(tripDate) ? (
-          //* Array.isArray(tripDate) > 0
+        {tripDate.length > 1 ? (
           <>
             <span className="font-bold">
               선택한 여행 기간
@@ -52,7 +51,7 @@ function TripCalendar() {
               오늘 날짜
               <span className="aria-hidden font-bold">: </span>
             </span>
-            {getTripDateKo(tripDate)}
+            {getTripDateKo(tripDate[0])}
           </>
         )}
       </p>
