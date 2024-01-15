@@ -17,20 +17,22 @@ async function fetchLocals() {
   return await response.json();
 }
 
-async function createLocalRecord(title: string, userId: string) {
+/* async function createLocalRecord(title: string, userId: string) {
   createRecord('mySchedule', {
     title: title,
     username: userId.toString(), //* 숫자 -> 문자
   });
-}
+} */
 
 function TripLocalPage() {
-  const user = pocketbase.authStore.model; // 로그인 유저 정보
+  // const user = pocketbase.authStore.model; // 로그인 유저 정보
   const { data, isLoading, error } = useQuery(['locals'], fetchLocals, {
     retry: 2,
   });
 
-  const { selectName, selectIndex } = LocalStore();
+  console.log(data);
+
+  const { selectName, selectIndex, setSelectName } = LocalStore();
   const isSelect = selectIndex !== null;
 
   if (error instanceof Error) {
@@ -41,6 +43,8 @@ function TripLocalPage() {
       </div>
     );
   }
+
+  console.log(selectName);
 
   return (
     <>
@@ -72,8 +76,9 @@ function TripLocalPage() {
               <Link to="/tripcalendar">
                 {selectName && (
                   <ButtonLarge
-                    onClick={() =>
-                      user && createLocalRecord(selectName, user.id)
+                    onClick={
+                      () => setSelectName(selectName)
+                      //user && createLocalRecord(selectName, user.id)
                     }
                   >
                     선택 완료
@@ -81,7 +86,9 @@ function TripLocalPage() {
                 )}
               </Link>
             ) : (
-              <ButtonLarge>선택 완료</ButtonLarge>
+              <>
+                <ButtonLarge>선택 완료</ButtonLarge>
+              </>
             )}
           </>
         )}
