@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useQuery } from '@tanstack/react-query';
 
 import pocketbase from '@/api/pocketbase';
@@ -17,20 +19,20 @@ async function fetchLocals() {
   return await response.json();
 }
 
-async function createLocalRecord(title: string, userId: string) {
+/* async function createLocalRecord(title: string, userId: string) {
   createRecord('mySchedule', {
     title: title,
     username: userId.toString(), //* 숫자 -> 문자
   });
-}
+} */
 
 function TripLocalPage() {
-  const user = pocketbase.authStore.model; // 로그인 유저 정보
+  // const user = pocketbase.authStore.model; // 로그인 유저 정보
   const { data, isLoading, error } = useQuery(['locals'], fetchLocals, {
     retry: 2,
   });
 
-  const { selectName, selectIndex } = LocalStore();
+  const { selectName, selectIndex, setSelectName } = LocalStore();
   const isSelect = selectIndex !== null;
 
   if (error instanceof Error) {
@@ -72,8 +74,9 @@ function TripLocalPage() {
               <Link to="/tripcalendar">
                 {selectName && (
                   <ButtonLarge
-                    onClick={() =>
-                      user && createLocalRecord(selectName, user.id)
+                    onClick={
+                      () => setSelectName(selectName)
+                      //user && createLocalRecord(selectName, user.id)
                     }
                   >
                     선택 완료
@@ -81,7 +84,19 @@ function TripLocalPage() {
                 )}
               </Link>
             ) : (
-              <ButtonLarge>선택 완료</ButtonLarge>
+              <>
+                <ButtonLarge
+                  onClick={() => toast.error('회원 정보를 다시 확인해주세요.')}
+                >
+                  선택 완료
+                </ButtonLarge>
+                <ToastContainer
+                  position="top-center"
+                  autoClose={500}
+                  hideProgressBar
+                  theme="colored"
+                />
+              </>
             )}
           </>
         )}

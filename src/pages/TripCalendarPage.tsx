@@ -9,25 +9,41 @@ import TripCalendar from '@/components/TripCalendar/TripCalendar';
 import TripTitle from '@/components/TripTitle';
 import useFetchMySchedule from '@/hooks/useFetchMySchedule';
 import { DateStore } from '@/store/dateStore';
-import { updateRecord, getTripDateUTC } from '@/utils';
+import { updateRecord, getTripDateUTC, createRecord } from '@/utils';
+import { LocalStore } from '@/store/localStore';
 
-async function updateMyScheduleTitle(recordId: string, date: Date[]) {
+/* async function updateMyScheduleTitle(recordId: string, date: Date[]) {
   updateRecord('mySchedule', recordId, {
+    start_date: getTripDateUTC(date[0]),
+    end_date: getTripDateUTC(date[1]),
+  });
+} */
+
+async function createMyScheduleRecord(
+  title: string,
+  date: Date[],
+  userId: string
+) {
+  createRecord('mySchedule', {
+    title: title,
+    username: userId.toString(),
     start_date: getTripDateUTC(date[0]),
     end_date: getTripDateUTC(date[1]),
   });
 }
 
 export default function TripCalendarPage() {
-  const user = pocketbase.authStore.model; // 로그인 유저 정보
-  const { tripDate } = DateStore(); // 선택한 날짜
+  const user = pocketbase.authStore.model;
+  const { selectName } = LocalStore();
+  const { tripDate, setDate } = DateStore();
 
-  // Tanstack Query
   const { data, error } = useQuery(
     ['mySchedule', user?.id],
     () => user && useFetchMySchedule(user.id),
     { refetchOnWindowFocus: false }
   );
+
+  console.log(data);
 
   if (error instanceof Error) {
     return (
@@ -55,7 +71,10 @@ export default function TripCalendarPage() {
           {Array.isArray(tripDate) ? (
             <Link to={`/tripedit/${data.id}`}>
               <ButtonLarge
-                onClick={() => updateMyScheduleTitle(data.id, tripDate)}
+                onClick={
+                  () => createMyScheduleRecord(selectName!, tripDate, user!.id)
+                  //updateMyScheduleTitle(data.id, tripDate)
+                }
               >
                 선택 완료
               </ButtonLarge>
