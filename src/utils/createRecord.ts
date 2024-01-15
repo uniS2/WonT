@@ -1,8 +1,10 @@
 import pocketbase from '@/api/pocketbase';
 
 interface RecordData {
-  title: string;
-  username: string;
+  title?: string;
+  username?: string;
+  start_date?: string;
+  end_date?: string;
 }
 
 export const createRecord = async (
