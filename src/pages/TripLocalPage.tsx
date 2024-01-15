@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useQuery } from '@tanstack/react-query';
 
 import pocketbase from '@/api/pocketbase';
@@ -30,8 +32,6 @@ function TripLocalPage() {
     retry: 2,
   });
 
-  console.log(data);
-
   const { selectName, selectIndex, setSelectName } = LocalStore();
   const isSelect = selectIndex !== null;
 
@@ -43,8 +43,6 @@ function TripLocalPage() {
       </div>
     );
   }
-
-  console.log(selectName);
 
   return (
     <>
@@ -87,7 +85,17 @@ function TripLocalPage() {
               </Link>
             ) : (
               <>
-                <ButtonLarge>선택 완료</ButtonLarge>
+                <ButtonLarge
+                  onClick={() => toast.error('회원 정보를 다시 확인해주세요.')}
+                >
+                  선택 완료
+                </ButtonLarge>
+                <ToastContainer
+                  position="top-center"
+                  autoClose={500}
+                  hideProgressBar
+                  theme="colored"
+                />
               </>
             )}
           </>
