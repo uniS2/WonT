@@ -1,5 +1,8 @@
 # [멋사 6기🦁 | 멋쟁이 🔟조 | React 프로젝트]
 
+> **[@uniS2](https://github.com/uniS2): React + JavaScript 프로젝트 개인 레포** <br/>
+> **[멋쟁이 🔟조](https://github.com/FRONTENDSCHOOL6/WonT): TypeScript, Next.js 마이그레이션 진행 중**
+
 ![readme-logo](https://github.com/FRONTENDSCHOOL6/react-project-10/assets/125878245/dcc77ab4-96b6-4329-92bb-fcc80a3e079d)
 
 ## 📋목차
